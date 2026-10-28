@@ -1,0 +1,10 @@
+"use client";
+import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
+import { resetPasswordSchema } from "@/lib/validation/auth";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { FormMessage } from "./form-message";
+export function ResetPasswordForm() { const router = useRouter(); const params = useSearchParams(); const token = params.get("token") ?? undefined; const [error, setError] = useState<string>(); const [pending, setPending] = useState(false); const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({}); if (!token) return <p className="text-sm text-destructive">This password reset link is invalid or has expired.</p>; async function submit(formData: FormData) { setError(undefined); const parsed = resetPasswordSchema.safeParse(Object.fromEntries(formData)); if (!parsed.success) { setFieldErrors(Object.fromEntries(parsed.error.issues.map((issue) => [String(issue.path[0]), issue.message]))); return; } setPending(true); const { error: authError } = await authClient.resetPassword({ token, newPassword: parsed.data.password }); setPending(false); if (authError) { setError("This password reset link is invalid, expired, or has already been used."); return; } router.replace("/login?reset=success"); } return <form action={submit} className="space-y-4"><div className="space-y-2"><Label htmlFor="password">New Password</Label><Input id="password" name="password" type="password" autoComplete="new-password" /><FormMessage message={fieldErrors.password} /></div><div className="space-y-2"><Label htmlFor="confirmPassword">Confirm New Password</Label><Input id="confirmPassword" name="confirmPassword" type="password" autoComplete="new-password" /><FormMessage message={fieldErrors.confirmPassword} /></div><FormMessage message={error} /><Button className="w-full" disabled={pending}>{pending ? "Resetting password..." : "Reset password"}</Button></form>; }

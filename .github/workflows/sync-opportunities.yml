@@ -1,0 +1,19 @@
+name: Sync opportunities
+on:
+  schedule:
+    - cron: "17 6,18 * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: easygrantpath-opportunity-sync
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger protected sync
+        env:
+          SYNC_URL: ${{ secrets.EASYGRANTPATH_SYNC_URL }}
+          SYNC_SECRET: ${{ secrets.SYNC_SECRET }}
+        run: curl --fail-with-body --retry 3 --retry-all-errors --request POST "$SYNC_URL" --header "Authorization: Bearer $SYNC_SECRET" --header "Content-Type: application/json" --data '{"source":"grants-gov"}'

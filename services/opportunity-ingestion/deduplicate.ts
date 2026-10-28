@@ -1,0 +1,3 @@
+import { createHash } from "crypto"; import type { NormalizedOpportunity } from "@/types/opportunities";
+export function opportunityFingerprint(opportunity: NormalizedOpportunity) { return createHash("sha256").update([opportunity.title, opportunity.organization ?? opportunity.agency ?? "", opportunity.deadline?.toISOString().slice(0, 10) ?? ""].map(value => value.toLowerCase().trim().replace(/\s+/g, " ")).join("|")).digest("hex"); }
+export function slugify(value: string) { return value.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 120) || "opportunity"; }

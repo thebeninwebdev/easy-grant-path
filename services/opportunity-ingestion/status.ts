@@ -1,0 +1,2 @@
+import type { OpportunityStatus } from "@/types/opportunities";
+export function getOpportunityStatus(openingDate?: Date, deadline?: Date, now = new Date(), closingSoonDays = 14): OpportunityStatus { if (deadline && deadline.getTime() < now.getTime()) return "closed"; if (openingDate && openingDate.getTime() > now.getTime()) return "upcoming"; if (deadline && deadline.getTime() - now.getTime() <= closingSoonDays * 86_400_000) return "closing_soon"; return "open"; }
