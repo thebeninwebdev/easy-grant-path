@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# EasyGrantPath
 
-## Getting Started
+EasyGrantPath helps individuals, startups, NGOs, and organizations discover suitable funding opportunities and provides professional application-support services.
 
-First, run the development server:
+## Phase 2: authentication
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+This repository contains the project foundation plus Better Auth email/password registration, email verification, password reset, server-side route guards, and `user`/`admin` authorization.
+
+It does **not** yet include opportunity listings or ingestion, grant matching, eligibility checking, service packages, payments, real dashboards, uploads, referrals, application workflows beyond authentication, or French translations.
+
+## Stack
+
+- Next.js 16, React 19, TypeScript, Tailwind CSS 4
+- shadcn/ui-style Radix primitives and Sonner
+- MongoDB, Mongoose, Better Auth, Zod
+- Yarn 4 (run through Corepack where Yarn is not globally installed)
+
+## Setup
+
+1. Enable Corepack if needed: `corepack enable`
+2. Install dependencies: `corepack yarn install`
+3. Copy `.env.example` to `.env.local` and supply local values.
+4. Start the app: `corepack yarn dev`
+
+Required server-only variables:
+
+```env
+MONGODB_URI=
+BETTER_AUTH_SECRET=
+BETTER_AUTH_URL=http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Commands
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `corepack yarn dev` — development server
+- `corepack yarn lint` — ESLint
+- `corepack yarn tsc --noEmit` — type-check
+- `corepack yarn build` — production build
+- `corepack yarn start` — serve a production build
+- `corepack yarn make-admin email@example.com` — promote an existing Better Auth user to administrator
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Structure
 
-## Learn More
+`app/` routes and route handlers; `components/` reusable UI; `lib/` infrastructure; `models/` future Mongoose models; `services/` business logic; `sources/` grant-source adapters; `jobs/` scheduled-job functions; `actions/` server actions; `types/` shared contracts; `hooks/` React hooks; and `emails/` templates.
 
-To learn more about Next.js, take a look at the following resources:
+## Phase 2 decisions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Configure a transactional email provider before production registration, verification, and password reset. In development, verification/reset URLs are logged server-side only. Choose the initial opportunity data model and source ingestion/review workflow before implementing source adapters. Confirm the MongoDB deployment topology (replica set versus standalone) before enabling auth database transactions in production.
+"# easy-grant-path" 
