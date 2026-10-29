@@ -1,2 +1,2 @@
-import { errorResponse, successResponse } from "@/lib/api-response"; import { requireApiAdmin } from "@/lib/auth-api"; import { syncSource } from "@/services/opportunity-ingestion/sync-source";
-export const runtime = "nodejs"; export async function POST() { const auth = await requireApiAdmin(); if ("response" in auth) return auth.response; try { return successResponse(await syncSource("grants-gov")); } catch (error) { return errorResponse(error); } }
+import { errorResponse, successResponse } from "@/lib/api-response"; import { syncSource } from "@/services/opportunity-ingestion/sync-source";
+export async function POST() { try { return successResponse(await syncSource("grants-gov")); } catch (error) { return errorResponse(error); } }

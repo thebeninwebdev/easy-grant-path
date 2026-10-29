@@ -1,3 +1,43 @@
-import Link from "next/link"; import { requireAdmin } from "@/lib/auth-session"; import { connectToDatabase } from "@/lib/db"; import { Opportunity } from "@/models/Opportunity";
-export const dynamic = "force-dynamic";
-export default async function OpportunityReviewPage() { await requireAdmin(); await connectToDatabase(); const opportunities = await Opportunity.find({ verificationStatus: "needs_review" }).sort({ createdAt: -1 }).limit(100).lean(); return <main className="mx-auto w-full max-w-6xl p-6"><div className="mb-6 flex items-center justify-between"><div><h1 className="text-2xl font-semibold">Opportunity review</h1><p className="text-sm text-muted-foreground">Imported opportunities remain private until an admin verifies them.</p></div><Link className="text-sm underline" href="/admin">Admin home</Link></div><div className="overflow-x-auto rounded border"><table className="w-full text-left text-sm"><thead><tr className="border-b"><th className="p-3">Opportunity</th><th>Source</th><th>Funding</th><th>Deadline</th><th>Relevance</th><th>Official link</th></tr></thead><tbody>{opportunities.map(item => <tr key={String(item._id)} className="border-b align-top"><td className="p-3"><p className="font-medium">{item.title}</p><p className="text-muted-foreground">{item.agency ?? item.organization ?? "—"}{item.opportunityNumber ? ` · ${item.opportunityNumber}` : ""}</p></td><td>{item.source.name}</td><td>{item.fundingMin ?? "—"}–{item.fundingMax ?? "—"} {item.currency}</td><td>{item.deadline?.toLocaleDateString() ?? "—"}</td><td>{item.relevanceScore}<p className="text-xs text-muted-foreground">{item.relevanceReasons.join(", ")}</p></td><td><a className="underline" href={item.officialUrl} target="_blank" rel="noreferrer">View</a></td></tr>)}</tbody></table>{opportunities.length === 0 && <p className="p-4 text-muted-foreground">No opportunities awaiting review.</p>}</div></main>; }
+import type { Metadata } from "next";
+import { ArrowLeft, Plus, ShieldCheck } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { OpportunityReviewWorkspace } from "@/components/admin/opportunities/opportunity-review-workspace";
+import { getAdminOpportunities, parseAdminOpportunityFilters } from "@/lib/admin-opportunities";
+
+export const metadata: Metadata = { title: "Opportunity review" };
+
+export default async function OpportunityReviewPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const filters = parseAdminOpportunityFilters(await searchParams);
+  const data = await getAdminOpportunities(filters);
+
+  return (
+    <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-6 sm:px-6 lg:px-8">
+      <header className="mb-7 flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <Link href="/admin" className="mb-3 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground">
+            <ArrowLeft className="size-4" /> Admin home
+          </Link>
+          <div className="flex items-center gap-3">
+            <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+              <ShieldCheck className="size-5" />
+            </div>
+            <div>
+              <h1 className="text-2xl font-semibold tracking-tight">Opportunity review</h1>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Validate imported funding data before it reaches EasyGrantPath users.
+              </p>
+            </div>
+          </div>
+        </div>
+        <Button asChild><Link href="/admin/opportunities/new"><Plus className="size-4" /> Add opportunity</Link></Button>
+      </header>
+
+      <OpportunityReviewWorkspace key={JSON.stringify(filters)} initialData={data} filters={filters} />
+    </main>
+  );
+}

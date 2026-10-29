@@ -1,7 +1,0 @@
-"use client";
-import Link from "next/link";
-import { useState } from "react";
-import { useSearchParams } from "next/navigation";
-import { authClient } from "@/lib/auth-client";
-import { Button } from "@/components/ui/button";
-export function VerifyEmailCard() { const params = useSearchParams(); const email = params.get("email"); const [pending, setPending] = useState(false); const [message, setMessage] = useState<string>(); const [error, setError] = useState<string>(); async function resend() { if (!email) { setError("Enter your email by registering again or contact support."); return; } setPending(true); setError(undefined); const { error: authError } = await authClient.sendVerificationEmail({ email, callbackURL: `${window.location.origin}/login?verified=true` }); setPending(false); if (authError) { setError("We could not send another verification email. Please try again later."); return; } setMessage("If the address can receive verification emails, a new link has been sent."); } return <div className="space-y-4 text-center">{email && <p className="text-sm text-muted-foreground">Verification email sent to {email}</p>}{message && <p className="text-sm text-green-700">{message}</p>}{error && <p className="text-sm text-destructive">{error}</p>}<Button className="w-full" variant="outline" onClick={resend} disabled={pending}>{pending ? "Sending..." : "Resend verification email"}</Button><Link className="block text-sm underline" href="/login">Back to sign in</Link></div>; }
