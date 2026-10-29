@@ -11,6 +11,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
+import { OpportunityRichContent } from "@/components/opportunities/opportunity-rich-content";
 import type { AdminOpportunityItem } from "@/lib/admin-opportunities";
 import { formatDate, formatFunding, humanize } from "./opportunity-formatters";
 import { OpportunityReviewActions, type OpportunityAction } from "./opportunity-review-actions";
@@ -104,9 +105,7 @@ export function OpportunityReviewDetails({ opportunity, busy, onOpenChange, onAc
               </div>
               <div>
                 <h3 className="font-semibold">Full description</h3>
-                <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-muted-foreground">
-                  {opportunity.description || "No full description was supplied by the source."}
-                </p>
+                <OpportunityRichContent content={opportunity.description} className="mt-2" />
               </div>
             </section>
 

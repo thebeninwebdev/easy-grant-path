@@ -4,4 +4,5 @@ const opportunitySchema = new Schema({ title: { type: String, required: true, tr
 opportunitySchema.index({ "source.slug": 1, "source.externalId": 1 }, { unique: true });
 opportunitySchema.index({ verificationStatus: 1, status: 1, createdAt: -1 });
 opportunitySchema.index({ status: 1, createdAt: -1 });
+opportunitySchema.index({ verificationStatus: 1, status: 1, deadline: 1 });
 export type OpportunityDocument = InferSchemaType<typeof opportunitySchema>; export const Opportunity = models.Opportunity || model("Opportunity", opportunitySchema);

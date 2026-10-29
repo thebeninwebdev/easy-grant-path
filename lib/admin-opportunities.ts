@@ -2,6 +2,7 @@ import "server-only";
 
 import { connection } from "next/server";
 import { connectToDatabase } from "@/lib/db";
+import { normalizePlainText, normalizePlainTextList, sanitizeOpportunityHtml } from "@/lib/opportunity-content";
 import { Opportunity } from "@/models/Opportunity";
 import {
   OPPORTUNITY_TYPES,
@@ -167,16 +168,16 @@ function serializeOpportunity(raw: Record<string, unknown>): AdminOpportunityIte
   const source = raw.source as Record<string, unknown>;
   return {
     id: String(raw._id),
-    title: String(raw.title),
-    summary: typeof raw.summary === "string" ? raw.summary : null,
-    description: typeof raw.description === "string" ? raw.description : null,
-    organization: typeof raw.organization === "string" ? raw.organization : null,
-    agency: typeof raw.agency === "string" ? raw.agency : null,
+    title: normalizePlainText(raw.title) ?? "Untitled opportunity",
+    summary: normalizePlainText(raw.summary),
+    description: sanitizeOpportunityHtml(raw.description),
+    organization: normalizePlainText(raw.organization),
+    agency: normalizePlainText(raw.agency),
     type: raw.type as OpportunityType,
-    countries: Array.isArray(raw.countries) ? raw.countries.map(String) : [],
-    eligibleCountries: Array.isArray(raw.eligibleCountries) ? raw.eligibleCountries.map(String) : [],
-    applicantTypes: Array.isArray(raw.applicantTypes) ? raw.applicantTypes.map(String) : [],
-    sectors: Array.isArray(raw.sectors) ? raw.sectors.map(String) : [],
+    countries: normalizePlainTextList(raw.countries),
+    eligibleCountries: normalizePlainTextList(raw.eligibleCountries),
+    applicantTypes: normalizePlainTextList(raw.applicantTypes),
+    sectors: normalizePlainTextList(raw.sectors),
     fundingMin: typeof raw.fundingMin === "number" ? raw.fundingMin : null,
     fundingMax: typeof raw.fundingMax === "number" ? raw.fundingMax : null,
     currency: typeof raw.currency === "string" ? raw.currency : "USD",
@@ -184,10 +185,10 @@ function serializeOpportunity(raw: Record<string, unknown>): AdminOpportunityIte
     deadline: iso(raw.deadline),
     officialUrl: typeof raw.officialUrl === "string" ? raw.officialUrl : null,
     discoveryUrl: typeof raw.discoveryUrl === "string" ? raw.discoveryUrl : null,
-    opportunityNumber: typeof raw.opportunityNumber === "string" ? raw.opportunityNumber : null,
+    opportunityNumber: normalizePlainText(raw.opportunityNumber),
     source: {
       slug: String(source.slug),
-      name: String(source.name),
+      name: normalizePlainText(source.name) ?? "Unknown source",
       type: String(source.type),
       externalId: String(source.externalId),
     },
@@ -197,7 +198,7 @@ function serializeOpportunity(raw: Record<string, unknown>): AdminOpportunityIte
     verificationStatus: raw.verificationStatus as VerificationStatus,
     verifiedAt: iso(raw.verifiedAt),
     relevanceScore: typeof raw.relevanceScore === "number" ? raw.relevanceScore : 0,
-    relevanceReasons: Array.isArray(raw.relevanceReasons) ? raw.relevanceReasons.map(String) : [],
+    relevanceReasons: normalizePlainTextList(raw.relevanceReasons),
     createdAt: iso(raw.createdAt) ?? new Date(0).toISOString(),
   };
 }

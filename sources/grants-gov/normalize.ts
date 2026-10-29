@@ -1,3 +1,69 @@
+import { normalizePlainText, sanitizeOpportunityHtml } from "@/lib/opportunity-content";
 import type { NormalizedOpportunity, RawOpportunity } from "@/types/opportunities";
-const getString = (data: Record<string, unknown>, ...keys: string[]) => { for (const key of keys) { const value = data[key]; if (typeof value === "string" && value.trim()) return value.trim(); if (typeof value === "number") return String(value); } return undefined; }; const getDate = (value: unknown) => { if (!value || typeof value !== "string") return undefined; const date = new Date(value); return Number.isNaN(date.getTime()) ? undefined : date; }; const strings = (value: unknown): string[] => Array.isArray(value) ? value.map(item => typeof item === "string" ? item : typeof item === "object" && item ? getString(item as Record<string, unknown>, "name", "description", "code") : undefined).filter((item): item is string => Boolean(item)) : [];
-export function normalizeGrantsGov(raw: RawOpportunity): NormalizedOpportunity | null { const root = raw.data; const opportunity = (root.opportunity ?? root) as Record<string, unknown>; const synopsis = (opportunity.synopsis ?? root.synopsis ?? {}) as Record<string, unknown>; const id = getString(opportunity, "opportunityId", "id") ?? raw.id; const title = getString(opportunity, "opportunityTitle", "title"); if (!id || !title) return null; const description = getString(synopsis, "synopsisDesc", "description") ?? getString(opportunity, "description"); const agency = getString(opportunity, "agencyName", "agency") ?? getString(synopsis, "agencyName"); return { externalId: id, title, summary: getString(opportunity, "description", "synopsis"), description, organization: agency, agency, applicantTypes: strings(synopsis.applicantTypes ?? opportunity.applicantTypes), sectors: strings(synopsis.fundingCategories ?? opportunity.fundingCategories), fundingMin: Number(getString(synopsis, "awardFloor", "awardFloorAmt")) || undefined, fundingMax: Number(getString(synopsis, "awardCeiling", "awardCeilingAmt")) || undefined, currency: "USD", openingDate: getDate(getString(opportunity, "openDate", "postingDate")), deadline: getDate(getString(synopsis, "responseDate", "closeDate") ?? getString(opportunity, "closeDate")), officialUrl: `https://www.grants.gov/search-results-detail/${encodeURIComponent(id)}`, discoveryUrl: `https://www.grants.gov/search-results-detail/${encodeURIComponent(id)}`, opportunityNumber: getString(opportunity, "opportunityNumber", "number"), sourceLastUpdatedAt: getDate(getString(opportunity, "lastUpdatedDate", "lastUpdated")), metadata: {} }; }
+
+function getString(data: Record<string, unknown>, ...keys: string[]) {
+  for (const key of keys) {
+    const value = data[key];
+    if (typeof value === "string" && value.trim()) return value.trim();
+    if (typeof value === "number") return String(value);
+  }
+  return undefined;
+}
+
+function plain(value: unknown, maxLength?: number) {
+  const normalized = normalizePlainText(value);
+  return normalized && maxLength ? normalized.slice(0, maxLength).trim() : normalized ?? undefined;
+}
+
+function getDate(value: unknown) {
+  if (!value || typeof value !== "string") return undefined;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? undefined : date;
+}
+
+function strings(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  return [...new Set(value.map((item) => {
+    const candidate = typeof item === "string"
+      ? item
+      : typeof item === "object" && item
+        ? getString(item as Record<string, unknown>, "name", "description", "code")
+        : undefined;
+    return plain(candidate);
+  }).filter((item): item is string => Boolean(item)))];
+}
+
+export function normalizeGrantsGov(raw: RawOpportunity): NormalizedOpportunity | null {
+  const root = raw.data;
+  const opportunity = (root.opportunity ?? root) as Record<string, unknown>;
+  const synopsis = (opportunity.synopsis ?? root.synopsis ?? {}) as Record<string, unknown>;
+  const id = plain(getString(opportunity, "opportunityId", "id")) ?? raw.id;
+  const title = plain(getString(opportunity, "opportunityTitle", "title"));
+  if (!id || !title) return null;
+
+  const rawDescription = getString(synopsis, "synopsisDesc", "description") ?? getString(opportunity, "description");
+  const description = sanitizeOpportunityHtml(rawDescription) ?? undefined;
+  const agency = plain(getString(opportunity, "agencyName", "agency") ?? getString(synopsis, "agencyName"));
+  const summary = plain(getString(opportunity, "description", "synopsis"), 1_000);
+
+  return {
+    externalId: id,
+    title,
+    summary,
+    description,
+    organization: agency,
+    agency,
+    applicantTypes: strings(synopsis.applicantTypes ?? opportunity.applicantTypes),
+    sectors: strings(synopsis.fundingCategories ?? opportunity.fundingCategories),
+    fundingMin: Number(getString(synopsis, "awardFloor", "awardFloorAmt")) || undefined,
+    fundingMax: Number(getString(synopsis, "awardCeiling", "awardCeilingAmt")) || undefined,
+    currency: "USD",
+    openingDate: getDate(getString(opportunity, "openDate", "postingDate")),
+    deadline: getDate(getString(synopsis, "responseDate", "closeDate") ?? getString(opportunity, "closeDate")),
+    officialUrl: `https://www.grants.gov/search-results-detail/${encodeURIComponent(id)}`,
+    discoveryUrl: `https://www.grants.gov/search-results-detail/${encodeURIComponent(id)}`,
+    opportunityNumber: plain(getString(opportunity, "opportunityNumber", "number")),
+    sourceLastUpdatedAt: getDate(getString(opportunity, "lastUpdatedDate", "lastUpdated")),
+    metadata: {},
+  };
+}
