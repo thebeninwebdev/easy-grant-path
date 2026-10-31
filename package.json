@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:content": "node --no-warnings --experimental-strip-types scripts/test-opportunity-content.mjs"
+    "test:content": "node --no-warnings --experimental-strip-types scripts/test-opportunity-content.mjs",
+    "test:proposals": "node --no-warnings --experimental-strip-types scripts/test-proposal-logic.mjs"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.3.1",

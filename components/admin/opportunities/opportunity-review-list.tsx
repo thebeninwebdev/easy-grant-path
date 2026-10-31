@@ -1,6 +1,7 @@
 "use client";
 
-import { CalendarDays, ExternalLink, Eye, Landmark, Sparkles } from "lucide-react";
+import { CalendarDays, ExternalLink, Eye, FilePenLine, Landmark, Sparkles } from "lucide-react";
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -67,6 +68,7 @@ export function OpportunityReviewList({ items, busyIds, onReview, onAction }: Op
                 <td className="px-4 py-4">
                   <div className="flex flex-col items-end gap-2">
                     <Button size="sm" variant="outline" onClick={() => onReview(item)}><Eye className="size-4" /> Review</Button>
+                    <Button size="sm" variant="ghost" asChild><Link href={`/admin/opportunities/${item.id}/proposal`}><FilePenLine className="size-4" /> Proposal Starter</Link></Button>
                     <OpportunityReviewActions
                       opportunity={item}
                       busy={busyIds.has(item.id)}
@@ -99,7 +101,7 @@ export function OpportunityReviewList({ items, busyIds, onReview, onAction }: Op
                 <div><p className="text-xs text-muted-foreground">Number</p><p className="mt-1 font-medium">{item.opportunityNumber || "Not provided"}</p></div>
               </div>
               <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <Button variant="outline" onClick={() => onReview(item)}><Eye className="size-4" /> Review details</Button>
+                <div className="flex flex-wrap gap-2"><Button variant="outline" onClick={() => onReview(item)}><Eye className="size-4" /> Review details</Button><Button variant="ghost" asChild><Link href={`/admin/opportunities/${item.id}/proposal`}><FilePenLine className="size-4" /> Proposal Starter</Link></Button></div>
                 <OpportunityReviewActions
                   opportunity={item}
                   busy={busyIds.has(item.id)}
