@@ -1,23 +1,19 @@
 import "server-only";
 import PDFDocument from "pdfkit";
 import { AlignmentType, Document, Footer, HeadingLevel, Packer, PageBreak, PageNumber, Paragraph, TextRun } from "docx";
-import type { ProposalDocumentData } from "@/lib/proposal-document";
+import { formatFundingAmount, type ProposalDocumentData } from "@/lib/proposal-document";
 
 const PDF_MARGIN = 64;
 
 export async function renderProposalPdf(data: ProposalDocumentData) {
-  const document = new PDFDocument({ size: "A4", margins: { top: PDF_MARGIN, right: PDF_MARGIN, bottom: 72, left: PDF_MARGIN }, bufferPages: true, info: { Title: data.metadata.title, Author: data.metadata.organization || "Proposal applicant" } });
+  const document = new PDFDocument({ size: "A4", margins: { top: PDF_MARGIN, right: PDF_MARGIN, bottom: 72, left: PDF_MARGIN }, bufferPages: true, info: { Title: data.metadata.title, Author: data.metadata.applicantDisplayName || "Proposal applicant" } });
   const chunks: Buffer[] = [];
   document.on("data", (chunk: Buffer) => chunks.push(chunk));
   const completed = new Promise<Buffer>((resolve, reject) => { document.on("end", () => resolve(Buffer.concat(chunks))); document.on("error", reject); });
   document.fillColor("#1d2a24").font("Helvetica-Bold").fontSize(23).text(data.metadata.title, { align: "left" });
   document.moveDown(1.4).strokeColor("#34785b").lineWidth(1.5).moveTo(PDF_MARGIN, document.y).lineTo(210 * 2.83465 - PDF_MARGIN, document.y).stroke();
-  document.moveDown(2).font("Helvetica").fontSize(10).fillColor("#5b655f").text("PREPARED FOR", { characterSpacing: 1.2 });
-  document.moveDown(0.35).font("Helvetica-Bold").fontSize(12).fillColor("#1d2a24").text(data.metadata.opportunityTitle);
-  document.moveDown(1.5).font("Helvetica").fontSize(10).fillColor("#5b655f").text("PREPARED BY", { characterSpacing: 1.2 });
-  document.moveDown(0.35).font("Helvetica-Bold").fontSize(12).fillColor("#1d2a24").text(data.metadata.organization || "Applicant");
-  document.moveDown(1.5).font("Helvetica").fontSize(10).fillColor("#5b655f").text("DATE", { characterSpacing: 1.2 });
-  document.moveDown(0.35).font("Helvetica-Bold").fontSize(12).fillColor("#1d2a24").text(data.metadata.preparedOn);
+  const coverRows = [["PREPARED BY", data.metadata.applicantDisplayName], ["PREPARED FOR", data.metadata.fundingOrganization], ["FUNDING OPPORTUNITY", data.metadata.opportunityTitle], ["PROJECT LOCATION", data.metadata.projectLocation], ["PROJECT DURATION", data.metadata.projectDuration], ["FUNDING REQUESTED", formatFundingAmount(data.metadata.amountRequested, data.metadata.currency)], ["DATE", data.metadata.preparedOn]].filter(([, value]) => Boolean(value));
+  for (const [label, value] of coverRows) { document.moveDown(1.25).font("Helvetica").fontSize(10).fillColor("#5b655f").text(label, { characterSpacing: 1.2 }); document.moveDown(0.3).font("Helvetica-Bold").fontSize(12).fillColor("#1d2a24").text(value); }
   if (data.metadata.status === "draft") document.moveDown(2).font("Helvetica-Oblique").fontSize(10).fillColor("#6b746f").text("Draft proposal");
   document.addPage();
   data.sections.forEach((section, index) => {
@@ -45,12 +41,7 @@ export async function renderProposalPdf(data: ProposalDocumentData) {
 export async function renderProposalDocx(data: ProposalDocumentData) {
   const body: Paragraph[] = [
     new Paragraph({ text: data.metadata.title, heading: HeadingLevel.TITLE, spacing: { after: 720 } }),
-    new Paragraph({ children: [new TextRun({ text: "Prepared for", bold: true, color: "59645E", size: 20 })], spacing: { after: 100 } }),
-    new Paragraph({ text: data.metadata.opportunityTitle, spacing: { after: 420 } }),
-    new Paragraph({ children: [new TextRun({ text: "Prepared by", bold: true, color: "59645E", size: 20 })], spacing: { after: 100 } }),
-    new Paragraph({ text: data.metadata.organization || "Applicant", spacing: { after: 420 } }),
-    new Paragraph({ children: [new TextRun({ text: "Date", bold: true, color: "59645E", size: 20 })], spacing: { after: 100 } }),
-    new Paragraph({ text: data.metadata.preparedOn, spacing: { after: 420 } }),
+    ...[["Prepared by", data.metadata.applicantDisplayName], ["Prepared for", data.metadata.fundingOrganization], ["Funding opportunity", data.metadata.opportunityTitle], ["Project location", data.metadata.projectLocation], ["Project duration", data.metadata.projectDuration], ["Funding requested", formatFundingAmount(data.metadata.amountRequested, data.metadata.currency)], ["Date", data.metadata.preparedOn]].filter(([, value]) => Boolean(value)).flatMap(([label, value]) => [new Paragraph({ children: [new TextRun({ text: label, bold: true, color: "59645E", size: 20 })], spacing: { after: 100 } }), new Paragraph({ text: value, spacing: { after: 320 } })]),
     ...(data.metadata.status === "draft" ? [new Paragraph({ children: [new TextRun({ text: "Draft proposal", italics: true, color: "68716C" })] })] : []),
     new Paragraph({ children: [new PageBreak()] }),
   ];
