@@ -1,4 +1,4 @@
-import { getProposalPreset, getProposalStarter, normalizeProposalStarterId, type ProposalStarterId } from "@/lib/proposal-presets";
+import { getProposalPreset, getProposalStarter, normalizeProposalStarterId, type ProposalStarterId } from "./proposal-presets.ts";
 
 export type RecommendationConfidence = "low" | "medium" | "high";
 export interface RecommendationOpportunity {
@@ -26,7 +26,7 @@ const groups: Array<{ id: ProposalStarterId; terms: string[]; reason: string }> 
 ];
 
 const sectionSignals: Array<{ keys: string[]; terms: string[]; reason: string; required?: boolean }> = [
-  { keys: ["sustainability", "post-fellowship-plan"], terms: ["sustainability", "continuation plan", "long-term viability", "after the grant"], reason: "Opportunity mentions continuation or long-term viability" },
+  { keys: ["sustainability", "post-fellowship-plan"], terms: ["sustainability", "continuation plan", "long-term viability", "after the grant"], reason: "Opportunity mentions continuation or long-term viability", required: false },
   { keys: ["risk-management", "key-risks", "risks-limitations"], terms: ["risk assessment", "risk mitigation", "risks and assumptions", "risk management"], reason: "Opportunity requests risk planning" },
   { keys: ["inclusion-safeguarding", "safeguarding"], terms: ["safeguarding", "child protection", "protection policy"], reason: "Opportunity includes safeguarding requirements" },
   { keys: ["monitoring-evaluation"], terms: ["monitoring", "evaluation", "indicators", "m&e", "results framework"], reason: "Opportunity requests monitoring and evaluation", required: true },
@@ -50,7 +50,7 @@ export function buildProposalRecommendation(opportunity: RecommendationOpportuni
   const sections = getProposalPreset(starter.id).map((section) => ({ key: section.key, enabled: section.enabled !== false, required: Boolean(section.required), reason: "Core section from the recommended proposal family" }));
   for (const signal of sectionSignals) {
     if (!signal.terms.some((term) => hasTerm(text, term))) continue;
-    for (const section of sections) if (signal.keys.includes(section.key)) { section.enabled = true; if (signal.required) section.required = true; section.reason = signal.reason; }
+    for (const section of sections) if (signal.keys.includes(section.key)) { section.enabled = true; if (signal.required !== undefined) section.required = signal.required; section.reason = signal.reason; }
     reasons.push(signal.reason);
   }
   return { recommendedTemplateType: starter.id, confidence, reasons: [...new Set(reasons)], sections };
