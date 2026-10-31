@@ -13,11 +13,21 @@ function sections(specs: readonly Spec[]): ProposalTemplateSectionInput[] {
     prompt,
     placeholder: `Describe ${focus}, using the applicant's actual situation, evidence and plans.`,
     example, wordLimit, required, order,
+    enabled: true,
   }));
 }
 
 function starter(id: ProposalStarterId, name: string, description: string, recommendedOpportunityTypes: OpportunityType[], recommendedSectors: string[], specs: readonly Spec[]): ProposalStarter {
-  return { id, name, description, recommendedOpportunityTypes, recommendedSectors, sections: sections(specs) };
+  const prepared = sections(specs);
+  if (id === "general") {
+    const optional = new Set(["project-goal", "sustainability", "risk-management"]);
+    const required = new Set(["executive-summary", "problem-statement", "specific-objectives", "target-beneficiaries", "proposed-activities", "expected-results", "implementation-plan", "monitoring-evaluation", "budget-narrative", "organizational-capacity"]);
+    for (const section of prepared) {
+      section.required = required.has(section.key);
+      if (optional.has(section.key)) section.required = false;
+    }
+  }
+  return { id, name, description, recommendedOpportunityTypes, recommendedSectors, sections: prepared };
 }
 
 export const PROPOSAL_STARTERS: ProposalStarter[] = [
@@ -35,6 +45,11 @@ export const PROPOSAL_STARTERS: ProposalStarter[] = [
     ["organizational-capacity", "Organizational Capacity", "the applicant's relevant experience, team, systems and delivery record", "Why is the organization equipped to deliver? What similar work and controls demonstrate readiness?", 280],
     ["budget-narrative", "Budget Narrative", "the main cost categories, assumptions, value for money and relationship between costs and activities", "What will funds purchase? Why are costs reasonable and necessary? What co-funding exists?", 300],
     ["risk-management", "Risk Management", "the main operational, financial, safeguarding and external risks and practical mitigation measures", "What could prevent success? How likely and serious is each risk? Who monitors and responds?", 250],
+    ["partnerships", "Partnerships", "the roles and commitments of partners who strengthen delivery", "Who will contribute to the project, and what will each partner do?", 220, false],
+    ["safeguarding", "Safeguarding", "how participants will be protected from harm and how concerns will be handled", "What protection measures and reporting channels will apply?", 220, false],
+    ["inclusion", "Inclusion", "how people facing barriers will participate safely and fairly", "Which barriers may exclude people, and how will the project address them?", 220, false],
+    ["baseline-information", "Current Situation", "the starting conditions against which progress will be understood", "What is the current situation before your project begins?", 220, false],
+    ["implementation-dependencies", "Implementation Dependencies", "external decisions, resources or conditions needed for delivery", "What must be in place for the project to proceed, and who controls it?", 220, false],
   ]),
   starter("ngo_community_development", "NGO / Community Development", "Best for nonprofit, civil society and community-impact projects.", ["grant"], ["community development", "civil society", "social impact"], [
     ["executive-summary", "Executive Summary", "the community need, proposed response, people reached, partners and measurable social impact", "What community challenge is addressed, how, with whom and with what result?", 300],

@@ -17,6 +17,7 @@ const sectionSchema = new Schema({
   example: { type: String, trim: true },
   placeholder: { type: String, trim: true },
   wordLimit: { type: Number, min: 1 },
+  enabled: { type: Boolean, default: true },
   required: { type: Boolean, default: true },
   order: { type: Number, required: true, min: 0 },
 }, { _id: false });
@@ -28,6 +29,11 @@ const proposalTemplateSchema = new Schema({
   templateType: { type: String, enum: PROPOSAL_TEMPLATE_TYPES, default: "general" },
   sections: { type: [sectionSchema], default: [] },
   status: { type: String, enum: ["draft", "published"], default: "draft", index: true },
+  recommendation: {
+    source: { type: String, enum: ["automatic", "manual"] },
+    confidence: { type: String, enum: ["low", "medium", "high"] },
+    reasons: { type: [String], default: [] },
+  },
   createdBy: { type: String, trim: true },
   updatedBy: { type: String, trim: true },
 }, { timestamps: true });

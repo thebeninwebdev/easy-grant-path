@@ -1,12 +1,13 @@
 import assert from "node:assert/strict";
 import { calculateProposalProgress, canCompleteProposal, isPublishedTemplateVisible, ownsProposal, snapshotTemplateSections } from "../lib/proposal-logic.ts";
+import { buildProposalRecommendation } from "../lib/proposal-recommendation.ts";
 import { getProposalPreset, getRecommendedStarterIds, PROPOSAL_STARTERS } from "../lib/proposal-presets.ts";
 assert.equal(isPublishedTemplateVisible("draft", 2), false);
 assert.equal(isPublishedTemplateVisible("published", 0), false);
 assert.equal(isPublishedTemplateVisible("published", 2), true);
 assert.equal(ownsProposal("user-a", "user-a"), true);
 assert.equal(ownsProposal("user-a", "user-b"), false);
-const sections = [{ key: "summary", title: "Summary", guidance: "Explain it", required: true, order: 1 }, { key: "optional", title: "Optional", guidance: "Optional", required: false, order: 0 }];
+const sections = [{ key: "summary", title: "Summary", guidance: "Explain it", enabled: true, required: true, order: 1 }, { key: "optional", title: "Optional", guidance: "Optional", enabled: false, required: false, order: 0 }];
 const snapshot = snapshotTemplateSections(sections);
 assert.equal(snapshot[0].key, "optional");
 assert.equal(snapshot[1].content, "");
@@ -17,6 +18,14 @@ assert.equal(calculateProposalProgress([{ required: true, content: "Written" }, 
 assert.equal(calculateProposalProgress([{ required: true, content: "   " }]), 0);
 assert.equal(canCompleteProposal([{ required: true, content: "Done" }, { required: false, content: "" }]), true);
 assert.equal(canCompleteProposal([{ required: true, content: "" }]), false);
+assert.equal(buildProposalRecommendation({ title: "Digital Skills and Employment Program for Young People", description: "Training, employer placement and measurable outcomes with monitoring and evaluation.", type: "grant", sectors: [] }).recommendedTemplateType, "youth_employment_skills");
+assert.equal(buildProposalRecommendation({ title: "Startup grant", description: "Market, customers, revenue and commercialization.", type: "grant", sectors: [] }).recommendedTemplateType, "startup_sme");
+assert.equal(buildProposalRecommendation({ title: "Research funding", description: "Research questions, methodology, data collection and ethics.", type: "grant", sectors: [] }).recommendedTemplateType, "research_academic");
+assert.equal(buildProposalRecommendation({ title: "Scholarship", description: "Study, academic program and tuition support.", type: "grant", sectors: [] }).recommendedTemplateType, "scholarship_study");
+assert.equal(buildProposalRecommendation({ title: "Unknown opportunity", description: "", type: "other", sectors: [] }).recommendedTemplateType, "general");
+const sustainability = buildProposalRecommendation({ title: "Community grant", description: "A continuation plan and long-term viability are required.", type: "grant", sectors: ["community development"] });
+assert.ok(sustainability.sections.find((section) => section.key === "sustainability")?.enabled);
+assert.ok(sustainability.sections.find((section) => section.key === "sustainability")?.required === false);
 assert.equal(PROPOSAL_STARTERS.length, 12, "all ready-made starters are present");
 for (const starter of PROPOSAL_STARTERS) {
   assert.ok(starter.description.length >= 30, `${starter.id} has a useful description`);

@@ -8,15 +8,16 @@ export const proposalSectionSchema = z.object({
   guidance: z.string().trim().min(1).max(4_000),
   prompt: optionalText(4_000), example: optionalText(4_000), placeholder: optionalText(1_000),
   wordLimit: z.number().int().min(1).max(20_000).optional(),
-  required: z.boolean(), order: z.number().int().min(0),
+  enabled: z.boolean().default(true), required: z.boolean(), order: z.number().int().min(0),
 }).strict();
 
 export const proposalTemplateInputSchema = z.object({
   title: z.string().trim().min(1).max(200), description: optionalText(2_000),
   templateType: z.enum(PROPOSAL_TEMPLATE_TYPES), sections: z.array(proposalSectionSchema).max(50),
   status: z.enum(["draft", "published"]),
+  recommendation: z.object({ source: z.enum(["automatic", "manual"]), confidence: z.enum(["low", "medium", "high"]).optional(), reasons: z.array(z.string().max(500)).max(20).optional() }).optional(),
 }).strict().superRefine((value, context) => {
-  if (value.status === "published" && value.sections.length === 0) context.addIssue({ code: "custom", path: ["sections"], message: "Add at least one valid section before publishing." });
+  if (value.status === "published" && !value.sections.some((section) => section.enabled)) context.addIssue({ code: "custom", path: ["sections"], message: "Enable at least one section before publishing." });
   const keys = value.sections.map((section) => section.key); const orders = value.sections.map((section) => section.order);
   if (new Set(keys).size !== keys.length) context.addIssue({ code: "custom", path: ["sections"], message: "Section keys must be unique." });
   if (new Set(orders).size !== orders.length) context.addIssue({ code: "custom", path: ["sections"], message: "Section order values must be unique." });
