@@ -1,6 +1,6 @@
 import type { OpportunityType } from "@/types/opportunities";
 
-export type ExtractionMethod = "json-ld" | "open-graph" | "meta" | "semantic-html" | "text-heuristics";
+export type ExtractionMethod = "json-ld" | "open-graph" | "meta" | "semantic-html" | "text-heuristics" | "ai";
 
 export interface ExtractedOpportunity {
   title: string | null;
