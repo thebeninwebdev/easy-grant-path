@@ -4,8 +4,6 @@ import { renderProposalPdf } from "@/lib/proposal-exports";
 import { getProposalApplication } from "@/lib/proposals";
 import { errorResponse } from "@/lib/api-response";
 
-export const runtime = "nodejs";
-
 export async function GET(_request: Request, context: { params: Promise<{ id: string }> }) {
   try {
     const application = await getProposalApplication((await context.params).id);
