@@ -1,5 +1,15 @@
 import "server-only";
-// Authentication is intentionally deferred by AGENTS.md. Keeping identity in one
-// server-only adapter means Better Auth can replace this without trusting userId
-// values sent by the browser or changing proposal ownership queries.
-export const DEVELOPMENT_USER_ID = "development-user";
+import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
+import { AppError } from "@/lib/errors";
+
+export async function getCurrentUserId() {
+  const session = await auth.api.getSession({ headers: await headers() });
+  return session?.user.id ?? null;
+}
+
+export async function requireCurrentUserId() {
+  const userId = await getCurrentUserId();
+  if (!userId) throw new AppError("Sign in required.", "UNAUTHORIZED", 401);
+  return userId;
+}

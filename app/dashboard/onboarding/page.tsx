@@ -1,5 +1,9 @@
+import { redirect } from "next/navigation";
 import { OnboardingFlow } from "@/components/onboarding/onboarding-flow";
-import { getDevelopmentProfile } from "@/lib/user-profile";
-import { getOrganizationProfile } from "@/lib/organization-profile";
-export const instant = false;
-export default async function OnboardingPage() { const [profile, organization] = await Promise.all([getDevelopmentProfile(), getOrganizationProfile()]); return <OnboardingFlow profile={profile} organization={organization} />; }
+import { getDevelopmentProfile, hasActiveAccess, isRegistrationProfileComplete } from "@/lib/user-profile";
+export default async function RegistrationPage() {
+  const profile = await getDevelopmentProfile();
+  if (hasActiveAccess(profile)) redirect("/dashboard");
+  if (isRegistrationProfileComplete(profile)) redirect("/dashboard/teaser");
+  return <OnboardingFlow profile={profile} />;
+}

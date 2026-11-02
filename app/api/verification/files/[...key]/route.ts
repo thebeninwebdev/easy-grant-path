@@ -1,6 +1,6 @@
 import { errorResponse } from "@/lib/api-response";
 import { getVerificationFile } from "@/lib/file-storage";
-import { DEVELOPMENT_USER_ID } from "@/lib/development-user";
+import { requireCurrentUserId } from "@/lib/development-user";
 import { IdentityVerification } from "@/models/IdentityVerification";
 import { OrganizationVerificationDocument } from "@/models/OrganizationVerificationDocument";
 import { AppError } from "@/lib/errors";
@@ -9,8 +9,8 @@ export async function GET(_request: Request, context: { params: Promise<{ key: s
   try {
     const key = (await context.params).key.join("/");
     const [identity, organization] = await Promise.all([
-      IdentityVerification.findOne({ userId: DEVELOPMENT_USER_ID, "documentFile.storageKey": key }).select("documentFile").lean(),
-      OrganizationVerificationDocument.findOne({ userId: DEVELOPMENT_USER_ID, "storage.storageKey": key }).select("storage").lean(),
+      IdentityVerification.findOne({ userId: await requireCurrentUserId(), "documentFile.storageKey": key }).select("documentFile").lean(),
+      OrganizationVerificationDocument.findOne({ userId: await requireCurrentUserId(), "storage.storageKey": key }).select("storage").lean(),
     ]);
     const file = identity?.documentFile || organization?.storage;
     if (!file?.storageKey) throw new AppError("Verification file not found.", "NOT_FOUND", 404);

@@ -1,11 +1,5 @@
-export default function Home() {
-  return (
-    <main className="flex flex-1 items-center justify-center p-6">
-      <section className="space-y-3 text-center">
-        <h1 className="text-3xl font-semibold tracking-tight">EasyGrantPath</h1>
-        <p className="text-muted-foreground">Funding opportunities made easier.</p>
-        <p className="text-sm text-muted-foreground">Project setup complete.</p>
-      </section>
-    </main>
-  );
-}
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, ShieldCheck, Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
+export default function Home() { return <main className="relative flex min-h-screen flex-1 items-center justify-center overflow-hidden px-4 py-8 sm:p-8"><div className="absolute -left-24 top-12 size-80 rounded-full bg-primary/10 blur-3xl" /><div className="absolute -right-24 bottom-0 size-96 rounded-full bg-emerald-200/40 blur-3xl" /><section className="relative grid w-full max-w-5xl overflow-hidden rounded-3xl border bg-card shadow-xl md:grid-cols-[1.05fr_.95fr]"><div className="p-7 sm:p-11"><Image src="/logo.png" alt="EasyGrantPath" width={170} height={58} className="h-auto w-36" priority /><div className="mt-14"><p className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary"><Sparkles className="size-3.5" /> Funding opportunities, made clearer</p><h1 className="mt-5 text-4xl font-semibold tracking-tight sm:text-5xl">Find grants that fit you.</h1><p className="mt-5 max-w-md text-lg leading-8 text-muted-foreground">Create your EasyGrantPath account to discover funding opportunities that match your goals.</p></div><Button asChild className="mt-10 h-12 w-full sm:w-auto"><Link href="/sign-up">Create account <ArrowRight className="size-4" /></Link></Button><p className="mt-5 text-sm text-muted-foreground">Account creation is currently available through the EasyGrantPath registration flow.</p></div><aside className="hidden bg-primary p-11 text-primary-foreground md:block"><ShieldCheck className="size-10" /><p className="mt-20 text-sm font-medium text-primary-foreground/75">EasyGrantPath helps you</p><h2 className="mt-3 text-3xl font-semibold leading-tight">Discover credible funding before you spend time applying.</h2><div className="mt-10 space-y-4 text-sm text-primary-foreground/85"><p>- Verified opportunity sources</p><p>- Profile-led recommendations</p><p>- Application and proposal tools after activation</p></div></aside></section></main>; }

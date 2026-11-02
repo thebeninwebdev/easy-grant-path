@@ -7,7 +7,7 @@ import { OpportunityCard } from "@/components/opportunities/opportunity-card";
 import { OpportunityFilters } from "@/components/opportunities/opportunity-filters";
 import { getPublicOpportunities, parsePublicOpportunityFilters } from "@/lib/public-opportunities";
 import { listProposalApplications } from "@/lib/proposals";
-import { firstName, getDevelopmentProfile, scoreOpportunity } from "@/lib/user-profile";
+import { firstName, getDevelopmentProfile, hasActiveAccess, isRegistrationProfileComplete, scoreOpportunity } from "@/lib/user-profile";
 import { redirect } from "next/navigation";
 import { getIdentityVerification, getOrganizationVerification } from "@/lib/verification";
 import { isOrganizationApplicantType } from "@/lib/applicant-types";
@@ -28,8 +28,11 @@ function pageHref(filters: ReturnType<typeof parsePublicOpportunityFilters>, pag
 
 export default async function DashboardPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const filters = parsePublicOpportunityFilters(await searchParams);
-  const [data, proposals, profile, identity, organizationVerification] = await Promise.all([getPublicOpportunities(filters), listProposalApplications(), getDevelopmentProfile(), getIdentityVerification(), getOrganizationVerification()]);
+  const profile = await getDevelopmentProfile();
   if (!profile) redirect("/dashboard/onboarding");
+  if (!isRegistrationProfileComplete(profile)) redirect("/dashboard/onboarding");
+  if (!hasActiveAccess(profile)) redirect("/dashboard/teaser");
+  const [data, proposals, identity, organizationVerification] = await Promise.all([getPublicOpportunities(filters), listProposalApplications(), getIdentityVerification(), getOrganizationVerification()]);
   const personalizedItems = profile.onboardingCompleted ? data.items.slice().sort((a, b) => scoreOpportunity(b, profile) - scoreOpportunity(a, profile)) : data.items;
   const hasFilters = Boolean(filters.search || filters.type || filters.country || filters.sector || filters.deadline);
   const organizationApplicant = isOrganizationApplicantType(profile.applicantType);

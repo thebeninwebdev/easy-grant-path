@@ -11,7 +11,7 @@ export async function connectToDatabase(): Promise<Mongoose> {
   if (cache.conn) return cache.conn;
   if (!cache.promise) {
     const { MONGODB_URI } = getServerEnv();
-    cache.promise = mongoose.connect(MONGODB_URI, { bufferCommands: false }).catch((error: unknown) => {
+    cache.promise = mongoose.connect(MONGODB_URI, { bufferCommands: false, maxPoolSize: 10, minPoolSize: 0, serverSelectionTimeoutMS: 10_000 }).catch((error: unknown) => {
       cache.promise = null;
       logger.error("MongoDB connection failed", { error: error instanceof Error ? error.message : "Unknown error" });
       throw error;
