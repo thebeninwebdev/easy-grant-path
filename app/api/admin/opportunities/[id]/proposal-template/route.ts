@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/lib/admin-auth";
 import { isValidObjectId } from "mongoose";
 import { errorResponse, successResponse } from "@/lib/api-response";
 import { connectToDatabase } from "@/lib/db";
@@ -7,7 +8,7 @@ import { Opportunity } from "@/models/Opportunity";
 import { ProposalTemplate } from "@/models/ProposalTemplate";
 
 export async function PUT(request: Request, context: { params: Promise<{ id: string }> }) {
-  try {
+  try { await requireAdmin();
     const { id } = await context.params;
     if (!isValidObjectId(id)) throw new AppError("Invalid opportunity ID.", "VALIDATION_ERROR", 400);
     const parsed = proposalTemplateInputSchema.safeParse(await request.json());
@@ -17,7 +18,7 @@ export async function PUT(request: Request, context: { params: Promise<{ id: str
     const template = await ProposalTemplate.findOneAndUpdate(
       { opportunityId: id },
       { $set: { ...parsed.data, sections: parsed.data.sections.slice().sort((a, b) => a.order - b.order), updatedBy: "development-admin" }, $setOnInsert: { createdBy: "development-admin" } },
-      { new: true, upsert: true, runValidators: true },
+      { returnDocument: "after", upsert: true, runValidators: true },
     ).lean();
     return successResponse(template);
   } catch (error) { return errorResponse(error); }

@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/lib/admin-auth";
 import { createHash, randomUUID } from "crypto";
 import { errorResponse, successResponse } from "@/lib/api-response";
 import { connectToDatabase } from "@/lib/db";
@@ -20,7 +21,7 @@ function canonicalUrl(value?: string) {
 }
 
 export async function POST(request: Request) {
-  try {
+  try { await requireAdmin();
     const result = manualOpportunitySchema.safeParse(await request.json());
     if (!result.success) throw new AppError(result.error.issues[0]?.message ?? "Invalid opportunity payload.", "VALIDATION_ERROR", 400);
 
@@ -43,7 +44,7 @@ export async function POST(request: Request) {
     const openingDate = dateAtNoonUtc(input.openingDate);
     const deadline = dateAtNoonUtc(input.deadline);
     const verified = input.action === "verify";
-    const { action: _action, ...fields } = input;
+    const { action: _action, importIdentity, ...fields } = input;
     const opportunity = await Opportunity.create({
       ...fields, officialUrl, discoveryUrl, openingDate, deadline,
       slug: slugify(input.title),
@@ -52,7 +53,7 @@ export async function POST(request: Request) {
       status: verified ? "open" : getOpportunityStatus(openingDate, deadline),
       verificationStatus: verified ? "verified" : "needs_review",
       verifiedAt: verified ? new Date() : undefined,
-      lastCheckedAt: new Date(), metadata: { manualEntry: true },
+      lastCheckedAt: new Date(), metadata: { manualEntry: true, ...(importIdentity ? { importIdentity } : {}) },
     });
     void _action;
     return successResponse(opportunity.toObject(), { status: 201 });

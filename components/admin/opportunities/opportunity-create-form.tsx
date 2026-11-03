@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { AlertCircle, CheckCircle2, ExternalLink, FileSearch, Loader2, Save, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -14,9 +14,10 @@ import { OPPORTUNITY_TYPES } from "@/types/opportunities";
 
 type FormState = Record<string, string>;
 type Extracted = Record<string, string | number | string[] | null>;
+type Identification = { submittedUrl: string; providedOpportunityName: string | null; detectedOpportunityName: string | null; resolvedSearchName: string | null; canonicalOpportunityName: string | null; source: "admin" | "crawler" | "metadata" | null; confidence: "high" | "medium" | "low" | null; organizationHint: string | null; originalDomain: string; searchQuery: string | null; cacheKey: string | null; researchResultCount: number; acceptedResearchResultCount: number };
 
 const initial: FormState = {
-  importUrl: "", title: "", organization: "", agency: "", summary: "", description: "", type: "grant",
+  importUrl: "", importName: "", title: "", organization: "", agency: "", summary: "", description: "", type: "grant",
   countries: "", eligibleCountries: "", applicantTypes: "", sectors: "", fundingMin: "", fundingMax: "",
   currency: "", openingDate: "", deadline: "", opportunityNumber: "", officialUrl: "", discoveryUrl: "",
 };
@@ -40,17 +41,22 @@ export function OpportunityCreateForm() {
   const [saving, setSaving] = useState<"review" | "verify" | null>(null);
   const [notice, setNotice] = useState<{ tone: "success" | "error"; text: string; warnings?: string[] } | null>(null);
   const [duplicate, setDuplicate] = useState<{ id: string; title: string } | null>(null);
+  const [identification, setIdentification] = useState<Identification | null>(null);
+  const nameInputRef = useRef<HTMLInputElement>(null);
 
   const update = (field: string, value: string) => setForm((current) => ({ ...current, [field]: value }));
-  const populatedCount = useMemo(() => Object.entries(form).filter(([key, value]) => key !== "importUrl" && value.trim()).length, [form]);
+  const populatedCount = useMemo(() => Object.entries(form).filter(([key, value]) => !["importUrl", "importName"].includes(key) && value.trim()).length, [form]);
 
   async function extract() {
     if (!form.importUrl.trim()) return setNotice({ tone: "error", text: "Enter the public opportunity URL first." });
     setExtracting(true); setNotice(null);
     try {
-      const response = await fetch("/api/admin/opportunities/extract", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ url: form.importUrl.trim() }) });
+      const response = await fetch("/api/admin/opportunities/extract", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ url: form.importUrl.trim(), name: form.importName.trim() || undefined }) });
       const payload = await response.json();
-      if (!response.ok) throw new Error(payload.error?.message || "Could not extract this page.");
+      if (!response.ok) {
+        if (payload.error?.code === "IDENTITY_REQUIRED") requestAnimationFrame(() => nameInputRef.current?.focus());
+        throw new Error(payload.error?.message || "Could not extract this page.");
+      }
       const data = payload.data as Extracted;
       setForm((current) => {
         const next = { ...current };
@@ -62,8 +68,15 @@ export function OpportunityCreateForm() {
         return next;
       });
       const warnings = Array.isArray(payload.meta?.warnings) ? payload.meta.warnings : [];
-      setNotice({ tone: "success", text: `Imported ${payload.meta?.fieldsFound?.length ?? 0} fields. Review every value before saving.`, warnings });
-      toast.success("Opportunity details imported");
+      const identity = payload.meta?.identity;
+      setIdentification(identity ? { ...identity, researchResultCount: payload.meta?.research?.resultCount ?? 0, acceptedResearchResultCount: payload.meta?.research?.acceptedResultCount ?? 0 } : null);
+      if (payload.meta?.requiresName) {
+        setNotice({ tone: "error", text: "We couldn't confidently identify this opportunity from the page. Enter the opportunity name to help us research it.", warnings });
+        requestAnimationFrame(() => nameInputRef.current?.focus());
+      } else {
+        setNotice({ tone: "success", text: "Imported " + (payload.meta?.fieldsFound?.length ?? 0) + " fields. Review every value before saving.", warnings });
+        toast.success("Opportunity details imported");
+      }
     } catch (error) {
       setNotice({ tone: "error", text: error instanceof Error ? error.message : "Could not extract this page." });
     } finally { setExtracting(false); }
@@ -79,7 +92,7 @@ export function OpportunityCreateForm() {
       sectors: splitList(form.sectors), fundingMin: numeric(form.fundingMin), fundingMax: numeric(form.fundingMax),
       currency: form.currency.trim().toUpperCase() || undefined, openingDate: form.openingDate,
       deadline: form.deadline, opportunityNumber: form.opportunityNumber, officialUrl: form.officialUrl,
-      discoveryUrl: form.discoveryUrl, action,
+      discoveryUrl: form.discoveryUrl, importIdentity: identification, action,
     };
     try {
       const response = await fetch("/api/admin/opportunities", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
@@ -102,6 +115,12 @@ export function OpportunityCreateForm() {
         <CardHeader><CardTitle className="flex items-center gap-2 text-base"><FileSearch className="size-4" /> Import from a public page</CardTitle></CardHeader>
         <CardContent>
           <div className="flex flex-col gap-3 sm:flex-row"><Input value={form.importUrl} onChange={(event) => update("importUrl", event.target.value)} placeholder="https://funder.org/opportunities/..." type="url" /><Button type="button" variant="outline" disabled={extracting} onClick={extract}>{extracting ? <Loader2 className="size-4 animate-spin" /> : <FileSearch className="size-4" />}{extracting ? "Reading opportunity page…" : "Fetch details"}</Button></div>
+          <div className="mt-4 grid gap-1.5">
+            <label className="text-sm font-medium" htmlFor="opportunity-name">Opportunity name (optional)</label>
+            <Input id="opportunity-name" ref={nameInputRef} value={form.importName} onChange={(event) => { update("importName", event.target.value); setIdentification(null); }} placeholder="African Youth Innovation Grant 2026" />
+            <p className="text-xs text-muted-foreground">Optional. If left blank, we&apos;ll try to detect the opportunity name from the page.</p>
+          </div>
+          {identification?.resolvedSearchName ? <div className="mt-4 rounded-lg border bg-muted/40 p-3 text-sm"><p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Identified opportunity</p><p className="mt-1 font-medium">{identification.canonicalOpportunityName || identification.resolvedSearchName}</p><p className="mt-1 text-xs text-muted-foreground">{identification.source === "admin" ? "Provided by you" : "Detected from page"}{identification.confidence === "low" ? " · Please verify this opportunity name." : ""}</p></div> : null}
           <p className="mt-2 text-xs text-muted-foreground">Import is optional. It fills only empty fields and never saves automatically.</p>
         </CardContent>
       </Card>

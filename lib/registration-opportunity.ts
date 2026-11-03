@@ -1,9 +1,9 @@
 import "server-only";
-import { getPublicOpportunities, type PublicOpportunity } from "@/lib/public-opportunities";
+import { getTeaserOpportunityCandidates, type PublicOpportunity } from "@/lib/public-opportunities";
 import type { DevelopmentProfile } from "@/lib/user-profile";
 
 export interface OpportunityPreview {
-  slug: string; title: string; organization: string | null; fundingMin: number | null; fundingMax: number | null;
+  slug: string; title: string; organization: string | null; type: PublicOpportunity["type"]; fundingMin: number | null; fundingMax: number | null;
   currency: string; deadline: string | null; countries: string[]; sectors: string[]; summary: string | null; descriptionExcerpt: string | null; verified: boolean;
 }
 const countryAliases: Record<string, string[]> = { CI: ["cote d'ivoire", "cote divoire", "ivory coast", "west africa", "africa"], BJ: ["benin", "west africa", "africa"], BF: ["burkina faso", "west africa", "africa"], GH: ["ghana", "west africa", "africa"], GN: ["guinea", "west africa", "africa"], ML: ["mali", "west africa", "africa"], NE: ["niger", "west africa", "africa"], NG: ["nigeria", "west africa", "africa"], SN: ["senegal", "west africa", "africa"], TG: ["togo", "west africa", "africa"], CM: ["cameroon", "africa"], KE: ["kenya", "africa"], ZA: ["south africa", "africa"] };
@@ -24,10 +24,10 @@ function score(item: PublicOpportunity, profile: DevelopmentProfile) {
   return total;
 }
 export async function getRegistrationOpportunity(profile: DevelopmentProfile): Promise<{ opportunity: OpportunityPreview | null; strong: boolean }> {
-  const data = await getPublicOpportunities({ search: "", type: "", country: "", sector: "", deadline: "", sort: "deadline", page: 1 });
-  const ranked = data.items.map((item) => ({ item, score: score(item, profile) })).filter((entry) => entry.score >= 0).sort((a, b) => b.score - a.score);
-  const selected = ranked[0];
+  const candidates = await getTeaserOpportunityCandidates();
+  const ranked = candidates.map(({ item, verified }) => ({ item, verified, score: score(item, profile) })).sort((a, b) => b.score - a.score || Number(b.verified) - Number(a.verified));
+  const selected = ranked.find((entry) => entry.score >= 0) ?? ranked[0];
   if (!selected) return { opportunity: null, strong: false };
   const description = plain(selected.item.description);
-  return { strong: selected.score >= 9, opportunity: { slug: selected.item.slug, title: selected.item.title, organization: selected.item.agency || selected.item.organization, fundingMin: selected.item.fundingMin, fundingMax: selected.item.fundingMax, currency: selected.item.currency, deadline: selected.item.deadline, countries: selected.item.eligibleCountries.length ? selected.item.eligibleCountries : selected.item.countries, sectors: selected.item.sectors, summary: selected.item.summary, descriptionExcerpt: description ? description.slice(0, 360) : null, verified: selected.item.status !== "upcoming" } };
+  return { strong: selected.score >= 9, opportunity: { slug: selected.item.slug, type: selected.item.type, title: selected.item.title, organization: selected.item.agency || selected.item.organization, fundingMin: selected.item.fundingMin, fundingMax: selected.item.fundingMax, currency: selected.item.currency, deadline: selected.item.deadline, countries: selected.item.eligibleCountries.length ? selected.item.eligibleCountries : selected.item.countries, sectors: selected.item.sectors, summary: selected.item.summary, descriptionExcerpt: description ? description.slice(0, 360) : null, verified: selected.verified } };
 }

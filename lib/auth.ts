@@ -1,7 +1,9 @@
 import "server-only";
 import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "@better-auth/mongo-adapter";
+import { admin } from "better-auth/plugins";
 import { MongoClient } from "mongodb";
+import { sendVerificationEmail } from "@/lib/email";
 
 const uri = process.env.MONGODB_URI;
 const secret = process.env.BETTER_AUTH_SECRET;
@@ -17,4 +19,11 @@ export const auth = betterAuth({
   secret,
   baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
   emailAndPassword: { enabled: true, minPasswordLength: 8 },
+  emailVerification: {
+    sendOnSignUp: true,
+    sendVerificationEmail: async ({ user, url }) => {
+      await sendVerificationEmail({ name: user.name, email: user.email, url });
+    },
+  },
+  plugins: [admin({ defaultRole: "user", adminRoles: ["admin"] })],
 });

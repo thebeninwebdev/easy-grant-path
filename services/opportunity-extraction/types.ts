@@ -1,4 +1,5 @@
 import type { OpportunityType } from "@/types/opportunities";
+import type { IdentityConfidence, IdentitySource, RankedResearchSource } from "./opportunity-identity";
 
 export type ExtractionMethod = "json-ld" | "open-graph" | "meta" | "semantic-html" | "text-heuristics" | "ai";
 
@@ -6,9 +7,9 @@ export interface ExtractedOpportunity {
   title: string | null;
   organization: string | null;
   agency: string | null;
+  type: OpportunityType | null;
   summary: string | null;
   description: string | null;
-  type: OpportunityType | null;
   countries: string[];
   eligibleCountries: string[];
   applicantTypes: string[];
@@ -23,12 +24,35 @@ export interface ExtractedOpportunity {
   discoveryUrl: string | null;
 }
 
+export interface OpportunityIdentityMeta {
+  submittedUrl: string;
+  providedOpportunityName: string | null;
+  detectedOpportunityName: string | null;
+  resolvedSearchName: string | null;
+  canonicalOpportunityName: string | null;
+  source: IdentitySource | null;
+  confidence: IdentityConfidence | null;
+  organizationHint: string | null;
+  originalDomain: string;
+  searchQuery: string | null;
+  cacheKey: string | null;
+}
+
 export interface ExtractionMeta {
   sourceUrl: string;
   finalUrl: string;
   methods: ExtractionMethod[];
   warnings: string[];
   fieldsFound: string[];
+  requiresName: boolean;
+  crawlFailed: boolean;
+  identity: OpportunityIdentityMeta;
+  research: {
+    cacheHit: boolean;
+    resultCount: number;
+    acceptedResultCount: number;
+    sources: RankedResearchSource[];
+  } | null;
 }
 
 export interface OpportunityExtractionResult {

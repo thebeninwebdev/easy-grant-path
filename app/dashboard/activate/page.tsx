@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { appConfig } from "@/lib/config";
 import { getDevelopmentProfile, hasActiveAccess, isRegistrationProfileComplete } from "@/lib/user-profile";
 import { redirect } from "next/navigation";
+
+export const instant = false;
 export default async function ActivatePage() {
   const profile = await getDevelopmentProfile();
   if (!isRegistrationProfileComplete(profile)) redirect("/dashboard/onboarding");

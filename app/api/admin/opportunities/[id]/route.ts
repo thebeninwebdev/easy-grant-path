@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/lib/admin-auth";
 import { isValidObjectId } from "mongoose";
 import { errorResponse, successResponse } from "@/lib/api-response";
 import { connectToDatabase } from "@/lib/db";
@@ -5,7 +6,7 @@ import { AppError } from "@/lib/errors";
 import { Opportunity } from "@/models/Opportunity";
 
 export async function PATCH(request: Request, context: RouteContext<"/api/admin/opportunities/[id]">) {
-  try {
+  try { await requireAdmin();
     const { id } = await context.params;
     if (!isValidObjectId(id)) throw new AppError("Invalid opportunity ID.", "VALIDATION_ERROR", 400);
 
@@ -23,7 +24,7 @@ export async function PATCH(request: Request, context: RouteContext<"/api/admin/
       : action === "reject"
         ? { verificationStatus: "rejected" }
         : { status: "archived" };
-    const opportunity = await Opportunity.findByIdAndUpdate(id, { $set: update }, { new: true }).lean();
+    const opportunity = await Opportunity.findByIdAndUpdate(id, { $set: update }, { returnDocument: "after" }).lean();
     if (!opportunity) throw new AppError("Opportunity not found.", "NOT_FOUND", 404);
     return successResponse(opportunity);
   } catch (error) {

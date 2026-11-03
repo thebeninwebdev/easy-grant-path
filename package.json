@@ -8,7 +8,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "admin:promote": "node scripts/set-admin-role.mjs",
     "test:content": "node --no-warnings --experimental-strip-types scripts/test-opportunity-content.mjs",
+    "test:identity": "node --no-warnings --experimental-strip-types scripts/test-opportunity-identity.mjs",
     "test:proposals": "node --no-warnings --experimental-strip-types scripts/test-proposal-logic.mjs",
     "test:document": "node --no-warnings --experimental-strip-types scripts/test-proposal-document.mjs"
   },

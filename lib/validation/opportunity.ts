@@ -11,6 +11,23 @@ const list = z.array(z.string().trim().min(1).max(120)).max(100).default([]);
 
 export const extractionRequestSchema = z.object({
   url: z.url().max(2_000).refine((value) => /^https?:\/\//i.test(value), "Only HTTP and HTTPS URLs are supported."),
+  name: z.string().trim().max(300).optional().transform((value) => value || undefined),
+}).strict();
+
+const importIdentitySchema = z.object({
+  submittedUrl: z.url().max(2_000),
+  providedOpportunityName: z.string().max(300).nullable(),
+  detectedOpportunityName: z.string().max(300).nullable(),
+  resolvedSearchName: z.string().max(300).nullable(),
+  canonicalOpportunityName: z.string().max(300).nullable(),
+  source: z.enum(["admin", "crawler", "metadata"]).nullable(),
+  confidence: z.enum(["high", "medium", "low"]).nullable(),
+  organizationHint: z.string().max(300).nullable(),
+  originalDomain: z.string().max(255),
+  searchQuery: z.string().max(1_000).nullable(),
+  cacheKey: z.string().max(500).nullable(),
+  researchResultCount: z.number().int().nonnegative(),
+  acceptedResearchResultCount: z.number().int().nonnegative(),
 }).strict();
 
 export const manualOpportunitySchema = z.object({
@@ -32,6 +49,7 @@ export const manualOpportunitySchema = z.object({
   opportunityNumber: optionalText(200),
   officialUrl: optionalUrl,
   discoveryUrl: optionalUrl,
+  importIdentity: importIdentitySchema.optional(),
   action: z.enum(["review", "verify"]),
 }).strict().superRefine((value, context) => {
   if (value.fundingMin !== undefined && value.fundingMax !== undefined && value.fundingMin > value.fundingMax) {
