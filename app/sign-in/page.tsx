@@ -7,6 +7,8 @@ function safeCallback(value: string | string[] | undefined) {
   return callback?.startsWith("/") && !callback.startsWith("//") ? callback : "/dashboard/onboarding";
 }
 
+export const instant = false;
+
 export default async function SignInPage({ searchParams }: { searchParams: Promise<{ callbackURL?: string | string[] }> }) {
   const callbackURL = safeCallback((await searchParams).callbackURL);
   return (

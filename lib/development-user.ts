@@ -9,11 +9,12 @@ export async function getCurrentSession() {
 
 export async function getCurrentUserId() {
   const session = await getCurrentSession();
-  return session?.user.id ?? null;
+  return session?.user.emailVerified ? session.user.id : null;
 }
 
 export async function requireCurrentUserId() {
-  const userId = await getCurrentUserId();
-  if (!userId) throw new AppError("Sign in required.", "UNAUTHORIZED", 401);
-  return userId;
+  const session = await getCurrentSession();
+  if (!session) throw new AppError("Sign in required.", "UNAUTHORIZED", 401);
+  if (!session.user.emailVerified) throw new AppError("Verify your email before continuing.", "EMAIL_NOT_VERIFIED", 403);
+  return session.user.id;
 }

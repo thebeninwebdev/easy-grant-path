@@ -18,9 +18,14 @@ export const auth = betterAuth({
   database: mongodbAdapter(client.db(), { client, transaction: false }),
   secret,
   baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
-  emailAndPassword: { enabled: true, minPasswordLength: 8 },
+  emailAndPassword: {
+    enabled: true,
+    minPasswordLength: 8,
+    requireEmailVerification: true,
+  },
   emailVerification: {
     sendOnSignUp: true,
+    autoSignInAfterVerification: true,
     sendVerificationEmail: async ({ user, url }) => {
       await sendVerificationEmail({ name: user.name, email: user.email, url });
     },

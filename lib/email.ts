@@ -17,8 +17,7 @@ export async function sendVerificationEmail({ name, email, url }: { name: string
   const from = process.env.RESEND_FROM_EMAIL;
 
   if (!apiKey || !from) {
-    console.error("Signup verification email was not sent: RESEND_API_KEY and RESEND_FROM_EMAIL must be configured.");
-    return;
+    throw new Error("RESEND_API_KEY and RESEND_FROM_EMAIL must be configured before users can sign up.");
   }
 
   const safeName = escapeHtml(name || "there");
@@ -39,6 +38,6 @@ export async function sendVerificationEmail({ name, email, url }: { name: string
   });
 
   if (!response.ok) {
-    console.error("Signup verification email was not sent:", response.status, await response.text());
+    throw new Error(`Resend rejected the verification email with status ${response.status}.`);
   }
 }
