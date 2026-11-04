@@ -8,6 +8,20 @@ const optionalDate = z.string().trim().optional().transform((value) => value || 
   return new Date(`${value}T12:00:00.000Z`).toISOString().slice(0, 10) === value;
 }, "Use a valid date in YYYY-MM-DD format.");
 const list = z.array(z.string().trim().min(1).max(120)).max(100).default([]);
+const imageMetadataSchema = z.object({
+  url: z.url().max(2_000).refine((value) => /^https?:\/\//i.test(value), "Only HTTP and HTTPS image URLs are supported."),
+  sourceUrl: z.url().max(2_000).refine((value) => /^https?:\/\//i.test(value), "Only HTTP and HTTPS source URLs are supported."),
+  type: z.enum(["official-banner", "programme-image", "open-graph", "organization-logo", "favicon", "generic-image"]),
+  origin: z.enum(["page-metadata", "structured-data", "page-image", "organization-site", "brand-asset"]),
+  verified: z.boolean(),
+  confidence: z.enum(["high", "medium", "low"]).optional(),
+  width: z.number().int().positive().max(100_000).optional(),
+  height: z.number().int().positive().max(100_000).optional(),
+  alt: z.string().trim().max(500).optional(),
+  discoveredAt: z.iso.datetime().optional(),
+  selectionReasons: z.array(z.string().max(500)).max(30).optional(),
+  reviewStatus: z.enum(["approved", "unreviewed"]).optional(),
+}).strict();
 
 export const extractionRequestSchema = z.object({
   url: z.url().max(2_000).refine((value) => /^https?:\/\//i.test(value), "Only HTTP and HTTPS URLs are supported."),
@@ -49,6 +63,8 @@ export const manualOpportunitySchema = z.object({
   opportunityNumber: optionalText(200),
   officialUrl: optionalUrl,
   discoveryUrl: optionalUrl,
+  opportunityImage: imageMetadataSchema.optional(),
+  organizationLogo: imageMetadataSchema.optional(),
   importIdentity: importIdentitySchema.optional(),
   action: z.enum(["review", "verify"]),
 }).strict().superRefine((value, context) => {

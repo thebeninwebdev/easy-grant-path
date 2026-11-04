@@ -7,6 +7,8 @@ import { manualOpportunitySchema } from "@/lib/validation/opportunity";
 import { Opportunity } from "@/models/Opportunity";
 import { slugify } from "@/services/opportunity-ingestion/deduplicate";
 import { getOpportunityStatus } from "@/services/opportunity-ingestion/status";
+import { validateImageAsset } from "@/services/opportunity-extraction/image-validation";
+import type { OpportunityImageMetadata } from "@/services/opportunity-extraction/image-discovery";
 
 function dateAtNoonUtc(value?: string) {
   return value ? new Date(`${value}T12:00:00.000Z`) : undefined;
@@ -18,6 +20,21 @@ function canonicalUrl(value?: string) {
   parsed.hash = "";
   if (parsed.pathname !== "/") parsed.pathname = parsed.pathname.replace(/\/$/, "");
   return parsed.toString();
+}
+
+async function validateManualImage(image: OpportunityImageMetadata | undefined, approved: boolean) {
+  if (!image) return undefined;
+  const result = await validateImageAsset(image.url);
+  if (!result.valid) throw new AppError("One of the image URLs is not a safe, usable image: " + result.reasons[0], "INVALID_IMAGE", 422);
+  return {
+    ...image,
+    url: result.finalUrl,
+    verified: true,
+    width: result.width ?? image.width,
+    height: result.height ?? image.height,
+    selectionReasons: [...(image.selectionReasons ?? []), ...result.reasons],
+    reviewStatus: approved ? "approved" as const : "unreviewed" as const,
+  };
 }
 
 export async function POST(request: Request) {
@@ -44,9 +61,13 @@ export async function POST(request: Request) {
     const openingDate = dateAtNoonUtc(input.openingDate);
     const deadline = dateAtNoonUtc(input.deadline);
     const verified = input.action === "verify";
-    const { action: _action, importIdentity, ...fields } = input;
+    const [opportunityImage, organizationLogo] = await Promise.all([
+      validateManualImage(input.opportunityImage, verified),
+      validateManualImage(input.organizationLogo, verified),
+    ]);
+    const { action: _action, importIdentity, opportunityImage: _opportunityImage, organizationLogo: _organizationLogo, ...fields } = input;
     const opportunity = await Opportunity.create({
-      ...fields, officialUrl, discoveryUrl, openingDate, deadline,
+      ...fields, officialUrl, discoveryUrl, openingDate, deadline, opportunityImage, organizationLogo,
       slug: slugify(input.title),
       source: { slug: "manual", name: "Manual entry", type: "manual", externalId },
       fingerprint: createHash("sha256").update(externalId).digest("hex"),
@@ -55,7 +76,7 @@ export async function POST(request: Request) {
       verifiedAt: verified ? new Date() : undefined,
       lastCheckedAt: new Date(), metadata: { manualEntry: true, ...(importIdentity ? { importIdentity } : {}) },
     });
-    void _action;
+    void _action; void _opportunityImage; void _organizationLogo;
     return successResponse(opportunity.toObject(), { status: 201 });
   } catch (error) {
     return errorResponse(error instanceof SyntaxError ? new AppError("Request body must be valid JSON.", "VALIDATION_ERROR", 400) : error);

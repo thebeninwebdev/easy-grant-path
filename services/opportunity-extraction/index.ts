@@ -96,6 +96,16 @@ export async function extractOpportunityFromUrl(url: string, providedOpportunity
     const research = await researchSafely(url, "", identity, warnings, methods);
     let data = applyResearch({ ...emptyExtractedOpportunity(), discoveryUrl: url }, research, identity);
     data = { ...data, discoveryUrl: url, officialUrl: data.officialUrl || null };
+    const images = research ? await discoverImages({
+      identity,
+      organization: data.organization || data.agency,
+      officialUrl: data.officialUrl,
+      researchSources: research.sources,
+    }).catch((error) => {
+      warnings.push(error instanceof Error ? error.message : "Image discovery was unavailable.");
+      return null;
+    }) : null;
+    if (images) data = { ...data, opportunityImage: images.opportunityImage, organizationLogo: images.organizationLogo };
     logger.info("Opportunity identity resolved", { submittedUrl: url, crawlerDetectedTitle: null, resolvedSearchName: identity.searchName, identitySource: identity.source, organizationHint: identity.organizationHint, searchQuery: identity.searchQuery, crawlFailed: true });
     return {
       data,
@@ -109,6 +119,7 @@ export async function extractOpportunityFromUrl(url: string, providedOpportunity
         crawlFailed: true,
         identity: identificationMeta(url, providedName, identity, data.title),
         research: researchMeta(research),
+        ...(images ? { images } : {}),
       },
     };
   }
@@ -148,9 +159,6 @@ export async function extractOpportunityFromUrl(url: string, providedOpportunity
     organization: data.organization || data.agency,
   });
   data = { ...data, title: identity?.searchName ?? null, discoveryUrl: page.requestedUrl };
-  const images = discoverImages($, page.finalUrl, data.organization || data.agency);
-  data = { ...data, opportunityImage: images.opportunityImage, organizationLogo: images.organizationLogo };
-
   logger.info("Opportunity identity resolved", {
     submittedUrl: page.requestedUrl,
     adminNameProvided: Boolean(providedName),
@@ -175,7 +183,6 @@ export async function extractOpportunityFromUrl(url: string, providedOpportunity
         crawlFailed: false,
         identity: identificationMeta(page.requestedUrl, providedName, null, null),
         research: null,
-        images,
       },
     };
   }
@@ -186,6 +193,17 @@ export async function extractOpportunityFromUrl(url: string, providedOpportunity
   const research = await researchSafely(page.finalUrl, text, identity, warnings, methods);
   data = applyResearch(data, research, identity);
   data = { ...data, discoveryUrl: page.requestedUrl, officialUrl: data.officialUrl || page.finalUrl };
+  const images = await discoverImages({
+    originalPage: { url: page.finalUrl, html: page.html, authority: 2, official: false },
+    researchSources: research?.sources,
+    identity,
+    organization: data.organization || data.agency,
+    officialUrl: data.officialUrl,
+  }).catch((error) => {
+    warnings.push(error instanceof Error ? error.message : "Image discovery was unavailable.");
+    return null;
+  });
+  if (images) data = { ...data, opportunityImage: images.opportunityImage, organizationLogo: images.organizationLogo };
   if (!data.description || !data.deadline) warnings.push("Some details could not be detected. Please complete and verify the form manually.");
 
   return {
@@ -200,7 +218,7 @@ export async function extractOpportunityFromUrl(url: string, providedOpportunity
       crawlFailed: false,
       identity: identificationMeta(page.requestedUrl, providedName, identity, data.title),
       research: researchMeta(research),
-      images,
+      ...(images ? { images } : {}),
     },
   };
 }

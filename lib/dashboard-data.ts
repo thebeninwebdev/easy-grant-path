@@ -3,7 +3,7 @@ import { connection } from 'next/server';
 import { connectToDatabase } from '@/lib/db';
 import { matchOpportunity, type OpportunityMatch } from '@/lib/opportunity-matching';
 import { normalizePlainText, normalizePlainTextList, sanitizeOpportunityHtml } from '@/lib/opportunity-content';
-import type { PublicOpportunity } from '@/lib/public-opportunities';
+import { serializePublicImage, type PublicOpportunity } from '@/lib/public-opportunities';
 import type { DevelopmentProfile } from '@/lib/user-profile';
 import { Opportunity } from '@/models/Opportunity';
 import type { OpportunityStatus, OpportunityType } from '@/types/opportunities';
@@ -27,6 +27,7 @@ function serialize(raw: Record<string, unknown>): PublicOpportunity {
     fundingMax: typeof raw.fundingMax === 'number' ? raw.fundingMax : null, currency: typeof raw.currency === 'string' ? raw.currency : 'USD',
     openingDate: iso(raw.openingDate), deadline: iso(raw.deadline), officialUrl: typeof raw.officialUrl === 'string' ? raw.officialUrl : null,
     opportunityNumber: normalizePlainText(raw.opportunityNumber), status: raw.status as OpportunityStatus,
+    opportunityImage: serializePublicImage(raw.opportunityImage), organizationLogo: serializePublicImage(raw.organizationLogo),
   };
 }
 

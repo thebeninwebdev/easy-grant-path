@@ -56,7 +56,15 @@ export interface ExtractionMeta {
     acceptedResultCount: number;
     sources: RankedResearchSource[];
   } | null;
-  images?: { candidateCount: number; opportunityImage: OpportunityImageMetadata | null; organizationLogo: OpportunityImageMetadata | null };
+  images?: {
+    candidateCount: number;
+    opportunityImage: OpportunityImageMetadata | null;
+    organizationLogo: OpportunityImageMetadata | null;
+    inspectedSources: string[];
+    rejectedCandidates: Array<{ url: string; reasons: string[] }>;
+    cacheHits: number;
+    durationMs: number;
+  };
 }
 
 export interface OpportunityExtractionResult {

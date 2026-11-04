@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
-import { AlertCircle, CheckCircle2, ExternalLink, FileSearch, Loader2, Save, ShieldCheck } from "lucide-react";
+import { AlertCircle, CheckCircle2, ExternalLink, FileSearch, ImageOff, Loader2, Save, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -13,7 +13,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { OPPORTUNITY_TYPES } from "@/types/opportunities";
 
 type FormState = Record<string, string>;
-type Extracted = Record<string, string | number | string[] | null>;
+type ImageMetadata = {
+  url: string; sourceUrl: string; type: "official-banner" | "programme-image" | "open-graph" | "organization-logo" | "favicon" | "generic-image";
+  origin: "page-metadata" | "structured-data" | "page-image" | "organization-site" | "brand-asset"; verified: boolean;
+  confidence?: "high" | "medium" | "low"; width?: number; height?: number; alt?: string; discoveredAt?: string;
+  selectionReasons?: string[]; reviewStatus?: "approved" | "unreviewed";
+};
+type Extracted = Record<string, string | number | string[] | ImageMetadata | null>;
 type Identification = { submittedUrl: string; providedOpportunityName: string | null; detectedOpportunityName: string | null; resolvedSearchName: string | null; canonicalOpportunityName: string | null; source: "admin" | "crawler" | "metadata" | null; confidence: "high" | "medium" | "low" | null; organizationHint: string | null; originalDomain: string; searchQuery: string | null; cacheKey: string | null; researchResultCount: number; acceptedResearchResultCount: number };
 
 const initial: FormState = {
@@ -34,6 +40,30 @@ function displayType(value: string) {
   return value.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
+function ImageEditor({ label, image, logo, onChange }: { label: string; image: ImageMetadata | null; logo?: boolean; onChange: (image: ImageMetadata | null) => void }) {
+  function replace(url: string) {
+    if (!url.trim()) return onChange(null);
+    onChange({
+      url: url.trim(),
+      sourceUrl: url.trim(),
+      type: logo ? "organization-logo" : "generic-image",
+      origin: image?.origin || "page-image",
+      verified: false,
+      alt: image?.alt,
+      reviewStatus: "unreviewed",
+    });
+  }
+  return <div className="rounded-xl border p-4">
+    <div className="flex items-center justify-between gap-3"><p className="text-sm font-medium">{label}</p>{image ? <Button type="button" size="sm" variant="ghost" onClick={() => onChange(null)}><ImageOff className="size-4" /> Remove</Button> : null}</div>
+    <div className={"mt-3 overflow-hidden rounded-lg bg-muted " + (logo ? "flex aspect-square max-w-40 items-center justify-center" : "aspect-[16/9]")}>
+      {image ? <img src={image.url} alt={image.alt || label} className={logo ? "max-h-full max-w-full object-contain p-3" : "h-full w-full object-cover"} loading="lazy" referrerPolicy="no-referrer" /> : <div className="flex h-full items-center justify-center text-xs text-muted-foreground">No image selected</div>}
+    </div>
+    <Input className="mt-3" type="url" value={image?.url ?? ""} placeholder="https://official-site.org/image.jpg" onChange={(event) => replace(event.target.value)} />
+    {image?.sourceUrl ? <p className="mt-2 break-all text-xs text-muted-foreground">Source: <a className="text-primary hover:underline" href={image.sourceUrl} target="_blank" rel="noreferrer">{image.sourceUrl}</a></p> : null}
+    {image ? <p className="mt-1 text-xs text-muted-foreground">{image.confidence ? displayType(image.confidence) + " confidence · " : ""}{image.verified ? "Technically validated" : "Will be validated when saved"}</p> : null}
+  </div>;
+}
+
 export function OpportunityCreateForm() {
   const router = useRouter();
   const [form, setForm] = useState<FormState>(initial);
@@ -42,6 +72,7 @@ export function OpportunityCreateForm() {
   const [notice, setNotice] = useState<{ tone: "success" | "error"; text: string; warnings?: string[] } | null>(null);
   const [duplicate, setDuplicate] = useState<{ id: string; title: string } | null>(null);
   const [identification, setIdentification] = useState<Identification | null>(null);
+  const [images, setImages] = useState<{ opportunityImage: ImageMetadata | null; organizationLogo: ImageMetadata | null }>({ opportunityImage: null, organizationLogo: null });
   const nameInputRef = useRef<HTMLInputElement>(null);
 
   const update = (field: string, value: string) => setForm((current) => ({ ...current, [field]: value }));
@@ -58,10 +89,14 @@ export function OpportunityCreateForm() {
         throw new Error(payload.error?.message || "Could not extract this page.");
       }
       const data = payload.data as Extracted;
+      setImages({
+        opportunityImage: data.opportunityImage && !Array.isArray(data.opportunityImage) && typeof data.opportunityImage === "object" ? data.opportunityImage as ImageMetadata : null,
+        organizationLogo: data.organizationLogo && !Array.isArray(data.organizationLogo) && typeof data.organizationLogo === "object" ? data.organizationLogo as ImageMetadata : null,
+      });
       setForm((current) => {
         const next = { ...current };
         for (const [field, value] of Object.entries(data)) {
-          if (!(field in next) || next[field].trim() || value === null) continue;
+          if (!(field in next) || next[field].trim() || value === null || typeof value === "object" && !Array.isArray(value)) continue;
           next[field] = Array.isArray(value) ? value.join(", ") : String(value);
         }
         if (!next.discoveryUrl) next.discoveryUrl = form.importUrl.trim();
@@ -92,7 +127,8 @@ export function OpportunityCreateForm() {
       sectors: splitList(form.sectors), fundingMin: numeric(form.fundingMin), fundingMax: numeric(form.fundingMax),
       currency: form.currency.trim().toUpperCase() || undefined, openingDate: form.openingDate,
       deadline: form.deadline, opportunityNumber: form.opportunityNumber, officialUrl: form.officialUrl,
-      discoveryUrl: form.discoveryUrl, importIdentity: identification, action,
+      discoveryUrl: form.discoveryUrl, opportunityImage: images.opportunityImage ?? undefined,
+      organizationLogo: images.organizationLogo ?? undefined, importIdentity: identification, action,
     };
     try {
       const response = await fetch("/api/admin/opportunities", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
@@ -155,10 +191,17 @@ export function OpportunityCreateForm() {
         <Label label="Official URL"><Input type="url" value={form.officialUrl} onChange={(e) => update("officialUrl", e.target.value)} /></Label>
         <Label label="Discovery URL"><Input type="url" value={form.discoveryUrl} onChange={(e) => update("discoveryUrl", e.target.value)} /></Label>
       </CardContent></Card>
+
+      <Card><CardHeader><CardTitle className="text-base">Opportunity images</CardTitle></CardHeader><CardContent className="grid gap-5 sm:grid-cols-2">
+        <ImageEditor label="Opportunity banner" image={images.opportunityImage} onChange={(opportunityImage) => setImages((current) => ({ ...current, opportunityImage }))} />
+        <ImageEditor label="Funding organization logo" logo image={images.organizationLogo} onChange={(organizationLogo) => setImages((current) => ({ ...current, organizationLogo }))} />
+        <p className="text-xs text-muted-foreground sm:col-span-2">Images remain linked to their original source. Remove an incorrect result or paste an approved replacement URL; every URL is validated again when saved.</p>
+      </CardContent></Card>
     </div>
 
     <aside className="space-y-4 xl:sticky xl:top-6">
       <Card><CardHeader><div className="flex items-center justify-between"><CardTitle className="text-base">Preview</CardTitle><Badge variant="secondary">{populatedCount} fields</Badge></div></CardHeader><CardContent className="space-y-4">
+        <div className="relative aspect-[16/9] overflow-hidden rounded-lg bg-muted">{images.opportunityImage ? <img src={images.opportunityImage.url} alt={images.opportunityImage.alt || form.title || "Opportunity"} className="h-full w-full object-cover" referrerPolicy="no-referrer" /> : <div className="flex h-full items-center justify-center text-xs text-muted-foreground">Opportunity image preview</div>}</div>
         <div><Badge variant="outline">{displayType(form.type)}</Badge><h2 className="mt-3 text-lg font-semibold leading-snug">{form.title || "Untitled opportunity"}</h2><p className="mt-1 text-sm text-muted-foreground">{form.agency || form.organization || "Organization not provided"}</p></div>
         <p className="line-clamp-5 whitespace-pre-wrap text-sm leading-6 text-muted-foreground">{form.summary || form.description || "A summary or description will appear here."}</p>
         <dl className="grid grid-cols-2 gap-3 rounded-lg bg-muted/50 p-3 text-sm"><div><dt className="text-xs text-muted-foreground">Deadline</dt><dd className="mt-1 font-medium">{form.deadline || "Not set"}</dd></div><div><dt className="text-xs text-muted-foreground">Funding</dt><dd className="mt-1 font-medium">{form.fundingMax ? `${form.currency || ""} ${Number(form.fundingMax).toLocaleString()}`.trim() : "Not set"}</dd></div></dl>

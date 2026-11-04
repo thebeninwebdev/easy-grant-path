@@ -2,8 +2,8 @@ import { lookup } from "node:dns/promises";
 import http from "node:http";
 import https from "node:https";
 import ipaddr from "ipaddr.js";
-import { AppError } from "@/lib/errors";
-import type { FetchedPage } from "./types";
+import { AppError } from "../../lib/errors.ts";
+import type { FetchedPage } from "./types.ts";
 
 const MAX_REDIRECTS = 5;
 const MAX_RESPONSE_BYTES = 2 * 1024 * 1024;

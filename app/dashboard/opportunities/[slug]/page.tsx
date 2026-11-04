@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { OpportunityRichContent } from "@/components/opportunities/opportunity-rich-content";
+import { OpportunityBanner, OrganizationLogo } from "@/components/opportunities/opportunity-image";
 import { ProposalStarterCard } from "@/components/proposals/proposal-starter-card";
 import { SaveOpportunityButton } from '@/components/opportunities/save-opportunity-button';
 import { formatDate, formatFunding, humanize } from "@/components/admin/opportunities/opportunity-formatters";
@@ -57,6 +58,8 @@ export default async function OpportunityDetailPage({ params }: { params: Promis
 
   return (
     <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8 sm:px-6 lg:px-8">
+      <OpportunityBanner image={opportunity.opportunityImage || opportunity.organizationLogo} alt={opportunity.title} eager className="mb-5 rounded-2xl border shadow-sm" />
+      <div className="mb-5 flex items-center gap-3"><OrganizationLogo image={opportunity.organizationLogo} organization={opportunity.agency || opportunity.organization || "Funding organization"} className="size-14" /><div><p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Funding organization</p><p className="font-medium">{opportunity.agency || opportunity.organization || "Organization not provided"}</p></div></div>
       <Link href="/dashboard/opportunities" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="size-4" /> Back to opportunities</Link>
       <header className="mt-6 rounded-2xl border bg-card p-6 shadow-sm sm:p-8"><div className="flex flex-wrap items-center gap-2"><Badge className="gap-1 bg-emerald-100 text-emerald-800"><CheckCircle2 className="size-3" /> Verified by EasyGrantPath</Badge><Badge variant="outline">{humanize(opportunity.type)}</Badge></div><h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">{opportunity.title}</h1><p className="mt-3 flex items-center gap-2 text-muted-foreground"><Landmark className="size-4" />{opportunity.agency || opportunity.organization || "Organization not provided"}</p><div className="mt-7 grid gap-4 sm:grid-cols-3"><div><p className="text-xs uppercase tracking-wide text-muted-foreground">Funding</p><p className="mt-1 font-semibold">{formatFunding(opportunity)}</p></div><div><p className="text-xs uppercase tracking-wide text-muted-foreground">Deadline</p><p className="mt-1 flex items-center gap-1.5 font-semibold"><CalendarDays className="size-4" />{formatDate(opportunity.deadline)}</p></div><div><p className="text-xs uppercase tracking-wide text-muted-foreground">Opening date</p><p className="mt-1 font-semibold">{formatDate(opportunity.openingDate)}</p></div></div></header>
       <div className='mt-5 flex justify-end'><SaveOpportunityButton opportunityId={opportunity.id} initiallySaved={savedIds.includes(opportunity.id)} /></div>
