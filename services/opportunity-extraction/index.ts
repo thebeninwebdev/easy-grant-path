@@ -9,6 +9,7 @@ import { cleanText, emptyExtractedOpportunity, foundFields, mergeEmptyFields } f
 import { extractWithGemini, type OpportunityResearchResult } from "./ai-extract";
 import { originalDomain, resolveOpportunityIdentity, type OpportunityIdentity } from "./opportunity-identity";
 import type { ExtractionMethod, OpportunityExtractionResult } from "./types";
+import { discoverImages } from "./image-discovery";
 
 function contributed(before: string[], after: string[]) {
   return after.some((field) => !before.includes(field));
@@ -147,6 +148,8 @@ export async function extractOpportunityFromUrl(url: string, providedOpportunity
     organization: data.organization || data.agency,
   });
   data = { ...data, title: identity?.searchName ?? null, discoveryUrl: page.requestedUrl };
+  const images = discoverImages($, page.finalUrl, data.organization || data.agency);
+  data = { ...data, opportunityImage: images.opportunityImage, organizationLogo: images.organizationLogo };
 
   logger.info("Opportunity identity resolved", {
     submittedUrl: page.requestedUrl,
@@ -172,6 +175,7 @@ export async function extractOpportunityFromUrl(url: string, providedOpportunity
         crawlFailed: false,
         identity: identificationMeta(page.requestedUrl, providedName, null, null),
         research: null,
+        images,
       },
     };
   }
@@ -196,8 +200,11 @@ export async function extractOpportunityFromUrl(url: string, providedOpportunity
       crawlFailed: false,
       identity: identificationMeta(page.requestedUrl, providedName, identity, data.title),
       research: researchMeta(research),
+      images,
     },
   };
 }
 
 export type { ExtractedOpportunity, OpportunityExtractionResult } from "./types";
+
+

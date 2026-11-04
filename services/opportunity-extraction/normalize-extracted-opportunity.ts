@@ -52,6 +52,8 @@ export function emptyExtractedOpportunity(): ExtractedOpportunity {
     opportunityNumber: null,
     officialUrl: null,
     discoveryUrl: null,
+    opportunityImage: null,
+    organizationLogo: null,
   };
 }
 

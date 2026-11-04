@@ -1,5 +1,6 @@
 import type { OpportunityType } from "@/types/opportunities";
 import type { IdentityConfidence, IdentitySource, RankedResearchSource } from "./opportunity-identity";
+import type { OpportunityImageMetadata } from "./image-discovery";
 
 export type ExtractionMethod = "json-ld" | "open-graph" | "meta" | "semantic-html" | "text-heuristics" | "ai";
 
@@ -22,6 +23,8 @@ export interface ExtractedOpportunity {
   opportunityNumber: string | null;
   officialUrl: string | null;
   discoveryUrl: string | null;
+  opportunityImage: OpportunityImageMetadata | null;
+  organizationLogo: OpportunityImageMetadata | null;
 }
 
 export interface OpportunityIdentityMeta {
@@ -53,6 +56,7 @@ export interface ExtractionMeta {
     acceptedResultCount: number;
     sources: RankedResearchSource[];
   } | null;
+  images?: { candidateCount: number; opportunityImage: OpportunityImageMetadata | null; organizationLogo: OpportunityImageMetadata | null };
 }
 
 export interface OpportunityExtractionResult {
@@ -68,3 +72,4 @@ export interface FetchedPage {
 }
 
 export type ExtractedFields = Partial<ExtractedOpportunity>;
+
