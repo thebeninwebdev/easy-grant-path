@@ -20,7 +20,7 @@ function navigation(verificationHref: string) {
     { label: 'Saved Opportunities', href: '/dashboard/saved', icon: Bookmark },
     { label: 'My Proposals', href: '/dashboard/proposals', icon: FileText },
     { label: 'Verification', href: verificationHref, icon: ShieldCheck },
-    { label: 'My Profile', href: '/dashboard/settings', icon: Settings },
+    { label: 'Account & Profile', href: '/dashboard/settings', icon: Settings },
   ];
 }
 

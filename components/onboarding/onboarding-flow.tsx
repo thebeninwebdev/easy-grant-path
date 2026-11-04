@@ -64,7 +64,7 @@ export function OnboardingFlow({ profile, accountName }: { profile: Profile | nu
   const isOrganization = form.applicantType === "startup_sme" || form.applicantType === "ngo_nonprofit";
 
   async function save(payload: object) {
-    const response = await fetch("/api/profile", {
+    const response = await fetch("/api/profile/onboarding", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
@@ -72,6 +72,15 @@ export function OnboardingFlow({ profile, accountName }: { profile: Profile | nu
     if (!response.ok) {
       throw new Error((await response.json().catch(() => null))?.error?.message || "We couldn't save that. Check your connection and try again.");
     }
+  }
+
+  async function saveOrganization() {
+    const response = await fetch("/api/organization-profile", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ organizationType: form.applicantType, name: form.organizationName.trim(), countryCode: form.countryCode, registrationStatus: "not_registered" }),
+    });
+    if (!response.ok) throw new Error((await response.json().catch(() => null))?.error?.message || "We couldn't save your organization details.");
   }
 
   async function continueFlow() {
@@ -86,8 +95,9 @@ export function OnboardingFlow({ profile, accountName }: { profile: Profile | nu
         await save({ applicantType: form.applicantType, onboardingCompleted: false, onboardingSkipped: false });
         setStep(2);
       } else {
+        if (isOrganization) await saveOrganization();
         await save({
-          fullName: isOrganization ? form.organizationName.trim() : accountName.trim() || undefined,
+          fullName: accountName.trim() || undefined,
           countryCode: form.countryCode,
           interests: [form.interest],
           opportunityTypes: [form.opportunityType],

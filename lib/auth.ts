@@ -3,7 +3,7 @@ import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "@better-auth/mongo-adapter";
 import { admin } from "better-auth/plugins";
 import { MongoClient } from "mongodb";
-import { sendVerificationEmail } from "@/lib/email";
+import { sendPasswordResetEmail, sendVerificationEmail } from "@/lib/email";
 
 const uri = process.env.MONGODB_URI;
 const secret = process.env.BETTER_AUTH_SECRET;
@@ -22,6 +22,10 @@ export const auth = betterAuth({
     enabled: true,
     minPasswordLength: 8,
     requireEmailVerification: true,
+    resetPasswordTokenExpiresIn: 3600,
+    sendResetPassword: async ({ user, url }) => {
+      await sendPasswordResetEmail({ name: user.name, email: user.email, url });
+    },
   },
   emailVerification: {
     sendOnSignUp: true,
