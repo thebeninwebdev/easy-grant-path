@@ -12,6 +12,7 @@
     "db:backfill-paid": "node scripts/backfill-user-paid.mjs",
     "test:content": "node --no-warnings --experimental-strip-types scripts/test-opportunity-content.mjs",
     "test:identity": "node --no-warnings --experimental-strip-types scripts/test-opportunity-identity.mjs",
+    "test:matching": "node --no-warnings --experimental-strip-types scripts/test-opportunity-matching.mjs",
     "test:proposals": "node --no-warnings --experimental-strip-types scripts/test-proposal-logic.mjs",
     "test:document": "node --no-warnings --experimental-strip-types scripts/test-proposal-document.mjs"
   },
