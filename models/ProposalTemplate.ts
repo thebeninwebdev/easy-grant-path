@@ -23,7 +23,8 @@ const sectionSchema = new Schema({
 }, { _id: false });
 
 const proposalTemplateSchema = new Schema({
-  opportunityId: { type: Schema.Types.ObjectId, ref: "Opportunity", required: true, unique: true, index: true },
+  opportunityId: { type: Schema.Types.ObjectId, ref: "Opportunity" },
+  scope: { type: String, enum: ["opportunity", "general"], default: "opportunity", index: true },
   title: { type: String, required: true, trim: true },
   description: { type: String, trim: true },
   templateType: { type: String, enum: PROPOSAL_TEMPLATE_TYPES, default: "general" },
@@ -37,6 +38,12 @@ const proposalTemplateSchema = new Schema({
   createdBy: { type: String, trim: true },
   updatedBy: { type: String, trim: true },
 }, { timestamps: true });
+
+proposalTemplateSchema.index(
+  { opportunityId: 1 },
+  { unique: true, partialFilterExpression: { opportunityId: { $type: "objectId" } } },
+);
+proposalTemplateSchema.index({ scope: 1, status: 1, templateType: 1, updatedAt: -1 });
 
 proposalTemplateSchema.path("sections").validate((sections: Array<{ key: string; order: number }>) => {
   const keys = sections.map((section) => section.key);

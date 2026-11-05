@@ -3,7 +3,7 @@ import { AppError } from "@/lib/errors";
 import { getCurrentSession } from "@/lib/development-user";
 
 export function hasAdminRole(role: string | null | undefined) {
-  return role?.split(",").map((value) => value.trim()).includes("admin") ?? false;
+  return role?.split(",").map((value) => value.trim().toLowerCase()).includes("admin") ?? false;
 }
 
 export async function requireAdmin() {

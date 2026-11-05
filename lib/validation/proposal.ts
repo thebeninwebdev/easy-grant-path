@@ -23,7 +23,13 @@ export const proposalTemplateInputSchema = z.object({
   if (new Set(orders).size !== orders.length) context.addIssue({ code: "custom", path: ["sections"], message: "Section order values must be unique." });
 });
 
-export const startProposalSchema = z.object({ opportunityId: z.string().trim().min(1) }).strict();
+const objectId = z.string().trim().regex(/^[a-f\d]{24}$/i, "Choose a valid record.");
+export const startProposalSchema = z.object({
+  opportunityId: objectId.optional(),
+  templateId: objectId.optional(),
+}).strict().superRefine((value, context) => {
+  if (!value.opportunityId && !value.templateId) context.addIssue({ code: "custom", message: "Choose an opportunity or a general template." });
+});
 export const updateProposalSchema = z.object({ sectionKey: z.string().trim().min(1).max(80), content: z.string().max(100_000) }).strict();
 export const APPLICANT_TYPES = ["individual", "ngo_nonprofit", "startup_sme", "academic_research", "community_organization", "other"] as const;
 const proposalMetadataShape = z.object({

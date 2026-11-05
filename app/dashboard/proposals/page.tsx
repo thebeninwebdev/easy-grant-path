@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { CheckCircle2, FilePenLine } from 'lucide-react';
+import { CheckCircle2, FilePenLine, Plus } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import { formatDate } from '@/components/admin/opportunities/opportunity-formatters';
 import { Badge } from '@/components/ui/badge';
@@ -23,9 +23,10 @@ export default async function ProposalsPage({ searchParams }: { searchParams: Pr
   return (
     <main className='mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8'>
       <header>
-        <p className='text-sm font-medium text-primary'>Application preparation</p>
+        <div className='flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between'><div><p className='text-sm font-medium text-primary'>Application preparation</p>
         <h1 className='mt-2 text-3xl font-semibold tracking-tight'>My Proposals</h1>
-        <p className='mt-2 text-muted-foreground'>Continue writing, review completed work, and keep deadlines in view.</p>
+        <p className='mt-2 text-muted-foreground'>Create new proposals, continue writing, and review completed work.</p></div>
+        <Button asChild size='lg'><Link href='/dashboard/proposals/new'><Plus className='size-4' /> Create Proposal</Link></Button></div>
         <div className='mt-5 flex flex-wrap gap-2'>
           {[['all', 'All'], ['in-progress', 'In progress'], ['completed', 'Completed']].map(([value, label]) => (
             <Button key={value} asChild size='sm' variant={filter === value ? 'default' : 'outline'}>
@@ -64,8 +65,8 @@ export default async function ProposalsPage({ searchParams }: { searchParams: Pr
         <div className='mt-7 rounded-2xl border border-dashed bg-card px-6 py-16 text-center'>
           <FilePenLine className='mx-auto size-9 text-muted-foreground/60' />
           <h2 className='mt-4 font-semibold'>{all.length ? 'No proposals match this filter.' : `You haven't started a proposal yet.`}</h2>
-          <p className='mt-2 text-sm text-muted-foreground'>Find an opportunity and use a proposal starter to begin.</p>
-          <Button asChild className='mt-5'><Link href='/dashboard/opportunities'>Discover opportunities</Link></Button>
+          <p className='mt-2 text-sm text-muted-foreground'>{all.length ? 'Create another proposal or change the filter to continue existing work.' : 'Choose an opportunity or start with a reusable general template.'}</p>
+          <div className='mt-5 flex flex-wrap justify-center gap-3'><Button asChild><Link href='/dashboard/proposals/new'><Plus className='size-4' /> Create Proposal</Link></Button><Button asChild variant='outline'><Link href='/dashboard/opportunities'>Discover opportunities</Link></Button></div>
         </div>
       )}
     </main>
