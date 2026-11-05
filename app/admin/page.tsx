@@ -15,7 +15,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     ["Published opportunities", data.metrics.published, "Verified and public", "/admin/opportunities?status=published"],
     ["Needs review", data.metrics.needsReview, "Opportunity review queue", "/admin/opportunities?verificationStatus=needs_review"],
     ["Applications", data.metrics.applications, "Proposal workspaces", "/admin/analytics"],
-    ["Paid service requests", data.metrics.paidServiceRequests, "Proposal review purchases", "/admin/service-requests"],
+    ["Paid service requests", data.metrics.paidServiceRequests, "Paid writing and review requests", "/admin/service-requests"],
     ["Successful payments", data.metrics.successfulPayments, "Test and live ledger", "/admin/payments?status=successful"],
   ] as const;
   return <div className="space-y-8">

@@ -1,2 +1,3 @@
-export function normalizeWhatsappNumber(value: string) { const compact = value.trim().replace(/[\s().-]/g, ""); return /^\+[1-9]\d{7,14}$/.test(compact) ? compact : null; }
+﻿export function normalizeWhatsappNumber(value: string) { const compact = value.trim().replace(/[\s().-]/g, ""); return /^\+[1-9]\d{7,14}$/.test(compact) ? compact : null; }
+export function normalizeContactNumber(countryCode: string, localNumber: string) { const code = countryCode.trim().replace(/[\s().-]/g, "").replace(/^00/, "+"); const local = localNumber.trim().replace(/[\s().-]/g, "").replace(/^0+/, ""); return normalizeWhatsappNumber(`${code}${local}`); }
 export function whatsappUrl(number: string, message?: string) { const normalized = normalizeWhatsappNumber(number); if (!normalized) return null; const base = `https://wa.me/${normalized.slice(1)}`; return message ? `${base}?text=${encodeURIComponent(message)}` : base; }

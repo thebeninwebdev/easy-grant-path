@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/auth/password-input';
 
 const verificationCallbackURL = '/dashboard/onboarding';
+const postSignInPath = '/auth/continue';
 type Fields = Partial<Record<'name' | 'email' | 'password', string>>;
 
 function friendlyAuthError(code?: string, message?: string, signUp?: boolean) {
@@ -65,7 +66,7 @@ export function AuthForm({ mode, callbackURL = verificationCallbackURL }: { mode
       const result = await authClient.signIn.email({ email: normalizedEmail, password, callbackURL });
       if (result.error?.code === 'EMAIL_NOT_VERIFIED') { setVerificationEmail(normalizedEmail); return; }
       if (result.error) throw Object.assign(new Error(result.error.message || ''), { code: result.error.code });
-      router.push(callbackURL); router.refresh();
+      router.replace(`${postSignInPath}?callbackURL=${encodeURIComponent(callbackURL)}`); router.refresh();
     } catch (caught) {
       const issue = caught as Error & { code?: string };
       setError(friendlyAuthError(issue.code, issue.message, signUp));

@@ -54,10 +54,17 @@ function relativeDate(value: string | null) {
   return days === 0 ? 'Today' : days === 1 ? 'Yesterday' : `${days} days ago`;
 }
 
+function UnsubscribedDashboard({ name }: { name: string }) {
+  return <main className='mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8'>
+    <header><p className='text-sm font-medium text-primary'>Your EasyGrantPath account</p><h1 className='mt-1 text-3xl font-semibold tracking-tight'>Welcome, {name}</h1><p className='mt-2 text-muted-foreground'>Your account is ready. Activate platform access when you are ready to unlock matched opportunities and subscriber-only tools.</p></header>
+    <section className='mt-7 rounded-2xl border border-primary/20 bg-primary/[0.04] p-5 sm:p-6'><h2 className='text-xl font-semibold'>Explore EasyGrantPath access</h2><p className='mt-2 max-w-2xl text-sm leading-6 text-muted-foreground'>You can manage your profile, payment history, and proposal support requests without an active subscription. A subscription is only required for premium opportunity access.</p><div className='mt-5 flex flex-wrap gap-3'><Button asChild><Link href='/dashboard/activate'>View access options <ArrowRight className='size-4' /></Link></Button><Button asChild variant='outline'><Link href='/dashboard/payments'>Payment history</Link></Button></div></section>
+    <section className='mt-6 grid gap-4 sm:grid-cols-3'><Card><CardContent className='p-5'><h2 className='font-semibold'>Profile</h2><p className='mt-1 text-sm text-muted-foreground'>Keep your funding details up to date.</p><Button asChild className='mt-4' size='sm' variant='outline'><Link href='/dashboard/settings'>Manage profile</Link></Button></CardContent></Card><Card><CardContent className='p-5'><h2 className='font-semibold'>Proposal support</h2><p className='mt-1 text-sm text-muted-foreground'>Request proposal writing or review support.</p><Button asChild className='mt-4' size='sm' variant='outline'><Link href='/dashboard/assistance'>Get support</Link></Button></CardContent></Card><Card><CardContent className='p-5'><h2 className='font-semibold'>Opportunities</h2><p className='mt-1 text-sm text-muted-foreground'>Preview what subscriber access unlocks.</p><Button asChild className='mt-4' size='sm' variant='outline'><Link href='/dashboard/teaser'>Preview access</Link></Button></CardContent></Card></section>
+  </main>;
+}
 export default async function DashboardPage() {
   const profile = await getDevelopmentProfile();
   if (!profile || !isRegistrationProfileComplete(profile)) redirect('/dashboard/onboarding');
-  if (!hasActiveAccess(profile)) redirect('/dashboard/teaser');
+  if (!hasActiveAccess(profile)) return <UnsubscribedDashboard name={firstName(profile.fullName)} />;
   const organizationApplicant = isOrganizationApplicantType(profile.applicantType);
   const [opportunityData, proposals, savedIds, verification] = await Promise.all([
     getDashboardOpportunityData(profile),
@@ -101,7 +108,7 @@ export default async function DashboardPage() {
 
     <div className='mt-9 grid gap-6 xl:grid-cols-[minmax(0,1.35fr)_minmax(300px,.65fr)]'>
       <section><h2 className='text-xl font-semibold'>Closing soon</h2><p className='mt-1 text-sm text-muted-foreground'>Relevant opportunities that need your attention.</p>
-        {opportunityData.closingSoon.length ? <div className='mt-4 divide-y rounded-2xl border bg-card'>{opportunityData.closingSoon.map(({ opportunity }) => <div key={opportunity.id} className='flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between'><div className='min-w-0'><p className='truncate font-medium'>{opportunity.title}</p><p className='mt-1 text-sm text-muted-foreground'>{formatDate(opportunity.deadline)} · {opportunity.deadline ? daysRemaining(opportunity.deadline) : ''}</p></div><Button asChild size='sm' variant='outline'><Link href={`/dashboard/opportunities/${opportunity.slug}`}>View details</Link></Button></div>)}</div> : <EmptyState title='No upcoming deadlines need your attention.' description='Your matched opportunities do not close within the next 14 days.' />}
+        {opportunityData.closingSoon.length ? <div className='mt-4 divide-y rounded-2xl border bg-card'>{opportunityData.closingSoon.map(({ opportunity }) => <div key={opportunity.id} className='flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between'><div className='min-w-0'><p className='truncate font-medium'>{opportunity.title}</p><p className='mt-1 text-sm text-muted-foreground'>{formatDate(opportunity.deadline)} Â· {opportunity.deadline ? daysRemaining(opportunity.deadline) : ''}</p></div><Button asChild size='sm' variant='outline'><Link href={`/dashboard/opportunities/${opportunity.slug}`}>View details</Link></Button></div>)}</div> : <EmptyState title='No upcoming deadlines need your attention.' description='Your matched opportunities do not close within the next 14 days.' />}
       </section>
       <div className='space-y-6'>
         <FundingProfile profile={profile} />

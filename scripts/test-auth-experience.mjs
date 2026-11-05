@@ -35,4 +35,35 @@ assert.match(authConfig, /sendResetPassword/);
 assert.match(authConfig, /resetPasswordTokenExpiresIn: 3600/);
 assert.match(authConfig, /requireEmailVerification: true/);
 
+
+const authNavigation = readFileSync('lib/auth-navigation.ts', 'utf8');
+assert.match(authNavigation, /hasActiveSession/);
+assert.match(authNavigation, /hasAdminRole/);
+assert.match(authNavigation, /callback\.startsWith\("\/dashboard"\)/);
+
+const home = readFileSync('app/page.tsx', 'utf8');
+assert.match(home, /getCurrentSession/);
+assert.match(home, /authenticatedDestination/);
+assert.match(home, /redirect\(destination\)/);
+
+const signInPage = readFileSync('app/sign-in/page.tsx', 'utf8');
+const signUpPage = readFileSync('app/sign-up/page.tsx', 'utf8');
+assert.match(signInPage, /authenticatedDestination/);
+assert.match(signUpPage, /authenticatedDestination/);
+assert.match(signInPage, /getCurrentSession/);
+assert.match(signUpPage, /getCurrentSession/);
+
+const authContinue = readFileSync('app/auth/continue/page.tsx', 'utf8');
+assert.match(authContinue, /getCurrentSession/);
+assert.match(authContinue, /authenticatedDestination/);
+assert.match(authContinue, /redirect\(destination/);
+assert.match(authForm, /postSignInPath/);
+assert.match(authForm, /router\.replace/);
+
+const dashboardLayout = readFileSync('app/dashboard/layout.tsx', 'utf8');
+const adminLayout = readFileSync('app/admin/layout.tsx', 'utf8');
+assert.match(dashboardLayout, /hasAdminRole/);
+assert.match(dashboardLayout, /redirect\("\/admin"\)/);
+assert.match(adminLayout, /hasActiveSession/);
+assert.match(adminLayout, /redirect\("\/dashboard"\)/);
 console.log('Authentication UX, redirect, and recovery-boundary tests passed.');
