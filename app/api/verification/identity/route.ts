@@ -1,9 +1,29 @@
+import { z } from "zod";
 import { errorResponse, successResponse } from "@/lib/api-response";
 import { AppError } from "@/lib/errors";
-import { saveVerificationFile, validateUploadedFile } from "@/lib/file-storage";
-import { getIdentityVerification, submitIdentityVerification } from "@/lib/verification";
-import { z } from "zod";
-const types = z.enum(["national_id", "passport", "drivers_license", "other_government_id"]);
-export async function GET() { try { return successResponse(await getIdentityVerification()); } catch (error) { return errorResponse(error); } }
-export async function POST(request: Request) { try { const body = await request.formData(); const parsed = types.safeParse(body.get("documentType")); if (!parsed.success) throw new AppError("Choose a document type.", "VALIDATION_ERROR", 400); const file = body.get("file"); const issue = validateUploadedFile(file instanceof File ? file : null); if (issue) throw new AppError(issue, "VALIDATION_ERROR", 400); return successResponse(await submitIdentityVerification(parsed.data, await saveVerificationFile(file as File)), { status: 201 }); } catch (error) { return errorResponse(error); } }
-export async function PATCH() { try { return successResponse(await getIdentityVerification()); } catch (error) { return errorResponse(error); } }
+import { requireCurrentUserId } from "@/lib/development-user";
+import { assertUploadRequestSize, readUploadRequestJson, deleteVerificationFiles, finalizeVerificationUpload } from "@/lib/file-storage";
+import { assertCanSubmitIdentity, getIdentityVerificationForUserId, submitIdentityVerification } from "@/lib/verification";
+import { claimPendingVerificationUpload } from "@/lib/verification-rate-limit";
+const schema = z.object({
+  documentType: z.enum(["national_id", "passport", "drivers_license", "other_government_id"]),
+  upload: z.object({ storageKey: z.string().max(160), filename: z.string().min(1).max(255), mimeType: z.string().max(64), size: z.number().int().positive() }),
+});
+export async function GET() { try { const userId = await requireCurrentUserId(); return successResponse(await getIdentityVerificationForUserId(userId)); } catch (error) { return errorResponse(error); } }
+export async function POST(request: Request) {
+  let storedKey: string | undefined;
+  try {
+    const userId = await requireCurrentUserId();
+    assertUploadRequestSize(request); await assertCanSubmitIdentity(userId);
+    const parsed = schema.safeParse(await readUploadRequestJson(request));
+    if (!parsed.success) throw new AppError("Choose a valid document and document type.", "VALIDATION_ERROR", 400);
+    await claimPendingVerificationUpload(userId, "identity", parsed.data.upload.storageKey);
+    const metadata = await finalizeVerificationUpload(parsed.data.upload); storedKey = metadata.storageKey;
+    const result = await submitIdentityVerification(userId, parsed.data.documentType, metadata);
+    await deleteVerificationFiles(result.replacedStorageKeys).catch(() => undefined);
+    return successResponse(result.record, { status: 201 });
+  } catch (error) {
+    if (storedKey) await deleteVerificationFiles([storedKey]).catch(() => undefined);
+    return errorResponse(error);
+  }
+}

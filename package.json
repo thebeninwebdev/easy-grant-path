@@ -19,13 +19,18 @@
     "test:profile-settings": "node --no-warnings --experimental-strip-types scripts/test-profile-settings.mjs",
     "test:sync-workflow": "node scripts/test-sync-workflow.mjs",
     "test:proposals": "node --no-warnings --experimental-strip-types scripts/test-proposal-logic.mjs",
-    "test:document": "node --no-warnings --experimental-strip-types scripts/test-proposal-document.mjs"
+    "test:document": "node --no-warnings --experimental-strip-types scripts/test-proposal-document.mjs",
+    "test:verification": "node --no-warnings --experimental-strip-types scripts/test-verification-security.mjs",
+    "verification:cleanup": "node scripts/cleanup-verification-files.mjs",
+    "verification:storage-check": "node scripts/check-verification-storage.mjs",
+    "verification:legacy-report": "node scripts/report-legacy-verification-files.mjs"
   },
   "dependencies": {
     "@better-auth/mongo-adapter": "^1.7.15",
     "@radix-ui/react-dialog": "^1.3.1",
     "@radix-ui/react-separator": "^1.2.0",
     "@radix-ui/react-slot": "^1.5.0",
+    "@vercel/blob": "2.3.0",
     "better-auth": "^1.7.15",
     "cheerio": "^1.2.0",
     "class-variance-authority": "^0.7.1",

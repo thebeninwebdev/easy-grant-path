@@ -66,3 +66,7 @@ The `Sync opportunities` workflow runs at 06:17 and 18:17 UTC and can also be ru
 During development, the open admin sync route delegates to the same ingestion service. Pending imported records appear at `/admin/opportunities`. Inspect `SourceSyncRun` records and the source health fields in `GrantSource` to troubleshoot failures.
 
 To test manually, call the admin sync route directly, or call the protected internal route with `Authorization: Bearer <SYNC_SECRET>` and `{"source":"grants-gov"}`. Never place that secret in client code. A future source only needs to implement the source adapter contract (`fetch`, `normalize`, and `assessRelevance`) and be registered in `sources/shared/source-registry.ts`; the sync, review, and publishing paths remain unchanged.
+
+## Verification document storage
+
+Identity and organization documents use a private Vercel Blob store with authenticated upload-token issuance and authorized, no-store downloads. Configure server-only Blob credentials and read `docs/verification-storage.md` before enabling the workflow. Run `corepack yarn verification:legacy-report` before deployment and schedule `corepack yarn verification:cleanup`.

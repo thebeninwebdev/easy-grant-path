@@ -39,12 +39,6 @@ export function Homepage({ opportunityShowcase }: { opportunityShowcase: ReactNo
       const gsap = gsapModule.gsap;
       gsap.registerPlugin(triggerModule.ScrollTrigger);
       context = gsap.context(() => {
-        gsap.timeline({ defaults: { ease: "power3.out" } })
-          .from("[data-hero-word]", { yPercent: 115, opacity: 0, duration: 0.9, stagger: 0.07 })
-          .from("[data-hero-copy]", { y: 24, opacity: 0, duration: 0.65 }, "-=0.35")
-          .from("[data-hero-actions]", { y: 18, opacity: 0, duration: 0.6 }, "-=0.35")
-          .from("[data-hero-visual]", { clipPath: "inset(0 0 100% 0)", duration: 1.25, ease: "power4.inOut" }, 0.15);
-
         gsap.to("[data-parallax]", { yPercent: 7, ease: "none", scrollTrigger: { trigger: "[data-hero]", start: "top top", end: "bottom top", scrub: 0.8 } });
         gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((element) => {
           gsap.from(element, { y: 54, opacity: 0, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: element, start: "top 86%", once: true } });
