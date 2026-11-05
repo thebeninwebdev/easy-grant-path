@@ -18,7 +18,7 @@ export default async function CustomersPage({ searchParams }: { searchParams: Pr
     <div className="overflow-x-auto rounded-xl border bg-background"><table className="w-full text-sm"><thead className="bg-muted/50 text-left"><tr><th className="p-3">Customer</th><th className="p-3">Type</th><th className="p-3">Country</th><th className="p-3">Access</th><th className="p-3">Account</th><th className="p-3">Joined</th></tr></thead><tbody>
       {rows.map(({ profile, user }) => <tr key={String(profile._id)} className="border-t"><td className="p-3"><Link href={`/admin/customers/${profile.userId}`} className="font-medium text-primary">{user?.name || profile.fullName || "Unnamed"}</Link><p className="text-xs text-muted-foreground">{user?.email || profile.userId}</p></td><td className="p-3">{profile.applicantType || "-"}</td><td className="p-3">{profile.countryCode || "-"}</td><td className="p-3">{profile.accessStatus}</td><td className="p-3">{profile.accountStatus}</td><td className="p-3">{new Date(profile.createdAt).toLocaleDateString()}</td></tr>)}
       {!rows.length && <tr><td colSpan={6} className="p-8 text-center text-muted-foreground">No customers match these filters.</td></tr>}
-    </tbody></table></div><p className="text-xs text-muted-foreground">Showing up to 100 newest profiles. Payment history is unavailable until a payment provider and ledger are configured.</p>
+    </tbody></table></div><p className="text-xs text-muted-foreground">Showing up to 100 newest profiles. Payment history is available in the read-only Payments section.</p>
   </div>;
 }
 function Header({ title, text }: { title: string; text: string }) { return <header><h1 className="text-3xl font-semibold">{title}</h1><p className="mt-1 text-muted-foreground">{text}</p></header>; }

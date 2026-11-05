@@ -1,0 +1,3 @@
+import { PaymentCallback } from "@/components/payments/payment-callback";
+export const instant = false;
+export default async function PaymentCallbackPage({ searchParams }: { searchParams: Promise<{ tx_ref?: string; transaction_id?: string; status?: string }> }) { const query = await searchParams; return <main className="px-4 py-12 sm:px-6"><PaymentCallback reference={query.tx_ref} transactionId={query.transaction_id} statusHint={query.status} /></main>; }

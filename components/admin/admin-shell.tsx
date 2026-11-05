@@ -6,6 +6,8 @@ const nav: Array<[string, string]> = [
   ["/admin", "Overview"],
   ["/admin/opportunities", "Opportunities"],
   ["/admin/customers", "Customers"],
+  ["/admin/payments", "Payments"],
+  ["/admin/service-requests", "Service Requests"],
   ["/admin/verifications", "Verifications"],
   ["/admin/sources", "Sources & sync"],
   ["/admin/proposal-templates", "Templates"],

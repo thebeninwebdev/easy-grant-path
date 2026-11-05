@@ -6,6 +6,8 @@ const userProfileSchema = new Schema({
   fullName: { type: String, trim: true },
   applicantType: { type: String, enum: APPLICANT_PROFILE_TYPES },
   countryCode: { type: String, trim: true, uppercase: true },
+  whatsappNumber: { type: String, trim: true, maxlength: 16 },
+  whatsappConsentAt: Date,
   declaredPreferences: { interests: { type: [String], default: [] }, opportunityTypes: { type: [String], default: [] } },
   inferredPreferences: { opportunityTypes: { type: [String], default: [] }, sectors: { type: [String], default: [] } },
   primaryGoal: { type: String, enum: ["find_opportunities", "check_eligibility", "prepare_applications", "write_proposals"] },
@@ -19,6 +21,8 @@ const userProfileSchema = new Schema({
   suspendedAt: Date,
   suspendedBy: String,
   activatedAt: Date,
+  accessExpiresAt: Date,
+  accessPaymentReference: { type: String, trim: true },
   lastActivityAt: Date,
 }, { timestamps: true });
 userProfileSchema.index({ countryCode: 1, applicantType: 1, createdAt: -1 });

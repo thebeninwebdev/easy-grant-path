@@ -1,0 +1,4 @@
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+export function ReconcilePaymentsButton() { const [busy, setBusy] = useState(false); const router = useRouter(); async function run() { setBusy(true); try { const response = await fetch("/api/admin/payments/reconcile", { method: "POST" }); if (!response.ok) throw new Error(); router.refresh(); } finally { setBusy(false); } } return <button className="rounded-md border bg-background px-3 py-2 text-sm font-medium disabled:opacity-60" disabled={busy} onClick={() => void run()}>{busy ? "Reconciling…" : "Reconcile pending"}</button>; }

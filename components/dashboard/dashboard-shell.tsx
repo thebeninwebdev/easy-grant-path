@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Bookmark, Compass, FileText, LayoutDashboard, LogOut, Menu, Settings, ShieldCheck, Sparkles, UserRound } from 'lucide-react';
+import { Bookmark, Compass, CreditCard, FileText, LayoutDashboard, LogOut, Menu, Settings, ShieldCheck, Sparkles, UserRound } from 'lucide-react';
 import { authClient } from '@/lib/auth-client';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -19,6 +19,7 @@ function navigation(verificationHref: string) {
     { label: 'My Matches', href: '/dashboard/opportunities?view=matches', icon: Sparkles },
     { label: 'Saved Opportunities', href: '/dashboard/saved', icon: Bookmark },
     { label: 'My Proposals', href: '/dashboard/proposals', icon: FileText },
+    { label: 'Payments', href: '/dashboard/payments', icon: CreditCard },
     { label: 'Verification', href: verificationHref, icon: ShieldCheck },
     { label: 'Account & Profile', href: '/dashboard/settings', icon: Settings },
   ];

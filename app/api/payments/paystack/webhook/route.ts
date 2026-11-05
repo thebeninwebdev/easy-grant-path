@@ -1,0 +1,1 @@
+export async function POST() { return Response.json({ error: "This webhook endpoint has been retired. Use /api/webhooks/flutterwave." }, { status: 410 }); }

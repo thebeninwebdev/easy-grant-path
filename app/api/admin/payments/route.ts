@@ -1,0 +1,3 @@
+import { errorResponse, successResponse } from "@/lib/api-response";
+import { listAdminPayments } from "@/lib/payments";
+export async function GET(request: Request) { try { const url = new URL(request.url); const status = url.searchParams.get("status") || undefined; const environment = url.searchParams.get("environment") || undefined; return successResponse(await listAdminPayments({ status, environment })); } catch (error) { return errorResponse(error); } }

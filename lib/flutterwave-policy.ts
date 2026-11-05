@@ -1,0 +1,12 @@
+import { timingSafeEqual } from "node:crypto";
+import type { PaymentEnvironment } from "@/lib/flutterwave-config";
+function majorToMinorAmount(amount: unknown, currency: string) { const numeric = typeof amount === "number" || typeof amount === "string" ? Number(amount) : Number.NaN; const digits = new Intl.NumberFormat("en", { style: "currency", currency }).resolvedOptions().maximumFractionDigits ?? 2; return Number.isFinite(numeric) && numeric >= 0 ? Math.round(numeric * 10 ** digits) : null; }
+export function safeSecretEqual(expected: string, candidate: string | null) { if (!expected || !candidate) return false; const a = Buffer.from(expected); const b = Buffer.from(candidate); return a.length === b.length && timingSafeEqual(a, b); }
+export type FlutterwaveTransaction = { id?: unknown; tx_ref?: unknown; status?: unknown; amount?: unknown; charged_amount?: unknown; currency?: unknown; payment_type?: unknown; account_id?: unknown; customer?: { email?: unknown }; meta?: unknown };
+function metadata(value: unknown): Record<string, unknown> | null { if (value && typeof value === "object" && !Array.isArray(value)) return value as Record<string, unknown>; if (typeof value === "string") { try { const parsed = JSON.parse(value); return parsed && typeof parsed === "object" ? parsed as Record<string, unknown> : null; } catch {} } return null; }
+export function validateFlutterwaveTransaction(expected: { reference: string; amountMinor: number; currency: string; email: string; paymentId: string; environment: PaymentEnvironment }, data: FlutterwaveTransaction, configuredEnvironment: PaymentEnvironment) {
+  const id = typeof data.id === "number" && Number.isSafeInteger(data.id) && data.id > 0 ? String(data.id) : typeof data.id === "string" && /^\d+$/.test(data.id) && data.id !== "0" ? data.id : null;
+  const meta = metadata(data.meta);
+  const metadataMatches = meta?.payment_id === expected.paymentId && meta?.payment_environment === expected.environment;
+  return { id, valid: Boolean(id && expected.environment === configuredEnvironment && data.status === "successful" && data.tx_ref === expected.reference && data.currency === expected.currency && majorToMinorAmount(data.amount, expected.currency) === expected.amountMinor && typeof data.customer?.email === "string" && data.customer.email.toLowerCase() === expected.email.toLowerCase() && metadataMatches) };
+}

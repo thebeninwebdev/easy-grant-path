@@ -1,0 +1,3 @@
+import { Schema, model, models } from "mongoose";
+const schema = new Schema({ key: { type: String, required: true, unique: true, index: true }, event: { type: String, required: true, maxlength: 100 }, transactionId: { type: String, maxlength: 100 }, paymentReference: { type: String, maxlength: 150, index: true }, providerStatus: { type: String, maxlength: 80 }, processingStatus: { type: String, enum: ["pending", "processing", "processed", "failed"], default: "pending", index: true }, attempts: { type: Number, default: 0 }, lastError: { type: String, maxlength: 500 }, processedAt: Date }, { timestamps: true });
+export const PaymentWebhookEvent = models.PaymentWebhookEvent || model("PaymentWebhookEvent", schema);

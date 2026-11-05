@@ -21,6 +21,8 @@
     "test:proposals": "node --no-warnings --experimental-strip-types scripts/test-proposal-logic.mjs",
     "test:document": "node --no-warnings --experimental-strip-types scripts/test-proposal-document.mjs",
     "test:verification": "node --no-warnings --experimental-strip-types scripts/test-verification-security.mjs",
+    "test:service-requests": "node --no-warnings --experimental-strip-types scripts/test-service-requests.mjs",
+    "test:payments": "node --no-warnings --experimental-strip-types scripts/test-service-requests.mjs",
     "verification:cleanup": "node scripts/cleanup-verification-files.mjs",
     "verification:storage-check": "node scripts/check-verification-storage.mjs",
     "verification:legacy-report": "node scripts/report-legacy-verification-files.mjs"

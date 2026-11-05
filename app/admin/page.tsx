@@ -15,6 +15,8 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     ["Published opportunities", data.metrics.published, "Verified and public", "/admin/opportunities?status=published"],
     ["Needs review", data.metrics.needsReview, "Opportunity review queue", "/admin/opportunities?verificationStatus=needs_review"],
     ["Applications", data.metrics.applications, "Proposal workspaces", "/admin/analytics"],
+    ["Paid service requests", data.metrics.paidServiceRequests, "Proposal review purchases", "/admin/service-requests"],
+    ["Successful payments", data.metrics.successfulPayments, "Test and live ledger", "/admin/payments?status=successful"],
   ] as const;
   return <div className="space-y-8">
     <header className="flex flex-wrap items-end justify-between gap-4">
@@ -29,9 +31,10 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
         <Queue label="Pending verifications" value={data.attention.pendingVerifications} href="/admin/verifications?status=pending" />
         <Queue label="Verified opportunities missing deadlines" value={data.attention.missingDeadline} href="/admin/opportunities" />
         <Queue label={`Failed syncs in ${days} days`} value={data.attention.failedSyncs} href="/admin/sources" />
+        <Queue label="Pending payment reconciliation" value={data.attention.pendingPayments} href="/admin/payments?status=pending" />
       </div></div>
       <div className="rounded-xl border bg-background p-6"><h2 className="text-lg font-semibold">Integration readiness</h2><div className="mt-4 space-y-4">
-        {Object.entries(data.capabilities).map(([name, capability]) => <div key={name}><div className="flex items-center justify-between"><p className="font-medium capitalize">{name}</p><span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs text-amber-900">Not configured</span></div><p className="mt-1 text-sm text-muted-foreground">{capability.reason}</p></div>)}
+        {Object.entries(data.capabilities).map(([name, capability]) => <div key={name}><div className="flex items-center justify-between"><p className="font-medium capitalize">{name}</p><span className={`rounded-full px-2 py-0.5 text-xs ${capability.available ? "bg-emerald-100 text-emerald-900" : "bg-amber-100 text-amber-900"}`}>{capability.available ? "Available" : "Not configured"}</span></div><p className="mt-1 text-sm text-muted-foreground">{capability.reason}</p></div>)}
       </div></div>
     </section>
     <section className="rounded-xl border bg-background p-6"><div className="flex justify-between"><h2 className="text-lg font-semibold">Recent admin activity</h2><Link href="/admin/activity" className="text-sm text-primary">View all</Link></div>
