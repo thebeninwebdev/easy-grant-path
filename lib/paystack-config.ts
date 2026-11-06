@@ -3,9 +3,9 @@ import "server-only";
 export type PaymentEnvironment = "test" | "live";
 
 function paymentEnvironment(): PaymentEnvironment {
-  if (process.env.VERCEL_ENV === "production") return "live";
-  if (process.env.VERCEL_ENV === "preview" || process.env.VERCEL_ENV === "development") return "test";
-  return process.env.NODE_ENV === "production" ? "live" : "test";
+  // TEMPORARY: Force Paystack test mode during integration testing.
+  // Restore production environment detection before accepting real payments.
+  return "test";
 }
 
 function validAppUrl(value: string, environment: PaymentEnvironment) {
