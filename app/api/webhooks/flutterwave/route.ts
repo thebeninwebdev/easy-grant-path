@@ -22,7 +22,7 @@ export async function POST(request: Request) {
   const providerStatus = typeof data?.status === "string" ? data.status : "unknown";
   if (!event || !data || !transactionId || !paymentReference) return Response.json({ error: "Malformed webhook event." }, { status: 400 });
   await connectToDatabase();
-  const key = `${event}:${transactionId}:${providerStatus}`;
+  const key = `flutterwave:${event}:${transactionId}:${providerStatus}`;
   await PaymentWebhookEvent.updateOne({ key }, { $setOnInsert: { key, event, transactionId, paymentReference, providerStatus, processingStatus: "pending" } }, { upsert: true, setDefaultsOnInsert: true });
   const stale = new Date(Date.now() - 5 * 60_000);
   const claimed = await PaymentWebhookEvent.findOneAndUpdate({ key, $or: [{ processingStatus: { $in: ["pending", "failed"] } }, { processingStatus: "processing", updatedAt: { $lte: stale } }] }, { $set: { processingStatus: "processing" }, $inc: { attempts: 1 } }, { returnDocument: "after" }).lean();

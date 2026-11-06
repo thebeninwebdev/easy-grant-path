@@ -71,6 +71,9 @@ To test manually, call the admin sync route directly, or call the protected inte
 
 Identity and organization documents use a private Vercel Blob store with authenticated upload-token issuance and authorized, no-store downloads. Configure server-only Blob credentials and read `docs/verification-storage.md` before enabling the workflow. Run `corepack yarn verification:legacy-report` before deployment and schedule `corepack yarn verification:cleanup`.
 
+## Payments
+
+New payments use Paystack-hosted checkout in XOF; all price calculation and verification are server-side. Historical Flutterwave records remain readable and reconciliable. Read [the Paystack payment runbook](docs/paystack-payments.md) before configuring credentials, webhooks, test mode, or production activation.
 ## Opportunity sources
 
 See [docs/opportunity-sources.md](docs/opportunity-sources.md) for the five official integrations, sync secrets, schedules, safety controls, and manual-review workflow.

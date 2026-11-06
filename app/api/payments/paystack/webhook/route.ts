@@ -1,1 +1,1 @@
-export async function POST() { return Response.json({ error: "This webhook endpoint has been retired. Use /api/webhooks/flutterwave." }, { status: 410 }); }
+export { POST } from "@/app/api/webhooks/paystack/route";
