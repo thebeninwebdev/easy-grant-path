@@ -3,6 +3,7 @@ import Link from "next/link";
 import { connection } from "next/server";
 import { getAdminDashboard } from "@/lib/admin-dashboard";
 export const metadata: Metadata = { title: "Admin overview" };
+export const instant = false;
 const format = new Intl.NumberFormat("en");
 export default async function AdminPage({ searchParams }: { searchParams: Promise<{ days?: string }> }) {
   await connection();
