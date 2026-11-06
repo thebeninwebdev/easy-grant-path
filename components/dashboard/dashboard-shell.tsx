@@ -19,7 +19,7 @@ function navigation(verificationHref: string) {
     { label: 'My Matches', href: '/dashboard/opportunities?view=matches', icon: Sparkles },
     { label: 'Saved Opportunities', href: '/dashboard/saved', icon: Bookmark },
     { label: 'My Proposals', href: '/dashboard/proposals', icon: FileText },
-    { label: 'My Assistance Requests', href: '/dashboard/assistance', icon: MessageCircle },
+    { label: 'Proposal Services', href: '/dashboard/assistance', icon: MessageCircle },
     { label: 'Payments', href: '/dashboard/payments', icon: CreditCard },
     { label: 'Verification', href: verificationHref, icon: ShieldCheck },
     { label: 'Account & Profile', href: '/dashboard/settings', icon: Settings },

@@ -26,6 +26,7 @@ export function AdminShell(props: {
         <Link href="/admin" className="font-semibold">EasyGrantPath <span className="text-primary">Admin</span></Link>
         {!!props.attentionCount && <span className="rounded-full bg-destructive px-2 py-0.5 text-xs text-destructive-foreground">{props.attentionCount}</span>}
       </div>
+      <Link href="/dashboard" className="mx-3 mb-3 block rounded-md border px-3 py-2 text-sm text-muted-foreground hover:bg-muted">View user dashboard</Link>
       <nav aria-label="Admin navigation" className="flex gap-1 overflow-x-auto px-3 pb-3 lg:block lg:space-y-1">
         {nav.map(([href, label]) => {
           const active = href === "/admin" ? path === href : path.startsWith(href);

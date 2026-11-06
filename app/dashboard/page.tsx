@@ -14,6 +14,7 @@ import { listProposalApplications } from '@/lib/proposals';
 import { listSavedOpportunityIds } from '@/lib/saved-opportunities';
 import { firstName, getDevelopmentProfile, hasActiveAccess, isRegistrationProfileComplete } from '@/lib/user-profile';
 import { getIdentityVerification, getOrganizationVerification } from '@/lib/verification';
+import { ProfessionalProposalServices } from '@/components/services/professional-proposal-services';
 
 export const metadata: Metadata = { title: 'Dashboard overview' };
 export const instant = false;
@@ -54,9 +55,12 @@ function relativeDate(value: string | null) {
   return days === 0 ? 'Today' : days === 1 ? 'Yesterday' : `${days} days ago`;
 }
 
+function ProfessionalHelp() { return <section className='mt-7 rounded-2xl border bg-card p-5 sm:p-6'><h2 className='text-xl font-semibold'>Get Professional Proposal Assistance</h2><p className='mt-2 text-sm text-muted-foreground'>Need help preparing a winning application? Get professional proposal writing or review support from the EasyGrantPath team.</p><div className='mt-5'><ProfessionalProposalServices cards /></div></section>; }
+
 function UnsubscribedDashboard({ name }: { name: string }) {
   return <main className='mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8'>
     <header><p className='text-sm font-medium text-primary'>Your EasyGrantPath account</p><h1 className='mt-1 text-3xl font-semibold tracking-tight'>Welcome, {name}</h1><p className='mt-2 text-muted-foreground'>Your account is ready. Activate platform access when you are ready to unlock matched opportunities and subscriber-only tools.</p></header>
+    <ProfessionalHelp />
     <section className='mt-7 rounded-2xl border border-primary/20 bg-primary/[0.04] p-5 sm:p-6'><h2 className='text-xl font-semibold'>Explore EasyGrantPath access</h2><p className='mt-2 max-w-2xl text-sm leading-6 text-muted-foreground'>You can manage your profile, payment history, and proposal support requests without an active subscription. A subscription is only required for premium opportunity access.</p><div className='mt-5 flex flex-wrap gap-3'><Button asChild><Link href='/dashboard/activate'>View access options <ArrowRight className='size-4' /></Link></Button><Button asChild variant='outline'><Link href='/dashboard/payments'>Payment history</Link></Button></div></section>
     <section className='mt-6 grid gap-4 sm:grid-cols-3'><Card><CardContent className='p-5'><h2 className='font-semibold'>Profile</h2><p className='mt-1 text-sm text-muted-foreground'>Keep your funding details up to date.</p><Button asChild className='mt-4' size='sm' variant='outline'><Link href='/dashboard/settings'>Manage profile</Link></Button></CardContent></Card><Card><CardContent className='p-5'><h2 className='font-semibold'>Proposal support</h2><p className='mt-1 text-sm text-muted-foreground'>Request proposal writing or review support.</p><Button asChild className='mt-4' size='sm' variant='outline'><Link href='/dashboard/assistance'>Get support</Link></Button></CardContent></Card><Card><CardContent className='p-5'><h2 className='font-semibold'>Opportunities</h2><p className='mt-1 text-sm text-muted-foreground'>Preview what subscriber access unlocks.</p><Button asChild className='mt-4' size='sm' variant='outline'><Link href='/dashboard/teaser'>Preview access</Link></Button></CardContent></Card></section>
   </main>;
@@ -91,6 +95,7 @@ export default async function DashboardPage() {
       <Button asChild variant='outline'><Link href='/dashboard/settings'><Settings className='size-4' /> Edit profile</Link></Button>
     </header>
 
+    <ProfessionalHelp />
     {activeProposal ? <section className='mt-7 rounded-2xl border border-primary/20 bg-primary/[0.04] p-5 sm:p-6'>
       <div className='flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between'><div className='min-w-0'><div className='flex items-center gap-2 text-sm font-semibold text-primary'><FileText className='size-4' /> Continue your proposal</div><h2 className='mt-2 truncate text-xl font-semibold'>{activeProposal.proposalMetadata.projectTitle || activeProposal.opportunityTitle}</h2><p className='mt-1 truncate text-sm text-muted-foreground'>{activeProposal.opportunityTitle}</p><div className='mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs text-muted-foreground'><span>{activeProposal.progress}% complete</span><span>Updated {relativeDate(activeProposal.updatedAt)}</span>{activeProposal.deadline ? <span>Deadline {formatDate(activeProposal.deadline)}</span> : null}</div><div className='mt-2 h-2 max-w-xl overflow-hidden rounded-full bg-primary/10'><div className='h-full rounded-full bg-primary' style={{ width: `${activeProposal.progress}%` }} /></div></div><div className='mt-5 flex flex-wrap gap-3'><Button asChild><Link href={`/dashboard/proposals/${activeProposal.id}`}>Continue writing <ArrowRight className='size-4' /></Link></Button><Button asChild variant='outline'><Link href='/dashboard/proposals/new'><FileText className='size-4' /> Create Proposal</Link></Button></div></div>
     </section> : <section className='mt-7 flex flex-col gap-4 rounded-2xl border bg-card p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6'><div><h2 className='font-semibold'>Ready to start a proposal?</h2><p className='mt-1 text-sm text-muted-foreground'>Choose an opportunity or begin with a reusable general template.</p></div><div className='flex flex-wrap gap-3'><Button asChild><Link href='/dashboard/proposals/new'><FileText className='size-4' /> Create Proposal</Link></Button><Button asChild variant='outline'><Link href='/dashboard/opportunities'>Explore opportunities</Link></Button></div></section>}

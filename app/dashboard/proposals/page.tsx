@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { listProposalApplications } from '@/lib/proposals';
 import { getDevelopmentProfile, hasActiveAccess, isRegistrationProfileComplete } from '@/lib/user-profile';
+import { ProfessionalProposalServices } from '@/components/services/professional-proposal-services';
 
 export const metadata: Metadata = { title: 'My proposals' };
 export const instant = false;
@@ -35,6 +36,7 @@ export default async function ProposalsPage({ searchParams }: { searchParams: Pr
           ))}
         </div>
       </header>
+      <section className='mt-7 rounded-2xl border bg-card p-5'><h2 className='text-xl font-semibold'>Need professional help?</h2><p className='mt-1 text-sm text-muted-foreground'>Self-service proposals are written in EasyGrantPath. For professional writing or review, our team works with you through WhatsApp.</p><div className='mt-4'><ProfessionalProposalServices /></div></section>
       {items.length ? (
         <div className='mt-7 grid gap-4'>
           {items.map((proposal) => (

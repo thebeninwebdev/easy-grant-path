@@ -61,6 +61,7 @@ export const manualOpportunitySchema = z.object({
   openingDate: optionalDate,
   deadline: optionalDate,
   opportunityNumber: optionalText(200),
+  applicationUrl: optionalUrl,
   officialUrl: optionalUrl,
   discoveryUrl: optionalUrl,
   opportunityImage: imageMetadataSchema.optional(),

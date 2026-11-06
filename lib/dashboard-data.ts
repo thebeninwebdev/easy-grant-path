@@ -25,7 +25,7 @@ function serialize(raw: Record<string, unknown>): PublicOpportunity {
     eligibleCountries: normalizePlainTextList(raw.eligibleCountries), applicantTypes: normalizePlainTextList(raw.applicantTypes),
     sectors: normalizePlainTextList(raw.sectors), fundingMin: typeof raw.fundingMin === 'number' ? raw.fundingMin : null,
     fundingMax: typeof raw.fundingMax === 'number' ? raw.fundingMax : null, currency: typeof raw.currency === 'string' ? raw.currency : 'USD',
-    openingDate: iso(raw.openingDate), deadline: iso(raw.deadline), officialUrl: typeof raw.officialUrl === 'string' ? raw.officialUrl : null,
+    openingDate: iso(raw.openingDate), deadline: iso(raw.deadline), applicationUrl: typeof raw.applicationUrl === 'string' ? raw.applicationUrl : null, officialUrl: typeof raw.officialUrl === 'string' ? raw.officialUrl : null, discoveryUrl: typeof raw.discoveryUrl === 'string' ? raw.discoveryUrl : null,
     opportunityNumber: normalizePlainText(raw.opportunityNumber), status: raw.status as OpportunityStatus,
     opportunityImage: serializePublicImage(raw.opportunityImage), organizationLogo: serializePublicImage(raw.organizationLogo),
   };

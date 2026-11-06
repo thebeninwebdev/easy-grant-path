@@ -10,7 +10,6 @@ export function hasActiveSession(session: SessionLike) {
 
 export function authenticatedDestination(session: SessionLike, callbackURL?: string | string[]) {
   if (!hasActiveSession(session)) return null;
-  if (hasAdminRole(session?.user?.role)) return "/admin";
   const callback = safeAuthCallback(callbackURL, "/dashboard");
   return callback.startsWith("/dashboard") ? callback : "/dashboard";
 }
