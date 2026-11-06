@@ -1,0 +1,1 @@
+import { relevance } from "@/sources/shared/official-html"; export { relevance as assessAfdbAccfRelevance };

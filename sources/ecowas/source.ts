@@ -1,0 +1,2 @@
+import type { OpportunitySource } from "@/types/opportunities"; import { fetchEcowas } from "./client"; import { normalizeEcowas } from "./normalize"; import { assessEcowasRelevance } from "./relevance";
+export const ecowasSource: OpportunitySource = { slug: "ecowas", name: "ECOWAS Grants", type: "scraper", fetch: fetchEcowas, normalize: async (raw) => normalizeEcowas(raw), assessRelevance: assessEcowasRelevance };

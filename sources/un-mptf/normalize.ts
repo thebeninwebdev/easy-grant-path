@@ -1,0 +1,1 @@
+import { normalizeOfficial } from "@/sources/shared/official-html"; import type { NormalizedOpportunity, RawOpportunity } from "@/types/opportunities"; export function normalizeUnMptf(raw: RawOpportunity): NormalizedOpportunity | null { return normalizeOfficial(raw, "UN Multi-Partner Trust Fund Office"); }

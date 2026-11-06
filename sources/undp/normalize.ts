@@ -1,0 +1,1 @@
+import { normalizeOfficial } from "@/sources/shared/official-html"; import type { NormalizedOpportunity, RawOpportunity } from "@/types/opportunities"; export function normalizeUndp(raw: RawOpportunity): NormalizedOpportunity | null { return normalizeOfficial(raw, "United Nations Development Programme (UNDP)"); }

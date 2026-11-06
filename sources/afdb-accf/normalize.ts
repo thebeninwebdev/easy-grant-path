@@ -1,0 +1,1 @@
+import { normalizeOfficial } from "@/sources/shared/official-html"; import type { NormalizedOpportunity, RawOpportunity } from "@/types/opportunities"; export function normalizeAfdbAccf(raw: RawOpportunity): NormalizedOpportunity | null { return normalizeOfficial(raw, "Africa Climate Change Fund (African Development Bank)"); }

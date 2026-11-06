@@ -5,7 +5,7 @@ import { Opportunity } from "@/models/Opportunity";
 import { SourceSyncRun } from "@/models/SourceSyncRun";
 import { getOpportunitySource } from "@/sources/shared/source-registry";
 import { extractOpportunityFromUrl } from "@/services/opportunity-extraction";
-import { opportunityFingerprint, slugify } from "./deduplicate";
+import { findDuplicateOpportunity, opportunityFingerprint, slugify } from "./deduplicate";
 import { getOpportunityStatus } from "./status";
 
 export interface SyncResult {
@@ -39,8 +39,8 @@ export function imageRefreshDecision(existing: {
   const checkedAt = existing.metadata?.imageCheckedAt ? new Date(String(existing.metadata.imageCheckedAt)) : null;
   const stale = Boolean(checkedAt && Number.isFinite(checkedAt.getTime()) && now.getTime() - checkedAt.getTime() >= IMAGE_REFRESH_MS);
   if (!stale) return { fetch: false, replaceBanner: false, replaceLogo: false, reason: "current" };
-  const replaceBanner = !approved(existing.opportunityImage);
-  const replaceLogo = !approved(existing.organizationLogo);
+  const replaceBanner = !approved(existing?.opportunityImage);
+  const replaceLogo = !approved(existing?.organizationLogo);
   return { fetch: replaceBanner || replaceLogo, replaceBanner, replaceLogo, reason: "stale" };
 }
 
@@ -55,6 +55,8 @@ export async function syncSource(slug: string): Promise<SyncResult> {
   );
   if (!grantSource.enabled) throw new Error("Opportunity source " + slug + " is disabled");
   const startedAt = new Date();
+  const activeRun = await SourceSyncRun.exists({ sourceSlug: slug, status: "running" });
+  if (activeRun) throw new Error("Opportunity source " + slug + " already has a running sync");
   const run = await SourceSyncRun.create({ sourceSlug: slug, startedAt });
   const metrics = { fetched: 0, normalized: 0, created: 0, updated: 0, skipped: 0, irrelevant: 0, failed: 0 };
 
@@ -75,6 +77,8 @@ export async function syncSource(slug: string): Promise<SyncResult> {
           "source.slug": slug,
           "source.externalId": opportunity.externalId,
         }).select("_id opportunityImage organizationLogo metadata").lean();
+        const duplicate = existing ? null : await findDuplicateOpportunity(opportunity);
+        if (duplicate) { metrics.skipped++; logger.warn("Possible cross-source duplicate skipped", { source: slug, duplicateId: String(duplicate._id), reason: duplicate.reason }); continue; }
         const refresh = imageRefreshDecision(existing as {
           opportunityImage?: unknown;
           organizationLogo?: unknown;
@@ -97,7 +101,7 @@ export async function syncSource(slug: string): Promise<SyncResult> {
           sectors: opportunity.sectors ?? [],
           fundingMin: opportunity.fundingMin,
           fundingMax: opportunity.fundingMax,
-          currency: opportunity.currency ?? "USD",
+          ...(opportunity.currency ? { currency: opportunity.currency } : {}),
           openingDate: opportunity.openingDate,
           deadline: opportunity.deadline,
           officialUrl: opportunity.officialUrl,
@@ -108,9 +112,11 @@ export async function syncSource(slug: string): Promise<SyncResult> {
           fingerprint: opportunityFingerprint(opportunity),
           relevanceScore: relevance.score,
           relevanceReasons: relevance.reasons,
-          status: getOpportunityStatus(opportunity.openingDate, opportunity.deadline, now),
+          status: getOpportunityStatus(opportunity.openingDate, opportunity.deadline, now, 14, opportunity.declaredStatus),
           metadata: {
             ...(opportunity.metadata ?? {}),
+            ...(opportunity.declaredStatus ? { sourceDeclaredStatus: opportunity.declaredStatus } : {}),
+            ...(duplicate ? { possibleDuplicate: { id: String(duplicate._id), title: String(duplicate.title), reason: duplicate.reason } } : {}),
             ...((existing?.metadata as Record<string, unknown> | undefined) ?? {}),
             ...(extracted?.meta.images ? { imageResearch: extracted.meta.images, imageCheckedAt: now } : {}),
           },
@@ -128,8 +134,8 @@ export async function syncSource(slug: string): Promise<SyncResult> {
             source: slug,
             refreshReason: refresh.reason,
             imagesFetched: Boolean(extracted?.meta.images),
-            approvedBannerPreserved: approved(existing.opportunityImage),
-            approvedLogoPreserved: approved(existing.organizationLogo),
+            approvedBannerPreserved: approved(existing?.opportunityImage),
+            approvedLogoPreserved: approved(existing?.organizationLogo),
           });
         } else {
           await Opportunity.create({

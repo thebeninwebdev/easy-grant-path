@@ -1,81 +1,45 @@
 name: Sync opportunities
-
 on:
   schedule:
-    - cron: "17 6,18 * * *"
+    - cron: "17 6 * * *" # Grants.gov, UNDP, ACCF, UN MPTF daily
+    - cron: "17 18 * * *" # Grants.gov and ECOWAS; ECOWAS every 12 hours
   workflow_dispatch:
-
+    inputs:
+      source:
+        description: "Source slug, or all"
+        required: false
+        default: all
 permissions:
   contents: read
-
 concurrency:
-  group: easygrantpath-opportunity-sync
+  group: easygrantpath-opportunity-sync-${{ github.event.inputs.source || github.event.schedule }}
   cancel-in-progress: false
-
 jobs:
   sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-
+    timeout-minutes: 12
     steps:
       - name: Validate configuration
         env:
           SYNC_URL: ${{ secrets.EASYGRANTPATH_SYNC_URL }}
           SYNC_SECRET: ${{ secrets.SYNC_SECRET }}
         run: |
-          if [ -z "$SYNC_URL" ]; then
-            echo "::error::EASYGRANTPATH_SYNC_URL is missing"
-            exit 1
-          fi
-
-          if [ -z "$SYNC_SECRET" ]; then
-            echo "::error::SYNC_SECRET is missing"
-            exit 1
-          fi
-
-      - name: Trigger protected sync
+          test -n "$SYNC_URL" || { echo "::error::EASYGRANTPATH_SYNC_URL is missing"; exit 1; }
+          test -n "$SYNC_SECRET" || { echo "::error::SYNC_SECRET is missing"; exit 1; }
+      - name: Trigger protected independent syncs
         env:
           SYNC_URL: ${{ secrets.EASYGRANTPATH_SYNC_URL }}
           SYNC_SECRET: ${{ secrets.SYNC_SECRET }}
+          REQUESTED_SOURCE: ${{ github.event.inputs.source }}
+          SCHEDULE: ${{ github.event.schedule }}
         run: |
-          response_file="$(mktemp)"
-          trap 'rm -f "$response_file"' EXIT
-
-          started_at="$(date +%s)"
-          echo "Opportunity sync started"
-
-          set +e
-          http_status="$(
-            curl \
-              --fail-with-body \
-              --show-error \
-              --silent \
-              --max-time 180 \
-              --retry 3 \
-              --retry-all-errors \
-              --output "$response_file" \
-              --write-out "%{http_code}" \
-              --request POST "$SYNC_URL" \
-              --header "Authorization: Bearer $SYNC_SECRET" \
-              --header "Content-Type: application/json" \
-              --data '{"source":"grants-gov"}'
-          )"
-          curl_exit=$?
-          set -e
-
-          duration_seconds=$(( $(date +%s) - started_at ))
-          echo "HTTP status: $http_status"
-          echo "Duration: ${duration_seconds}s"
-
-          if [ "$curl_exit" -ne 0 ]; then
-            echo "::error::Opportunity sync request failed (curl exit $curl_exit, HTTP ${http_status:-000})"
-            exit "$curl_exit"
-          fi
-
-          if ! jq -e '.data and (.data.source == "grants-gov")' "$response_file" >/dev/null; then
-            echo "::error::Opportunity sync returned an unexpected response"
-            exit 1
-          fi
-
-          summary="$(jq -r '"status=\(.data.status // "unknown") fetched=\(.data.fetched // 0) created=\(.data.created // 0) updated=\(.data.updated // 0) skipped=\(.data.skipped // 0) irrelevant=\(.data.irrelevant // 0) failed=\(.data.failed // 0)"' "$response_file")"
-          echo "Opportunity sync completed: $summary"
+          if [ -n "$REQUESTED_SOURCE" ] && [ "$REQUESTED_SOURCE" != all ]; then sources="$REQUESTED_SOURCE";
+          elif [ "$SCHEDULE" = "17 18 * * *" ]; then sources="grants-gov ecowas";
+          else sources="grants-gov ecowas undp afdb-accf un-mptf"; fi
+          for source in $sources; do
+            response_file="$(mktemp)"; trap 'rm -f "$response_file"' EXIT
+            echo "Syncing $source"
+            curl --fail-with-body --show-error --silent --max-time 240 --retry 2 --retry-all-errors --output "$response_file" --request POST "$SYNC_URL" --header "Authorization: Bearer $SYNC_SECRET" --header "Content-Type: application/json" --data "{\"source\":\"$source\"}"
+            jq -e --arg source "$source" '.data and .data.source == $source and (.data.status == "success" or .data.status == "partial")' "$response_file" >/dev/null
+            jq -r '"status=\(.data.status) fetched=\(.data.fetched) created=\(.data.created) updated=\(.data.updated) skipped=\(.data.skipped) irrelevant=\(.data.irrelevant) failed=\(.data.failed)"' "$response_file"
+          done

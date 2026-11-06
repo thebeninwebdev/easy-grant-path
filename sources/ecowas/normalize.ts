@@ -1,0 +1,2 @@
+import { normalizeOfficial } from "@/sources/shared/official-html"; import type { NormalizedOpportunity, RawOpportunity } from "@/types/opportunities";
+export function normalizeEcowas(raw: RawOpportunity): NormalizedOpportunity | null { return normalizeOfficial(raw, "ECOWAS Commission"); }

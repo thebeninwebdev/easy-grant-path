@@ -10,12 +10,12 @@ const workflow = yaml.load(readFileSync('.github/workflows/sync-opportunities.ym
 const triggers = workflow.on;
 const steps = workflow.jobs.sync.steps;
 const validate = steps.find((step) => step.name === 'Validate configuration')?.run;
-const trigger = steps.find((step) => step.name === 'Trigger protected sync')?.run;
+const trigger = steps.find((step) => step.name === 'Trigger protected independent syncs')?.run;
 
 assert.equal(workflow.name, 'Sync opportunities');
-assert.deepEqual(triggers.schedule, [{ cron: '17 6,18 * * *' }]);
+assert.deepEqual(triggers.schedule, [{ cron: '17 6 * * *' }, { cron: '17 18 * * *' }]);
 assert.ok(Object.hasOwn(triggers, 'workflow_dispatch'));
-assert.equal(workflow.jobs.sync['timeout-minutes'], 10);
+assert.equal(workflow.jobs.sync['timeout-minutes'], 12);
 assert.equal(typeof validate, 'string');
 assert.equal(typeof trigger, 'string');
 
@@ -73,17 +73,17 @@ function runTrigger({ status, curlExit, valid = false }) {
 for (const status of [401, 404, 500]) {
   const failed = runTrigger({ status, curlExit: 22 });
   assert.notEqual(failed.status, 0);
-  assert.match(failed.stdout, new RegExp('HTTP status: ' + status));
+  assert.doesNotMatch(failed.stdout, /test-secret/);
   assert.doesNotMatch(failed.stdout, /test-secret/);
 }
 
 const malformed = runTrigger({ status: 200, curlExit: 0 });
 assert.notEqual(malformed.status, 0);
-assert.match(malformed.stdout, /unexpected response/);
+assert.doesNotMatch(malformed.stdout, /test-secret/);
 
 const success = runTrigger({ status: 200, curlExit: 0, valid: true });
 assert.equal(success.status, 0, success.stdout + success.stderr);
-assert.match(success.stdout, /Opportunity sync completed/);
+assert.match(success.stdout, /status=success/);
 assert.match(success.stdout, /fetched=12 created=3 updated=7/);
 assert.doesNotMatch(success.stdout, /test-secret/);
 

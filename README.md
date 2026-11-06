@@ -70,3 +70,7 @@ To test manually, call the admin sync route directly, or call the protected inte
 ## Verification document storage
 
 Identity and organization documents use a private Vercel Blob store with authenticated upload-token issuance and authorized, no-store downloads. Configure server-only Blob credentials and read `docs/verification-storage.md` before enabling the workflow. Run `corepack yarn verification:legacy-report` before deployment and schedule `corepack yarn verification:cleanup`.
+
+## Opportunity sources
+
+See [docs/opportunity-sources.md](docs/opportunity-sources.md) for the five official integrations, sync secrets, schedules, safety controls, and manual-review workflow.

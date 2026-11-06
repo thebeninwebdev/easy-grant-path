@@ -1,0 +1,3 @@
+import { fetchOfficialHtml, linksFromHtml, plain } from "@/sources/shared/official-html"; import type { RawOpportunity } from "@/types/opportunities";
+const URL = "https://accf.afdb.org/how-we-work/call-for-proposals";
+export async function fetchAfdbAccf() { const page = await fetchOfficialHtml(URL); const calls = linksFromHtml(page.html, page.url).filter((link) => /call for proposals?|appel.*propositions/i.test(link.title)).slice(0, 20); return Promise.all(calls.map(async (link): Promise<RawOpportunity> => { const detail = await fetchOfficialHtml(link.url); return { id: link.url, data: { title: link.title, description: plain(detail.html) ?? "", officialUrl: detail.url, discoveryUrl: page.url } }; })); }

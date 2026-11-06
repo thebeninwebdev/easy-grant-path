@@ -1,0 +1,3 @@
+export const UNDP_COUNTRY_OFFICES = [
+  { name: "Côte d’Ivoire", url: "https://www.undp.org/cote-divoire" }, { name: "Senegal", url: "https://www.undp.org/senegal" }, { name: "Ghana", url: "https://www.undp.org/ghana" }, { name: "Nigeria", url: "https://www.undp.org/nigeria" }, { name: "Benin", url: "https://www.undp.org/benin" }, { name: "Togo", url: "https://www.undp.org/togo" }, { name: "Liberia", url: "https://www.undp.org/liberia" }, { name: "Sierra Leone", url: "https://www.undp.org/sierra-leone" }, { name: "Guinea", url: "https://www.undp.org/guinea" },
+] as const;
