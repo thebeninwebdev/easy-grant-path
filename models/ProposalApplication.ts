@@ -15,6 +15,7 @@ const applicationSectionSchema = new Schema({
 
 const proposalApplicationSchema = new Schema({
   userId: { type: String, required: true, index: true },
+  locale: { type: String, enum: ["fr", "en"] },
   opportunityId: { type: Schema.Types.ObjectId, ref: "Opportunity" },
   proposalKind: { type: String, enum: ["opportunity", "general"], default: "opportunity", index: true },
   proposalTemplateId: { type: Schema.Types.ObjectId, ref: "ProposalTemplate", required: true },

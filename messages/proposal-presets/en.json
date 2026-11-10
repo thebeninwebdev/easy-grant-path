@@ -1,0 +1,1453 @@
+{
+  "general": {
+    "name": "General Grant",
+    "description": "Best for standard project-based funding opportunities.",
+    "sections": {
+      "executive-summary": {
+        "title": "Executive Summary",
+        "guidance": "Explain the project, the need, target group, main activities, funding request and expected change in one concise overview. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What will be done, for whom, where, over what period, for how much, and with what result?",
+        "example": "",
+        "placeholder": "Describe the project, the need, target group, main activities, funding request and expected change in one concise overview, using the applicant's actual situation, evidence and plans."
+      },
+      "problem-statement": {
+        "title": "Problem Statement",
+        "guidance": "Explain the specific problem, affected people, location, scale, root causes and limits of existing responses. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who is affected? How serious is the problem? What credible evidence supports the need? Why is action urgent?",
+        "example": "",
+        "placeholder": "Describe the specific problem, affected people, location, scale, root causes and limits of existing responses, using the applicant's actual situation, evidence and plans."
+      },
+      "project-goal": {
+        "title": "Project Goal",
+        "guidance": "Explain the broad long-term change the project will contribute to. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What lasting condition should improve, and for which population or place?",
+        "example": "",
+        "placeholder": "Describe the broad long-term change the project will contribute to, using the applicant's actual situation, evidence and plans."
+      },
+      "specific-objectives": {
+        "title": "Specific Objectives",
+        "guidance": "Explain two to five measurable, time-bound changes the project will directly achieve. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What will change, by how much, for whom, where and by when?",
+        "example": "By December 2027, train 200 unemployed young people in [location], with at least 60% progressing to employment or self-employment.",
+        "placeholder": "Describe two to five measurable, time-bound changes the project will directly achieve, using the applicant's actual situation, evidence and plans."
+      },
+      "target-beneficiaries": {
+        "title": "Target Beneficiaries",
+        "guidance": "Explain the direct and indirect beneficiaries, selection criteria, numbers, location and relevant characteristics. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who benefits? How many people? Why this group? How will they be identified fairly?",
+        "example": "",
+        "placeholder": "Describe the direct and indirect beneficiaries, selection criteria, numbers, location and relevant characteristics, using the applicant's actual situation, evidence and plans."
+      },
+      "proposed-activities": {
+        "title": "Proposed Activities",
+        "guidance": "Explain the major activities and how each one contributes to an objective. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What will the team do? Who leads each activity? How does each activity address the problem?",
+        "example": "",
+        "placeholder": "Describe the major activities and how each one contributes to an objective, using the applicant's actual situation, evidence and plans."
+      },
+      "implementation-plan": {
+        "title": "Implementation Plan",
+        "guidance": "Explain the sequence, timing, responsibilities and milestones for delivery. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What happens first? Who is accountable? What are the main milestones and dependencies?",
+        "example": "",
+        "placeholder": "Describe the sequence, timing, responsibilities and milestones for delivery, using the applicant's actual situation, evidence and plans."
+      },
+      "expected-results": {
+        "title": "Expected Results",
+        "guidance": "Explain the immediate outputs and short- to medium-term outcomes expected from the activities. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What tangible products or services will be delivered? What changes should follow?",
+        "example": "",
+        "placeholder": "Describe the immediate outputs and short- to medium-term outcomes expected from the activities, using the applicant's actual situation, evidence and plans."
+      },
+      "monitoring-evaluation": {
+        "title": "Monitoring & Evaluation",
+        "guidance": "Explain the indicators, baselines, targets, data sources, collection schedule and learning process. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How will progress and results be measured? Who collects data? How will findings improve delivery?",
+        "example": "",
+        "placeholder": "Describe the indicators, baselines, targets, data sources, collection schedule and learning process, using the applicant's actual situation, evidence and plans."
+      },
+      "sustainability": {
+        "title": "Sustainability",
+        "guidance": "Explain how benefits, services, skills or financing will continue after the grant. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What must continue? Who will own it? Which resources, partnerships or revenue will sustain it?",
+        "example": "",
+        "placeholder": "Describe how benefits, services, skills or financing will continue after the grant, using the applicant's actual situation, evidence and plans."
+      },
+      "organizational-capacity": {
+        "title": "Organizational Capacity",
+        "guidance": "Explain the applicant's relevant experience, team, systems and delivery record. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Why is the organization equipped to deliver? What similar work and controls demonstrate readiness?",
+        "example": "",
+        "placeholder": "Describe the applicant's relevant experience, team, systems and delivery record, using the applicant's actual situation, evidence and plans."
+      },
+      "budget-narrative": {
+        "title": "Budget Narrative",
+        "guidance": "Explain the main cost categories, assumptions, value for money and relationship between costs and activities. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What will funds purchase? Why are costs reasonable and necessary? What co-funding exists?",
+        "example": "",
+        "placeholder": "Describe the main cost categories, assumptions, value for money and relationship between costs and activities, using the applicant's actual situation, evidence and plans."
+      },
+      "risk-management": {
+        "title": "Risk Management",
+        "guidance": "Explain the main operational, financial, safeguarding and external risks and practical mitigation measures. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What could prevent success? How likely and serious is each risk? Who monitors and responds?",
+        "example": "",
+        "placeholder": "Describe the main operational, financial, safeguarding and external risks and practical mitigation measures, using the applicant's actual situation, evidence and plans."
+      },
+      "partnerships": {
+        "title": "Partnerships",
+        "guidance": "Explain the roles and commitments of partners who strengthen delivery. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who will contribute to the project, and what will each partner do?",
+        "example": "",
+        "placeholder": "Describe the roles and commitments of partners who strengthen delivery, using the applicant's actual situation, evidence and plans."
+      },
+      "safeguarding": {
+        "title": "Safeguarding",
+        "guidance": "Explain how participants will be protected from harm and how concerns will be handled. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What protection measures and reporting channels will apply?",
+        "example": "",
+        "placeholder": "Describe how participants will be protected from harm and how concerns will be handled, using the applicant's actual situation, evidence and plans."
+      },
+      "inclusion": {
+        "title": "Inclusion",
+        "guidance": "Explain how people facing barriers will participate safely and fairly. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which barriers may exclude people, and how will the project address them?",
+        "example": "",
+        "placeholder": "Describe how people facing barriers will participate safely and fairly, using the applicant's actual situation, evidence and plans."
+      },
+      "baseline-information": {
+        "title": "Current Situation",
+        "guidance": "Explain the starting conditions against which progress will be understood. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What is the current situation before your project begins?",
+        "example": "",
+        "placeholder": "Describe the starting conditions against which progress will be understood, using the applicant's actual situation, evidence and plans."
+      },
+      "implementation-dependencies": {
+        "title": "Implementation Dependencies",
+        "guidance": "Explain external decisions, resources or conditions needed for delivery. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What must be in place for the project to proceed, and who controls it?",
+        "example": "",
+        "placeholder": "Describe external decisions, resources or conditions needed for delivery, using the applicant's actual situation, evidence and plans."
+      }
+    }
+  },
+  "ngo_community_development": {
+    "name": "NGO / Community Development",
+    "description": "Best for nonprofit, civil society and community-impact projects.",
+    "sections": {
+      "executive-summary": {
+        "title": "Executive Summary",
+        "guidance": "Explain the community need, proposed response, people reached, partners and measurable social impact. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What community challenge is addressed, how, with whom and with what result?",
+        "example": "",
+        "placeholder": "Describe the community need, proposed response, people reached, partners and measurable social impact, using the applicant's actual situation, evidence and plans."
+      },
+      "community-need": {
+        "title": "Community Need / Needs Assessment",
+        "guidance": "Explain the locally evidenced need, root causes, service gaps and community priorities. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What do local data and residents say? What is missing from current responses?",
+        "example": "",
+        "placeholder": "Describe the locally evidenced need, root causes, service gaps and community priorities, using the applicant's actual situation, evidence and plans."
+      },
+      "target-community": {
+        "title": "Target Community",
+        "guidance": "Explain the community's location, population, diversity, assets and selection rationale. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who lives there? Who is most affected? What strengths can the project build on?",
+        "example": "",
+        "placeholder": "Describe the community's location, population, diversity, assets and selection rationale, using the applicant's actual situation, evidence and plans."
+      },
+      "project-goal": {
+        "title": "Project Goal",
+        "guidance": "Explain the long-term community-level change sought. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What improved condition should the project contribute to?",
+        "example": "",
+        "placeholder": "Describe the long-term community-level change sought, using the applicant's actual situation, evidence and plans."
+      },
+      "specific-objectives": {
+        "title": "Specific Objectives",
+        "guidance": "Explain measurable and time-bound changes for the target community. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What will change, for how many people, and by when?",
+        "example": "",
+        "placeholder": "Describe measurable and time-bound changes for the target community, using the applicant's actual situation, evidence and plans."
+      },
+      "community-engagement": {
+        "title": "Community Engagement",
+        "guidance": "Explain how residents will shape decisions, implementation, feedback and accountability. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How were priorities identified? Which community groups will participate and hold the project accountable?",
+        "example": "",
+        "placeholder": "Describe how residents will shape decisions, implementation, feedback and accountability, using the applicant's actual situation, evidence and plans."
+      },
+      "proposed-activities": {
+        "title": "Proposed Activities",
+        "guidance": "Explain the services, mobilization and capacity-building activities linked to each objective. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What happens, how often, for whom and under whose leadership?",
+        "example": "",
+        "placeholder": "Describe the services, mobilization and capacity-building activities linked to each objective, using the applicant's actual situation, evidence and plans."
+      },
+      "implementation-plan": {
+        "title": "Implementation Plan",
+        "guidance": "Explain the phases, timeline, local responsibilities and milestones. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How will delivery be coordinated and adapted to community realities?",
+        "example": "",
+        "placeholder": "Describe the phases, timeline, local responsibilities and milestones, using the applicant's actual situation, evidence and plans."
+      },
+      "outputs-outcomes": {
+        "title": "Expected Outputs and Outcomes",
+        "guidance": "Explain the deliverables and measurable social changes expected. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What will be produced? What behavior, access or wellbeing should improve?",
+        "example": "",
+        "placeholder": "Describe the deliverables and measurable social changes expected, using the applicant's actual situation, evidence and plans."
+      },
+      "monitoring-evaluation": {
+        "title": "Monitoring & Evaluation",
+        "guidance": "Explain participatory indicators, targets, data collection, feedback and learning. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How will community members help define and verify success?",
+        "example": "",
+        "placeholder": "Describe participatory indicators, targets, data collection, feedback and learning, using the applicant's actual situation, evidence and plans."
+      },
+      "inclusion-safeguarding": {
+        "title": "Inclusion & Safeguarding",
+        "guidance": "Explain safe, equitable participation for marginalized groups and protection from harm. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What barriers or risks may exclude or harm people? What safeguards and reporting channels apply?",
+        "example": "",
+        "placeholder": "Describe safe, equitable participation for marginalized groups and protection from harm, using the applicant's actual situation, evidence and plans."
+      },
+      "sustainability": {
+        "title": "Sustainability",
+        "guidance": "Explain community ownership, local capacity and resources that will preserve results. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who continues the work and how will local structures and financing support it?",
+        "example": "",
+        "placeholder": "Describe community ownership, local capacity and resources that will preserve results, using the applicant's actual situation, evidence and plans."
+      },
+      "organizational-experience": {
+        "title": "Organizational Experience",
+        "guidance": "Explain relevant community relationships, delivery experience and accountable systems. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What evidence shows trust, competence and responsible resource management?",
+        "example": "",
+        "placeholder": "Describe relevant community relationships, delivery experience and accountable systems, using the applicant's actual situation, evidence and plans."
+      },
+      "partnerships": {
+        "title": "Partnerships",
+        "guidance": "Explain the roles and commitments of community, government, civil society and technical partners. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who contributes what? How will responsibilities and coordination be formalized?",
+        "example": "",
+        "placeholder": "Describe the roles and commitments of community, government, civil society and technical partners, using the applicant's actual situation, evidence and plans."
+      },
+      "budget-narrative": {
+        "title": "Budget Narrative",
+        "guidance": "Explain community-facing costs, assumptions, contributions and value for money. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How do costs support activities and equitable participation?",
+        "example": "",
+        "placeholder": "Describe community-facing costs, assumptions, contributions and value for money, using the applicant's actual situation, evidence and plans."
+      },
+      "risk-management": {
+        "title": "Risk Management",
+        "guidance": "Explain social, operational, safeguarding and contextual risks with mitigation and ownership. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What could undermine trust, participation or delivery, and how will it be managed?",
+        "example": "",
+        "placeholder": "Describe social, operational, safeguarding and contextual risks with mitigation and ownership, using the applicant's actual situation, evidence and plans."
+      }
+    }
+  },
+  "startup_sme": {
+    "name": "Startup / SME Funding",
+    "description": "Best for businesses, entrepreneurs and innovation funding.",
+    "sections": {
+      "executive-summary": {
+        "title": "Executive Summary",
+        "guidance": "Explain the business, customer problem, solution, traction, funding ask and growth opportunity. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What does the business do, for whom, why now, and what will the funding unlock?",
+        "example": "",
+        "placeholder": "Describe the business, customer problem, solution, traction, funding ask and growth opportunity, using the applicant's actual situation, evidence and plans."
+      },
+      "business-overview": {
+        "title": "Business Overview",
+        "guidance": "Explain the venture's legal or operating status, history, location, products and current stage. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "When did it start? What does it sell? Where and at what stage does it operate?",
+        "example": "",
+        "placeholder": "Describe the venture's legal or operating status, history, location, products and current stage, using the applicant's actual situation, evidence and plans."
+      },
+      "problem": {
+        "title": "Problem",
+        "guidance": "Explain the costly or persistent customer problem and evidence that it matters. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which customers experience the problem? How do they cope today? What evidence proves demand?",
+        "example": "",
+        "placeholder": "Describe the costly or persistent customer problem and evidence that it matters, using the applicant's actual situation, evidence and plans."
+      },
+      "product-solution": {
+        "title": "Product / Solution",
+        "guidance": "Explain how the product or service solves the customer problem and delivers value. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How does it work? What outcome does the customer receive? Why is it practical?",
+        "example": "",
+        "placeholder": "Describe how the product or service solves the customer problem and delivers value, using the applicant's actual situation, evidence and plans."
+      },
+      "target-customers": {
+        "title": "Target Customers",
+        "guidance": "Explain priority customer segments, needs, purchasing behavior and current reach. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who buys or uses the solution? Who is the first realistic target segment?",
+        "example": "",
+        "placeholder": "Describe priority customer segments, needs, purchasing behavior and current reach, using the applicant's actual situation, evidence and plans."
+      },
+      "market-opportunity": {
+        "title": "Market Opportunity",
+        "guidance": "Explain market size, trends, reachable segment and evidence of growth. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How large is the addressable market? Which trends support demand?",
+        "example": "",
+        "placeholder": "Describe market size, trends, reachable segment and evidence of growth, using the applicant's actual situation, evidence and plans."
+      },
+      "business-model": {
+        "title": "Business Model",
+        "guidance": "Explain how the business creates, delivers and captures value. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who pays, for what, how often, at what margin and through which channels?",
+        "example": "",
+        "placeholder": "Describe how the business creates, delivers and captures value, using the applicant's actual situation, evidence and plans."
+      },
+      "competitive-advantage": {
+        "title": "Competitive Advantage",
+        "guidance": "Explain alternatives and the venture's defensible differentiation. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who are competitors? Why will customers choose this solution? What is difficult to copy?",
+        "example": "",
+        "placeholder": "Describe alternatives and the venture's defensible differentiation, using the applicant's actual situation, evidence and plans."
+      },
+      "traction": {
+        "title": "Traction / Current Progress",
+        "guidance": "Explain validated progress such as customers, revenue, pilots, retention, partnerships or product milestones. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What measurable evidence shows execution and demand?",
+        "example": "",
+        "placeholder": "Describe validated progress such as customers, revenue, pilots, retention, partnerships or product milestones, using the applicant's actual situation, evidence and plans."
+      },
+      "growth-strategy": {
+        "title": "Marketing / Growth Strategy",
+        "guidance": "Explain customer acquisition, sales channels, retention and expansion priorities. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How will customers be reached cost-effectively? Which milestones guide growth?",
+        "example": "",
+        "placeholder": "Describe customer acquisition, sales channels, retention and expansion priorities, using the applicant's actual situation, evidence and plans."
+      },
+      "team": {
+        "title": "Team",
+        "guidance": "Explain founder and team capabilities, roles, relevant experience and important gaps. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Why can this team win? Who owns product, sales, operations and finance?",
+        "example": "",
+        "placeholder": "Describe founder and team capabilities, roles, relevant experience and important gaps, using the applicant's actual situation, evidence and plans."
+      },
+      "funding-request": {
+        "title": "Funding Request",
+        "guidance": "Explain the exact amount requested, funding form and business milestone it enables. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How much is needed, for what period and what measurable milestone will it unlock?",
+        "example": "",
+        "placeholder": "Describe the exact amount requested, funding form and business milestone it enables, using the applicant's actual situation, evidence and plans."
+      },
+      "use-of-funds": {
+        "title": "Use of Funds",
+        "guidance": "Explain the allocation of funds across product, people, equipment, marketing and working capital. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How much goes to each category? Why is each allocation necessary now?",
+        "example": "",
+        "placeholder": "Describe the allocation of funds across product, people, equipment, marketing and working capital, using the applicant's actual situation, evidence and plans."
+      },
+      "financial-outlook": {
+        "title": "Financial / Revenue Outlook",
+        "guidance": "Explain historical results, assumptions, revenue forecast, costs and path to sustainability. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What are the key drivers? When can operations cover costs? Which assumptions are most sensitive?",
+        "example": "",
+        "placeholder": "Describe historical results, assumptions, revenue forecast, costs and path to sustainability, using the applicant's actual situation, evidence and plans."
+      },
+      "job-creation": {
+        "title": "Job Creation / Economic Impact",
+        "guidance": "Explain direct and indirect jobs, skills, local procurement and economic value. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How many quality jobs will be created or sustained, for whom and by when?",
+        "example": "",
+        "placeholder": "Describe direct and indirect jobs, skills, local procurement and economic value, using the applicant's actual situation, evidence and plans."
+      },
+      "social-environmental-impact": {
+        "title": "Social or Environmental Impact",
+        "guidance": "Explain credible positive impact beyond commercial returns where relevant. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who benefits and how will impact be measured without overstating it?",
+        "example": "",
+        "placeholder": "Describe credible positive impact beyond commercial returns where relevant, using the applicant's actual situation, evidence and plans."
+      },
+      "key-risks": {
+        "title": "Key Risks",
+        "guidance": "Explain market, product, financial, regulatory and execution risks and mitigations. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What assumptions could fail? How will the team detect and respond early?",
+        "example": "",
+        "placeholder": "Describe market, product, financial, regulatory and execution risks and mitigations, using the applicant's actual situation, evidence and plans."
+      }
+    }
+  },
+  "youth_employment_skills": {
+    "name": "Youth Employment & Skills Development",
+    "description": "Best for vocational training, employability and youth livelihood projects.",
+    "sections": {
+      "executive-summary": {
+        "title": "Executive Summary",
+        "guidance": "Explain the youth employment challenge, training model, participants, employer links and employment outcomes. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who will gain which skills and progress to what livelihood outcome?",
+        "example": "",
+        "placeholder": "Describe the youth employment challenge, training model, participants, employer links and employment outcomes, using the applicant's actual situation, evidence and plans."
+      },
+      "youth-employment-problem": {
+        "title": "Youth Employment Problem",
+        "guidance": "Explain local unemployment, underemployment and skills mismatch supported by credible evidence. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which young people are excluded? Which skills or market failures limit opportunity?",
+        "example": "",
+        "placeholder": "Describe local unemployment, underemployment and skills mismatch supported by credible evidence, using the applicant's actual situation, evidence and plans."
+      },
+      "target-youth": {
+        "title": "Target Youth Population",
+        "guidance": "Explain participant age range, location, numbers, barriers and fair eligibility criteria. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who will participate and how will underserved youth be reached?",
+        "example": "",
+        "placeholder": "Describe participant age range, location, numbers, barriers and fair eligibility criteria, using the applicant's actual situation, evidence and plans."
+      },
+      "project-goal": {
+        "title": "Project Goal",
+        "guidance": "Explain the long-term employability and livelihood change sought. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What economic condition should improve for target youth?",
+        "example": "",
+        "placeholder": "Describe the long-term employability and livelihood change sought, using the applicant's actual situation, evidence and plans."
+      },
+      "specific-objectives": {
+        "title": "Specific Objectives",
+        "guidance": "Explain measurable training, completion, placement and enterprise outcomes. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How many enroll, complete, certify, find work or start viable enterprises, and by when?",
+        "example": "",
+        "placeholder": "Describe measurable training, completion, placement and enterprise outcomes, using the applicant's actual situation, evidence and plans."
+      },
+      "training-approach": {
+        "title": "Training / Skills Approach",
+        "guidance": "Explain competency-based technical, digital, entrepreneurial and soft-skills development. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which skills match real demand? How will practical competence be assessed?",
+        "example": "",
+        "placeholder": "Describe competency-based technical, digital, entrepreneurial and soft-skills development, using the applicant's actual situation, evidence and plans."
+      },
+      "participant-recruitment": {
+        "title": "Participant Recruitment",
+        "guidance": "Explain transparent outreach, screening, selection and retention support. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How will candidates learn about the program and be selected fairly?",
+        "example": "",
+        "placeholder": "Describe transparent outreach, screening, selection and retention support, using the applicant's actual situation, evidence and plans."
+      },
+      "activities": {
+        "title": "Activities",
+        "guidance": "Explain training, mentoring, work exposure, career services and enterprise support. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What will participants experience from enrollment through transition?",
+        "example": "",
+        "placeholder": "Describe training, mentoring, work exposure, career services and enterprise support, using the applicant's actual situation, evidence and plans."
+      },
+      "employer-partnerships": {
+        "title": "Employer / Industry Partnerships",
+        "guidance": "Explain employer roles in curriculum, placements, mentoring and hiring. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which partners validate demand and what commitments will they make?",
+        "example": "",
+        "placeholder": "Describe employer roles in curriculum, placements, mentoring and hiring, using the applicant's actual situation, evidence and plans."
+      },
+      "placement-pathway": {
+        "title": "Job Placement / Entrepreneurship Pathway",
+        "guidance": "Explain the practical route from training to employment, apprenticeship or self-employment. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How will graduates access vacancies, finance, markets and post-program support?",
+        "example": "",
+        "placeholder": "Describe the practical route from training to employment, apprenticeship or self-employment, using the applicant's actual situation, evidence and plans."
+      },
+      "expected-outcomes": {
+        "title": "Expected Outcomes",
+        "guidance": "Explain skills gains, certifications, placements, earnings and enterprise survival. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which economic outcomes will be measured and over what follow-up period?",
+        "example": "",
+        "placeholder": "Describe skills gains, certifications, placements, earnings and enterprise survival, using the applicant's actual situation, evidence and plans."
+      },
+      "monitoring-evaluation": {
+        "title": "Monitoring & Evaluation",
+        "guidance": "Explain attendance, assessment, completion, placement, earnings and employer satisfaction data. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How will results be verified and disaggregated?",
+        "example": "",
+        "placeholder": "Describe attendance, assessment, completion, placement, earnings and employer satisfaction data, using the applicant's actual situation, evidence and plans."
+      },
+      "sustainability": {
+        "title": "Sustainability",
+        "guidance": "Explain repeatable training delivery, employer ownership, alumni support and future financing. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How can services continue and remain aligned with labor demand?",
+        "example": "",
+        "placeholder": "Describe repeatable training delivery, employer ownership, alumni support and future financing, using the applicant's actual situation, evidence and plans."
+      },
+      "inclusion": {
+        "title": "Inclusion",
+        "guidance": "Explain access and reasonable support for young women, displaced youth, rural youth and people with disabilities. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which barriers affect participation and completion, and how will they be reduced?",
+        "example": "",
+        "placeholder": "Describe access and reasonable support for young women, displaced youth, rural youth and people with disabilities, using the applicant's actual situation, evidence and plans."
+      },
+      "organizational-capacity": {
+        "title": "Organizational Capacity",
+        "guidance": "Explain training quality, employer relationships, safeguarding and placement experience. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What prior results and systems show readiness?",
+        "example": "",
+        "placeholder": "Describe training quality, employer relationships, safeguarding and placement experience, using the applicant's actual situation, evidence and plans."
+      },
+      "budget-narrative": {
+        "title": "Budget Narrative",
+        "guidance": "Explain training, participant support, equipment, placement and follow-up costs. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What is the cost per participant and per outcome, and why is it reasonable?",
+        "example": "",
+        "placeholder": "Describe training, participant support, equipment, placement and follow-up costs, using the applicant's actual situation, evidence and plans."
+      }
+    }
+  },
+  "women_girls_empowerment": {
+    "name": "Women & Girls Empowerment",
+    "description": "Best for gender equality, women-led initiatives and girls' programs.",
+    "sections": {
+      "executive-summary": {
+        "title": "Executive Summary",
+        "guidance": "Explain the gender barrier, target group, locally grounded approach and measurable empowerment outcome. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which barrier will change, for whom, where and through what approach?",
+        "example": "",
+        "placeholder": "Describe the gender barrier, target group, locally grounded approach and measurable empowerment outcome, using the applicant's actual situation, evidence and plans."
+      },
+      "gender-gap": {
+        "title": "Problem / Gender Gap",
+        "guidance": "Explain the specific structural, economic or social barrier supported by sex- and age-disaggregated evidence. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What inequality exists? Who experiences it differently? What causes and reinforces it?",
+        "example": "",
+        "placeholder": "Describe the specific structural, economic or social barrier supported by sex- and age-disaggregated evidence, using the applicant's actual situation, evidence and plans."
+      },
+      "target-women-girls": {
+        "title": "Target Women or Girls",
+        "guidance": "Explain the participants' ages, locations, circumstances, strengths and intersecting barriers. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who is prioritized and how will their diversity shape delivery?",
+        "example": "",
+        "placeholder": "Describe the participants' ages, locations, circumstances, strengths and intersecting barriers, using the applicant's actual situation, evidence and plans."
+      },
+      "local-context": {
+        "title": "Local Context",
+        "guidance": "Explain the relevant laws, norms, services, risks and opportunities without stereotyping the community. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which contextual factors affect agency, access and safety?",
+        "example": "",
+        "placeholder": "Describe the relevant laws, norms, services, risks and opportunities without stereotyping the community, using the applicant's actual situation, evidence and plans."
+      },
+      "project-goal": {
+        "title": "Project Goal",
+        "guidance": "Explain the long-term gender equality or empowerment change sought. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What condition should improve for women or girls?",
+        "example": "",
+        "placeholder": "Describe the long-term gender equality or empowerment change sought, using the applicant's actual situation, evidence and plans."
+      },
+      "specific-objectives": {
+        "title": "Specific Objectives",
+        "guidance": "Explain measurable changes in agency, access, skills, income, leadership or safety. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What changes, for how many participants and by when?",
+        "example": "",
+        "placeholder": "Describe measurable changes in agency, access, skills, income, leadership or safety, using the applicant's actual situation, evidence and plans."
+      },
+      "empowerment-approach": {
+        "title": "Empowerment Approach",
+        "guidance": "Explain how participants will build voice, choice, resources, capability and supportive relationships. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How does the approach address root causes rather than only symptoms?",
+        "example": "",
+        "placeholder": "Describe how participants will build voice, choice, resources, capability and supportive relationships, using the applicant's actual situation, evidence and plans."
+      },
+      "proposed-activities": {
+        "title": "Proposed Activities",
+        "guidance": "Explain the services, training, mentoring, advocacy or systems-change activities. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What will happen, how often, and how does each activity advance an objective?",
+        "example": "",
+        "placeholder": "Describe the services, training, mentoring, advocacy or systems-change activities, using the applicant's actual situation, evidence and plans."
+      },
+      "safeguarding": {
+        "title": "Safeguarding",
+        "guidance": "Explain confidential, survivor-centered measures preventing and responding to harm, exploitation and retaliation. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What risks arise from participation? What referral and reporting procedures protect participants?",
+        "example": "",
+        "placeholder": "Describe confidential, survivor-centered measures preventing and responding to harm, exploitation and retaliation, using the applicant's actual situation, evidence and plans."
+      },
+      "inclusion": {
+        "title": "Inclusion",
+        "guidance": "Explain accessible participation across disability, income, age, location and other relevant identities. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who may be unintentionally excluded and what practical adjustments are planned?",
+        "example": "",
+        "placeholder": "Describe accessible participation across disability, income, age, location and other relevant identities, using the applicant's actual situation, evidence and plans."
+      },
+      "expected-outcomes": {
+        "title": "Expected Outcomes",
+        "guidance": "Explain measurable changes in opportunity, agency, wellbeing, leadership or institutional practice. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What changes should participants experience and how will they be verified?",
+        "example": "",
+        "placeholder": "Describe measurable changes in opportunity, agency, wellbeing, leadership or institutional practice, using the applicant's actual situation, evidence and plans."
+      },
+      "monitoring-evaluation": {
+        "title": "Monitoring & Evaluation",
+        "guidance": "Explain gender-responsive indicators, safe data collection, feedback and learning. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which quantitative and qualitative evidence will demonstrate meaningful change?",
+        "example": "",
+        "placeholder": "Describe gender-responsive indicators, safe data collection, feedback and learning, using the applicant's actual situation, evidence and plans."
+      },
+      "sustainability": {
+        "title": "Sustainability",
+        "guidance": "Explain continued participant networks, services, institutional change and local ownership. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What benefits and structures continue after funding?",
+        "example": "",
+        "placeholder": "Describe continued participant networks, services, institutional change and local ownership, using the applicant's actual situation, evidence and plans."
+      },
+      "stakeholder-engagement": {
+        "title": "Community / Stakeholder Engagement",
+        "guidance": "Explain constructive engagement with participants, families, leaders, institutions and allies. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Whose support is needed without weakening participant agency?",
+        "example": "",
+        "placeholder": "Describe constructive engagement with participants, families, leaders, institutions and allies, using the applicant's actual situation, evidence and plans."
+      },
+      "organizational-capacity": {
+        "title": "Organizational Capacity",
+        "guidance": "Explain relevant gender expertise, trusted relationships, safeguarding and accountable delivery. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What experience and systems demonstrate competence and safety?",
+        "example": "",
+        "placeholder": "Describe relevant gender expertise, trusted relationships, safeguarding and accountable delivery, using the applicant's actual situation, evidence and plans."
+      },
+      "budget-narrative": {
+        "title": "Budget Narrative",
+        "guidance": "Explain accessible participation, safeguarding, staffing, activities and outcome-measurement costs. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How does the budget remove barriers and protect quality?",
+        "example": "",
+        "placeholder": "Describe accessible participation, safeguarding, staffing, activities and outcome-measurement costs, using the applicant's actual situation, evidence and plans."
+      }
+    }
+  },
+  "agriculture_food_security": {
+    "name": "Agriculture & Food Security",
+    "description": "Best for farming, agribusiness, food systems and rural livelihoods.",
+    "sections": {
+      "executive-summary": {
+        "title": "Executive Summary",
+        "guidance": "Explain the agricultural challenge, producers reached, intervention, market pathway and food or income outcome. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What changes for which farmers, where, and through which production or market solution?",
+        "example": "",
+        "placeholder": "Describe the agricultural challenge, producers reached, intervention, market pathway and food or income outcome, using the applicant's actual situation, evidence and plans."
+      },
+      "challenge": {
+        "title": "Agricultural / Food Security Challenge",
+        "guidance": "Explain the production, nutrition, loss, income or market constraint with seasonal and local evidence. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What is failing in the food system? Who bears the cost and why?",
+        "example": "",
+        "placeholder": "Describe the production, nutrition, loss, income or market constraint with seasonal and local evidence, using the applicant's actual situation, evidence and plans."
+      },
+      "target-farmers": {
+        "title": "Target Farmers / Beneficiaries",
+        "guidance": "Explain producer types, farm sizes, value-chain roles, numbers and selection criteria. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who participates directly and who benefits indirectly?",
+        "example": "",
+        "placeholder": "Describe producer types, farm sizes, value-chain roles, numbers and selection criteria, using the applicant's actual situation, evidence and plans."
+      },
+      "geographic-area": {
+        "title": "Geographic Area",
+        "guidance": "Explain the agroecological, infrastructure and market conditions of the target area. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Why is this location suitable and what constraints shape implementation?",
+        "example": "",
+        "placeholder": "Describe the agroecological, infrastructure and market conditions of the target area, using the applicant's actual situation, evidence and plans."
+      },
+      "project-goal": {
+        "title": "Project Goal",
+        "guidance": "Explain the long-term food security, resilience or livelihood change sought. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What condition should improve across the target food system?",
+        "example": "",
+        "placeholder": "Describe the long-term food security, resilience or livelihood change sought, using the applicant's actual situation, evidence and plans."
+      },
+      "specific-objectives": {
+        "title": "Specific Objectives",
+        "guidance": "Explain measurable production, loss reduction, income, nutrition or market outcomes. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What changes by how much, for whom and by when?",
+        "example": "",
+        "placeholder": "Describe measurable production, loss reduction, income, nutrition or market outcomes, using the applicant's actual situation, evidence and plans."
+      },
+      "intervention": {
+        "title": "Proposed Agricultural Intervention",
+        "guidance": "Explain the technical and commercial logic of the proposed intervention. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which constraints does it address and why should it work in this context?",
+        "example": "",
+        "placeholder": "Describe the technical and commercial logic of the proposed intervention, using the applicant's actual situation, evidence and plans."
+      },
+      "activities": {
+        "title": "Activities",
+        "guidance": "Explain field, enterprise, infrastructure, aggregation and advisory activities. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What will happen through each production and market cycle?",
+        "example": "",
+        "placeholder": "Describe field, enterprise, infrastructure, aggregation and advisory activities, using the applicant's actual situation, evidence and plans."
+      },
+      "farmer-training": {
+        "title": "Farmer Training / Capacity Building",
+        "guidance": "Explain practical extension, demonstration, coaching and adoption support. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which practices will farmers learn, test and adopt? How will learning be verified?",
+        "example": "",
+        "placeholder": "Describe practical extension, demonstration, coaching and adoption support, using the applicant's actual situation, evidence and plans."
+      },
+      "inputs-technology": {
+        "title": "Inputs / Technology",
+        "guidance": "Explain the seeds, equipment, digital tools or infrastructure and their maintenance requirements. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What is supplied, to whom, under what terms, and how will it remain usable?",
+        "example": "",
+        "placeholder": "Describe the seeds, equipment, digital tools or infrastructure and their maintenance requirements, using the applicant's actual situation, evidence and plans."
+      },
+      "market-access": {
+        "title": "Market Access",
+        "guidance": "Explain buyer relationships, quality standards, aggregation, logistics and price information. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How will producers secure reliable, fair and profitable routes to market?",
+        "example": "",
+        "placeholder": "Describe buyer relationships, quality standards, aggregation, logistics and price information, using the applicant's actual situation, evidence and plans."
+      },
+      "value-chain": {
+        "title": "Value Chain Strategy",
+        "guidance": "Explain the roles, incentives and bottlenecks from inputs through production, processing and sales. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which actors must coordinate and where will value increase?",
+        "example": "",
+        "placeholder": "Describe the roles, incentives and bottlenecks from inputs through production, processing and sales, using the applicant's actual situation, evidence and plans."
+      },
+      "climate-resilience": {
+        "title": "Climate Resilience",
+        "guidance": "Explain practices that reduce climate exposure and protect natural resources where relevant. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which hazards matter and how will farmers adapt without creating new environmental harm?",
+        "example": "",
+        "placeholder": "Describe practices that reduce climate exposure and protect natural resources where relevant, using the applicant's actual situation, evidence and plans."
+      },
+      "expected-outcomes": {
+        "title": "Expected Outcomes",
+        "guidance": "Explain measurable yield, income, loss, nutrition, resilience and market outcomes. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which changes will be tracked across seasons?",
+        "example": "",
+        "placeholder": "Describe measurable yield, income, loss, nutrition, resilience and market outcomes, using the applicant's actual situation, evidence and plans."
+      },
+      "monitoring-evaluation": {
+        "title": "Monitoring & Evaluation",
+        "guidance": "Explain farm, production, sales, income and food-security indicators and methods. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How will seasonal and gender differences be captured?",
+        "example": "",
+        "placeholder": "Describe farm, production, sales, income and food-security indicators and methods, using the applicant's actual situation, evidence and plans."
+      },
+      "sustainability": {
+        "title": "Sustainability",
+        "guidance": "Explain commercial incentives, local services, producer ownership and asset maintenance. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What continues without grant subsidy and who pays or manages it?",
+        "example": "",
+        "placeholder": "Describe commercial incentives, local services, producer ownership and asset maintenance, using the applicant's actual situation, evidence and plans."
+      },
+      "budget-narrative": {
+        "title": "Budget Narrative",
+        "guidance": "Explain inputs, training, equipment, field support, logistics and measurement costs. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How do unit costs relate to farmers reached and outcomes expected?",
+        "example": "",
+        "placeholder": "Describe inputs, training, equipment, field support, logistics and measurement costs, using the applicant's actual situation, evidence and plans."
+      },
+      "risk-management": {
+        "title": "Risk Management",
+        "guidance": "Explain weather, pest, price, adoption, land and supply-chain risks with mitigations. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How will shocks be monitored and delivery adapted?",
+        "example": "",
+        "placeholder": "Describe weather, pest, price, adoption, land and supply-chain risks with mitigations, using the applicant's actual situation, evidence and plans."
+      }
+    }
+  },
+  "climate_environment": {
+    "name": "Climate & Environment",
+    "description": "Best for adaptation, mitigation, conservation and green projects.",
+    "sections": {
+      "executive-summary": {
+        "title": "Executive Summary",
+        "guidance": "Explain the environmental problem, location, intervention, communities or ecosystem affected and measurable impact. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What environmental result will be delivered, where, for whom and by when?",
+        "example": "",
+        "placeholder": "Describe the environmental problem, location, intervention, communities or ecosystem affected and measurable impact, using the applicant's actual situation, evidence and plans."
+      },
+      "climate-problem": {
+        "title": "Environmental / Climate Problem",
+        "guidance": "Explain the hazard, degradation or emissions problem, drivers, scale and evidence. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What is changing? What causes it? Why are current responses insufficient?",
+        "example": "",
+        "placeholder": "Describe the hazard, degradation or emissions problem, drivers, scale and evidence, using the applicant's actual situation, evidence and plans."
+      },
+      "geographic-context": {
+        "title": "Geographic Context",
+        "guidance": "Explain the landscape, climate exposure, land use and governance context. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which physical and institutional conditions shape the project?",
+        "example": "",
+        "placeholder": "Describe the landscape, climate exposure, land use and governance context, using the applicant's actual situation, evidence and plans."
+      },
+      "target-communities-ecosystem": {
+        "title": "Target Communities / Ecosystem",
+        "guidance": "Explain the people, livelihoods, habitats or species most affected and their relationship to the resource. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who or what is vulnerable, and how are benefits and burdens distributed?",
+        "example": "",
+        "placeholder": "Describe the people, livelihoods, habitats or species most affected and their relationship to the resource, using the applicant's actual situation, evidence and plans."
+      },
+      "baseline": {
+        "title": "Baseline Situation",
+        "guidance": "Explain the starting environmental and socioeconomic conditions against which change will be measured. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which baseline indicators and data sources establish current conditions?",
+        "example": "",
+        "placeholder": "Describe the starting environmental and socioeconomic conditions against which change will be measured, using the applicant's actual situation, evidence and plans."
+      },
+      "project-goal": {
+        "title": "Project Goal",
+        "guidance": "Explain the long-term resilience, conservation or emissions change sought. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What environmental condition should improve?",
+        "example": "",
+        "placeholder": "Describe the long-term resilience, conservation or emissions change sought, using the applicant's actual situation, evidence and plans."
+      },
+      "specific-objectives": {
+        "title": "Specific Objectives",
+        "guidance": "Explain measurable environmental and community outcomes. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What changes, over what area or population, and by when?",
+        "example": "",
+        "placeholder": "Describe measurable environmental and community outcomes, using the applicant's actual situation, evidence and plans."
+      },
+      "intervention": {
+        "title": "Proposed Intervention",
+        "guidance": "Explain the scientific, technical and social logic of the solution. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How does the intervention address identified drivers and avoid unintended harm?",
+        "example": "",
+        "placeholder": "Describe the scientific, technical and social logic of the solution, using the applicant's actual situation, evidence and plans."
+      },
+      "activities": {
+        "title": "Activities",
+        "guidance": "Explain restoration, infrastructure, behavior, policy, livelihood or technology activities. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What will be implemented, by whom and in what sequence?",
+        "example": "",
+        "placeholder": "Describe restoration, infrastructure, behavior, policy, livelihood or technology activities, using the applicant's actual situation, evidence and plans."
+      },
+      "environmental-impact": {
+        "title": "Climate / Environmental Impact",
+        "guidance": "Explain quantified or credibly measurable environmental benefits. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which indicators show adaptation, mitigation, conservation or pollution-reduction impact?",
+        "example": "",
+        "placeholder": "Describe quantified or credibly measurable environmental benefits, using the applicant's actual situation, evidence and plans."
+      },
+      "adaptation-mitigation": {
+        "title": "Adaptation or Mitigation Approach",
+        "guidance": "Explain the relevant climate pathway and assumptions connecting activities to impact. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Does the project reduce vulnerability, emissions, or both? How?",
+        "example": "",
+        "placeholder": "Describe the relevant climate pathway and assumptions connecting activities to impact, using the applicant's actual situation, evidence and plans."
+      },
+      "community-participation": {
+        "title": "Community Participation",
+        "guidance": "Explain meaningful local decision-making, consent, benefit sharing and grievance mechanisms. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How will affected groups shape and oversee the work?",
+        "example": "",
+        "placeholder": "Describe meaningful local decision-making, consent, benefit sharing and grievance mechanisms, using the applicant's actual situation, evidence and plans."
+      },
+      "monitoring-indicators": {
+        "title": "Monitoring Indicators",
+        "guidance": "Explain baseline, output, outcome and environmental indicators with methods and frequency. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What will be measured, using which tools, and by whom?",
+        "example": "",
+        "placeholder": "Describe baseline, output, outcome and environmental indicators with methods and frequency, using the applicant's actual situation, evidence and plans."
+      },
+      "sustainability": {
+        "title": "Sustainability",
+        "guidance": "Explain long-term stewardship, maintenance, financing and institutional ownership. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who protects the gains and with what resources?",
+        "example": "",
+        "placeholder": "Describe long-term stewardship, maintenance, financing and institutional ownership, using the applicant's actual situation, evidence and plans."
+      },
+      "scalability": {
+        "title": "Scalability / Replicability",
+        "guidance": "Explain conditions, costs and evidence needed to extend the approach elsewhere. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What is transferable and what must be adapted?",
+        "example": "",
+        "placeholder": "Describe conditions, costs and evidence needed to extend the approach elsewhere, using the applicant's actual situation, evidence and plans."
+      },
+      "organizational-capacity": {
+        "title": "Organizational Capacity",
+        "guidance": "Explain relevant technical expertise, community relationships, safeguards and delivery systems. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What prior work demonstrates readiness?",
+        "example": "",
+        "placeholder": "Describe relevant technical expertise, community relationships, safeguards and delivery systems, using the applicant's actual situation, evidence and plans."
+      },
+      "budget-narrative": {
+        "title": "Budget Narrative",
+        "guidance": "Explain technical, field, community, monitoring and maintenance costs. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How do costs connect to environmental outputs and value for money?",
+        "example": "",
+        "placeholder": "Describe technical, field, community, monitoring and maintenance costs, using the applicant's actual situation, evidence and plans."
+      },
+      "environmental-risks": {
+        "title": "Environmental / Implementation Risks",
+        "guidance": "Explain ecological, social, climate, land and delivery risks and mitigations. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Could the intervention cause harm or fail under changing conditions?",
+        "example": "",
+        "placeholder": "Describe ecological, social, climate, land and delivery risks and mitigations, using the applicant's actual situation, evidence and plans."
+      }
+    }
+  },
+  "education": {
+    "name": "Education",
+    "description": "Best for schools, learning, EdTech and education-access projects.",
+    "sections": {
+      "executive-summary": {
+        "title": "Executive Summary",
+        "guidance": "Explain the learning problem, target learners, educational response and measurable learning outcome. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who will learn what, through which approach, where and by when?",
+        "example": "",
+        "placeholder": "Describe the learning problem, target learners, educational response and measurable learning outcome, using the applicant's actual situation, evidence and plans."
+      },
+      "education-problem": {
+        "title": "Education Problem",
+        "guidance": "Explain the access, participation, teaching or learning challenge supported by education data. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which learners are affected? What evidence shows the gap and its causes?",
+        "example": "",
+        "placeholder": "Describe the access, participation, teaching or learning challenge supported by education data, using the applicant's actual situation, evidence and plans."
+      },
+      "target-learners": {
+        "title": "Target Learners",
+        "guidance": "Explain learner ages, levels, numbers, locations, needs and selection criteria. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who participates and which barriers affect their learning?",
+        "example": "",
+        "placeholder": "Describe learner ages, levels, numbers, locations, needs and selection criteria, using the applicant's actual situation, evidence and plans."
+      },
+      "school-context": {
+        "title": "Geographic / School Context",
+        "guidance": "Explain the school, community, language, infrastructure and policy conditions. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which contextual realities must the intervention fit?",
+        "example": "",
+        "placeholder": "Describe the school, community, language, infrastructure and policy conditions, using the applicant's actual situation, evidence and plans."
+      },
+      "project-goal": {
+        "title": "Project Goal",
+        "guidance": "Explain the long-term education access, quality or learning change sought. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What education condition should improve?",
+        "example": "",
+        "placeholder": "Describe the long-term education access, quality or learning change sought, using the applicant's actual situation, evidence and plans."
+      },
+      "specific-objectives": {
+        "title": "Specific Objectives",
+        "guidance": "Explain measurable changes in access, attendance, teaching quality or learning. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What changes, for how many learners or teachers, and by when?",
+        "example": "",
+        "placeholder": "Describe measurable changes in access, attendance, teaching quality or learning, using the applicant's actual situation, evidence and plans."
+      },
+      "educational-intervention": {
+        "title": "Educational Intervention",
+        "guidance": "Explain the evidence-informed educational solution and its delivery model. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Why should this approach improve the identified learning problem?",
+        "example": "",
+        "placeholder": "Describe the evidence-informed educational solution and its delivery model, using the applicant's actual situation, evidence and plans."
+      },
+      "learning-approach": {
+        "title": "Curriculum / Learning Approach",
+        "guidance": "Explain content, pedagogy, language, assessment and age appropriateness. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What will be taught and how will learners practice and demonstrate mastery?",
+        "example": "",
+        "placeholder": "Describe content, pedagogy, language, assessment and age appropriateness, using the applicant's actual situation, evidence and plans."
+      },
+      "activities": {
+        "title": "Activities",
+        "guidance": "Explain instruction, materials, technology, mentoring, outreach and support activities. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What happens for learners, teachers and schools throughout implementation?",
+        "example": "",
+        "placeholder": "Describe instruction, materials, technology, mentoring, outreach and support activities, using the applicant's actual situation, evidence and plans."
+      },
+      "teacher-development": {
+        "title": "Teacher / Facilitator Development",
+        "guidance": "Explain recruitment, training, coaching and quality assurance for educators. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How will teaching practice improve and remain supported?",
+        "example": "",
+        "placeholder": "Describe recruitment, training, coaching and quality assurance for educators, using the applicant's actual situation, evidence and plans."
+      },
+      "access-inclusion": {
+        "title": "Access and Inclusion",
+        "guidance": "Explain participation for girls, learners with disabilities, displaced learners and underserved communities. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which barriers affect enrollment, attendance and completion, and how will they be reduced?",
+        "example": "",
+        "placeholder": "Describe participation for girls, learners with disabilities, displaced learners and underserved communities, using the applicant's actual situation, evidence and plans."
+      },
+      "learning-outcomes": {
+        "title": "Expected Learning Outcomes",
+        "guidance": "Explain specific knowledge, competencies and progression outcomes. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which learning gains are expected and how will they be measured?",
+        "example": "",
+        "placeholder": "Describe specific knowledge, competencies and progression outcomes, using the applicant's actual situation, evidence and plans."
+      },
+      "monitoring-evaluation": {
+        "title": "Monitoring & Evaluation",
+        "guidance": "Explain enrollment, attendance, retention, teaching and learning indicators. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What baseline and assessment methods will show progress?",
+        "example": "",
+        "placeholder": "Describe enrollment, attendance, retention, teaching and learning indicators, using the applicant's actual situation, evidence and plans."
+      },
+      "sustainability": {
+        "title": "Sustainability",
+        "guidance": "Explain continued teaching capacity, materials, technology support and institutional ownership. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What remains in use and who maintains it after funding?",
+        "example": "",
+        "placeholder": "Describe continued teaching capacity, materials, technology support and institutional ownership, using the applicant's actual situation, evidence and plans."
+      },
+      "organizational-capacity": {
+        "title": "Organizational Capacity",
+        "guidance": "Explain education expertise, school relationships, child safeguarding and implementation experience. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What evidence demonstrates safe and effective delivery?",
+        "example": "",
+        "placeholder": "Describe education expertise, school relationships, child safeguarding and implementation experience, using the applicant's actual situation, evidence and plans."
+      },
+      "budget-narrative": {
+        "title": "Budget Narrative",
+        "guidance": "Explain instruction, materials, educator, technology, access and assessment costs. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What is the cost per learner or educator and why is it reasonable?",
+        "example": "",
+        "placeholder": "Describe instruction, materials, educator, technology, access and assessment costs, using the applicant's actual situation, evidence and plans."
+      }
+    }
+  },
+  "health_public_health": {
+    "name": "Health / Public Health",
+    "description": "Best for community health and health-system interventions.",
+    "sections": {
+      "executive-summary": {
+        "title": "Executive Summary",
+        "guidance": "Explain the public-health problem, target population, intervention, delivery partners and measurable health outcome. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What health result will improve, for whom, where and through which service or prevention approach?",
+        "example": "",
+        "placeholder": "Describe the public-health problem, target population, intervention, delivery partners and measurable health outcome, using the applicant's actual situation, evidence and plans."
+      },
+      "health-problem": {
+        "title": "Health Problem",
+        "guidance": "Explain the disease, service or health-system problem using credible epidemiological or service data. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What is the burden, who is most affected, and what drives the gap?",
+        "example": "",
+        "placeholder": "Describe the disease, service or health-system problem using credible epidemiological or service data, using the applicant's actual situation, evidence and plans."
+      },
+      "target-population": {
+        "title": "Target Population",
+        "guidance": "Explain the population's size, location, needs, vulnerabilities and access barriers. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who is prioritized and why? How will people be reached safely and fairly?",
+        "example": "",
+        "placeholder": "Describe the population's size, location, needs, vulnerabilities and access barriers, using the applicant's actual situation, evidence and plans."
+      },
+      "geographic-context": {
+        "title": "Geographic Context",
+        "guidance": "Explain the service, infrastructure, workforce and referral context. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which local conditions affect access, quality and continuity of care?",
+        "example": "",
+        "placeholder": "Describe the service, infrastructure, workforce and referral context, using the applicant's actual situation, evidence and plans."
+      },
+      "baseline-evidence": {
+        "title": "Evidence / Baseline",
+        "guidance": "Explain the starting health indicators, service coverage and evidence sources. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which baseline values will be used to assess change?",
+        "example": "",
+        "placeholder": "Describe the starting health indicators, service coverage and evidence sources, using the applicant's actual situation, evidence and plans."
+      },
+      "project-goal": {
+        "title": "Project Goal",
+        "guidance": "Explain the long-term population-health or health-system change sought. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What health condition should improve?",
+        "example": "",
+        "placeholder": "Describe the long-term population-health or health-system change sought, using the applicant's actual situation, evidence and plans."
+      },
+      "specific-objectives": {
+        "title": "Specific Objectives",
+        "guidance": "Explain measurable prevention, access, quality or health outcomes. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What changes, for how many people and by when?",
+        "example": "",
+        "placeholder": "Describe measurable prevention, access, quality or health outcomes, using the applicant's actual situation, evidence and plans."
+      },
+      "intervention": {
+        "title": "Intervention",
+        "guidance": "Explain the evidence-informed prevention, service-delivery or system-strengthening approach. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Why is the approach appropriate and consistent with relevant public-health guidance?",
+        "example": "",
+        "placeholder": "Describe the evidence-informed prevention, service-delivery or system-strengthening approach, using the applicant's actual situation, evidence and plans."
+      },
+      "activities": {
+        "title": "Activities",
+        "guidance": "Explain outreach, training, service, referral, supply or system activities. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What will be delivered, by which qualified actors, and how often?",
+        "example": "",
+        "placeholder": "Describe outreach, training, service, referral, supply or system activities, using the applicant's actual situation, evidence and plans."
+      },
+      "community-engagement": {
+        "title": "Community Engagement",
+        "guidance": "Explain trusted communication, participation, feedback and culturally appropriate delivery. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How will communities shape implementation and address misinformation or mistrust?",
+        "example": "",
+        "placeholder": "Describe trusted communication, participation, feedback and culturally appropriate delivery, using the applicant's actual situation, evidence and plans."
+      },
+      "access-inclusion": {
+        "title": "Access and Inclusion",
+        "guidance": "Explain practical access for underserved groups and protection from discrimination. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which financial, physical, social or language barriers must be reduced?",
+        "example": "",
+        "placeholder": "Describe practical access for underserved groups and protection from discrimination, using the applicant's actual situation, evidence and plans."
+      },
+      "health-outcomes": {
+        "title": "Expected Health Outcomes",
+        "guidance": "Explain measurable changes in coverage, behavior, quality, morbidity or system performance. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which outcomes are realistically attributable to the project?",
+        "example": "",
+        "placeholder": "Describe measurable changes in coverage, behavior, quality, morbidity or system performance, using the applicant's actual situation, evidence and plans."
+      },
+      "monitoring-evaluation": {
+        "title": "Monitoring & Evaluation",
+        "guidance": "Explain ethical collection of health, service-quality and reach indicators. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How will data quality, confidentiality and disaggregation be maintained?",
+        "example": "",
+        "placeholder": "Describe ethical collection of health, service-quality and reach indicators, using the applicant's actual situation, evidence and plans."
+      },
+      "sustainability": {
+        "title": "Sustainability",
+        "guidance": "Explain integration into services, workforce capacity, supplies and domestic or partner financing. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What continues within the health system after grant support?",
+        "example": "",
+        "placeholder": "Describe integration into services, workforce capacity, supplies and domestic or partner financing, using the applicant's actual situation, evidence and plans."
+      },
+      "partnerships-referrals": {
+        "title": "Partnerships / Referral Systems",
+        "guidance": "Explain roles of facilities, authorities, community actors and referral partners. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How will continuity, escalation and accountability work across partners?",
+        "example": "",
+        "placeholder": "Describe roles of facilities, authorities, community actors and referral partners, using the applicant's actual situation, evidence and plans."
+      },
+      "organizational-capacity": {
+        "title": "Organizational Capacity",
+        "guidance": "Explain public-health expertise, qualified staff, data protection and delivery experience. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What systems demonstrate safe, ethical and competent implementation?",
+        "example": "",
+        "placeholder": "Describe public-health expertise, qualified staff, data protection and delivery experience, using the applicant's actual situation, evidence and plans."
+      },
+      "budget-narrative": {
+        "title": "Budget Narrative",
+        "guidance": "Explain staff, service, outreach, commodity, training, data and referral costs. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How do costs connect to reach, quality and health outcomes?",
+        "example": "",
+        "placeholder": "Describe staff, service, outreach, commodity, training, data and referral costs, using the applicant's actual situation, evidence and plans."
+      },
+      "risk-safeguarding": {
+        "title": "Risk / Safeguarding Considerations",
+        "guidance": "Explain clinical, privacy, stigma, safeguarding and implementation risks without giving medical advice. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What could harm participants or service quality and how will qualified teams manage it?",
+        "example": "",
+        "placeholder": "Describe clinical, privacy, stigma, safeguarding and implementation risks without giving medical advice, using the applicant's actual situation, evidence and plans."
+      }
+    }
+  },
+  "research_academic": {
+    "name": "Research / Academic Funding",
+    "description": "Best for academic research and research funding.",
+    "sections": {
+      "abstract": {
+        "title": "Abstract",
+        "guidance": "Explain the research problem, gap, aim, methods and expected contribution in a self-contained summary. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What will be studied, why, how, and what new knowledge should result?",
+        "example": "",
+        "placeholder": "Describe the research problem, gap, aim, methods and expected contribution in a self-contained summary, using the applicant's actual situation, evidence and plans."
+      },
+      "background": {
+        "title": "Background",
+        "guidance": "Explain the scholarly and contextual foundation needed to understand the topic. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What is already known and why does the topic matter in this setting?",
+        "example": "",
+        "placeholder": "Describe the scholarly and contextual foundation needed to understand the topic, using the applicant's actual situation, evidence and plans."
+      },
+      "problem-statement": {
+        "title": "Problem Statement",
+        "guidance": "Explain the precise research problem and consequences of leaving it unresolved. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What specific uncertainty or unresolved issue motivates the study?",
+        "example": "",
+        "placeholder": "Describe the precise research problem and consequences of leaving it unresolved, using the applicant's actual situation, evidence and plans."
+      },
+      "knowledge-gap": {
+        "title": "Literature / Knowledge Gap",
+        "guidance": "Explain the gap, inconsistency or limitation in existing evidence. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which findings exist, what remains unknown, and how will this study add value?",
+        "example": "",
+        "placeholder": "Describe the gap, inconsistency or limitation in existing evidence, using the applicant's actual situation, evidence and plans."
+      },
+      "research-questions": {
+        "title": "Research Questions",
+        "guidance": "Explain focused, answerable questions aligned with the design and available evidence. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What exactly must the study answer? Are subquestions necessary?",
+        "example": "",
+        "placeholder": "Describe focused, answerable questions aligned with the design and available evidence, using the applicant's actual situation, evidence and plans."
+      },
+      "aim": {
+        "title": "Aim",
+        "guidance": "Explain the single overarching purpose of the research. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What is the study ultimately intended to establish, understand or develop?",
+        "example": "",
+        "placeholder": "Describe the single overarching purpose of the research, using the applicant's actual situation, evidence and plans."
+      },
+      "specific-objectives": {
+        "title": "Specific Objectives",
+        "guidance": "Explain the sequential, measurable objectives needed to achieve the aim. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which analyses, comparisons or outputs will each objective produce?",
+        "example": "",
+        "placeholder": "Describe the sequential, measurable objectives needed to achieve the aim, using the applicant's actual situation, evidence and plans."
+      },
+      "methodology": {
+        "title": "Methodology",
+        "guidance": "Explain the research design, rationale, setting and procedures with enough detail for scientific assessment. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Why is this design appropriate? How will rigor, validity or trustworthiness be protected?",
+        "example": "",
+        "placeholder": "Describe the research design, rationale, setting and procedures with enough detail for scientific assessment, using the applicant's actual situation, evidence and plans."
+      },
+      "study-population": {
+        "title": "Study Population / Data Sources",
+        "guidance": "Explain the population, sample, materials, datasets or archives and selection approach. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who or what is included, excluded and sampled, and why?",
+        "example": "",
+        "placeholder": "Describe the population, sample, materials, datasets or archives and selection approach, using the applicant's actual situation, evidence and plans."
+      },
+      "data-collection": {
+        "title": "Data Collection",
+        "guidance": "Explain the instruments, variables, procedures, quality controls and data management. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What data are collected, by whom, when and with which validated tools?",
+        "example": "",
+        "placeholder": "Describe the instruments, variables, procedures, quality controls and data management, using the applicant's actual situation, evidence and plans."
+      },
+      "data-analysis": {
+        "title": "Data Analysis",
+        "guidance": "Explain the analytical methods linked directly to each research question. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which statistical, qualitative or computational techniques will answer each question?",
+        "example": "",
+        "placeholder": "Describe the analytical methods linked directly to each research question, using the applicant's actual situation, evidence and plans."
+      },
+      "ethics": {
+        "title": "Ethics",
+        "guidance": "Explain consent, privacy, risk, benefit, approvals and responsible data handling. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What ethical issues arise and how will participants, communities and data be protected?",
+        "example": "",
+        "placeholder": "Describe consent, privacy, risk, benefit, approvals and responsible data handling, using the applicant's actual situation, evidence and plans."
+      },
+      "expected-results": {
+        "title": "Expected Results",
+        "guidance": "Explain plausible findings or research outputs without predetermining conclusions. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What evidence, datasets, methods or outputs should the study generate?",
+        "example": "",
+        "placeholder": "Describe plausible findings or research outputs without predetermining conclusions, using the applicant's actual situation, evidence and plans."
+      },
+      "significance": {
+        "title": "Research Significance / Impact",
+        "guidance": "Explain the theoretical, practical, policy or methodological contribution. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who can use the results and what decisions or future research could they improve?",
+        "example": "",
+        "placeholder": "Describe the theoretical, practical, policy or methodological contribution, using the applicant's actual situation, evidence and plans."
+      },
+      "dissemination": {
+        "title": "Dissemination",
+        "guidance": "Explain appropriate communication to academic, policy, practitioner and community audiences. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which products and channels will reach each audience?",
+        "example": "",
+        "placeholder": "Describe appropriate communication to academic, policy, practitioner and community audiences, using the applicant's actual situation, evidence and plans."
+      },
+      "timeline": {
+        "title": "Timeline",
+        "guidance": "Explain the realistic sequence of approvals, collection, analysis and reporting. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What are the milestones, dependencies and completion dates?",
+        "example": "",
+        "placeholder": "Describe the realistic sequence of approvals, collection, analysis and reporting, using the applicant's actual situation, evidence and plans."
+      },
+      "budget-justification": {
+        "title": "Budget Justification",
+        "guidance": "Explain the necessity and basis of research personnel, fieldwork, equipment, analysis and dissemination costs. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Why is each major cost essential and proportionate to the methods?",
+        "example": "",
+        "placeholder": "Describe the necessity and basis of research personnel, fieldwork, equipment, analysis and dissemination costs, using the applicant's actual situation, evidence and plans."
+      },
+      "research-team": {
+        "title": "Research Team",
+        "guidance": "Explain the investigators' complementary expertise, responsibilities and institutional support. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who leads each methodological and management function?",
+        "example": "",
+        "placeholder": "Describe the investigators' complementary expertise, responsibilities and institutional support, using the applicant's actual situation, evidence and plans."
+      },
+      "risks-limitations": {
+        "title": "Risks / Limitations",
+        "guidance": "Explain scientific, recruitment, data, operational and interpretive limitations and mitigations. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What could weaken feasibility or inference, and how will it be addressed transparently?",
+        "example": "",
+        "placeholder": "Describe scientific, recruitment, data, operational and interpretive limitations and mitigations, using the applicant's actual situation, evidence and plans."
+      }
+    }
+  },
+  "fellowship_leadership": {
+    "name": "Fellowship / Leadership",
+    "description": "Best for leadership and professional-development programs.",
+    "sections": {
+      "background": {
+        "title": "Personal / Professional Background",
+        "guidance": "Explain the applicant's genuine journey, current work, values and relevant context. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which experiences shaped the applicant and connect directly to this fellowship?",
+        "example": "",
+        "placeholder": "Describe the applicant's genuine journey, current work, values and relevant context, using the applicant's actual situation, evidence and plans."
+      },
+      "motivation": {
+        "title": "Motivation",
+        "guidance": "Explain the authentic reason for applying and the problem or opportunity driving that decision. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Why this opportunity, beyond prestige? What personal commitment sustains the applicant's interest?",
+        "example": "",
+        "placeholder": "Describe the authentic reason for applying and the problem or opportunity driving that decision, using the applicant's actual situation, evidence and plans."
+      },
+      "leadership-experience": {
+        "title": "Leadership Experience",
+        "guidance": "Explain a specific example of influencing people or systems, including decisions, challenges and results. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What was the situation? What did the applicant personally do? What changed and what was learned?",
+        "example": "",
+        "placeholder": "Describe a specific example of influencing people or systems, including decisions, challenges and results, using the applicant's actual situation, evidence and plans."
+      },
+      "significant-achievement": {
+        "title": "Significant Achievement",
+        "guidance": "Explain one meaningful accomplishment and the applicant's distinct contribution. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Why did it matter? Which obstacles were overcome? What evidence shows the result?",
+        "example": "",
+        "placeholder": "Describe one meaningful accomplishment and the applicant's distinct contribution, using the applicant's actual situation, evidence and plans."
+      },
+      "issue-of-interest": {
+        "title": "Challenge or Issue of Interest",
+        "guidance": "Explain the issue the applicant is committed to and their informed perspective on it. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who is affected, what causes the issue, and why does it matter personally and professionally?",
+        "example": "",
+        "placeholder": "Describe the issue the applicant is committed to and their informed perspective on it, using the applicant's actual situation, evidence and plans."
+      },
+      "proposed-project": {
+        "title": "Proposed Project / Area of Work",
+        "guidance": "Explain the work the applicant plans to advance during or after the fellowship. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What will the applicant explore or build, with whom, and toward what result?",
+        "example": "",
+        "placeholder": "Describe the work the applicant plans to advance during or after the fellowship, using the applicant's actual situation, evidence and plans."
+      },
+      "community-impact": {
+        "title": "Community Impact",
+        "guidance": "Explain how the applicant's work has benefited or will benefit a defined community. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who benefits, how are they involved, and what evidence will show meaningful impact?",
+        "example": "",
+        "placeholder": "Describe how the applicant's work has benefited or will benefit a defined community, using the applicant's actual situation, evidence and plans."
+      },
+      "career-goals": {
+        "title": "Career Goals",
+        "guidance": "Explain specific short- and long-term goals grounded in the applicant's real trajectory. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What role or contribution does the applicant aim to make over the next two to ten years?",
+        "example": "",
+        "placeholder": "Describe specific short- and long-term goals grounded in the applicant's real trajectory, using the applicant's actual situation, evidence and plans."
+      },
+      "why-fellowship": {
+        "title": "Why This Fellowship",
+        "guidance": "Explain the specific program features, network or learning that match the applicant's goals. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which named elements are relevant and why can they not be gained as effectively elsewhere?",
+        "example": "",
+        "placeholder": "Describe the specific program features, network or learning that match the applicant's goals, using the applicant's actual situation, evidence and plans."
+      },
+      "why-now": {
+        "title": "Why Now",
+        "guidance": "Explain why the applicant's current stage and circumstances make this the right moment. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What transition, opportunity or constraint makes participation timely?",
+        "example": "",
+        "placeholder": "Describe why the applicant's current stage and circumstances make this the right moment, using the applicant's actual situation, evidence and plans."
+      },
+      "applicant-contribution": {
+        "title": "What the Applicant Will Contribute",
+        "guidance": "Explain the lived experience, expertise, perspective and generosity the applicant brings to the cohort. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "How will peers and the fellowship community benefit from the applicant's participation?",
+        "example": "",
+        "placeholder": "Describe the lived experience, expertise, perspective and generosity the applicant brings to the cohort, using the applicant's actual situation, evidence and plans."
+      },
+      "learning-goals": {
+        "title": "What the Applicant Hopes to Learn",
+        "guidance": "Explain specific capabilities, perspectives and relationships the applicant intends to develop. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which gaps will the fellowship help close and how will learning be applied?",
+        "example": "",
+        "placeholder": "Describe specific capabilities, perspectives and relationships the applicant intends to develop, using the applicant's actual situation, evidence and plans."
+      },
+      "post-fellowship-plan": {
+        "title": "Post-Fellowship Plan",
+        "guidance": "Explain concrete actions for applying learning, sustaining relationships and multiplying impact. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What happens in the first year after the program, and who will be involved?",
+        "example": "",
+        "placeholder": "Describe concrete actions for applying learning, sustaining relationships and multiplying impact, using the applicant's actual situation, evidence and plans."
+      }
+    }
+  },
+  "scholarship_study": {
+    "name": "Scholarship / Study Funding",
+    "description": "Best for scholarships and academic-study funding.",
+    "sections": {
+      "personal-background": {
+        "title": "Personal Background",
+        "guidance": "Explain the applicant's formative experiences and context relevant to their educational path. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which experiences shaped the applicant's interests, resilience and perspective?",
+        "example": "",
+        "placeholder": "Describe the applicant's formative experiences and context relevant to their educational path, using the applicant's actual situation, evidence and plans."
+      },
+      "academic-background": {
+        "title": "Academic Background",
+        "guidance": "Explain the applicant's course of study, preparation and intellectual development. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What has been studied and how has it prepared the applicant for the next program?",
+        "example": "",
+        "placeholder": "Describe the applicant's course of study, preparation and intellectual development, using the applicant's actual situation, evidence and plans."
+      },
+      "academic-achievements": {
+        "title": "Academic Achievements",
+        "guidance": "Explain specific academic accomplishments with context rather than a repeated transcript. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which results, projects or distinctions best demonstrate readiness and why?",
+        "example": "",
+        "placeholder": "Describe specific academic accomplishments with context rather than a repeated transcript, using the applicant's actual situation, evidence and plans."
+      },
+      "motivation-for-study": {
+        "title": "Motivation for Study",
+        "guidance": "Explain the genuine intellectual and practical reasons for pursuing further study. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What questions or real-world challenges motivate this decision?",
+        "example": "",
+        "placeholder": "Describe the genuine intellectual and practical reasons for pursuing further study, using the applicant's actual situation, evidence and plans."
+      },
+      "chosen-field": {
+        "title": "Chosen Field / Program",
+        "guidance": "Explain why the field and curriculum match the applicant's preparation and goals. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which subjects, methods or specializations are essential to the applicant's plan?",
+        "example": "",
+        "placeholder": "Describe why the field and curriculum match the applicant's preparation and goals, using the applicant's actual situation, evidence and plans."
+      },
+      "why-institution": {
+        "title": "Why This Institution / Program",
+        "guidance": "Explain specific courses, faculty, facilities or approaches that make the program a strong fit. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which named features matter and how will the applicant use them?",
+        "example": "",
+        "placeholder": "Describe specific courses, faculty, facilities or approaches that make the program a strong fit, using the applicant's actual situation, evidence and plans."
+      },
+      "career-goals": {
+        "title": "Career Goals",
+        "guidance": "Explain credible short- and long-term goals connected to the proposed study. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What work will the applicant pursue after graduation and what capabilities are required?",
+        "example": "",
+        "placeholder": "Describe credible short- and long-term goals connected to the proposed study, using the applicant's actual situation, evidence and plans."
+      },
+      "leadership-extracurricular": {
+        "title": "Leadership / Extracurricular Experience",
+        "guidance": "Explain meaningful leadership, service, work or extracurricular experiences and lessons. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What did the applicant personally contribute and what changed as a result?",
+        "example": "",
+        "placeholder": "Describe meaningful leadership, service, work or extracurricular experiences and lessons, using the applicant's actual situation, evidence and plans."
+      },
+      "community-contribution": {
+        "title": "Community Contribution",
+        "guidance": "Explain how the applicant has contributed and intends to contribute to a defined community. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Who benefits, what has already been done, and how will study strengthen future contribution?",
+        "example": "",
+        "placeholder": "Describe how the applicant has contributed and intends to contribute to a defined community, using the applicant's actual situation, evidence and plans."
+      },
+      "financial-need": {
+        "title": "Financial Need",
+        "guidance": "Explain the relevant financial circumstances, available resources and funding gap respectfully and factually. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "What costs cannot be met, what support exists, and how would funding enable participation?",
+        "example": "",
+        "placeholder": "Describe the relevant financial circumstances, available resources and funding gap respectfully and factually, using the applicant's actual situation, evidence and plans."
+      },
+      "future-impact": {
+        "title": "Future Impact",
+        "guidance": "Explain how acquired knowledge and networks will create realistic value after study. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which people, institutions or sectors could benefit, and through what actions?",
+        "example": "",
+        "placeholder": "Describe how acquired knowledge and networks will create realistic value after study, using the applicant's actual situation, evidence and plans."
+      },
+      "strong-candidate": {
+        "title": "Why the Applicant Is a Strong Candidate",
+        "guidance": "Explain the strongest evidence of preparation, fit, character and future contribution without generic claims. Use specific, verifiable details from the applicant's real context. Connect evidence, planned actions and intended results instead of relying on broad claims.",
+        "prompt": "Which two or three qualities are proven by concrete experiences?",
+        "example": "",
+        "placeholder": "Describe the strongest evidence of preparation, fit, character and future contribution without generic claims, using the applicant's actual situation, evidence and plans."
+      }
+    }
+  }
+}

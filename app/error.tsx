@@ -1,4 +1,5 @@
 "use client";
-import { useEffect } from "react";
-import { Button } from "@/components/ui/button";
-export default function ErrorPage({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) { useEffect(() => { console.error("Application error", error); }, [error]); return <main className="flex flex-1 items-center justify-center p-6"><div className="space-y-4 text-center"><h1 className="text-xl font-semibold">Something went wrong</h1><p className="text-muted-foreground">Please try again.</p><Button onClick={reset}>Try again</Button></div></main>; }
+import {useEffect} from "react";
+import {useTranslations} from "next-intl";
+import {Button} from "@/components/ui/button";
+export default function ErrorPage({error, reset}: {error: Error & {digest?: string}; reset: () => void}) { const t = useTranslations("Errors.generic"); useEffect(() => { console.error("Application error", error); }, [error]); return <main className="flex flex-1 items-center justify-center p-6"><div className="space-y-4 text-center"><h1 className="text-xl font-semibold">{t("title")}</h1><p className="text-muted-foreground">{t("description")}</p><Button onClick={reset}>{t("tryAgain")}</Button></div></main>; }

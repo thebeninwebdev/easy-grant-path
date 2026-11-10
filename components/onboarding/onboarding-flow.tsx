@@ -2,7 +2,8 @@
 
 import { Building2, Check, ChevronDown, HandHeart, MapPin, UserRound } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import {useTranslations} from "next-intl";
+import { useRouter } from "@/i18n/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -49,6 +50,7 @@ type Profile = {
 };
 
 export function OnboardingFlow({ profile, accountName }: { profile: Profile | null; accountName: string }) {
+  const t = useTranslations("Onboarding");
   const router = useRouter();
   const [step, setStep] = useState<1 | 2>(profile?.applicantType ? 2 : 1);
   const [saving, setSaving] = useState(false);
@@ -70,7 +72,7 @@ export function OnboardingFlow({ profile, accountName }: { profile: Profile | nu
       body: JSON.stringify(payload),
     });
     if (!response.ok) {
-      throw new Error((await response.json().catch(() => null))?.error?.message || "We couldn't save that. Check your connection and try again.");
+      throw new Error((await response.json().catch(() => null))?.error?.message || t("errors.saveFailed"));
     }
   }
 
@@ -80,14 +82,14 @@ export function OnboardingFlow({ profile, accountName }: { profile: Profile | nu
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ organizationType: form.applicantType, name: form.organizationName.trim(), countryCode: form.countryCode, registrationStatus: "not_registered" }),
     });
-    if (!response.ok) throw new Error((await response.json().catch(() => null))?.error?.message || "We couldn't save your organization details.");
+    if (!response.ok) throw new Error((await response.json().catch(() => null))?.error?.message || t("flow.organizationFailed"));
   }
 
   async function continueFlow() {
     setError("");
-    if (step === 1 && !form.applicantType) return setError("Choose the option that best describes you.");
-    if (step === 2 && isOrganization && form.organizationName.trim().length < 2) return setError("Enter your business or organization name.");
-    if (step === 2 && (!form.countryCode || !form.interest || !form.opportunityType)) return setError("Complete all required profile choices.");
+    if (step === 1 && !form.applicantType) return setError(t("errors.selectAccountType"));
+    if (step === 2 && isOrganization && form.organizationName.trim().length < 2) return setError(t("errors.enterOrgName"));
+    if (step === 2 && (!form.countryCode || !form.interest || !form.opportunityType)) return setError(t("flow.completeChoices"));
 
     setSaving(true);
     try {
@@ -107,7 +109,7 @@ export function OnboardingFlow({ profile, accountName }: { profile: Profile | nu
         router.push("/dashboard/teaser");
       }
     } catch (caught) {
-      setError(caught instanceof Error ? caught.message : "We couldn't save your registration.");
+      setError(caught instanceof Error ? caught.message : t("flow.registrationFailed"));
     } finally {
       setSaving(false);
     }
@@ -118,7 +120,7 @@ export function OnboardingFlow({ profile, accountName }: { profile: Profile | nu
       <div className="w-full rounded-3xl border bg-card p-5 shadow-sm sm:p-9">
         <header className="flex items-center justify-between gap-4">
           <Image src="/logo.png" alt="EasyGrantPath" width={154} height={52} className="h-auto w-32" priority />
-          <span className="text-xs font-medium text-muted-foreground">Step {step} of 3</span>
+          <span className="text-xs font-medium text-muted-foreground">{t("flow.step", {step})}</span>
         </header>
         <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-muted">
           <div className="h-full rounded-full bg-primary transition-all" style={{ width: `${step / 3 * 100}%` }} />
@@ -126,10 +128,10 @@ export function OnboardingFlow({ profile, accountName }: { profile: Profile | nu
 
         {step === 1 ? (
           <section className="mt-8">
-            <h1 className="text-3xl font-semibold tracking-tight">What best describes you?</h1>
-            <p className="mt-2 text-muted-foreground">This helps us show you the most relevant opportunities.</p>
+            <h1 className="text-3xl font-semibold tracking-tight">{t("flow.question")}</h1>
+            <p className="mt-2 text-muted-foreground">{t("flow.questionDesc")}</p>
             <div className="mt-6 grid gap-3">
-              {accountTypes.map(([value, title, description, Icon]) => (
+              {accountTypes.map(([value, , , Icon]) => (
                 <button
                   type="button"
                   key={value}
@@ -137,7 +139,7 @@ export function OnboardingFlow({ profile, accountName }: { profile: Profile | nu
                   className={`relative flex min-h-24 items-center gap-4 rounded-2xl border p-4 text-left transition-colors ${form.applicantType === value ? "border-primary bg-primary/5 ring-1 ring-primary" : "hover:bg-muted/50"}`}
                 >
                   <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary"><Icon className="size-5" /></span>
-                  <span className="pr-7"><span className="block font-semibold">{title}</span><span className="mt-1 block text-sm text-muted-foreground">{description}</span></span>
+                  <span className="pr-7"><span className="block font-semibold">{t(`accountTypes.${value}`)}</span><span className="mt-1 block text-sm text-muted-foreground">{t(`flow.${value}Desc`)}</span></span>
                   <span className={`absolute right-4 top-4 flex size-5 items-center justify-center rounded-full border ${form.applicantType === value ? "border-primary bg-primary text-primary-foreground" : ""}`}>{form.applicantType === value ? <Check className="size-3.5" /> : null}</span>
                 </button>
               ))}
@@ -145,12 +147,12 @@ export function OnboardingFlow({ profile, accountName }: { profile: Profile | nu
           </section>
         ) : (
           <section className="mt-8">
-            <h1 className="text-3xl font-semibold tracking-tight">A few quick details</h1>
+            <h1 className="text-3xl font-semibold tracking-tight">{t("flow.details")}</h1>
             <p className="mt-2 text-muted-foreground">Just 2–3 things so we can show you relevant opportunities.</p>
 
             {isOrganization ? (
               <label className="mt-6 block text-sm font-medium">
-                {form.applicantType === "startup_sme" ? "Business name" : "Organization name"} <span className="text-destructive">*</span>
+                {form.applicantType === "startup_sme" ? t("flow.businessName") : t("flow.organizationName")} <span className="text-destructive">*</span>
                 <Input required value={form.organizationName} onChange={(event) => setForm((current) => ({ ...current, organizationName: event.target.value }))} className="mt-2 h-11" />
               </label>
             ) : null}
@@ -160,8 +162,8 @@ export function OnboardingFlow({ profile, accountName }: { profile: Profile | nu
               <span className="relative mt-2 block">
                 <MapPin className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
                 <select className="h-11 w-full appearance-none rounded-md border bg-background py-1 pl-10 pr-10 text-sm" value={form.countryCode} onChange={(event) => setForm((current) => ({ ...current, countryCode: event.target.value }))}>
-                  <option value="">Select your country</option>
-                  {countries.map(([code, name]) => <option key={code} value={code}>{name}</option>)}
+                  <option value="">{t("flow.selectCountry")}</option>
+                  {countries.map(([code]) => <option key={code} value={code}>{t(`countries.${code}`)}</option>)}
                 </select>
                 <ChevronDown className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
               </span>
@@ -171,23 +173,23 @@ export function OnboardingFlow({ profile, accountName }: { profile: Profile | nu
               Primary sector / area of interest <span className="text-destructive">*</span>
               <span className="relative mt-2 block">
                 <select className="h-11 w-full appearance-none rounded-md border bg-background px-3 pr-10 text-sm" value={form.interest} onChange={(event) => setForm((current) => ({ ...current, interest: event.target.value }))}>
-                  <option value="">Select an area</option>
-                  {interests.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+                  <option value="">{t("flow.selectInterest")}</option>
+                  {interests.map(([value]) => <option key={value} value={value}>{t(`interests.${value}`)}</option>)}
                 </select>
                 <ChevronDown className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
               </span>
             </label>
 
-            <p className="mt-5 text-sm font-medium">What type of opportunities interest you most? <span className="text-destructive">*</span></p>
+            <p className="mt-5 text-sm font-medium">{t("flow.preferredType")} <span className="text-destructive">*</span></p>
             <div className="mt-2 grid grid-cols-2 gap-2">
-              {opportunityTypes.map(([value, label]) => (
+              {opportunityTypes.map(([value]) => (
                 <button
                   type="button"
                   key={value}
                   onClick={() => setForm((current) => ({ ...current, opportunityType: value }))}
                   className={`flex min-h-11 items-center justify-between rounded-xl border px-3 text-left text-sm font-medium ${form.opportunityType === value ? "border-primary bg-primary/5 text-primary" : "hover:bg-muted/50"}`}
                 >
-                  {label}{form.opportunityType === value ? <Check className="size-4" /> : null}
+                  {t(`opportunityTypes.${value}`)}{form.opportunityType === value ? <Check className="size-4" /> : null}
                 </button>
               ))}
             </div>
@@ -196,8 +198,8 @@ export function OnboardingFlow({ profile, accountName }: { profile: Profile | nu
 
         {error ? <p role="alert" className="mt-5 text-sm text-destructive">{error}</p> : null}
         <footer className="mt-8 flex items-center justify-between gap-3">
-          <Button variant="ghost" disabled={step === 1 || saving} onClick={() => setStep(1)}>Back</Button>
-          <Button className="min-w-36" disabled={saving} onClick={() => void continueFlow()}>{saving ? "Saving..." : step === 1 ? "Continue" : "See my match"}</Button>
+          <Button variant="ghost" disabled={step === 1 || saving} onClick={() => setStep(1)}>{t("flow.back")}</Button>
+          <Button className="min-w-36" disabled={saving} onClick={() => void continueFlow()}>{saving ? t("flow.saving") : step === 1 ? t("flow.continue") : t("flow.seeMatch")}</Button>
         </footer>
       </div>
     </main>

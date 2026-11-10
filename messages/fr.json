@@ -1,0 +1,1242 @@
+{
+  "Common": {
+    "loading": "Chargement…",
+    "saving": "Enregistrement…",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "continue": "Continuer",
+    "submit": "Soumettre",
+    "confirm": "Confirmer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "view": "Voir",
+    "create": "Créer",
+    "or": "ou",
+    "and": "et",
+    "yes": "Oui",
+    "no": "Non",
+    "unknown": "Inconnu",
+    "notProvided": "Non fourni",
+    "notSpecified": "Non précisé",
+    "notStarted": "Non commencé",
+    "viewDetails": "Voir les détails",
+    "learnMore": "En savoir plus",
+    "tryAgain": "Réessayer",
+    "checkAgain": "Vérifier à nouveau",
+    "returnHome": "Retour à l'accueil",
+    "contactSupport": "Contacter le support",
+    "copy": "Copier",
+    "share": "Partager",
+    "export": "Exporter",
+    "download": "Télécharger",
+    "upload": "Téléverser",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "filters": "Filtres",
+    "sort": "Trier",
+    "apply": "Appliquer",
+    "clear": "Effacer",
+    "reset": "Réinitialiser",
+    "optional": "Facultatif",
+    "required": "Obligatoire",
+    "page": "Page",
+    "of": "sur",
+    "results": "résultats",
+    "noResults": "Aucun résultat",
+    "recentlyUpdated": "Mis à jour récemment",
+    "currency": "Devise",
+    "rollingDeadline": "Date limite continue",
+    "noDeadline": "Pas de date limite",
+    "closingSoon": "Fermeture prochaine",
+    "verified": "Vérifié",
+    "pending": "En attente",
+    "inProgress": "En cours",
+    "completed": "Terminé",
+    "failed": "Échoué",
+    "cancelled": "Annulé",
+    "active": "Actif",
+    "inactive": "Inactif",
+    "skipToContent": "Aller au contenu",
+    "homeLabel": "Accueil EasyGrantPath"
+  },
+  "Navigation": {
+    "opportunities": "Opportunités",
+    "howItWorks": "Comment ça marche",
+    "countries": "Pays",
+    "signIn": "Se connecter",
+    "signUp": "S'inscrire",
+    "dashboard": "Tableau de bord",
+    "createAccount": "Créer un compte",
+    "openNavigation": "Ouvrir la navigation",
+    "language": "Langue",
+    "switchToFrench": "Passer en français",
+    "switchToEnglish": "Switch to English",
+    "mainLabel": "Navigation principale",
+    "mobileLabel": "Navigation mobile",
+    "support": "Accompagnement",
+    "french": "Français",
+    "english": "English",
+    "changeLanguage": "Changer de langue"
+  },
+  "Home": {
+    "meta": {
+      "title": "Opportunités de financement pour les personnes ambitieuses en Afrique de l'Ouest",
+      "description": "Découvrez des subventions, bourses, fellowships crédibles et un accompagnement professionnel dans vos candidatures avec EasyGrantPath."
+    },
+    "hero": {
+      "kicker": "L''opportunité, rendue accessible",
+      "heading1": "Votre ambition",
+      "heading2": "mérite une",
+      "heading3": "opportunité.",
+      "description": "Découvrez des subventions, bourses d''études, fellowships et possibilités de financement en Afrique. Trouvez l''opportunité qui vous convient et bénéficiez d''un accompagnement expert pour la saisir.",
+      "exploreButton": "Explorer les opportunités",
+      "signUpButton": "Créer un compte gratuit",
+      "learnMoreButton": "Comment ça marche",
+      "scrollHint": "Faire défiler",
+      "imageAlt": "Une entrepreneure nigériane travaillant sur son ordinateur portable dans un bureau moderne à Lagos",
+      "noteTitle": "Conçu pour avancer",
+      "noteBody": "De la découverte à une candidature plus solide.",
+      "photoCredit": "Lagos, Nigéria · Photo via Pexels",
+      "scrollMission": "Découvrir notre mission",
+      "scrollExplore": "Faire défiler pour explorer"
+    },
+    "showcase": {
+      "heading": "Opportunités récentes",
+      "viewAll": "Explorer toutes les opportunités",
+      "arrowLabel": "Voir {title}",
+      "kicker": "Ouvrir des portes",
+      "heading1": "Des opportunités qui",
+      "heading2": "méritent votre attention.",
+      "description": "Sélectionnées auprès de sources fiables et présentées avec les informations nécessaires pour décider de la suite.",
+      "emptyTitle": "De nouvelles opportunités sont en préparation.",
+      "emptyDescription": "Nous vérifions actuellement les prochains appels à financement. Créez un compte pour être prêt dès leur publication.",
+      "focus": "Domaine",
+      "funding": "Financement",
+      "deadline": "Date limite",
+      "viewOpportunity": "Voir l''opportunité",
+      "loading": "Chargement des opportunités",
+      "fundingPartner": "Partenaire financier",
+      "westAfrica": "Afrique de l''Ouest",
+      "crossSector": "Multisectoriel",
+      "seeFundingDetails": "Voir les détails du financement"
+    },
+    "howItWorks": {
+      "kicker": "Simple. Efficace.",
+      "heading": "Votre processus en 3 étapes",
+      "steps": {
+        "discover": {
+          "number": "01",
+          "title": "Découvrir",
+          "copy": "Parcourez des opportunités crédibles, comparez les points essentiels et concentrez votre énergie là où vous avez les meilleures chances d'impact."
+        },
+        "prepare": {
+          "number": "02",
+          "title": "Préparer",
+          "copy": "Transformez les exigences en un plan clair, rédigez une proposition convaincante et gardez chaque détail important en un seul endroit."
+        },
+        "getSupport": {
+          "number": "03",
+          "title": "Obtenir de l'aide",
+          "copy": "Demandez une révision professionnelle ou un accompagnement complet dans votre candidature quand vous avez besoin d'un regard expert."
+        }
+      }
+    },
+    "countries": {
+      "kicker": "Régional par conception",
+      "heading1": "Explorez",
+      "heading2": "l'Afrique de l'Ouest.",
+      "description": "Commencez là où vous êtes. Découvrez des financements adaptés à votre pays, votre travail et les communautés que vous souhaitez servir.",
+      "mapAlt": "Carte stylisée de l'Afrique de l'Ouest",
+      "atlantic": "Océan Atlantique",
+      "list": {
+        "CI": {
+          "name": "Côte d'Ivoire",
+          "detail": "Programmes entreprises, climat et régionaux"
+        },
+        "GH": {
+          "name": "Ghana",
+          "detail": "Recherche, éducation et impact social"
+        },
+        "SN": {
+          "name": "Sénégal",
+          "detail": "Innovation, culture et croissance verte"
+        },
+        "NG": {
+          "name": "Nigéria",
+          "detail": "Startups, fellowships et subventions de développement"
+        },
+        "BJ": {
+          "name": "Bénin",
+          "detail": "Agriculture, jeunesse et initiatives communautaires"
+        }
+      },
+      "imageTitle": "Carte stylisée de l''Afrique de l''Ouest"
+    },
+    "support": {
+      "kicker": "Assistance professionnelle",
+      "heading1": "Vous rêvez.",
+      "heading2": "Nous nous occupons des détails.",
+      "description": "Quand une candidature compte vraiment, vous ne devriez pas avoir à démêler seul chaque exigence. EasyGrantPath peut vous aider à organiser une proposition, réviser votre brouillon et préparer une candidature plus complète.",
+      "imageAlt": "Deux professionnels examinant un dossier ensemble",
+      "imageCaption": "La clarté améliore la qualité de chaque candidature.",
+      "benefits": {
+        "guided": "Préparation guidée de propositions",
+        "review": "Révision professionnelle de documents",
+        "assistance": "Accompagnement complet dans la candidature"
+      },
+      "notice": {
+        "title": "Indépendant et transparent.",
+        "body": "EasyGrantPath n'est pas un fournisseur de subventions et ne peut garantir de financement. Les services d'accompagnement améliorent la préparation ; les décisions restent toujours avec le financeur."
+      },
+      "cta": "Découvrez notre accompagnement"
+    },
+    "finalCta": {
+      "eyebrow": "Votre prochaine étape",
+      "heading1": "Votre prochaine opportunité",
+      "heading2": "commence ici.",
+      "description": "Trouvez un point de départ crédible — et le soutien pour continuer.",
+      "exploreButton": "Explorer les opportunités",
+      "signUpButton": "Créer un compte gratuit",
+      "imageAlt": "Des entrepreneurs africains en discussion"
+    },
+    "footer": {
+      "description": "Découverte d'opportunités crédibles et accompagnement professionnel pour des personnes ambitieuses à travers l'Afrique de l'Ouest.",
+      "explore": {
+        "title": "Explorer",
+        "opportunities": "Opportunités",
+        "countries": "Pays",
+        "howItWorks": "Comment ça marche"
+      },
+      "account": {
+        "title": "Compte",
+        "createAccount": "Créer un compte",
+        "signIn": "Se connecter",
+        "dashboard": "Tableau de bord"
+      },
+      "supportSection": {
+        "title": "Support",
+        "applicationSupport": "Aide à la candidature",
+        "proposalTools": "Outils de proposition",
+        "contact": "Contact"
+      },
+      "builtFor": "Conçu pour saisir les opportunités en Afrique de l'Ouest."
+    },
+    "mission": {
+      "number": "01 / Notre mission",
+      "heading": "Les opportunités existent.",
+      "emphasis": "Trouver la bonne peut tout changer.",
+      "lead": "Partout en Afrique de l''Ouest, des personnes ambitieuses entreprennent, étudient, innovent et résolvent des problèmes complexes. Trop souvent, le financement adapté reste difficile à trouver — et encore plus difficile à solliciter.",
+      "body": "EasyGrantPath rassemble des opportunités crédibles, des outils pratiques et une expertise humaine dans un parcours clair. Pour aider davantage de bonnes idées à passer du potentiel au progrès."
+    },
+    "process": {
+      "imageAlt": "Une équipe de professionnels africains collaborant dans un bureau",
+      "overlayTitle": "Un parcours clair.",
+      "overlayBody": "Une opportunité devient plus utile lorsque vous savez quelle étape suivre.",
+      "kicker": "Comment ça marche",
+      "heading1": "De la possibilité",
+      "heading2": "à un projet bien préparé."
+    }
+  },
+  "Contact": {
+    "meta": {
+      "title": "Contacter le support",
+      "description": "Contactez EasyGrantPath pour des questions sur les opportunités, candidatures, votre compte ou un support technique."
+    },
+    "nav": {
+      "opportunities": "Opportunités",
+      "howItWorks": "Comment ça marche",
+      "signIn": "Se connecter",
+      "backHome": "Retour à l'accueil"
+    },
+    "hero": {
+      "eyebrow": "Contacter EasyGrantPath",
+      "heading": "Rendons la prochaine étape plus claire.",
+      "description": "Questions sur une opportunité, votre candidature ou la plateforme ? Envoyez-nous le contexte et nous vous aiderons à trouver la bonne voie.",
+      "emailSupport": "Envoyer un email au support",
+      "supportEmailLabel": "Email du support",
+      "imageAlt": "Une professionnelle examinant des documents de recherche et de candidature"
+    },
+    "inquiries": {
+      "kicker": "Commencez avec le bon contexte",
+      "heading": "Comment pouvons-nous vous aider ?",
+      "description": "Choisissez le sujet le plus proche pour ouvrir un email avec un objet utile déjà ajouté.",
+      "writeTo": "Écrire au support",
+      "types": {
+        "opportunity": {
+          "title": "Questions sur les opportunités",
+          "copy": "Partagez le titre ou le lien de l'opportunité et dites-nous ce que vous avez besoin de clarifier.",
+          "subject": "Question sur une opportunité"
+        },
+        "application": {
+          "title": "Aide à la candidature",
+          "copy": "Dites-nous où vous en êtes dans le processus et la date limite vers laquelle vous travaillez.",
+          "subject": "Demande d'aide à la candidature"
+        },
+        "technical": {
+          "title": "Aide technique ou compte",
+          "copy": "Décrivez ce qui s'est passé et incluez le message d'erreur exact, s'il y en a un.",
+          "subject": "Support technique ou de compte"
+        }
+      }
+    },
+    "preparation": {
+      "kicker": "Aidez-nous à vous aider",
+      "heading": "Un peu de contexte va loin.",
+      "description": "Inclure les informations essentielles dans votre premier email nous aide à comprendre le problème sans échanges inutiles.",
+      "items": {
+        "1": "Votre nom et pays",
+        "2": "Le titre ou lien de l'opportunité",
+        "3": "Votre date limite et le support dont vous avez besoin",
+        "4": "Pour les problèmes techniques, le message d'erreur exact"
+      },
+      "privacyNote": {
+        "title": "Protégez vos informations.",
+        "body": "Ne transmettez pas par email vos mots de passe, coordonnées bancaires ou documents d'identité, sauf si notre équipe de support vous demande expressément une soumission sécurisée."
+      },
+      "imageAlt": "Deux professionnels examinant des informations ensemble"
+    },
+    "finalCta": {
+      "eyebrow": "Prêt quand vous l'êtes",
+      "heading": "Dites-nous ce que vous traversez.",
+      "description": "Notre boîte de réception de support est le meilleur endroit pour commencer."
+    },
+    "footer": {
+      "description": "Découverte d'opportunités crédibles et accompagnement professionnel à travers l'Afrique de l'Ouest."
+    },
+    "supportSubject": "Demande d''assistance EasyGrantPath",
+    "homeLabel": "Accueil EasyGrantPath",
+    "navLabel": "Navigation de contact"
+  },
+  "Auth": {
+    "welcomeTo": "Bienvenue sur EasyGrantPath",
+    "funding": "FINANCEMENT, AVEC DIRECTION",
+    "tagline": "Votre prochaine opportunité commence ici.",
+    "sideDescription": "Découvrez des opportunités de financement crédibles, explorez des programmes adaptés à vos objectifs et préparez de meilleures candidatures avec EasyGrantPath.",
+    "benefits": {
+      "discover": "Découvrez des opportunités de financement pertinentes",
+      "find": "Trouvez des subventions adaptées à votre profil",
+      "prepare": "Préparez et organisez des propositions plus solides"
+    },
+    "footer": "© EasyGrantPath. Opportunités de financement, rendues plus claires.",
+    "signIn": {
+      "title": "Bon retour",
+      "description": "Connectez-vous pour continuer votre parcours de financement.",
+      "meta": "Se connecter",
+      "submit": "Se connecter",
+      "submitting": "Connexion…",
+      "noAccount": "Pas encore de compte ?",
+      "createAccount": "Créer un compte",
+      "forgotPassword": "Mot de passe oublié ?"
+    },
+    "signUp": {
+      "title": "Créez votre compte",
+      "description": "Rejoignez EasyGrantPath et découvrez des opportunités de financement adaptées à vos objectifs.",
+      "meta": "Créer un compte",
+      "submit": "Créer mon compte",
+      "submitting": "Création du compte…",
+      "hasAccount": "Vous avez déjà un compte ?",
+      "signIn": "Se connecter",
+      "termsNotice": "En créant un compte, vous acceptez nos conditions d'utilisation.",
+      "verificationSent": "Vérifiez votre adresse email",
+      "verificationBody": "Nous avons envoyé un lien de vérification à {email}. Cliquez sur le lien pour activer votre compte.",
+      "resend": "Renvoyer l'email",
+      "resending": "Renvoi en cours…",
+      "resendSuccess": "Un nouvel email de vérification a été envoyé.",
+      "waitSeconds": "Patienter {seconds}s",
+      "useDifferentEmail": "Utiliser une autre adresse email"
+    },
+    "forgotPassword": {
+      "title": "Réinitialisez votre mot de passe",
+      "description": "Saisissez votre email et nous enverrons des instructions de réinitialisation sécurisées si un compte existe.",
+      "meta": "Mot de passe oublié",
+      "submit": "Envoyer les instructions",
+      "submitting": "Envoi en cours…",
+      "backToSignIn": "Retour à la connexion",
+      "sentTitle": "Vérifiez votre email",
+      "sentBody": "Si un compte existe pour {email}, nous avons envoyé des instructions de réinitialisation. Vérifiez vos spams si vous ne voyez pas l'email.",
+      "ifAccountExists": "Si un compte existe pour {email}, nous avons envoyé des instructions de réinitialisation du mot de passe."
+    },
+    "resetPassword": {
+      "title": "Choisissez un nouveau mot de passe",
+      "description": "Créez un mot de passe sécurisé pour votre compte EasyGrantPath.",
+      "meta": "Réinitialiser le mot de passe",
+      "submit": "Définir le nouveau mot de passe",
+      "submitting": "Enregistrement…",
+      "successTitle": "Mot de passe mis à jour",
+      "successBody": "Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter.",
+      "invalidToken": "Ce lien de réinitialisation est invalide ou a expiré. Demandez-en un nouveau.",
+      "requestNew": "Demander un nouveau lien"
+    },
+    "fields": {
+      "name": "Nom complet",
+      "email": "Adresse email",
+      "password": "Mot de passe",
+      "newPassword": "Nouveau mot de passe",
+      "namePlaceholder": "Votre nom complet",
+      "emailPlaceholder": "votre@email.com",
+      "passwordPlaceholder": "••••••••",
+      "showPassword": "Afficher le mot de passe",
+      "hidePassword": "Masquer le mot de passe"
+    },
+    "errors": {
+      "emailNotVerified": "Vérifiez votre adresse email pour continuer.",
+      "invalidEmailOrPassword": "Email ou mot de passe incorrect.",
+      "userAlreadyExists": "Un compte avec cet email existe déjà.",
+      "tooManyRequests": "Trop de tentatives. Attendez un moment et réessayez.",
+      "signInFailed": "Nous n'avons pas pu vous connecter. Veuillez réessayer.",
+      "signUpFailed": "Nous n'avons pas pu créer votre compte. Veuillez réessayer.",
+      "resendFailed": "Nous n'avons pas pu renvoyer l'email de vérification. Veuillez réessayer.",
+      "nameRequired": "Saisissez votre nom complet.",
+      "emailRequired": "Saisissez une adresse email valide.",
+      "passwordRequired": "Saisissez votre mot de passe.",
+      "passwordTooShort": "Le mot de passe doit contenir au moins 8 caractères.",
+      "emailInvalid": "Saisissez une adresse email valide.",
+      "resetFailed": "Nous n'avons pas pu réinitialiser votre mot de passe. Veuillez réessayer.",
+      "linkExpired": "Ce lien a expiré. Demandez-en un nouveau.",
+      "passwordGuidance": "Au moins 8 caractères."
+    }
+  },
+  "Onboarding": {
+    "step1": {
+      "title": "Parlons de vous",
+      "description": "Quelques informations rapides pour personnaliser votre expérience.",
+      "step": "Étape 1 sur 2",
+      "accountTypeLabel": "Je suis…",
+      "individual": "Particulier",
+      "individualDesc": "Je candidate en tant que personne.",
+      "business": "Entreprise",
+      "businessDesc": "Je représente une entreprise à but lucratif ou une entreprise sociale.",
+      "ngo": "ONG / Association",
+      "ngoDesc": "Je représente une association, une ONG ou une organisation de la société civile.",
+      "fullNameLabel": "Nom complet",
+      "orgNameLabel": "Nom de l'organisation",
+      "orgNamePlaceholder": "Nom légal de votre organisation",
+      "countryLabel": "Pays",
+      "selectCountry": "Sélectionnez votre pays",
+      "continue": "Continuer",
+      "saving": "Enregistrement…"
+    },
+    "step2": {
+      "title": "Votre profil de financement",
+      "description": "Dites-nous ce qui vous intéresse pour que nous puissions vous proposer les meilleures correspondances.",
+      "step": "Étape 2 sur 2",
+      "interestLabel": "Principal centre d'intérêt",
+      "selectInterest": "Sélectionnez un domaine d'intérêt",
+      "opportunityTypeLabel": "Type d'opportunité",
+      "selectOpportunityType": "Sélectionnez un type",
+      "finishButton": "Terminer la configuration",
+      "saving": "Enregistrement…",
+      "back": "Retour"
+    },
+    "interests": {
+      "agriculture": "Agriculture",
+      "climate": "Climat / Environnement",
+      "education": "Éducation",
+      "entrepreneurship": "Entrepreneuriat / PME",
+      "health": "Santé",
+      "technology": "Technologie / Innovation",
+      "women_girls": "Femmes et Filles",
+      "youth": "Développement de la jeunesse",
+      "community_development": "Développement communautaire",
+      "research": "Recherche / Autre"
+    },
+    "opportunityTypes": {
+      "grant": "Subventions",
+      "fellowship": "Fellowships",
+      "scholarship": "Bourses d'études",
+      "accelerator": "Formation / Accélérateurs",
+      "other": "Autre"
+    },
+    "accountTypes": {
+      "individual": "Particulier",
+      "startup_sme": "Entreprise",
+      "ngo_nonprofit": "ONG / Association"
+    },
+    "countries": {
+      "CI": "Côte d'Ivoire",
+      "BJ": "Bénin",
+      "BF": "Burkina Faso",
+      "GH": "Ghana",
+      "GN": "Guinée",
+      "ML": "Mali",
+      "NE": "Niger",
+      "NG": "Nigéria",
+      "SN": "Sénégal",
+      "TG": "Togo",
+      "CM": "Cameroun",
+      "KE": "Kenya",
+      "ZA": "Afrique du Sud"
+    },
+    "errors": {
+      "selectAccountType": "Sélectionnez votre type de compte.",
+      "enterOrgName": "Saisissez le nom de votre organisation.",
+      "selectCountry": "Sélectionnez votre pays.",
+      "selectInterest": "Sélectionnez votre principal centre d'intérêt.",
+      "selectOpportunityType": "Sélectionnez un type d'opportunité.",
+      "saveFailed": "Nous n'avons pas pu enregistrer. Vérifiez votre connexion et réessayez."
+    },
+    "flow": {
+      "step": "Étape {step} sur 3",
+      "question": "Quelle situation vous décrit le mieux ?",
+      "questionDesc": "Cette information nous aide à vous proposer les opportunités les plus pertinentes.",
+      "details": "Quelques informations rapides",
+      "detailsDesc": "Deux ou trois choix pour personnaliser vos opportunités.",
+      "businessName": "Nom de l’entreprise",
+      "organizationName": "Nom de l’organisation",
+      "country": "Pays",
+      "selectCountry": "Sélectionnez votre pays",
+      "interest": "Principal secteur ou domaine d’intérêt",
+      "selectInterest": "Sélectionnez un domaine",
+      "preferredType": "Quel type d’opportunité vous intéresse le plus ?",
+      "back": "Retour",
+      "continue": "Continuer",
+      "seeMatch": "Voir ma correspondance",
+      "saving": "Enregistrement…",
+      "individualDesc": "Je recherche des opportunités en mon nom.",
+      "startup_smeDesc": "Je représente une entreprise ou une entreprise sociale.",
+      "ngo_nonprofitDesc": "Je représente une ONG, une association ou une organisation de la société civile.",
+      "completeChoices": "Complétez tous les choix obligatoires.",
+      "registrationFailed": "Nous n’avons pas pu enregistrer votre inscription.",
+      "organizationFailed": "Nous n’avons pas pu enregistrer les informations de votre organisation."
+    }
+  },
+  "Dashboard": {
+    "nav": {
+      "overview": "Aperçu",
+      "discoverOpportunities": "Découvrir des opportunités",
+      "myMatches": "Mes correspondances",
+      "savedOpportunities": "Opportunités sauvegardées",
+      "myProposals": "Mes propositions",
+      "proposalServices": "Services de proposition",
+      "payments": "Paiements",
+      "verification": "Vérification",
+      "accountProfile": "Compte et profil",
+      "signOut": "Se déconnecter",
+      "yourAccount": "Votre compte",
+      "navigationLabel": "Navigation du tableau de bord"
+    },
+    "overview": {
+      "meta": "Aperçu du tableau de bord",
+      "greeting": "Bonjour, {name}",
+      "greetingDefault": "Bonjour",
+      "completeProfile": "Complétez votre profil",
+      "completeProfileDesc": "Renseignez votre profil pour débloquer vos recommandations personnalisées.",
+      "editButton": "Modifier",
+      "metrics": {
+        "savedOpportunities": "Opportunités sauvegardées",
+        "savedNote": "Opportunités dans votre liste",
+        "proposals": "Propositions",
+        "proposalsNote": "Propositions en cours et terminées",
+        "matches": "Correspondances",
+        "matchesNote": "Opportunités qui vous correspondent",
+        "daysRemaining": "jours restants",
+        "dueToday": "À rendre aujourd'hui",
+        "dayRemaining": "1 jour restant"
+      },
+      "fundingProfile": {
+        "title": "Votre profil de financement",
+        "country": "Pays",
+        "applicant": "Type de candidat",
+        "interests": "Centres d'intérêt",
+        "lookingFor": "Recherche"
+      },
+      "verification": {
+        "identity": "Vérification d'identité",
+        "organization": "Vérification d'organisation",
+        "verified": "Vérifié",
+        "underReview": "En cours d'examen",
+        "actionRequired": "Action requise",
+        "notStarted": "Non commencé",
+        "completeVerification": "Complétez la vérification avant d'utiliser les services d'assistance.",
+        "documentsReviewed": "Vos documents sont en cours d'examen.",
+        "reviewNote": "Consultez la note et soumettez à nouveau vos documents.",
+        "reviewAndResubmit": "Réviser et soumettre à nouveau",
+        "viewStatus": "Voir le statut",
+        "startVerification": "Commencer la vérification"
+      },
+      "recentMatches": {
+        "title": "Correspondances récentes",
+        "viewAll": "Voir tout",
+        "noMatches": "Aucune correspondance pour votre profil pour l'instant.",
+        "updatePreferences": "Mettez à jour vos préférences ou explorez toutes les opportunités disponibles.",
+        "editPreferences": "Modifier les préférences",
+        "browseAll": "Tout parcourir"
+      },
+      "recentProposals": {
+        "title": "Propositions récentes",
+        "viewAll": "Voir tout",
+        "noProposals": "Aucune proposition en cours.",
+        "startFirst": "Commencez votre première proposition",
+        "continue": "Continuer",
+        "complete": "Terminé"
+      },
+      "needHelp": {
+        "title": "Besoin d'aide professionnelle ?",
+        "description": "Les propositions en libre-service sont rédigées dans EasyGrantPath. Pour une rédaction ou révision professionnelle, notre équipe travaille avec vous via WhatsApp."
+      }
+    },
+    "teaser": {
+      "step": "Étape 3 sur 3",
+      "noOpportunity": {
+        "title": "Votre profil est prêt",
+        "description": "Activez votre accès pour parcourir toutes les opportunités vérifiées et commencer à candidater.",
+        "activateButton": "Activer l'accès complet"
+      },
+      "opportunity": {
+        "funding": "Financement",
+        "deadline": "Date limite",
+        "eligibility": "Éligibilité",
+        "locked": "Toute l'éligibilité, les exigences et les détails de candidature sont verrouillés.",
+        "viewBasic": "Voir les détails de base",
+        "unlockFull": "Débloquer l'accès complet",
+        "verifiedSource": "Source vérifiée examinée par EasyGrantPath",
+        "reviewPending": "Source officielle · Examen EasyGrantPath en attente",
+        "summary": "Une opportunité de financement vérifiée sélectionnée pour votre profil."
+      },
+      "activateTitle": "Débloquez l'accès complet",
+      "activateDesc": "Accès complet à toutes les opportunités vérifiées, à vos outils de proposition et à l'historique de candidature.",
+      "activateButton": "Activer l'accès complet",
+      "activateNotConfigured": "Les paiements d'abonnement ne sont pas encore configurés.",
+      "activateNotConfiguredDesc": "Configurez le prix de la plateforme, la devise, la durée et les informations d'identification Paystack appropriées avant que l'accès puisse être vendu.",
+      "backToPreview": "Retour à l'aperçu de l'opportunité"
+    },
+    "activate": {
+      "meta": "Débloquer l'accès",
+      "title": "Débloquez l'accès complet",
+      "description": "Continuez depuis l'aperçu de l'opportunité avec tout ce dont vous avez besoin pour évaluer et postuler à des financements.",
+      "benefits": {
+        "fullDetails": "Détails complets des opportunités",
+        "eligibility": "Éligibilité et exigences",
+        "current": "Opportunités actuelles et futures",
+        "save": "Sauvegarder des opportunités et suivre les candidatures",
+        "workspace": "Espace de travail et modèles de propositions"
+      },
+      "payButton": "Payer {amount} pour {days} jours",
+      "continueToPay": "Continuer vers le paiement",
+      "openingCheckout": "Ouverture du paiement sécurisé…",
+      "checkoutError": "Le paiement n'a pas pu être lancé.",
+      "backToPreview": "Retour à l'aperçu de l'opportunité"
+    }
+  },
+  "Opportunities": {
+    "meta": {
+      "discover": "Découvrir des opportunités",
+      "saved": "Opportunités sauvegardées",
+      "detail": "Opportunité"
+    },
+    "discover": {
+      "kicker": "Toutes les opportunités vérifiées",
+      "title": "Découvrir des opportunités",
+      "description": "Parcourez les subventions, fellowships, bourses et programmes vérifiés disponibles pour votre profil.",
+      "matchesKicker": "Mes correspondances",
+      "matchesTitle": "Correspondances personnalisées",
+      "matchesDescription": "Opportunités analysées par rapport à votre profil. Les scores de correspondance sont basés sur votre pays, votre type de candidat et vos intérêts.",
+      "searchPlaceholder": "Rechercher des opportunités…",
+      "filterButton": "Filtres",
+      "applyFilters": "Appliquer les filtres",
+      "applySort": "Appliquer le tri",
+      "clearFilters": "Effacer les filtres",
+      "activeFilters": "Filtres actifs",
+      "removeFilter": "Supprimer le filtre {label}",
+      "noResults": "Aucune opportunité ne correspond à votre recherche.",
+      "noMatches": "Nous n'avons pas encore trouvé de correspondance forte pour votre profil.",
+      "tryUpdating": "Essayez de mettre à jour vos préférences ou d'explorer toutes les opportunités disponibles.",
+      "editPreferences": "Modifier les préférences",
+      "browseAll": "Tout parcourir",
+      "pageOf": "Page {page} sur {total}",
+      "previousPage": "Précédent",
+      "nextPage": "Suivant",
+      "bestMatch": "Meilleure correspondance",
+      "filterHint": "Filtrer et trier les opportunités vérifiées",
+      "matchCount": "{count} correspondances potentielles",
+      "resultCount": "{count} opportunités vérifiées",
+      "paginationLabel": "Pagination des opportunités"
+    },
+    "saved": {
+      "kicker": "Votre liste",
+      "title": "Opportunités sauvegardées",
+      "description": "Gardez les opportunités prometteuses à portée de main pendant que vous comparez et préparez.",
+      "emptyTitle": "Sauvegardez les opportunités intéressantes pour les retrouver ici.",
+      "emptyDescription": "Utilisez l'action signet en parcourant les opportunités.",
+      "exploreButton": "Explorer les opportunités",
+      "closed": "Fermée",
+      "viewDetails": "Voir les détails"
+    },
+    "filters": {
+      "title": "Filtrer les opportunités",
+      "type": "Type",
+      "country": "Pays",
+      "sector": "Secteur",
+      "deadline": "Date limite",
+      "sort": "Trier par",
+      "anyType": "Tous les types",
+      "anyCountry": "Tous les pays",
+      "anySector": "Tous les secteurs",
+      "anyDeadline": "N'importe quelle date",
+      "closingSoon": "Fermeture prochaine",
+      "thisMonth": "Ce mois-ci",
+      "next30Days": "30 prochains jours",
+      "noDeadline": "Pas de date limite",
+      "sortDeadline": "Date limite la plus proche",
+      "sortNewest": "Plus récent",
+      "sortOldest": "Plus ancien",
+      "sortFundingHigh": "Financement : du plus élevé",
+      "sortFundingLow": "Financement : du plus faible"
+    },
+    "types": {
+      "grant": "Subvention",
+      "fellowship": "Fellowship",
+      "scholarship": "Bourse d'études",
+      "loan": "Prêt",
+      "prize": "Prix",
+      "competition": "Compétition",
+      "accelerator": "Accélérateur",
+      "incubator": "Incubateur",
+      "other": "Autre"
+    },
+    "card": {
+      "verified": "Vérifié",
+      "funding": "Financement",
+      "deadline": "Date limite",
+      "eligible": "Éligible",
+      "viewOpportunity": "Voir l'opportunité",
+      "saveOpportunity": "Sauvegarder",
+      "unsaveOpportunity": "Retirer",
+      "saving": "Sauvegarde…",
+      "applyNow": "Postuler maintenant",
+      "noSummary": "Opportunité de financement vérifiée depuis une source officielle.",
+      "saved": "Sauvegardée",
+      "removeBookmark": "Retirer le signet",
+      "savedToast": "Opportunité sauvegardée.",
+      "removedToast": "Opportunité retirée des favoris.",
+      "saveError": "Impossible de mettre à jour cette opportunité sauvegardée."
+    },
+    "detail": {
+      "backToOpportunities": "Retour aux opportunités",
+      "backToPreview": "Retour à l'aperçu",
+      "verifiedBy": "Vérifié par EasyGrantPath",
+      "summary": "Résumé",
+      "about": "À propos de cette opportunité",
+      "funding": "Financement",
+      "deadline": "Date limite",
+      "openingDate": "Date d'ouverture",
+      "eligibility": "Éligibilité",
+      "eligibleCountries": "Pays éligibles",
+      "applicantTypes": "Types de candidats",
+      "sectors": "Secteurs",
+      "viewOfficial": "Voir l'opportunité officielle",
+      "opportunityNumber": "Numéro d'opportunité",
+      "confirmRequirements": "Confirmez les exigences et les délais avec l'organisation émettrice.",
+      "proposalStarter": {
+        "unavailable": "Démarreur de proposition non disponible",
+        "unavailableDesc": "Aucun modèle spécifique ou général adapté n'est disponible pour l'instant. Vous pouvez consulter d'autres modèles dans le guide de création de proposition.",
+        "openGuide": "Ouvrir le guide de proposition"
+      },
+      "needHelp": "Besoin d'aide pour votre candidature ?",
+      "needHelpDesc": "Obtenez un soutien professionnel en rédaction ou en révision de notre équipe via WhatsApp.",
+      "locked": {
+        "title": "Les détails complets de l'opportunité sont verrouillés",
+        "description": "Débloquez l'éligibilité, les exigences, les liens officiels et les outils de candidature.",
+        "unlockTitle": "Débloquer EasyGrantPath",
+        "unlockDesc": "Voir toutes les opportunités vérifiées et les détails complets des candidatures.",
+        "unlockButton": "Débloquer l'accès complet"
+      },
+      "noSummary": "Aucun résumé n'a été fourni par la source.",
+      "contentEnglishOnly": "Ce contenu est disponible en anglais uniquement.",
+      "orgNotProvided": "Organisation non fournie",
+      "fundingOrganization": "Organisme de financement",
+      "contentOriginalOnly": "Ce contenu est affiché dans sa langue source, car aucune traduction française révisée n'est disponible."
+    },
+    "matchLabel": {
+      "strongPotential": "Forte correspondance potentielle",
+      "goodPotential": "Bonne correspondance potentielle",
+      "worthExploring": "À explorer"
+    },
+    "matching": {
+      "whyFit": "Pourquoi cette opportunité pourrait vous convenir"
+    }
+  },
+  "Proposals": {
+    "meta": {
+      "list": "Mes propositions",
+      "new": "Créer une proposition",
+      "workspace": "Espace de travail"
+    },
+    "list": {
+      "kicker": "Préparation de candidature",
+      "title": "Mes propositions",
+      "description": "Créez de nouvelles propositions, continuez à écrire et révisez les travaux terminés.",
+      "createButton": "Créer une proposition",
+      "filters": {
+        "all": "Tout",
+        "inProgress": "En cours",
+        "completed": "Terminé"
+      },
+      "needHelp": {
+        "title": "Besoin d'aide professionnelle ?",
+        "description": "Les propositions en libre-service sont rédigées dans EasyGrantPath. Pour une rédaction ou révision professionnelle, notre équipe travaille avec vous via WhatsApp."
+      },
+      "emptyTitle": "Aucune proposition pour l'instant.",
+      "emptyDescription": "Commencez votre première proposition en choisissant une opportunité.",
+      "createFirst": "Créer votre première proposition",
+      "proposal": {
+        "inProgress": "En cours",
+        "completed": "Terminé",
+        "updatedAt": "Mis à jour {date}",
+        "updatedRecently": "Mis à jour récemment",
+        "percent": "% terminé",
+        "deadline": "Date limite {date}",
+        "deadlineNotProvided": "Date limite non fournie",
+        "continueEditing": "Continuer la rédaction",
+        "viewProposal": "Voir la proposition",
+        "orgNotProvided": "Organisation non fournie"
+      }
+    },
+    "new": {
+      "title": "Créer une proposition",
+      "selectOpportunity": "Choisir une opportunité",
+      "selectTemplate": "Choisir un modèle",
+      "opportunityLabel": "Opportunité",
+      "opportunityPlaceholder": "Sélectionnez une opportunité…",
+      "templateLabel": "Modèle de proposition",
+      "createButton": "Créer ma proposition",
+      "creating": "Création en cours…",
+      "recommended": "Recommandé",
+      "general": "Général",
+      "description": "Choisissez une opportunité de financement ou commencez avec un modèle général réutilisable.",
+      "opportunityHelp": "Sélectionnez une opportunité active, ou conservez une proposition générale.",
+      "generalOption": "Proposition générale — aucune opportunité pour l''instant",
+      "existingTitle": "Vous avez déjà une proposition pour cette opportunité.",
+      "existingDescription": "Reprenez-la pour conserver votre progression.",
+      "specificTemplateHelp": "Les modèles propres à l''opportunité sont privilégiés ; des modèles généraux adaptés peuvent servir de solution de repli.",
+      "generalTemplateHelp": "Choisissez un modèle général réutilisable publié.",
+      "structuredTemplate": "Un modèle structuré avec des conseils section par section.",
+      "noOpportunityTemplate": "Aucun modèle publié n''est disponible pour cette opportunité.",
+      "noGeneralTemplate": "Aucun modèle général publié n''est disponible.",
+      "continueTitle": "Continuer votre proposition",
+      "readyTitle": "Prêt à commencer",
+      "generalProposal": "Proposition de financement générale",
+      "templateRequired": "Modèle requis",
+      "continueExisting": "Continuer la proposition existante",
+      "recentGeneral": "Propositions générales récentes"
+    },
+    "workspace": {
+      "saving": "Enregistrement…",
+      "saved": "Enregistré",
+      "saveFailed": "Erreur d'enregistrement",
+      "wordCount": "{count} mots",
+      "wordLimit": "/{limit} mots",
+      "completeRequired": "{completed}/{total} sections obligatoires complétées",
+      "preview": "Aperçu",
+      "write": "Rédiger",
+      "exportPdf": "Exporter en PDF",
+      "exportDocx": "Exporter en DOCX",
+      "exporting": "Exportation…",
+      "markComplete": "Marquer comme terminé",
+      "reopen": "Rouvrir",
+      "completing": "Finalisation…",
+      "backToProposals": "Mes propositions",
+      "sectionNav": "Sections",
+      "unsavedChanges": "Des modifications non enregistrées sont en attente",
+      "exportSuccess": "Export réussi",
+      "completeSuccess": "Proposition marquée comme terminée",
+      "saveToast": "Modifications enregistrées",
+      "saveFailToast": "Les modifications n'ont pas pu être enregistrées. Réessayez.",
+      "exportError": "L'export a échoué. Réessayez.",
+      "completeError": "La proposition n'a pas pu être finalisée.",
+      "saveBeforeComplete": "Enregistrez vos dernières modifications avant de terminer.",
+      "incompleteConfirm": "Votre proposition contient encore {count, plural, one {# section obligatoire incomplète} other {# sections obligatoires incomplètes}}. Exporter quand même ce brouillon ?",
+      "noSections": "Cette proposition ne contient aucune section.",
+      "backToDashboard": "Retour au tableau de bord",
+      "editDetails": "Modifier les détails",
+      "generatingPdf": "Génération du PDF…",
+      "preparingWord": "Préparation du document Word…",
+      "optional": "Facultatif",
+      "required": "Obligatoire",
+      "proposal": "Proposition",
+      "howToAnswer": "Comment répondre",
+      "example": "Exemple :",
+      "yourResponse": "Votre réponse",
+      "placeholder": "Rédigez ici la section « {title} ». ",
+      "previous": "Précédent",
+      "next": "Section suivante",
+      "proposalComplete": "Proposition terminée",
+      "retry": "Réessayer",
+      "sectionPosition": "Section {current} sur {total}",
+      "words": "mots"
+    },
+    "setup": {
+      "title": "Configurer votre proposition",
+      "projectTitle": "Titre du projet",
+      "projectTitlePlaceholder": "Donnez un titre à votre proposition",
+      "continue": "Continuer vers la rédaction",
+      "saving": "Enregistrement…"
+    },
+    "services": {
+      "review": {
+        "name": "Faire réviser votre proposition",
+        "action": "Demander une révision",
+        "description": "Vous avez déjà une proposition ? Notre équipe peut la réviser et vous aider à identifier les points à améliorer avant soumission."
+      },
+      "writing": {
+        "name": "Faire rédiger votre proposition",
+        "action": "Faire rédiger ma proposition",
+        "description": "Besoin d'aide pour préparer votre proposition ? Notre équipe peut vous aider à la développer pour votre opportunité de financement."
+      },
+      "priceUnavailable": "Prix actuellement non disponible",
+      "notConfigured": "Le paiement en ligne n'est pas encore configuré pour ce service.",
+      "paymentAmount": "Montant du paiement",
+      "whatsappLabel": "Numéro WhatsApp",
+      "whatsappPlaceholder": "+229XXXXXXXX",
+      "saveWhatsapp": "Enregistrer ce numéro dans mon profil",
+      "securePayment": "Le paiement est traité de manière sécurisée par Paystack. Une fois vérifié par le serveur, notre équipe vous contactera via WhatsApp. Tout le travail se fait en dehors d'EasyGrantPath.",
+      "cancel": "Annuler",
+      "payButton": "Payer {price}",
+      "continueToPayment": "Continuer vers le paiement sécurisé",
+      "openingCheckout": "Ouverture du paiement…",
+      "checkoutError": "Le paiement n'a pas pu être lancé.",
+      "whatsappRequired": "Saisissez un numéro WhatsApp au format international, par exemple +225XXXXXXXXXX."
+    },
+    "starter": {
+      "title": "Démarrer une proposition",
+      "generalTemplate": "Modèle général",
+      "continueDescription": "Reprenez votre proposition existante sans perdre votre progression.",
+      "generalDescription": "Un modèle réutilisable adapté est disponible pour cette opportunité.",
+      "specificDescription": "Utilisez la structure publiée pour cette opportunité.",
+      "benefits": {
+        "basedOnOpportunity": "Adapté à cette opportunité",
+        "guidedSections": "Conseils section par section",
+        "autosave": "Enregistrement au fil de la rédaction"
+      },
+      "starting": "Démarrage…",
+      "continue": "Continuer ma proposition",
+      "start": "Commencer ma proposition",
+      "startError": "Impossible de démarrer votre proposition."
+    },
+    "document": {
+      "preparedBy": "Préparé par",
+      "preparedFor": "Préparé pour",
+      "opportunity": "Opportunité de financement",
+      "location": "Lieu du projet",
+      "duration": "Durée du projet",
+      "funding": "Financement demandé",
+      "date": "Date",
+      "draft": "Brouillon de proposition",
+      "prepared": "Proposition préparée",
+      "empty": "Commencez à rédiger cette section pour l’afficher ici.",
+      "page": "Page {page} sur {total}",
+      "previous": "Page précédente",
+      "next": "Page suivante",
+      "zoomOut": "Réduire le zoom",
+      "zoomIn": "Agrandir le zoom",
+      "preview": "Aperçu du document de proposition"
+    }
+  },
+  "Payments": {
+    "meta": {
+      "history": "Historique des paiements",
+      "callback": "Résultat du paiement",
+      "activate": "Activer l'accès"
+    },
+    "history": {
+      "kicker": "Facturation",
+      "title": "Historique des paiements",
+      "description": "Consultez toutes vos transactions et paiements de services.",
+      "empty": "Aucune tentative de paiement pour l'instant.",
+      "headers": {
+        "product": "Produit",
+        "amount": "Montant",
+        "status": "Statut",
+        "environment": "Environnement",
+        "reference": "Référence",
+        "date": "Date"
+      },
+      "products": {
+        "proposal_writing": "Rédaction de proposition",
+        "proposal_review": "Révision de proposition",
+        "platform_access": "Accès à la plateforme"
+      },
+      "whatsappNote": "Paiement reçu. Nous vous contacterons sur WhatsApp.",
+      "environments": {
+        "live": "Production",
+        "test": "Test"
+      },
+      "access": {
+        "active": "Accès à la plateforme actif",
+        "expired": "Accès à la plateforme expiré",
+        "expires": "L''accès expire le {date}.",
+        "expiredOn": "L''accès a expiré le {date}.",
+        "noExpiration": "Aucune date d''expiration n''est enregistrée pour votre accès existant."
+      },
+      "statuses": {
+        "pending": "En attente",
+        "processing": "Traitement en cours",
+        "successful": "Réussi",
+        "failed": "Échoué",
+        "cancelled": "Annulé",
+        "refunded": "Remboursé"
+      }
+    },
+    "callback": {
+      "verifying": {
+        "title": "Vérification du paiement",
+        "description": "Nous vérifions la transaction directement avec Paystack."
+      },
+      "successful": {
+        "title": "Paiement réussi",
+        "description": "Votre paiement a été vérifié. Notre équipe a été notifiée et vous contactera via WhatsApp pour organiser la suite."
+      },
+      "pending": {
+        "title": "Vérification en attente",
+        "description": "Nous n'avons pas encore confirmé le paiement. Aucun paiement ne sera traité comme payé jusqu'à ce que la vérification côté serveur réussisse."
+      },
+      "cancelled": {
+        "title": "Paiement annulé",
+        "description": "Le paiement a été annulé et aucun service n'a été activé."
+      },
+      "failed": {
+        "title": "Paiement non abouti",
+        "description": "La transaction n'a pas pu être vérifiée comme réussie."
+      },
+      "details": {
+        "service": "Service",
+        "proposal": "Proposition",
+        "reference": "Référence de paiement",
+        "contactNumber": "Numéro de contact"
+      },
+      "services": {
+        "proposal_writing": "Rédaction de proposition",
+        "proposal_review": "Révision de proposition",
+        "platform_access": "Accès EasyGrantPath"
+      },
+      "checkAgain": "Vérifier à nouveau",
+      "returnToProposals": "Retour à l'espace de travail",
+      "viewPaymentHistory": "Voir l'historique des paiements"
+    },
+    "checkoutError": "Le paiement n''a pas pu être lancé.",
+    "openingCheckout": "Ouverture du paiement sécurisé…",
+    "activate": {
+      "title": "Débloquer l''accès complet",
+      "description": "Passez de l''aperçu à toutes les informations nécessaires pour évaluer une opportunité et préparer votre candidature.",
+      "benefits": {
+        "details": "Détails complets des opportunités",
+        "eligibility": "Critères d''éligibilité et exigences",
+        "future": "Opportunités actuelles et à venir",
+        "saving": "Sauvegarde des opportunités et suivi des candidatures",
+        "proposals": "Espace de rédaction et modèles de proposition"
+      },
+      "payForDays": "Payer {price} pour {days} jours",
+      "continuePayment": "Continuer vers le paiement",
+      "notConfiguredTitle": "Les paiements d''abonnement ne sont pas encore configurés.",
+      "notConfiguredDescription": "L''accès à la plateforme est temporairement indisponible. Contactez le support.",
+      "backToPreview": "Retour à l''aperçu de l''opportunité"
+    }
+  },
+  "Settings": {
+    "meta": "Compte et profil",
+    "tabs": {
+      "account": "Compte",
+      "funding": "Profil de financement",
+      "organization": "Organisation",
+      "verification": "Vérification"
+    },
+    "account": {
+      "title": "Informations du compte",
+      "fullName": "Nom complet",
+      "email": "Adresse email",
+      "emailVerified": "Email vérifié",
+      "country": "Pays",
+      "saveChanges": "Enregistrer les modifications",
+      "saving": "Enregistrement…",
+      "updateSuccess": "Profil mis à jour avec succès.",
+      "updateError": "La mise à jour a échoué. Veuillez réessayer."
+    },
+    "funding": {
+      "title": "Profil de financement",
+      "applicantType": "Type de candidat",
+      "country": "Pays",
+      "interests": "Centres d'intérêt",
+      "opportunityTypes": "Types d'opportunités recherchés",
+      "primaryGoal": "Objectif principal",
+      "saveChanges": "Enregistrer les modifications",
+      "saving": "Enregistrement…"
+    },
+    "organization": {
+      "title": "Profil d'organisation",
+      "name": "Nom de l'organisation",
+      "type": "Type d'organisation",
+      "country": "Pays d'enregistrement",
+      "registrationStatus": "Statut d'enregistrement",
+      "saveChanges": "Enregistrer les modifications",
+      "saving": "Enregistrement…"
+    },
+    "verification": {
+      "title": "Vérification",
+      "status": "Statut de vérification",
+      "goToVerification": "Aller à la vérification"
+    }
+  },
+  "Verification": {
+    "identity": {
+      "meta": "Vérification d'identité",
+      "title": "Vérifiez votre identité",
+      "description": "Soumettez une pièce d'identité officielle pour vérifier votre compte.",
+      "documentType": "Type de document",
+      "nationalId": "Carte nationale d'identité",
+      "passport": "Passeport",
+      "driversLicense": "Permis de conduire",
+      "otherGovId": "Autre document officiel",
+      "fileLabel": "Document d'identité officiel",
+      "fileHint": "PDF, JPG ou PNG, 4 Mo maximum. Les fichiers sont stockés de manière privée et ne sont accessibles qu'aux examinateurs autorisés.",
+      "selectedFile": "Sélectionné : {name}",
+      "submit": "Soumettre pour examen",
+      "submitting": "Soumission sécurisée…",
+      "uploading": "Téléversement sécurisé…",
+      "submittingReview": "Soumission pour examen…",
+      "submitted": "Votre document d'identité est en cours d'examen.",
+      "errors": {
+        "chooseFirst": "Choisissez d'abord un document.",
+        "invalidType": "Choisissez un fichier PDF, JPG ou PNG.",
+        "tooLarge": "Les documents doivent faire 4 Mo ou moins.",
+        "uploadFailed": "Le téléversement a échoué. Veuillez réessayer.",
+        "submitFailed": "Le document n'a pas pu être soumis. Veuillez réessayer."
+      },
+      "statuses": {
+        "pending": {
+          "title": "Vérification en cours d'examen",
+          "description": "Soumis {date}. Les soumissions en double sont désactivées pendant l'examen."
+        },
+        "verified": {
+          "title": "Identité vérifiée",
+          "description": "Aucune action supplémentaire requise."
+        },
+        "actionRequired": {
+          "title": "Modifications demandées",
+          "defaultNote": "Veuillez téléverser un document plus clair ou corrigé."
+        },
+        "rejected": {
+          "title": "La vérification n'a pas été approuvée",
+          "defaultReason": "Contactez le support si vous pensez que cette décision devrait être réexaminée.",
+          "contactSupport": "Contacter le support"
+        }
+      },
+      "backToDashboard": "Retour aux opportunités",
+      "recently": "récemment"
+    },
+    "organization": {
+      "meta": "Vérification d'organisation",
+      "title": "Vérifiez votre organisation",
+      "description": "Soumettez les documents requis pour le stade d'enregistrement de votre organisation.",
+      "submit": "Soumettre pour examen",
+      "submitting": "Soumission sécurisée…",
+      "statuses": {
+        "pending": {
+          "title": "Vérification en cours d'examen",
+          "description": "Soumis {date}. Les téléversements sont verrouillés jusqu'à la fin de l'examen."
+        },
+        "verified": {
+          "title": "Organisation vérifiée",
+          "description": "Les documents d'enregistrement et de représentation ont été approuvés."
+        },
+        "provisional": {
+          "title": "Examiné de manière provisoire",
+          "description": "Le représentant a été examiné. La vérification complète d'enregistrement nécessite le document d'enregistrement complet."
+        },
+        "actionRequired": {
+          "title": "Modifications demandées",
+          "defaultNote": "Veuillez remplacer les documents demandés."
+        },
+        "rejected": {
+          "title": "La vérification n'a pas été approuvée",
+          "defaultReason": "Contactez le support pour les prochaines étapes disponibles.",
+          "contactSupport": "Contacter le support"
+        }
+      },
+      "backToDashboard": "Retour aux opportunités",
+      "form": {
+        "required": "Documents requis",
+        "registrationProgress": "L’enregistrement est en cours. L’approbation restera provisoire jusqu’à la vérification de l’enregistrement.",
+        "representativeId": "Pièce d’identité officielle du représentant",
+        "privateHint": "PDF, JPG ou PNG, 4 Mo maximum par fichier. Les fichiers sont stockés de façon privée.",
+        "notRequired": "Aucun document de vérification n’est requis pour ce profil d’organisation.",
+        "uploadRegistration": "Téléversez le document d’enregistrement.",
+        "uploadRepresentative": "Téléversez la pièce d’identité du représentant.",
+        "submitted": "Les documents de votre organisation sont en cours d’examen."
+      }
+    }
+  },
+  "Assistance": {
+    "meta": "Services professionnels",
+    "kicker": "Support professionnel",
+    "title": "Services professionnels de proposition",
+    "description": "EasyGrantPath propose une révision et une assistance à la rédaction de propositions payantes. Notre équipe gère le travail et la communication via WhatsApp.",
+    "howItWorks": {
+      "title": "Comment ça fonctionne",
+      "steps": {
+        "1": "1. Choisissez votre service.",
+        "2": "2. Saisissez ou confirmez votre numéro WhatsApp.",
+        "3": "3. Effectuez le paiement de manière sécurisée via Paystack.",
+        "4": "4. Après vérification, notre équipe vous contacte via WhatsApp."
+      }
+    },
+    "requests": {
+      "title": "Mes demandes d'assistance",
+      "empty": "Aucune demande d'assistance pour l'instant.",
+      "headers": {
+        "service": "Service",
+        "amount": "Montant",
+        "paymentStatus": "Statut du paiement",
+        "date": "Date",
+        "reference": "Référence"
+      },
+      "paidNote": "Paiement reçu — nous vous contacterons sur WhatsApp.",
+      "backToDashboard": "Retour au tableau de bord"
+    }
+  },
+  "Errors": {
+    "notFound": {
+      "code": "404",
+      "title": "Page introuvable",
+      "returnHome": "Retour à l'accueil"
+    },
+    "generic": {
+      "title": "Une erreur s'est produite",
+      "description": "Veuillez réessayer.",
+      "tryAgain": "Réessayer"
+    }
+  },
+  "Formatting": {
+    "currency": {
+      "locale": "fr-CI",
+      "from": "À partir de",
+      "upTo": "Jusqu'à",
+      "notProvided": "Non fourni"
+    },
+    "date": {
+      "locale": "fr-FR",
+      "notProvided": "Non fourni",
+      "recently": "Récemment"
+    }
+  },
+  "Emails": {
+    "verification": {
+      "subject": "Vérifiez votre adresse email EasyGrantPath",
+      "greeting": "Bonjour {name},",
+      "body": "Bienvenue sur EasyGrantPath. Confirmez votre adresse email pour sécuriser votre compte.",
+      "action": "Vérifier mon adresse email",
+      "ignore": "Si vous n''avez pas créé de compte, vous pouvez ignorer cet email en toute sécurité."
+    },
+    "passwordReset": {
+      "subject": "Réinitialisez votre mot de passe EasyGrantPath",
+      "greeting": "Bonjour {name},",
+      "body": "Nous avons reçu une demande de réinitialisation de votre mot de passe EasyGrantPath.",
+      "action": "Réinitialiser mon mot de passe",
+      "expiry": "Ce lien expire dans une heure. Si vous n''avez pas demandé cette réinitialisation, vous pouvez ignorer cet email en toute sécurité."
+    },
+    "fallbackName": "cher utilisateur"
+  }
+}

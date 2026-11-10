@@ -12,13 +12,15 @@ import { ProposalApplication } from "@/models/ProposalApplication";
 import { ProposalTemplate } from "@/models/ProposalTemplate";
 import { UserProfile } from "@/models/UserProfile";
 import { buildProposalRecommendation } from "@/lib/proposal-recommendation";
+import { localizeProposalTemplate } from "@/lib/proposal-localization";
+import { serializePublicOpportunity } from "@/lib/public-opportunities";
+import type { SupportedLocale } from "@/lib/config";
 
-type TemplateSection = { key: string; title: string; guidance: string; prompt?: string; example?: string; placeholder?: string; wordLimit?: number; enabled?: boolean; required: boolean; order: number };
 
 function iso(value: unknown) { if (!value) return null; const date = value instanceof Date ? value : new Date(String(value)); return Number.isNaN(date.getTime()) ? null : date.toISOString(); }
 function serializeTemplate(raw: Record<string, unknown>) { const opportunityId = raw.opportunityId ? String(raw.opportunityId) : null; return { id: String(raw._id), opportunityId, scope: raw.scope === "general" || !opportunityId ? "general" as const : "opportunity" as const, title: String(raw.title), description: typeof raw.description === "string" ? raw.description : "", templateType: String(raw.templateType), status: String(raw.status), recommendation: raw.recommendation || null, sections: ((raw.sections as Record<string, unknown>[]) || []).map((section) => ({ key: String(section.key), title: String(section.title), guidance: String(section.guidance), prompt: typeof section.prompt === "string" ? section.prompt : "", example: typeof section.example === "string" ? section.example : "", placeholder: typeof section.placeholder === "string" ? section.placeholder : "", wordLimit: typeof section.wordLimit === "number" ? section.wordLimit : undefined, enabled: section.enabled !== false, required: Boolean(section.required), order: Number(section.order) })).sort((a, b) => a.order - b.order), updatedAt: iso(raw.updatedAt) }; }
 export type SerializedProposalTemplate = ReturnType<typeof serializeTemplate>;
-function serializeApplication(raw: Record<string, unknown>) { const metadata = (raw.proposalMetadata || {}) as Record<string, unknown>; const fundingOrganization = typeof raw.fundingOrganizationSnapshot === "string" ? raw.fundingOrganizationSnapshot : typeof raw.organizationSnapshot === "string" ? raw.organizationSnapshot : ""; const opportunityId = raw.opportunityId ? String(raw.opportunityId) : null; return { id: String(raw._id), opportunityId, proposalKind: raw.proposalKind === "general" || !opportunityId ? "general" as const : "opportunity" as const, opportunityTitle: String(raw.opportunityTitleSnapshot), fundingOrganization, organization: fundingOrganization, deadline: iso(raw.deadlineSnapshot), templateTitle: String(raw.templateTitleSnapshot), setupCompleted: raw.setupCompleted !== false, proposalMetadata: { projectTitle: typeof metadata.projectTitle === "string" ? metadata.projectTitle : "", applicantType: typeof metadata.applicantType === "string" ? metadata.applicantType : "", applicantName: typeof metadata.applicantName === "string" ? metadata.applicantName : "", applicantOrganization: typeof metadata.applicantOrganization === "string" ? metadata.applicantOrganization : "", amountRequested: typeof metadata.amountRequested === "number" ? metadata.amountRequested : undefined, currency: typeof metadata.currency === "string" ? metadata.currency : "", projectLocation: typeof metadata.projectLocation === "string" ? metadata.projectLocation : "", projectDuration: typeof metadata.projectDuration === "string" ? metadata.projectDuration : "", contactPerson: typeof metadata.contactPerson === "string" ? metadata.contactPerson : "", contactEmail: typeof metadata.contactEmail === "string" ? metadata.contactEmail : "" }, status: String(raw.status) as "draft" | "completed", progress: Number(raw.progress || 0), sections: ((raw.sections as Record<string, unknown>[]) || []).map((section) => ({ key: String(section.key), title: String(section.title), guidance: String(section.guidanceSnapshot || ""), prompt: String(section.promptSnapshot || ""), example: String(section.exampleSnapshot || ""), placeholder: String(section.placeholderSnapshot || ""), wordLimit: typeof section.wordLimit === "number" ? section.wordLimit : undefined, required: Boolean(section.required), order: Number(section.order), content: String(section.content || "") })).sort((a, b) => a.order - b.order), startedAt: iso(raw.startedAt), completedAt: iso(raw.completedAt), updatedAt: iso(raw.updatedAt) }; }
+function serializeApplication(raw: Record<string, unknown>) { const metadata = (raw.proposalMetadata || {}) as Record<string, unknown>; const fundingOrganization = typeof raw.fundingOrganizationSnapshot === "string" ? raw.fundingOrganizationSnapshot : typeof raw.organizationSnapshot === "string" ? raw.organizationSnapshot : ""; const opportunityId = raw.opportunityId ? String(raw.opportunityId) : null; return { id: String(raw._id), locale: raw.locale === "fr" ? "fr" as const : "en" as const, opportunityId, proposalKind: raw.proposalKind === "general" || !opportunityId ? "general" as const : "opportunity" as const, opportunityTitle: String(raw.opportunityTitleSnapshot), fundingOrganization, organization: fundingOrganization, deadline: iso(raw.deadlineSnapshot), templateTitle: String(raw.templateTitleSnapshot), setupCompleted: raw.setupCompleted !== false, proposalMetadata: { projectTitle: typeof metadata.projectTitle === "string" ? metadata.projectTitle : "", applicantType: typeof metadata.applicantType === "string" ? metadata.applicantType : "", applicantName: typeof metadata.applicantName === "string" ? metadata.applicantName : "", applicantOrganization: typeof metadata.applicantOrganization === "string" ? metadata.applicantOrganization : "", amountRequested: typeof metadata.amountRequested === "number" ? metadata.amountRequested : undefined, currency: typeof metadata.currency === "string" ? metadata.currency : "", projectLocation: typeof metadata.projectLocation === "string" ? metadata.projectLocation : "", projectDuration: typeof metadata.projectDuration === "string" ? metadata.projectDuration : "", contactPerson: typeof metadata.contactPerson === "string" ? metadata.contactPerson : "", contactEmail: typeof metadata.contactEmail === "string" ? metadata.contactEmail : "" }, status: String(raw.status) as "draft" | "completed", progress: Number(raw.progress || 0), sections: ((raw.sections as Record<string, unknown>[]) || []).map((section) => ({ key: String(section.key), title: String(section.title), guidance: String(section.guidanceSnapshot || ""), prompt: String(section.promptSnapshot || ""), example: String(section.exampleSnapshot || ""), placeholder: String(section.placeholderSnapshot || ""), wordLimit: typeof section.wordLimit === "number" ? section.wordLimit : undefined, required: Boolean(section.required), order: Number(section.order), content: String(section.content || "") })).sort((a, b) => a.order - b.order), startedAt: iso(raw.startedAt), completedAt: iso(raw.completedAt), updatedAt: iso(raw.updatedAt) }; }
 export type SerializedProposalApplication = ReturnType<typeof serializeApplication>;
 
 async function requireProposalUserId() {
@@ -31,7 +33,7 @@ async function requireProposalUserId() {
 const publishedTemplateFilter = { status: "published", sections: { $elemMatch: { $or: [{ enabled: true }, { enabled: { $exists: false } }] } } } as const;
 
 export async function getAdminProposalContext(opportunityId: string) { await connection(); if (!isValidObjectId(opportunityId)) return null; await connectToDatabase(); const [opportunity, template] = await Promise.all([Opportunity.findById(opportunityId).lean(), ProposalTemplate.findOne({ opportunityId }).lean()]); if (!opportunity) return null; const contextOpportunity = { id: String(opportunity._id), title: String(opportunity.title), summary: opportunity.summary || "", description: opportunity.description || "", organization: String(opportunity.agency || opportunity.organization || "Organization not provided"), type: String(opportunity.type), deadline: iso(opportunity.deadline), applicantTypes: opportunity.applicantTypes || [], sectors: opportunity.sectors || [], eligibleCountries: opportunity.eligibleCountries || [], officialUrl: opportunity.officialUrl || null, metadata: (opportunity.metadata || {}) as Record<string, unknown> }; return { opportunity: contextOpportunity, recommendation: buildProposalRecommendation(contextOpportunity), template: template ? serializeTemplate(template as unknown as Record<string, unknown>) : null }; }
-export async function getPublishedTemplate(opportunityId: string) {
+export async function getPublishedTemplate(opportunityId: string, locale: SupportedLocale = "en") {
   await connection();
   if (!isValidObjectId(opportunityId)) return null;
   await connectToDatabase();
@@ -40,13 +42,13 @@ export async function getPublishedTemplate(opportunityId: string) {
     ProposalTemplate.findOne({ opportunityId, ...publishedTemplateFilter }).lean(),
     ProposalTemplate.find({ $or: [{ scope: "general" }, { opportunityId: { $exists: false } }], ...publishedTemplateFilter }).sort({ updatedAt: -1 }).lean(),
   ]);
-  if (specific) return serializeTemplate(specific as unknown as Record<string, unknown>);
+  if (specific) return localizeProposalTemplate(serializeTemplate(specific as unknown as Record<string, unknown>), locale);
   if (!opportunity) return null;
   const recommendation = buildProposalRecommendation({
     title: String(opportunity.title), description: String(opportunity.description || ""),
     type: String(opportunity.type), sectors: opportunity.sectors || [],
   });
-  const serialized = general.map((item) => serializeTemplate(item as unknown as Record<string, unknown>));
+  const serialized = general.map((item) => localizeProposalTemplate(serializeTemplate(item as unknown as Record<string, unknown>), locale));
   const selected = chooseFallbackTemplate(
     serialized.map((item) => ({ id: item.id, opportunityId: item.opportunityId, scope: item.scope, templateType: item.templateType, status: item.status, sectionCount: item.sections.length })),
     opportunityId,
@@ -60,27 +62,28 @@ export async function getExistingApplicationForOpportunity(opportunityId: string
   const application = await ProposalApplication.findOne({ userId, opportunityId }).select("_id").lean();
   return application ? String(application._id) : null;
 }
-export async function getProposalCreationOptions() {
+export async function getProposalCreationOptions(locale: SupportedLocale = "en") {
   await connection();
   const userId = await requireProposalUserId();
   const [opportunities, rawTemplates, existing] = await Promise.all([
     Opportunity.find({ verificationStatus: "verified", status: { $in: ["open", "closing_soon", "upcoming"] } })
-      .select("title agency organization type sectors description deadline").sort({ deadline: 1, title: 1 }).limit(100).lean(),
+      .select("title agency organization type sectors description deadline translations metadata").sort({ deadline: 1, title: 1 }).limit(100).lean(),
     ProposalTemplate.find(publishedTemplateFilter).sort({ updatedAt: -1 }).lean(),
     ProposalApplication.find({ userId }).select("_id opportunityId proposalTemplateId opportunityTitleSnapshot proposalMetadata updatedAt").sort({ updatedAt: -1 }).lean(),
   ]);
-  const templates = rawTemplates.map((item) => serializeTemplate(item as unknown as Record<string, unknown>));
+  const templates = rawTemplates.map((item) => localizeProposalTemplate(serializeTemplate(item as unknown as Record<string, unknown>), locale));
   const generalTemplates = templates.filter((template) => isGeneralProposalTemplate(template));
   const existingByOpportunity = new Map(existing.filter((item) => item.opportunityId).map((item) => [String(item.opportunityId), String(item._id)]));
   return {
     templates: templates.map((template) => ({ id: template.id, opportunityId: template.opportunityId, scope: template.scope, title: template.title, description: template.description, templateType: template.templateType })),
     opportunities: opportunities.map((opportunity) => {
       const id = String(opportunity._id);
+      const localized = serializePublicOpportunity(opportunity as unknown as Record<string, unknown>, locale);
       const recommended = buildProposalRecommendation({ title: String(opportunity.title), description: String(opportunity.description || ""), type: String(opportunity.type), sectors: opportunity.sectors || [] }).recommendedTemplateType;
       const applicableTemplateIds = templates.filter((template) =>
         template.opportunityId === id || (isGeneralProposalTemplate(template) && (template.templateType === recommended || template.templateType === "general"))
       ).map((template) => template.id);
-      return { id, title: String(opportunity.title), organization: String(opportunity.agency || opportunity.organization || "Organization not provided"), type: String(opportunity.type), deadline: iso(opportunity.deadline), recommendedTemplateType: recommended, applicableTemplateIds, existingApplicationId: existingByOpportunity.get(id) || null };
+      return { id, title: localized.title, organization: String(localized.agency || localized.organization || (locale === "fr" ? "Organisation non fournie" : "Organization not provided")), type: String(opportunity.type), deadline: iso(opportunity.deadline), recommendedTemplateType: recommended, applicableTemplateIds, existingApplicationId: existingByOpportunity.get(id) || null };
     }),
     generalTemplates: generalTemplates.map((template) => template.id),
     recentGeneralProposals: existing.filter((item) => !item.opportunityId).slice(0, 5).map((item) => {
@@ -90,9 +93,9 @@ export async function getProposalCreationOptions() {
   };
 }
 export type ProposalCreationOptions = Awaited<ReturnType<typeof getProposalCreationOptions>>;
-export type StartProposalInput = { opportunityId?: string; templateId?: string };
+export type StartProposalInput = { opportunityId?: string; templateId?: string; locale?: SupportedLocale };
 export async function startProposal(input: StartProposalInput) {
-  const { opportunityId, templateId } = input;
+  const { opportunityId, templateId, locale = "en" } = input;
   if (opportunityId && !isValidObjectId(opportunityId)) throw new AppError("Invalid opportunity ID.", "VALIDATION_ERROR", 400);
   if (templateId && !isValidObjectId(templateId)) throw new AppError("Invalid proposal template ID.", "VALIDATION_ERROR", 400);
   const userId = await requireProposalUserId();
@@ -107,27 +110,29 @@ export async function startProposal(input: StartProposalInput) {
 
   let template = templateId ? await ProposalTemplate.findOne({ _id: templateId, ...publishedTemplateFilter }).lean() : null;
   if (!template && !templateId && opportunityId) {
-    const selected = await getPublishedTemplate(opportunityId);
+    const selected = await getPublishedTemplate(opportunityId, locale);
     if (selected) template = await ProposalTemplate.findById(selected.id).lean();
   }
   if (!template) throw new AppError("Choose an available published proposal template.", "NOT_FOUND", 404);
 
-  const serializedTemplate = serializeTemplate(template as unknown as Record<string, unknown>);
+  const serializedTemplate = localizeProposalTemplate(serializeTemplate(template as unknown as Record<string, unknown>), locale);
   const candidate = { id: serializedTemplate.id, opportunityId: serializedTemplate.opportunityId, scope: serializedTemplate.scope, templateType: serializedTemplate.templateType, status: serializedTemplate.status, sectionCount: serializedTemplate.sections.filter((section) => section.enabled).length };
   if (!canUseProposalTemplate(candidate, opportunityId)) throw new AppError("This template cannot be used for the selected proposal.", "FORBIDDEN", 403);
 
-  const templateSections = ((template.sections || []) as TemplateSection[]).filter((section) => section.enabled !== false).slice().sort((a, b) => a.order - b.order);
-  const fundingOrganization = opportunity ? opportunity.agency || opportunity.organization || "" : "";
+  const templateSections = serializedTemplate.sections.filter((section) => section.enabled !== false).slice().sort((a, b) => a.order - b.order);
+  const localizedOpportunity = opportunity ? serializePublicOpportunity(opportunity as unknown as Record<string, unknown>, locale) : null;
+  const fundingOrganization = localizedOpportunity ? localizedOpportunity.agency || localizedOpportunity.organization || "" : "";
   const applicationData = {
     userId,
+    locale,
     ...(opportunityId ? { opportunityId } : {}),
     proposalKind: opportunityId ? "opportunity" : "general",
     proposalTemplateId: template._id,
-    opportunityTitleSnapshot: opportunity ? opportunity.title : "General funding proposal",
+    opportunityTitleSnapshot: localizedOpportunity ? localizedOpportunity.title : locale === "fr" ? "Proposition de financement générale" : "General funding proposal",
     organizationSnapshot: fundingOrganization,
     fundingOrganizationSnapshot: fundingOrganization,
     deadlineSnapshot: opportunity?.deadline,
-    templateTitleSnapshot: template.title,
+    templateTitleSnapshot: serializedTemplate.title,
     setupCompleted: false,
     sections: templateSections.map((section) => ({ key: section.key, title: section.title, guidanceSnapshot: section.guidance, promptSnapshot: section.prompt, exampleSnapshot: section.example, placeholderSnapshot: section.placeholder, wordLimit: section.wordLimit, required: section.required, order: section.order, content: "" })),
     progress: 0,

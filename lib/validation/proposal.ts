@@ -27,6 +27,7 @@ const objectId = z.string().trim().regex(/^[a-f\d]{24}$/i, "Choose a valid recor
 export const startProposalSchema = z.object({
   opportunityId: objectId.optional(),
   templateId: objectId.optional(),
+  locale: z.enum(["fr", "en"]).optional(),
 }).strict().superRefine((value, context) => {
   if (!value.opportunityId && !value.templateId) context.addIssue({ code: "custom", message: "Choose an opportunity or a general template." });
 });

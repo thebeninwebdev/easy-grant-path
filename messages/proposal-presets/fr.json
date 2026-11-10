@@ -1,0 +1,1453 @@
+{
+  "general": {
+    "name": "Subvention générale",
+    "description": "Idéal pour les opportunités de financement standard basées sur des projets.",
+    "sections": {
+      "executive-summary": {
+        "title": "Résumé exécutif",
+        "guidance": "Expliquez le projet, le besoin, le groupe cible, les principales activités, la demande de financement et le changement attendu dans un aperçu concis. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Que va-t-on faire, pour qui, où, sur quelle durée, pour combien et avec quel résultat ?",
+        "example": "",
+        "placeholder": "Décrivez le projet, le besoin, le groupe cible, les principales activités, la demande de financement et le changement attendu dans un aperçu concis, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "problem-statement": {
+        "title": "Énoncé du problème",
+        "guidance": "Expliquez le problème spécifique, les personnes affectées, l'emplacement, l'ampleur, les causes profondes et les limites des réponses existantes. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui est concerné ? Quelle est la gravité du problème ? Quelles preuves crédibles soutiennent cette nécessité ? Pourquoi une action est-elle urgente ?",
+        "example": "",
+        "placeholder": "Décrivez le problème spécifique, les personnes affectées, l'emplacement, l'ampleur, les causes profondes et les limites des réponses existantes, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "project-goal": {
+        "title": "Objectif du projet",
+        "guidance": "Expliquez le vaste changement à long terme auquel le projet contribuera. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelle condition durable devrait être améliorée, et pour quelle population ou quel lieu ?",
+        "example": "",
+        "placeholder": "Décrivez le vaste changement à long terme auquel le projet contribuera, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "specific-objectives": {
+        "title": "Objectifs spécifiques",
+        "guidance": "Expliquez deux à cinq changements mesurables et limités dans le temps que le projet réalisera directement. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu’est-ce qui va changer, dans quelle mesure, pour qui, où et quand ?",
+        "example": "D’ici décembre 2027, former 200 jeunes chômeurs en [location], dont au moins 60 % progresseront vers un emploi ou un travail indépendant.",
+        "placeholder": "Décrivez deux à cinq changements mesurables et limités dans le temps que le projet réalisera directement, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "target-beneficiaries": {
+        "title": "Bénéficiaires cibles",
+        "guidance": "Expliquez les bénéficiaires directs et indirects, les critères de sélection, le nombre, la localisation et les caractéristiques pertinentes. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "À qui profite-t-il ? Combien de personnes ? Pourquoi ce groupe ? Comment seront-ils identifiés équitablement ?",
+        "example": "",
+        "placeholder": "Décrivez les bénéficiaires directs et indirects, les critères de sélection, le nombre, la localisation et les caractéristiques pertinentes, en utilisant la situation réelle, les preuves et les projets du demandeur."
+      },
+      "proposed-activities": {
+        "title": "Activités proposées",
+        "guidance": "Expliquez les principales activités et comment chacune contribue à un objectif. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Que fera l’équipe ? Qui dirige chaque activité ? Comment chaque activité résout-elle le problème ?",
+        "example": "",
+        "placeholder": "Décrivez les principales activités et la manière dont chacune contribue à un objectif, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "implementation-plan": {
+        "title": "Plan de mise en œuvre",
+        "guidance": "Expliquez la séquence, le calendrier, les responsabilités et les étapes de livraison. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Que se passe-t-il en premier ? Qui est responsable ? Quelles sont les principales étapes et dépendances ?",
+        "example": "",
+        "placeholder": "Décrivez la séquence, le calendrier, les responsabilités et les étapes de livraison, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "expected-results": {
+        "title": "Résultats attendus",
+        "guidance": "Expliquer les résultats immédiats et les résultats à court et moyen terme attendus des activités. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels produits ou services tangibles seront fournis ? Quels changements devraient suivre ?",
+        "example": "",
+        "placeholder": "Décrivez les résultats immédiats et les résultats à court et moyen terme attendus des activités, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "monitoring-evaluation": {
+        "title": "Suivi et évaluation",
+        "guidance": "Expliquer les indicateurs, les références, les cibles, les sources de données, le calendrier de collecte et le processus d'apprentissage. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment les progrès et les résultats seront-ils mesurés ? Qui collecte les données ? Comment les résultats amélioreront-ils la prestation ?",
+        "example": "",
+        "placeholder": "Décrivez les indicateurs, les références, les cibles, les sources de données, le calendrier de collecte et le processus d'apprentissage, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "sustainability": {
+        "title": "Durabilité",
+        "guidance": "Expliquez comment les avantages, les services, les compétences ou le financement continueront après la subvention. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Que doit-il continuer ? À qui appartiendra-t-il ? Quelles ressources, partenariats ou revenus permettront de le maintenir ?",
+        "example": "",
+        "placeholder": "Décrivez comment les avantages, les services, les compétences ou le financement continueront après la subvention, en utilisant la situation réelle, les preuves et les projets du demandeur."
+      },
+      "organizational-capacity": {
+        "title": "Capacité organisationnelle",
+        "guidance": "Expliquez l'expérience pertinente du candidat, son équipe, ses systèmes et son historique de livraison. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Pourquoi l’organisation est-elle équipée pour livrer ? Quels travaux et contrôles similaires démontrent l’état de préparation ?",
+        "example": "",
+        "placeholder": "Décrivez l'expérience pertinente du candidat, son équipe, ses systèmes et son historique de livraison, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "budget-narrative": {
+        "title": "Récit budgétaire",
+        "guidance": "Expliquer les principales catégories de coûts, les hypothèses, l'optimisation des ressources et la relation entre les coûts et les activités. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu’est-ce que les fonds achèteront ? Pourquoi les coûts sont-ils raisonnables et nécessaires ? Quels cofinancements existent ?",
+        "example": "",
+        "placeholder": "Décrivez les principales catégories de coûts, les hypothèses, l'optimisation des ressources et la relation entre les coûts et les activités, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "risk-management": {
+        "title": "Gestion des risques",
+        "guidance": "Expliquer les principaux risques opérationnels, financiers, de sauvegarde et externes ainsi que les mesures pratiques d’atténuation. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu’est-ce qui pourrait empêcher le succès ? Quelle est la probabilité et la gravité de chaque risque ? Qui surveille et répond ?",
+        "example": "",
+        "placeholder": "Décrire les principaux risques opérationnels, financiers, de sauvegarde et externes ainsi que les mesures d'atténuation pratiques, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "partnerships": {
+        "title": "Partenariats",
+        "guidance": "Expliquer les rôles et les engagements des partenaires qui renforcent la prestation. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui contribuera au projet et que fera chaque partenaire ?",
+        "example": "",
+        "placeholder": "Décrire les rôles et les engagements des partenaires qui renforcent l'exécution, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "safeguarding": {
+        "title": "Sauvegarde",
+        "guidance": "Expliquez comment les participants seront protégés contre tout préjudice et comment les préoccupations seront traitées. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles mesures de protection et quels canaux de signalement seront applicables ?",
+        "example": "",
+        "placeholder": "Décrivez comment les participants seront protégés contre tout préjudice et comment les préoccupations seront traitées, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "inclusion": {
+        "title": "Inclusion",
+        "guidance": "Expliquez comment les personnes confrontées à des obstacles participeront de manière sûre et équitable. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels obstacles peuvent exclure les gens et comment le projet les surmontera-t-il ?",
+        "example": "",
+        "placeholder": "Décrivez comment les personnes confrontées à des obstacles participeront de manière sûre et équitable, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "baseline-information": {
+        "title": "Situation actuelle",
+        "guidance": "Expliquer les conditions de départ par rapport auxquelles les progrès seront compris. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelle est la situation actuelle avant le démarrage de votre projet ?",
+        "example": "",
+        "placeholder": "Décrivez les conditions de départ par rapport auxquelles les progrès seront évalués, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "implementation-dependencies": {
+        "title": "Dépendances d'implémentation",
+        "guidance": "Expliquer les décisions externes, les ressources ou les conditions nécessaires à la livraison. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Que doit-on mettre en place pour que le projet se poursuive et qui le contrôle ?",
+        "example": "",
+        "placeholder": "Décrire les décisions externes, les ressources ou les conditions nécessaires à la prestation, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      }
+    }
+  },
+  "ngo_community_development": {
+    "name": "ONG / Développement communautaire",
+    "description": "Idéal pour les projets à but non lucratif, de la société civile et à impact communautaire.",
+    "sections": {
+      "executive-summary": {
+        "title": "Résumé exécutif",
+        "guidance": "Expliquez le besoin de la communauté, la réponse proposée, les personnes touchées, les partenaires et l'impact social mesurable. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quel défi communautaire est relevé, comment, avec qui et avec quel résultat ?",
+        "example": "",
+        "placeholder": "Décrivez le besoin de la communauté, la réponse proposée, les personnes touchées, les partenaires et l'impact social mesurable, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "community-need": {
+        "title": "Besoin de la communauté/évaluation des besoins",
+        "guidance": "Expliquez le besoin constaté localement, les causes profondes, les lacunes dans les services et les priorités de la communauté. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Que disent les données locales et les habitants ? Qu’est-ce qui manque dans les réponses actuelles ?",
+        "example": "",
+        "placeholder": "Décrivez le besoin constaté localement, les causes profondes, les lacunes dans les services et les priorités de la communauté, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "target-community": {
+        "title": "Communauté cible",
+        "guidance": "Expliquer l'emplacement, la population, la diversité, les atouts et la justification de la sélection de la communauté. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui habite là ? Qui est le plus touché ? Sur quels atouts le projet peut-il s’appuyer ?",
+        "example": "",
+        "placeholder": "Décrivez l'emplacement, la population, la diversité, les atouts et la justification de la sélection de la communauté, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "project-goal": {
+        "title": "Objectif du projet",
+        "guidance": "Expliquez le changement recherché à long terme au niveau communautaire. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "À quelle amélioration de l’état le projet devrait-il contribuer ?",
+        "example": "",
+        "placeholder": "Décrivez le changement à long terme recherché au niveau communautaire, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "specific-objectives": {
+        "title": "Objectifs spécifiques",
+        "guidance": "Expliquez les changements mesurables et limités dans le temps pour la communauté cible. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu’est-ce qui va changer, pour combien de personnes et quand ?",
+        "example": "",
+        "placeholder": "Décrivez les changements mesurables et limités dans le temps pour la communauté cible, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "community-engagement": {
+        "title": "Engagement communautaire",
+        "guidance": "Expliquez comment les résidents façonneront les décisions, la mise en œuvre, les commentaires et la responsabilité. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment les priorités ont-elles été identifiées ? Quels groupes communautaires participeront et tiendront le projet responsable ?",
+        "example": "",
+        "placeholder": "Décrivez comment les résidents façonneront les décisions, la mise en œuvre, les commentaires et la responsabilité, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "proposed-activities": {
+        "title": "Activités proposées",
+        "guidance": "Expliquer les services, les activités de mobilisation et de renforcement des capacités liés à chaque objectif. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Que se passe-t-il, à quelle fréquence, pour qui et sous la direction de qui ?",
+        "example": "",
+        "placeholder": "Décrire les services, les activités de mobilisation et de renforcement des capacités liés à chaque objectif, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "implementation-plan": {
+        "title": "Plan de mise en œuvre",
+        "guidance": "Expliquez les phases, le calendrier, les responsabilités locales et les jalons. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment la prestation sera-t-elle coordonnée et adaptée aux réalités communautaires ?",
+        "example": "",
+        "placeholder": "Décrivez les phases, le calendrier, les responsabilités locales et les jalons, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "outputs-outcomes": {
+        "title": "Produits et résultats attendus",
+        "guidance": "Expliquez les livrables et les changements sociaux mesurables attendus. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Que sera produit ? Quel comportement, accès ou bien-être devrait être amélioré ?",
+        "example": "",
+        "placeholder": "Décrivez les résultats attendus et les changements sociaux mesurables attendus, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "monitoring-evaluation": {
+        "title": "Suivi et évaluation",
+        "guidance": "Expliquer les indicateurs participatifs, les cibles, la collecte de données, les commentaires et l'apprentissage. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment les membres de la communauté contribueront-ils à définir et à vérifier le succès ?",
+        "example": "",
+        "placeholder": "Décrire les indicateurs participatifs, les objectifs, la collecte de données, le retour d'information et l'apprentissage, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "inclusion-safeguarding": {
+        "title": "Inclusion et sauvegarde",
+        "guidance": "Expliquer la participation sûre et équitable des groupes marginalisés et la protection contre les préjudices. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels obstacles ou risques peuvent exclure ou nuire aux personnes ? Quelles garanties et quels canaux de signalement s’appliquent ?",
+        "example": "",
+        "placeholder": "Décrivez la participation sûre et équitable des groupes marginalisés et la protection contre les préjudices, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "sustainability": {
+        "title": "Durabilité",
+        "guidance": "Expliquer l’appropriation communautaire, la capacité locale et les ressources qui préserveront les résultats. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui continue le travail et comment les structures locales et les financements le soutiendront-ils ?",
+        "example": "",
+        "placeholder": "Décrivez l'appropriation communautaire, les capacités et les ressources locales qui permettront de préserver les résultats, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "organizational-experience": {
+        "title": "Expérience organisationnelle",
+        "guidance": "Expliquer les relations communautaires pertinentes, l'expérience de livraison et les systèmes responsables. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles preuves démontrent la confiance, la compétence et la gestion responsable des ressources ?",
+        "example": "",
+        "placeholder": "Décrire les relations communautaires pertinentes, l'expérience de livraison et les systèmes responsables, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "partnerships": {
+        "title": "Partenariats",
+        "guidance": "Expliquer les rôles et les engagements de la communauté, du gouvernement, de la société civile et des partenaires techniques. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui contribue à quoi ? Comment les responsabilités et la coordination seront-elles formalisées ?",
+        "example": "",
+        "placeholder": "Décrire les rôles et les engagements de la communauté, du gouvernement, de la société civile et des partenaires techniques, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "budget-narrative": {
+        "title": "Récit budgétaire",
+        "guidance": "Expliquez les coûts, les hypothèses, les contributions et le rapport qualité-prix auxquels la communauté est confrontée. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment les coûts soutiennent-ils les activités et la participation équitable ?",
+        "example": "",
+        "placeholder": "Décrivez les coûts, les hypothèses, les contributions et l'optimisation des ressources de la communauté, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "risk-management": {
+        "title": "Gestion des risques",
+        "guidance": "Expliquer les risques sociaux, opérationnels, de sauvegarde et contextuels avec atténuation et appropriation. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu’est-ce qui pourrait miner la confiance, la participation ou l’exécution, et comment cela sera-t-il géré ?",
+        "example": "",
+        "placeholder": "Décrire les risques sociaux, opérationnels, de sauvegarde et contextuels avec atténuation et appropriation, en utilisant la situation réelle, les preuves et les plans du candidat."
+      }
+    }
+  },
+  "startup_sme": {
+    "name": "Financement de startups/PME",
+    "description": "Idéal pour les entreprises, les entrepreneurs et le financement de l’innovation.",
+    "sections": {
+      "executive-summary": {
+        "title": "Résumé exécutif",
+        "guidance": "Expliquez l'entreprise, le problème du client, la solution, la traction, la demande de financement et l'opportunité de croissance. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Que fait l’entreprise, pour qui, pourquoi maintenant et que débloquera le financement ?",
+        "example": "",
+        "placeholder": "Décrivez l'entreprise, le problème du client, la solution, l'attrait, la demande de financement et l'opportunité de croissance, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "business-overview": {
+        "title": "Aperçu de l'entreprise",
+        "guidance": "Expliquez le statut juridique ou opérationnel de l'entreprise, son historique, son emplacement, ses produits et son stade actuel. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quand a-t-il commencé ? Qu'est-ce que ça vend ? Où et à quel stade intervient-il ?",
+        "example": "",
+        "placeholder": "Décrivez le statut juridique ou opérationnel de l'entreprise, son historique, son emplacement, ses produits et son stade actuel, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "problem": {
+        "title": "Problème",
+        "guidance": "Expliquez le problème coûteux ou persistant du client et prouvez qu'il est important. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels clients rencontrent le problème ? Comment s’en sortent-ils aujourd’hui ? Quelles preuves prouvent la demande ?",
+        "example": "",
+        "placeholder": "Décrivez le problème coûteux ou persistant du client et les preuves de son importance, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "product-solution": {
+        "title": "Produit/Solution",
+        "guidance": "Expliquez comment le produit ou le service résout le problème du client et apporte de la valeur. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment ça marche ? Quel résultat le client reçoit-il ? Pourquoi est-ce pratique ?",
+        "example": "",
+        "placeholder": "Décrivez comment le produit ou le service résout le problème du client et apporte de la valeur, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "target-customers": {
+        "title": "Clients cibles",
+        "guidance": "Expliquez les segments de clientèle prioritaires, les besoins, le comportement d'achat et la portée actuelle. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui achète ou utilise la solution ? Quel est le premier segment cible réaliste ?",
+        "example": "",
+        "placeholder": "Décrivez les segments de clientèle prioritaires, les besoins, le comportement d'achat et la portée actuelle, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "market-opportunity": {
+        "title": "Opportunité de marché",
+        "guidance": "Expliquez la taille du marché, les tendances, le segment accessible et les preuves de croissance. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelle est la taille du marché adressable ? Quelles tendances soutiennent la demande ?",
+        "example": "",
+        "placeholder": "Décrivez la taille du marché, les tendances, le segment accessible et les preuves de croissance, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "business-model": {
+        "title": "Modèle économique",
+        "guidance": "Expliquez comment l'entreprise crée, fournit et capte de la valeur. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui paie, pour quoi, à quelle fréquence, avec quelle marge et par quels canaux ?",
+        "example": "",
+        "placeholder": "Décrivez comment l'entreprise crée, génère et capte de la valeur, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "competitive-advantage": {
+        "title": "Avantage concurrentiel",
+        "guidance": "Expliquez les alternatives et la différenciation défendable de l'entreprise. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui sont les concurrents ? Pourquoi les clients choisiront-ils cette solution ? Qu’est-ce qui est difficile à copier ?",
+        "example": "",
+        "placeholder": "Décrivez les alternatives et la différenciation défendable de l'entreprise, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "traction": {
+        "title": "Traction / Progrès actuel",
+        "guidance": "Expliquez les progrès validés tels que les clients, les revenus, les pilotes, la fidélisation, les partenariats ou les jalons du produit. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles preuves mesurables montrent l’exécution et la demande ?",
+        "example": "",
+        "placeholder": "Décrivez les progrès validés tels que les clients, les revenus, les pilotes, la fidélisation, les partenariats ou les jalons du produit, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "growth-strategy": {
+        "title": "Stratégie Marketing / Croissance",
+        "guidance": "Expliquer les priorités en matière d'acquisition de clients, de canaux de vente, de fidélisation et d'expansion. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment atteindre les clients de manière rentable ? Quelles étapes guident la croissance ?",
+        "example": "",
+        "placeholder": "Décrivez les priorités en matière d'acquisition de clients, de canaux de vente, de fidélisation et d'expansion, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "team": {
+        "title": "Équipe",
+        "guidance": "Expliquez les capacités, les rôles, l'expérience pertinente et les lacunes importantes du fondateur et de l'équipe. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Pourquoi cette équipe peut-elle gagner ? À qui appartiennent les produits, les ventes, les opérations et les finances ?",
+        "example": "",
+        "placeholder": "Décrivez les capacités, les rôles, l'expérience pertinente et les lacunes importantes du fondateur et de l'équipe, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "funding-request": {
+        "title": "Demande de financement",
+        "guidance": "Expliquez le montant exact demandé, le formulaire de financement et l'étape commerciale qu'il permet. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelle quantité est nécessaire, pour quelle période et quelle étape mesurable cela permettra-t-il de débloquer ?",
+        "example": "",
+        "placeholder": "Décrivez le montant exact demandé, le formulaire de financement et l'étape commerciale qu'il permet, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "use-of-funds": {
+        "title": "Utilisation des fonds",
+        "guidance": "Expliquer la répartition des fonds entre les produits, les personnes, les équipements, le marketing et le fonds de roulement. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Combien va à chaque catégorie ? Pourquoi chaque allocation est-elle nécessaire maintenant ?",
+        "example": "",
+        "placeholder": "Décrivez l'allocation des fonds entre les produits, les personnes, les équipements, le marketing et le fonds de roulement, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "financial-outlook": {
+        "title": "Perspectives financières/revenues",
+        "guidance": "Expliquer les résultats historiques, les hypothèses, les prévisions de revenus, les coûts et le chemin vers la durabilité. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels sont les principaux moteurs ? Quand les opérations peuvent-elles couvrir les coûts ? Quelles hypothèses sont les plus sensibles ?",
+        "example": "",
+        "placeholder": "Décrivez les résultats historiques, les hypothèses, les prévisions de revenus, les coûts et le chemin vers la durabilité, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "job-creation": {
+        "title": "Création d'emplois/Impact économique",
+        "guidance": "Expliquer les emplois directs et indirects, les compétences, les achats locaux et la valeur économique. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Combien d’emplois de qualité seront créés ou maintenus, pour qui et d’ici quand ?",
+        "example": "",
+        "placeholder": "Décrivez les emplois directs et indirects, les compétences, les achats locaux et la valeur économique, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "social-environmental-impact": {
+        "title": "Impact social ou environnemental",
+        "guidance": "Expliquez l’impact positif crédible au-delà des retours commerciaux, le cas échéant. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui en profite et comment l’impact sera-t-il mesuré sans l’exagérer ?",
+        "example": "",
+        "placeholder": "Décrivez l'impact positif crédible au-delà des retours commerciaux, le cas échéant, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "key-risks": {
+        "title": "Principaux risques",
+        "guidance": "Expliquer les risques et les mesures d'atténuation liés au marché, aux produits, aux finances, à la réglementation et à l'exécution. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles hypothèses pourraient échouer ? Comment l’équipe va-t-elle détecter et réagir rapidement ?",
+        "example": "",
+        "placeholder": "Décrire les risques et les atténuations liés au marché, aux produits, aux finances, à la réglementation et à l'exécution, en utilisant la situation réelle, les preuves et les plans du candidat."
+      }
+    }
+  },
+  "youth_employment_skills": {
+    "name": "Emploi des jeunes et développement des compétences",
+    "description": "Idéal pour les projets de formation professionnelle, d’employabilité et de moyens de subsistance des jeunes.",
+    "sections": {
+      "executive-summary": {
+        "title": "Résumé exécutif",
+        "guidance": "Expliquez le défi de l'emploi des jeunes, le modèle de formation, les participants, les liens avec les employeurs et les résultats en matière d'emploi. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui acquerra quelles compétences et progressera vers quel résultat en matière de moyens de subsistance ?",
+        "example": "",
+        "placeholder": "Décrivez le défi de l'emploi des jeunes, le modèle de formation, les participants, les liens avec les employeurs et les résultats en matière d'emploi, en utilisant la situation réelle, les preuves et les projets du candidat."
+      },
+      "youth-employment-problem": {
+        "title": "Problème d’emploi des jeunes",
+        "guidance": "Expliquer le chômage, le sous-emploi et l’inadéquation des compétences au niveau local en s’appuyant sur des preuves crédibles. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels jeunes sont exclus ? Quelles compétences ou défaillances du marché limitent les opportunités ?",
+        "example": "",
+        "placeholder": "Décrivez le chômage, le sous-emploi et l'inadéquation des compétences au niveau local, étayés par des preuves crédibles, en utilisant la situation réelle, les preuves et les projets du candidat."
+      },
+      "target-youth": {
+        "title": "Population cible des jeunes",
+        "guidance": "Expliquez la tranche d’âge des participants, leur emplacement, leur nombre, les obstacles et les critères d’éligibilité équitables. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui participera et comment les jeunes défavorisés seront-ils atteints ?",
+        "example": "",
+        "placeholder": "Décrivez la tranche d'âge des participants, leur emplacement, leur nombre, les obstacles et les critères d'éligibilité équitables, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "project-goal": {
+        "title": "Objectif du projet",
+        "guidance": "Expliquez l’employabilité à long terme et le changement de moyens de subsistance recherché. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelle condition économique devrait s’améliorer pour les jeunes cibles ?",
+        "example": "",
+        "placeholder": "Décrivez l'employabilité à long terme et le changement de moyens de subsistance recherché, en utilisant la situation réelle, les preuves et les projets du candidat."
+      },
+      "specific-objectives": {
+        "title": "Objectifs spécifiques",
+        "guidance": "Expliquer les résultats mesurables en matière de formation, d’achèvement, de placement et d’entreprise. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Combien d’entre eux s’inscrivent, terminent leurs études, certifient, trouvent du travail ou créent des entreprises viables, et quand ?",
+        "example": "",
+        "placeholder": "Décrire les résultats mesurables en matière de formation, d'achèvement, de placement et d'entreprise, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "training-approach": {
+        "title": "Approche Formation / Compétences",
+        "guidance": "Expliquer le développement des compétences techniques, numériques, entrepreneuriales et générales basé sur les compétences. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles compétences correspondent à une demande réelle ? Comment les compétences pratiques seront-elles évaluées ?",
+        "example": "",
+        "placeholder": "Décrire le développement des compétences techniques, numériques, entrepreneuriales et générales basé sur les compétences, en utilisant la situation réelle, les preuves et les projets du candidat."
+      },
+      "participant-recruitment": {
+        "title": "Recrutement des participants",
+        "guidance": "Expliquer le soutien transparent en matière de sensibilisation, de sélection, de sélection et de rétention. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment les candidats prendront-ils connaissance du programme et seront-ils sélectionnés équitablement ?",
+        "example": "",
+        "placeholder": "Décrire le soutien transparent en matière de sensibilisation, de sélection, de sélection et de rétention, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "activities": {
+        "title": "Activités",
+        "guidance": "Expliquer la formation, le mentorat, l'exposition professionnelle, les services de carrière et le soutien aux entreprises. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Que vivront les participants depuis leur inscription jusqu’à la transition ?",
+        "example": "",
+        "placeholder": "Décrivez la formation, le mentorat, l'exposition professionnelle, les services de carrière et le soutien aux entreprises, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "employer-partnerships": {
+        "title": "Partenariats employeur/industrie",
+        "guidance": "Expliquer les rôles de l'employeur dans le programme d'études, les stages, le mentorat et l'embauche. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels partenaires valident la demande et quels engagements prendront-ils ?",
+        "example": "",
+        "placeholder": "Décrire les rôles de l'employeur dans le programme d'études, les stages, le mentorat et l'embauche, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "placement-pathway": {
+        "title": "Placement professionnel / Parcours d’entrepreneuriat",
+        "guidance": "Expliquer le parcours pratique de la formation à l’emploi, à l’apprentissage ou au travail indépendant. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment les diplômés accéderont-ils aux postes vacants, aux financements, aux marchés et au soutien post-programme ?",
+        "example": "",
+        "placeholder": "Décrire le parcours pratique depuis la formation jusqu'à l'emploi, l'apprentissage ou le travail indépendant, en utilisant la situation réelle, les preuves et les projets du candidat."
+      },
+      "expected-outcomes": {
+        "title": "Résultats attendus",
+        "guidance": "Expliquez les gains de compétences, les certifications, les stages, les revenus et la survie de l'entreprise. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels résultats économiques seront mesurés et sur quelle période de suivi ?",
+        "example": "",
+        "placeholder": "Décrivez les acquis de compétences, les certifications, les stages, les revenus et la survie de l'entreprise, en utilisant la situation réelle, les preuves et les projets du candidat."
+      },
+      "monitoring-evaluation": {
+        "title": "Suivi et évaluation",
+        "guidance": "Expliquer les données sur l'assiduité, l'évaluation, l'achèvement, le placement, les gains et la satisfaction de l'employeur. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment les résultats seront-ils vérifiés et désagrégés ?",
+        "example": "",
+        "placeholder": "Décrire les données relatives à l'assiduité, à l'évaluation, à l'achèvement, au placement, aux revenus et à la satisfaction de l'employeur, en utilisant la situation réelle, les preuves et les projets du candidat."
+      },
+      "sustainability": {
+        "title": "Durabilité",
+        "guidance": "Expliquer la prestation de formation reproductible, l’appropriation par l’employeur, le soutien des anciens élèves et le financement futur. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment les services peuvent-ils perdurer et rester alignés sur la demande de main-d’œuvre ?",
+        "example": "",
+        "placeholder": "Décrivez la prestation de formation reproductible, l'appropriation par l'employeur, le soutien des anciens élèves et le financement futur, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "inclusion": {
+        "title": "Inclusion",
+        "guidance": "Expliquer l'accès et un soutien raisonnable aux jeunes femmes, aux jeunes déplacés, aux jeunes ruraux et aux personnes handicapées. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels obstacles affectent la participation et l’achèvement, et comment seront-ils réduits ?",
+        "example": "",
+        "placeholder": "Décrivez l'accès et le soutien raisonnable aux jeunes femmes, aux jeunes déplacés, aux jeunes ruraux et aux personnes handicapées, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "organizational-capacity": {
+        "title": "Capacité organisationnelle",
+        "guidance": "Expliquer la qualité de la formation, les relations avec les employeurs, la protection et l'expérience de placement. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels résultats et systèmes antérieurs montrent que nous sommes prêts ?",
+        "example": "",
+        "placeholder": "Décrivez la qualité de la formation, les relations avec l'employeur, la protection et l'expérience de placement, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "budget-narrative": {
+        "title": "Récit budgétaire",
+        "guidance": "Expliquez la formation, le soutien aux participants, l’équipement, le placement et les coûts de suivi. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quel est le coût par participant et par résultat, et pourquoi est-il raisonnable ?",
+        "example": "",
+        "placeholder": "Décrivez la formation, le soutien aux participants, l'équipement, le placement et les coûts de suivi, en utilisant la situation réelle, les preuves et les plans du candidat."
+      }
+    }
+  },
+  "women_girls_empowerment": {
+    "name": "Autonomisation des femmes et des filles",
+    "description": "Idéal pour l'égalité des sexes, les initiatives dirigées par les femmes et les programmes pour les filles.",
+    "sections": {
+      "executive-summary": {
+        "title": "Résumé exécutif",
+        "guidance": "Expliquez l’obstacle du genre, le groupe cible, l’approche ancrée localement et le résultat mesurable en matière d’autonomisation. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelle barrière va changer, pour qui, où et par quelle approche ?",
+        "example": "",
+        "placeholder": "Décrivez l'obstacle lié au genre, le groupe cible, l'approche ancrée localement et le résultat mesurable en matière d'autonomisation, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "gender-gap": {
+        "title": "Problème/Écart entre les sexes",
+        "guidance": "Expliquer l’obstacle structurel, économique ou social spécifique étayé par des preuves ventilées par sexe et par âge. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles inégalités existent ? Qui le vit différemment ? Qu’est-ce qui la provoque et la renforce ?",
+        "example": "",
+        "placeholder": "Décrivez l'obstacle structurel, économique ou social spécifique étayé par des preuves ventilées par sexe et par âge, en utilisant la situation réelle, les preuves et les projets du demandeur."
+      },
+      "target-women-girls": {
+        "title": "Cibler les femmes ou les filles",
+        "guidance": "Expliquez l'âge, l'emplacement, les circonstances, les points forts et les obstacles croisés des participants. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui est prioritaire et comment leur diversité façonnera-t-elle la prestation ?",
+        "example": "",
+        "placeholder": "Décrivez l'âge, le lieu de résidence, les circonstances, les points forts et les obstacles croisés des participants, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "local-context": {
+        "title": "Contexte local",
+        "guidance": "Expliquez les lois, normes, services, risques et opportunités pertinents sans stéréotyper la communauté. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels facteurs contextuels affectent l’action, l’accès et la sécurité ?",
+        "example": "",
+        "placeholder": "Décrivez les lois, normes, services, risques et opportunités pertinents sans stéréotyper la communauté, en utilisant la situation réelle, les preuves et les projets du candidat."
+      },
+      "project-goal": {
+        "title": "Objectif du projet",
+        "guidance": "Expliquez le changement à long terme recherché en matière d’égalité des sexes ou d’autonomisation. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelle condition devrait s’améliorer pour les femmes ou les filles ?",
+        "example": "",
+        "placeholder": "Décrivez le changement à long terme en matière d'égalité des sexes ou d'autonomisation recherché, en utilisant la situation réelle, les preuves et les projets du candidat."
+      },
+      "specific-objectives": {
+        "title": "Objectifs spécifiques",
+        "guidance": "Expliquer les changements mesurables en matière d’action, d’accès, de compétences, de revenus, de leadership ou de sécurité. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu'est-ce qui change, pour combien de participants et pour quand ?",
+        "example": "",
+        "placeholder": "Décrivez les changements mesurables en termes d'action, d'accès, de compétences, de revenus, de leadership ou de sécurité, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "empowerment-approach": {
+        "title": "Approche d’autonomisation",
+        "guidance": "Expliquez comment les participants développeront leur voix, leurs choix, leurs ressources, leurs capacités et leurs relations de soutien. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment l’approche s’attaque-t-elle aux causes profondes plutôt qu’aux seuls symptômes ?",
+        "example": "",
+        "placeholder": "Décrivez comment les participants développeront leur voix, leurs choix, leurs ressources, leurs capacités et leurs relations de soutien, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "proposed-activities": {
+        "title": "Activités proposées",
+        "guidance": "Expliquez les activités de services, de formation, de mentorat, de plaidoyer ou de changement de système. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Que se passera-t-il, à quelle fréquence et comment chaque activité fait-elle progresser un objectif ?",
+        "example": "",
+        "placeholder": "Décrivez les services, la formation, le mentorat, le plaidoyer ou les activités de changement de système, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "safeguarding": {
+        "title": "Sauvegarde",
+        "guidance": "Expliquer les mesures confidentielles et centrées sur les survivants pour prévenir et répondre aux préjudices, à l'exploitation et aux représailles. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels risques découlent de la participation ? Quelles procédures de référencement et de signalement protègent les participants ?",
+        "example": "",
+        "placeholder": "Décrire les mesures confidentielles et centrées sur les survivants pour prévenir et répondre aux préjudices, à l'exploitation et aux représailles, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "inclusion": {
+        "title": "Inclusion",
+        "guidance": "Expliquez la participation accessible en fonction du handicap, du revenu, de l’âge, du lieu et d’autres identités pertinentes. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui peut être involontairement exclu et quels ajustements pratiques sont prévus ?",
+        "example": "",
+        "placeholder": "Décrivez la participation accessible quel que soit le handicap, le revenu, l'âge, le lieu et d'autres identités pertinentes, en utilisant la situation réelle, les preuves et les projets du candidat."
+      },
+      "expected-outcomes": {
+        "title": "Résultats attendus",
+        "guidance": "Expliquer les changements mesurables dans les opportunités, l'action, le bien-être, le leadership ou les pratiques institutionnelles. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels changements les participants devraient-ils expérimenter et comment seront-ils vérifiés ?",
+        "example": "",
+        "placeholder": "Décrire les changements mesurables dans les opportunités, l'action, le bien-être, le leadership ou les pratiques institutionnelles, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "monitoring-evaluation": {
+        "title": "Suivi et évaluation",
+        "guidance": "Expliquer les indicateurs sensibles au genre, la collecte de données sécurisée, le retour d’information et l’apprentissage. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles données quantitatives et qualitatives démontreront un changement significatif ?",
+        "example": "",
+        "placeholder": "Décrire les indicateurs sensibles au genre, la collecte de données sécurisée, le retour d'information et l'apprentissage, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "sustainability": {
+        "title": "Durabilité",
+        "guidance": "Expliquer les réseaux de participants continus, les services, le changement institutionnel et l’appropriation locale. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels avantages et quelles structures perdurent après le financement ?",
+        "example": "",
+        "placeholder": "Décrire les réseaux de participants continus, les services, le changement institutionnel et l'appropriation locale, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "stakeholder-engagement": {
+        "title": "Engagement de la communauté/des parties prenantes",
+        "guidance": "Expliquer l'engagement constructif avec les participants, les familles, les dirigeants, les institutions et les alliés. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quel soutien est nécessaire sans affaiblir l’action des participants ?",
+        "example": "",
+        "placeholder": "Décrire l'engagement constructif avec les participants, les familles, les dirigeants, les institutions et les alliés, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "organizational-capacity": {
+        "title": "Capacité organisationnelle",
+        "guidance": "Expliquer l’expertise pertinente en matière de genre, les relations de confiance, la protection et la prestation responsable. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelle expérience et quels systèmes démontrent la compétence et la sécurité ?",
+        "example": "",
+        "placeholder": "Décrivez l'expertise pertinente en matière de genre, les relations de confiance, la protection et la prestation responsable, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "budget-narrative": {
+        "title": "Récit budgétaire",
+        "guidance": "Expliquer la participation accessible, la sauvegarde, le personnel, les activités et les coûts de mesure des résultats. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment le budget élimine-t-il les barrières et protège-t-il la qualité ?",
+        "example": "",
+        "placeholder": "Décrivez la participation accessible, la protection, le personnel, les activités et les coûts de mesure des résultats, en utilisant la situation réelle, les preuves et les plans du candidat."
+      }
+    }
+  },
+  "agriculture_food_security": {
+    "name": "Agriculture et sécurité alimentaire",
+    "description": "Idéal pour l’agriculture, l’agro-industrie, les systèmes alimentaires et les moyens de subsistance ruraux.",
+    "sections": {
+      "executive-summary": {
+        "title": "Résumé exécutif",
+        "guidance": "Expliquez le défi agricole, les producteurs touchés, l’intervention, le parcours du marché et les résultats en matière de nourriture ou de revenus. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels changements pour quels agriculteurs, où et à travers quelle solution de production ou de marché ?",
+        "example": "",
+        "placeholder": "Décrivez le défi agricole, les producteurs touchés, l'intervention, le parcours commercial et les résultats en matière de nourriture ou de revenus, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "challenge": {
+        "title": "Défi agricole/sécurité alimentaire",
+        "guidance": "Expliquez la production, la nutrition, la perte, les revenus ou la contrainte du marché avec des preuves saisonnières et locales. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu’est-ce qui échoue dans le système alimentaire ? Qui supporte le coût et pourquoi ?",
+        "example": "",
+        "placeholder": "Décrivez la production, la nutrition, la perte, les revenus ou les contraintes du marché avec des preuves saisonnières et locales, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "target-farmers": {
+        "title": "Cibler les agriculteurs/bénéficiaires",
+        "guidance": "Expliquez les types de producteurs, la taille des exploitations, les rôles dans la chaîne de valeur, les nombres et les critères de sélection. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui participe directement et qui bénéficie indirectement ?",
+        "example": "",
+        "placeholder": "Décrivez les types de producteurs, la taille des exploitations, les rôles dans la chaîne de valeur, le nombre et les critères de sélection, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "geographic-area": {
+        "title": "Zone géographique",
+        "guidance": "Explain the agroecological, infrastructure and market conditions of the target area. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Pourquoi cet emplacement est-il approprié et quelles contraintes conditionnent la mise en œuvre ?",
+        "example": "",
+        "placeholder": "Décrire les conditions agroécologiques, d'infrastructure et de marché de la zone cible, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "project-goal": {
+        "title": "Objectif du projet",
+        "guidance": "Expliquez la sécurité alimentaire à long terme, la résilience ou le changement des moyens de subsistance recherché. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelle condition devrait s’améliorer dans le système alimentaire cible ?",
+        "example": "",
+        "placeholder": "Décrivez la sécurité alimentaire à long terme, la résilience ou le changement des moyens de subsistance recherché, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "specific-objectives": {
+        "title": "Objectifs spécifiques",
+        "guidance": "Expliquer la production mesurable, la réduction des pertes, les revenus, la nutrition ou les résultats du marché. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu’est-ce qui change, dans quelle mesure, pour qui et quand ?",
+        "example": "",
+        "placeholder": "Décrivez la production mesurable, la réduction des pertes, les revenus, la nutrition ou les résultats du marché, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "intervention": {
+        "title": "Intervention agricole proposée",
+        "guidance": "Expliquer la logique technique et commerciale de l’intervention proposée. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles contraintes répond-il et pourquoi devrait-il fonctionner dans ce contexte ?",
+        "example": "",
+        "placeholder": "Décrire la logique technique et commerciale de l'intervention proposée, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "activities": {
+        "title": "Activités",
+        "guidance": "Expliquer les activités de terrain, d'entreprise, d'infrastructure, d'agrégation et de conseil. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Que se passera-t-il au cours de chaque cycle de production et de marché ?",
+        "example": "",
+        "placeholder": "Décrire les activités de terrain, d'entreprise, d'infrastructure, d'agrégation et de conseil, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "farmer-training": {
+        "title": "Formation des agriculteurs/renforcement des capacités",
+        "guidance": "Expliquer le soutien pratique à l’extension, à la démonstration, au coaching et à l’adoption. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles pratiques les agriculteurs vont-ils apprendre, tester et adopter ? Comment les apprentissages seront-ils vérifiés ?",
+        "example": "",
+        "placeholder": "Décrire le soutien pratique à l'extension, à la démonstration, au coaching et à l'adoption, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "inputs-technology": {
+        "title": "Intrants / Technologie",
+        "guidance": "Expliquer les semences, les équipements, les outils ou infrastructures numériques et leurs besoins en maintenance. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu'est-ce qui est fourni, à qui, dans quelles conditions et comment restera-t-il utilisable ?",
+        "example": "",
+        "placeholder": "Décrire les semences, les équipements, les outils ou infrastructures numériques et leurs besoins en matière de maintenance, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "market-access": {
+        "title": "Accès au marché",
+        "guidance": "Expliquer les relations avec les acheteurs, les normes de qualité, l'agrégation, la logistique et les informations sur les prix. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment les producteurs pourront-ils garantir des itinéraires d’accès au marché fiables, équitables et rentables ?",
+        "example": "",
+        "placeholder": "Décrire les relations avec les acheteurs, les normes de qualité, l'agrégation, la logistique et les informations sur les prix, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "value-chain": {
+        "title": "Stratégie de chaîne de valeur",
+        "guidance": "Expliquer les rôles, les incitations et les goulots d'étranglement des intrants jusqu'à la production, la transformation et la vente. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels acteurs doivent se coordonner et où la valeur va-t-elle augmenter ?",
+        "example": "",
+        "placeholder": "Décrivez les rôles, les incitations et les goulots d'étranglement depuis les intrants jusqu'à la production, la transformation et la vente, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "climate-resilience": {
+        "title": "Résilience climatique",
+        "guidance": "Expliquer les pratiques qui réduisent l’exposition au climat et protègent les ressources naturelles, le cas échéant. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels sont les risques importants et comment les agriculteurs s’adapteront-ils sans créer de nouveaux dommages environnementaux ?",
+        "example": "",
+        "placeholder": "Décrire les pratiques qui réduisent l'exposition au climat et protègent les ressources naturelles, le cas échéant, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "expected-outcomes": {
+        "title": "Résultats attendus",
+        "guidance": "Expliquer les rendements mesurables, les revenus, les pertes, la nutrition, la résilience et les résultats du marché. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels changements seront suivis au fil des saisons ?",
+        "example": "",
+        "placeholder": "Décrivez le rendement mesurable, les revenus, les pertes, la nutrition, la résilience et les résultats du marché, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "monitoring-evaluation": {
+        "title": "Suivi et évaluation",
+        "guidance": "Expliquer les indicateurs et méthodes agricoles, de production, de ventes, de revenus et de sécurité alimentaire. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment les différences saisonnières et entre les sexes seront-elles capturées ?",
+        "example": "",
+        "placeholder": "Décrire les indicateurs et les méthodes de l'exploitation agricole, de la production, des ventes, des revenus et de la sécurité alimentaire, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "sustainability": {
+        "title": "Durabilité",
+        "guidance": "Expliquer les incitations commerciales, les services locaux, la propriété des producteurs et la maintenance des actifs. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu'est-ce qui continue sans subvention et qui paie ou gère cela ?",
+        "example": "",
+        "placeholder": "Décrivez les incitations commerciales, les services locaux, la propriété des producteurs et le maintien des actifs, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "budget-narrative": {
+        "title": "Récit budgétaire",
+        "guidance": "Expliquer les intrants, la formation, l’équipement, le soutien sur le terrain, la logistique et les coûts de mesure. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quel est le rapport entre les coûts unitaires et les agriculteurs touchés et les résultats attendus ?",
+        "example": "",
+        "placeholder": "Décrire les intrants, la formation, l'équipement, le soutien sur le terrain, la logistique et les coûts de mesure, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "risk-management": {
+        "title": "Gestion des risques",
+        "guidance": "Expliquez les risques liés à la météo, aux ravageurs, aux prix, à l'adoption, aux terres et à la chaîne d'approvisionnement avec des mesures d'atténuation. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment les chocs seront-ils suivis et leur mise en œuvre adaptée ?",
+        "example": "",
+        "placeholder": "Décrire les risques liés aux conditions météorologiques, aux ravageurs, aux prix, à l'adoption, aux terres et à la chaîne d'approvisionnement avec des mesures d'atténuation, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      }
+    }
+  },
+  "climate_environment": {
+    "name": "Climat et environnement",
+    "description": "Idéal pour les projets d’adaptation, d’atténuation, de conservation et verts.",
+    "sections": {
+      "executive-summary": {
+        "title": "Résumé exécutif",
+        "guidance": "Expliquez le problème environnemental, l'emplacement, l'intervention, les communautés ou l'écosystème affectés et l'impact mesurable. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quel résultat environnemental sera obtenu, où, pour qui et quand ?",
+        "example": "",
+        "placeholder": "Décrire le problème environnemental, l'emplacement, l'intervention, les communautés ou l'écosystème affectés et l'impact mesurable, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "climate-problem": {
+        "title": "Problème environnemental/climatique",
+        "guidance": "Expliquez le problème de danger, de dégradation ou d’émissions, les facteurs déterminants, l’ampleur et les preuves. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu'est-ce qui change ? Qu’est-ce qui en est la cause ? Pourquoi les réponses actuelles sont-elles insuffisantes ?",
+        "example": "",
+        "placeholder": "Décrivez le problème de danger, de dégradation ou d'émissions, les facteurs déterminants, l'ampleur et les preuves, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "geographic-context": {
+        "title": "Contexte géographique",
+        "guidance": "Expliquer le paysage, l’exposition au climat, l’utilisation des terres et le contexte de gouvernance. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles conditions physiques et institutionnelles façonnent le projet ?",
+        "example": "",
+        "placeholder": "Décrire le paysage, l'exposition au climat, l'utilisation des terres et le contexte de gouvernance, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "target-communities-ecosystem": {
+        "title": "Communautés cibles/écosystème",
+        "guidance": "Expliquez les personnes, les moyens de subsistance, les habitats ou les espèces les plus touchés et leur relation avec la ressource. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui ou qu’est-ce qui est vulnérable, et comment les bénéfices et les fardeaux sont-ils répartis ?",
+        "example": "",
+        "placeholder": "Décrivez les personnes, les moyens de subsistance, les habitats ou les espèces les plus touchés et leur relation avec la ressource, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "baseline": {
+        "title": "Situation de référence",
+        "guidance": "Expliquer les conditions environnementales et socio-économiques de départ par rapport auxquelles le changement sera mesuré. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels indicateurs de référence et sources de données établissent les conditions actuelles ?",
+        "example": "",
+        "placeholder": "Décrire les conditions environnementales et socio-économiques de départ par rapport auxquelles le changement sera mesuré, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "project-goal": {
+        "title": "Objectif du projet",
+        "guidance": "Expliquez la résilience, la conservation ou le changement d’émissions à long terme recherché. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelle condition environnementale devrait être améliorée ?",
+        "example": "",
+        "placeholder": "Décrivez la résilience, la conservation ou le changement d'émissions à long terme recherché, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "specific-objectives": {
+        "title": "Objectifs spécifiques",
+        "guidance": "Expliquer les résultats mesurables en matière d’environnement et de communauté. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu’est-ce qui change, dans quelle zone ou quelle population, et quand ?",
+        "example": "",
+        "placeholder": "Décrire les résultats environnementaux et communautaires mesurables, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "intervention": {
+        "title": "Intervention proposée",
+        "guidance": "Expliquer la logique scientifique, technique et sociale de la solution. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment l’intervention s’adresse-t-elle aux conducteurs identifiés et évite-t-elle les préjudices involontaires ?",
+        "example": "",
+        "placeholder": "Décrire la logique scientifique, technique et sociale de la solution, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "activities": {
+        "title": "Activités",
+        "guidance": "Expliquer les activités de restauration, d’infrastructure, de comportement, de politique, de moyens de subsistance ou technologiques. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu’est-ce qui sera mis en œuvre, par qui et dans quel ordre ?",
+        "example": "",
+        "placeholder": "Décrivez les activités de restauration, d'infrastructure, de comportement, de politique, de subsistance ou technologiques, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "environmental-impact": {
+        "title": "Climat / Impact environnemental",
+        "guidance": "Expliquer les avantages environnementaux quantifiés ou mesurables de manière crédible. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels indicateurs montrent l’impact de l’adaptation, de l’atténuation, de la conservation ou de la réduction de la pollution ?",
+        "example": "",
+        "placeholder": "Décrire les avantages environnementaux quantifiés ou mesurables de manière crédible, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "adaptation-mitigation": {
+        "title": "Approche d’adaptation ou d’atténuation",
+        "guidance": "Expliquer la trajectoire climatique pertinente et les hypothèses reliant les activités à l’impact. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Le projet réduit-il la vulnérabilité, les émissions, ou les deux ? Comment?",
+        "example": "",
+        "placeholder": "Décrivez la trajectoire climatique pertinente et les hypothèses reliant les activités à l'impact, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "community-participation": {
+        "title": "Participation communautaire",
+        "guidance": "Expliquer les mécanismes locaux significatifs de prise de décision, de consentement, de partage des bénéfices et de réclamation. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment les groupes concernés façonneront-ils et superviseront-ils le travail ?",
+        "example": "",
+        "placeholder": "Décrire les mécanismes locaux significatifs de prise de décision, de consentement, de partage des bénéfices et de réclamation, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "monitoring-indicators": {
+        "title": "Indicateurs de suivi",
+        "guidance": "Expliquer les indicateurs de référence, de résultats, de résultats et environnementaux avec les méthodes et la fréquence. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu’est-ce qui sera mesuré, à l’aide de quels outils et par qui ?",
+        "example": "",
+        "placeholder": "Décrire les indicateurs de référence, de résultats, de résultats et environnementaux avec des méthodes et une fréquence, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "sustainability": {
+        "title": "Durabilité",
+        "guidance": "Expliquer la gestion à long terme, la maintenance, le financement et la propriété institutionnelle. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui protège les acquis et avec quelles ressources ?",
+        "example": "",
+        "placeholder": "Décrire l'intendance à long terme, l'entretien, le financement et la propriété institutionnelle, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "scalability": {
+        "title": "Évolutivité / Réplicabilité",
+        "guidance": "Expliquez les conditions, les coûts et les preuves nécessaires pour étendre l’approche ailleurs. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu’est-ce qui est transférable et qu’est-ce qui doit être adapté ?",
+        "example": "",
+        "placeholder": "Décrire les conditions, les coûts et les preuves nécessaires pour étendre l'approche ailleurs, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "organizational-capacity": {
+        "title": "Capacité organisationnelle",
+        "guidance": "Expliquer l’expertise technique pertinente, les relations avec la communauté, les garanties et les systèmes de livraison. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels travaux antérieurs démontrent la préparation ?",
+        "example": "",
+        "placeholder": "Décrire l'expertise technique pertinente, les relations avec la communauté, les garanties et les systèmes de prestation, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "budget-narrative": {
+        "title": "Récit budgétaire",
+        "guidance": "Expliquer les coûts techniques, de terrain, communautaires, de surveillance et de maintenance. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment les coûts sont-ils liés aux résultats environnementaux et au rapport qualité-prix ?",
+        "example": "",
+        "placeholder": "Décrivez les coûts techniques, de terrain, communautaires, de surveillance et de maintenance, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "environmental-risks": {
+        "title": "Risques environnementaux/de mise en œuvre",
+        "guidance": "Expliquer les risques et les mesures d’atténuation écologiques, sociaux, climatiques, fonciers et de livraison. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "L’intervention pourrait-elle causer des dommages ou échouer dans des conditions changeantes ?",
+        "example": "",
+        "placeholder": "Décrire les risques et les mesures d'atténuation écologiques, sociaux, climatiques, fonciers et de livraison, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      }
+    }
+  },
+  "education": {
+    "name": "Éducation",
+    "description": "Idéal pour les écoles, l'apprentissage, l'EdTech et les projets d'accès à l'éducation.",
+    "sections": {
+      "executive-summary": {
+        "title": "Résumé exécutif",
+        "guidance": "Expliquez le problème d'apprentissage, les apprenants cibles, la réponse éducative et les résultats d'apprentissage mesurables. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui apprendra quoi, par quelle approche, où et quand ?",
+        "example": "",
+        "placeholder": "Décrivez le problème d'apprentissage, les apprenants cibles, la réponse éducative et les résultats d'apprentissage mesurables, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "education-problem": {
+        "title": "Problème d'éducation",
+        "guidance": "Expliquer le défi en matière d’accès, de participation, d’enseignement ou d’apprentissage soutenu par les données sur l’éducation. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels apprenants sont concernés ? Quelles preuves montrent l’écart et ses causes ?",
+        "example": "",
+        "placeholder": "Décrivez le défi en matière d'accès, de participation, d'enseignement ou d'apprentissage soutenu par les données sur l'éducation, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "target-learners": {
+        "title": "Cibler les apprenants",
+        "guidance": "Expliquer les âges, les niveaux, les effectifs, les emplacements, les besoins et les critères de sélection des apprenants. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui participe et quels obstacles affectent leur apprentissage ?",
+        "example": "",
+        "placeholder": "Décrire l'âge, les niveaux, le nombre, les emplacements, les besoins et les critères de sélection des apprenants, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "school-context": {
+        "title": "Contexte géographique/scolaire",
+        "guidance": "Expliquer les conditions de l’école, de la communauté, de la langue, de l’infrastructure et des politiques. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "À quelles réalités contextuelles l’intervention doit-elle s’adapter ?",
+        "example": "",
+        "placeholder": "Décrivez l'école, la communauté, la langue, l'infrastructure et les conditions politiques, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "project-goal": {
+        "title": "Objectif du projet",
+        "guidance": "Expliquez l’accès à l’éducation à long terme, la qualité ou le changement d’apprentissage recherché. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelle condition éducative devrait être améliorée ?",
+        "example": "",
+        "placeholder": "Décrivez l'accès à l'éducation à long terme, la qualité ou le changement d'apprentissage recherché, en utilisant la situation réelle, les preuves et les projets du candidat."
+      },
+      "specific-objectives": {
+        "title": "Objectifs spécifiques",
+        "guidance": "Expliquer les changements mesurables dans l’accès, la fréquentation, la qualité de l’enseignement ou l’apprentissage. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu’est-ce qui change, pour combien d’apprenants ou d’enseignants et quand ?",
+        "example": "",
+        "placeholder": "Décrivez les changements mesurables dans l'accès, l'assiduité, la qualité de l'enseignement ou l'apprentissage, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "educational-intervention": {
+        "title": "Intervention éducative",
+        "guidance": "Expliquer la solution éducative fondée sur des données probantes et son modèle de prestation. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Pourquoi cette approche devrait-elle améliorer le problème d’apprentissage identifié ?",
+        "example": "",
+        "placeholder": "Décrivez la solution éducative fondée sur des données probantes et son modèle de prestation, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "learning-approach": {
+        "title": "Programme d'études / Approche d'apprentissage",
+        "guidance": "Expliquer le contenu, la pédagogie, la langue, l’évaluation et l’adéquation à l’âge. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu’est-ce qui sera enseigné et comment les apprenants mettront-ils en pratique et démontreront-ils leur maîtrise ?",
+        "example": "",
+        "placeholder": "Décrire le contenu, la pédagogie, la langue, l'évaluation et l'adéquation à l'âge, en utilisant la situation réelle, les preuves et les projets du candidat."
+      },
+      "activities": {
+        "title": "Activités",
+        "guidance": "Expliquer l’enseignement, le matériel, la technologie, le mentorat, les activités de sensibilisation et de soutien. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Que se passe-t-il pour les apprenants, les enseignants et les écoles tout au long de la mise en œuvre ?",
+        "example": "",
+        "placeholder": "Décrire l'enseignement, le matériel, la technologie, le mentorat, les activités de sensibilisation et de soutien, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "teacher-development": {
+        "title": "Développement des enseignants/animateurs",
+        "guidance": "Expliquer le recrutement, la formation, le coaching et l’assurance qualité pour les éducateurs. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment la pratique pédagogique s’améliorera-t-elle et restera-t-elle soutenue ?",
+        "example": "",
+        "placeholder": "Décrire le recrutement, la formation, l'encadrement et l'assurance qualité des éducateurs, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "access-inclusion": {
+        "title": "Accès et inclusion",
+        "guidance": "Expliquer la participation des filles, des apprenants handicapés, des apprenants déplacés et des communautés mal desservies. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels obstacles affectent l’inscription, la fréquentation et l’achèvement, et comment seront-ils réduits ?",
+        "example": "",
+        "placeholder": "Décrivez la participation des filles, des apprenants handicapés, des apprenants déplacés et des communautés mal desservies, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "learning-outcomes": {
+        "title": "Résultats d'apprentissage attendus",
+        "guidance": "Expliquer les connaissances, les compétences et les résultats de progression spécifiques. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels acquis d’apprentissage sont attendus et comment seront-ils mesurés ?",
+        "example": "",
+        "placeholder": "Décrire les connaissances, les compétences et les résultats de progression spécifiques, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "monitoring-evaluation": {
+        "title": "Suivi et évaluation",
+        "guidance": "Expliquer les indicateurs d’inscription, de fréquentation, de rétention, d’enseignement et d’apprentissage. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles méthodes de référence et d’évaluation montreront les progrès ?",
+        "example": "",
+        "placeholder": "Décrire les indicateurs d'inscription, de fréquentation, de rétention, d'enseignement et d'apprentissage, en utilisant la situation réelle, les preuves et les projets du candidat."
+      },
+      "sustainability": {
+        "title": "Durabilité",
+        "guidance": "Expliquer la capacité d’enseignement continue, le matériel, le soutien technologique et l’appropriation institutionnelle. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu’est-ce qui reste utilisé et qui l’entretient après le financement ?",
+        "example": "",
+        "placeholder": "Décrivez la capacité d'enseignement continue, le matériel, le soutien technologique et l'appropriation institutionnelle, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "organizational-capacity": {
+        "title": "Capacité organisationnelle",
+        "guidance": "Expliquer l’expertise en éducation, les relations scolaires, la protection de l’enfance et l’expérience de mise en œuvre. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles preuves démontrent un accouchement sûr et efficace ?",
+        "example": "",
+        "placeholder": "Décrivez l'expertise en matière d'éducation, les relations scolaires, la protection de l'enfance et l'expérience de mise en œuvre, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "budget-narrative": {
+        "title": "Récit budgétaire",
+        "guidance": "Expliquer les coûts d’instruction, de matériel, d’éducateur, de technologie, d’accès et d’évaluation. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quel est le coût par apprenant ou par éducateur et pourquoi est-il raisonnable ?",
+        "example": "",
+        "placeholder": "Décrivez les coûts d'enseignement, de matériel, d'éducateur, de technologie, d'accès et d'évaluation, en utilisant la situation réelle, les preuves et les plans du candidat."
+      }
+    }
+  },
+  "health_public_health": {
+    "name": "Santé / Santé publique",
+    "description": "Idéal pour les interventions en matière de santé communautaire et du système de santé.",
+    "sections": {
+      "executive-summary": {
+        "title": "Résumé exécutif",
+        "guidance": "Expliquer le problème de santé publique, la population cible, l’intervention, les partenaires de prestation et les résultats mesurables en matière de santé. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quel résultat de santé sera amélioré, pour qui, où et à travers quel service ou approche de prévention ?",
+        "example": "",
+        "placeholder": "Décrivez le problème de santé publique, la population cible, l'intervention, les partenaires de prestation et les résultats de santé mesurables, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "health-problem": {
+        "title": "Problème de santé",
+        "guidance": "Expliquez la maladie, le service ou le problème du système de santé en utilisant des données épidémiologiques ou de service crédibles. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quel est le fardeau, qui est le plus touché et qu’est-ce qui explique l’écart ?",
+        "example": "",
+        "placeholder": "Décrivez la maladie, le service ou le problème du système de santé en utilisant des données épidémiologiques ou de service crédibles, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "target-population": {
+        "title": "Population cible",
+        "guidance": "Expliquez la taille de la population, son emplacement, ses besoins, ses vulnérabilités et les obstacles à l'accès. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui est prioritaire et pourquoi ? Comment les gens seront-ils atteints de manière sûre et équitable ?",
+        "example": "",
+        "placeholder": "Décrivez la taille, l'emplacement, les besoins, les vulnérabilités et les obstacles à l'accès de la population, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "geographic-context": {
+        "title": "Contexte géographique",
+        "guidance": "Expliquer le contexte du service, de l’infrastructure, de la main-d’œuvre et de l’aiguillage. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles conditions locales affectent l’accès, la qualité et la continuité des soins ?",
+        "example": "",
+        "placeholder": "Décrivez le service, l'infrastructure, la main-d'œuvre et le contexte de référence, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "baseline-evidence": {
+        "title": "Preuve/Référence",
+        "guidance": "Expliquer les indicateurs de santé de départ, la couverture des services et les sources de preuves. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles valeurs de référence seront utilisées pour évaluer le changement ?",
+        "example": "",
+        "placeholder": "Décrivez les indicateurs de santé de départ, la couverture des services et les sources de preuves, en utilisant la situation réelle, les preuves et les projets du demandeur."
+      },
+      "project-goal": {
+        "title": "Objectif du projet",
+        "guidance": "Expliquez le changement à long terme recherché en matière de santé de la population ou de système de santé. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quel état de santé devrait s’améliorer ?",
+        "example": "",
+        "placeholder": "Décrivez le changement à long terme recherché en matière de santé de la population ou de système de santé, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "specific-objectives": {
+        "title": "Objectifs spécifiques",
+        "guidance": "Expliquer les résultats mesurables en matière de prévention, d’accès, de qualité ou de santé. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu’est-ce qui change, pour combien de personnes et pour quand ?",
+        "example": "",
+        "placeholder": "Décrire les résultats mesurables en matière de prévention, d'accès, de qualité ou de santé, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "intervention": {
+        "title": "Intervention",
+        "guidance": "Expliquer l’approche fondée sur des données probantes en matière de prévention, de prestation de services ou de renforcement du système. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Pourquoi l’approche est-elle appropriée et conforme aux orientations pertinentes en matière de santé publique ?",
+        "example": "",
+        "placeholder": "Décrivez l'approche fondée sur des données probantes en matière de prévention, de prestation de services ou de renforcement du système, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "activities": {
+        "title": "Activités",
+        "guidance": "Expliquer les activités de sensibilisation, de formation, de service, de référence, d’approvisionnement ou de système. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Que sera fourni, par quels acteurs qualifiés et à quelle fréquence ?",
+        "example": "",
+        "placeholder": "Décrire les activités de sensibilisation, de formation, de service, d'aiguillage, d'approvisionnement ou de système, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "community-engagement": {
+        "title": "Engagement communautaire",
+        "guidance": "Expliquer la communication fiable, la participation, les commentaires et la prestation culturellement appropriée. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment les communautés vont-elles façonner la mise en œuvre et lutter contre la désinformation ou la méfiance ?",
+        "example": "",
+        "placeholder": "Décrire la communication fiable, la participation, les commentaires et la prestation culturellement appropriée, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "access-inclusion": {
+        "title": "Accès et inclusion",
+        "guidance": "Expliquer l’accès pratique aux groupes mal desservis et la protection contre la discrimination. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles barrières financières, physiques, sociales ou linguistiques doivent être réduites ?",
+        "example": "",
+        "placeholder": "Décrire l'accès pratique pour les groupes mal desservis et la protection contre la discrimination, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "health-outcomes": {
+        "title": "Résultats de santé attendus",
+        "guidance": "Expliquer les changements mesurables dans la couverture, le comportement, la qualité, la morbidité ou la performance du système. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels résultats sont réalistement attribuables au projet ?",
+        "example": "",
+        "placeholder": "Décrire les changements mesurables dans la couverture, le comportement, la qualité, la morbidité ou la performance du système, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "monitoring-evaluation": {
+        "title": "Suivi et évaluation",
+        "guidance": "Expliquer la collecte éthique d’indicateurs de santé, de qualité de service et de portée. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment la qualité, la confidentialité et la ventilation des données seront-elles assurées ?",
+        "example": "",
+        "placeholder": "Décrire la collecte éthique d'indicateurs de santé, de qualité de service et de portée, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "sustainability": {
+        "title": "Durabilité",
+        "guidance": "Expliquer l'intégration dans les services, la capacité de la main-d'œuvre, les fournitures et le financement national ou partenaire. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Que continue-t-il au sein du système de santé après une subvention ?",
+        "example": "",
+        "placeholder": "Décrivez l'intégration dans les services, la capacité de la main-d'œuvre, les fournitures et le financement national ou partenaire, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "partnerships-referrals": {
+        "title": "Partenariats / Systèmes de référencement",
+        "guidance": "Expliquer les rôles des établissements, des autorités, des acteurs communautaires et des partenaires de référence. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment la continuité, l’escalade et la responsabilité fonctionneront-elles entre les partenaires ?",
+        "example": "",
+        "placeholder": "Décrire les rôles des établissements, des autorités, des acteurs communautaires et des partenaires de référence, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "organizational-capacity": {
+        "title": "Capacité organisationnelle",
+        "guidance": "Expliquer l'expertise en santé publique, le personnel qualifié, la protection des données et l'expérience en matière de livraison. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels systèmes démontrent une mise en œuvre sûre, éthique et compétente ?",
+        "example": "",
+        "placeholder": "Décrivez l'expertise en santé publique, le personnel qualifié, l'expérience en matière de protection des données et de prestation, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "budget-narrative": {
+        "title": "Récit budgétaire",
+        "guidance": "Expliquez les coûts du personnel, du service, de la sensibilisation, des produits, de la formation, des données et des références. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quel est le lien entre les coûts et la portée, la qualité et les résultats en matière de santé ?",
+        "example": "",
+        "placeholder": "Décrivez le personnel, le service, la sensibilisation, les produits, la formation, les données et les coûts de référence, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "risk-safeguarding": {
+        "title": "Considérations relatives aux risques et à la sauvegarde",
+        "guidance": "Expliquer les risques cliniques, de confidentialité, de stigmatisation, de sauvegarde et de mise en œuvre sans donner d’avis médical. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu’est-ce qui pourrait nuire aux participants ou à la qualité du service et comment les équipes qualifiées y parviendront-elles ?",
+        "example": "",
+        "placeholder": "Décrire les risques cliniques, de confidentialité, de stigmatisation, de sauvegarde et de mise en œuvre sans donner d'avis médical, en utilisant la situation réelle, les preuves et les projets du demandeur."
+      }
+    }
+  },
+  "research_academic": {
+    "name": "Recherche / Financement académique",
+    "description": "Idéal pour la recherche universitaire et le financement de la recherche.",
+    "sections": {
+      "abstract": {
+        "title": "Abstrait",
+        "guidance": "Expliquez le problème de recherche, les lacunes, l'objectif, les méthodes et la contribution attendue dans un résumé autonome. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu’est-ce qui sera étudié, pourquoi, comment et quelles nouvelles connaissances devraient en résulter ?",
+        "example": "",
+        "placeholder": "Décrivez le problème de recherche, les lacunes, l'objectif, les méthodes et la contribution attendue dans un résumé autonome, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "background": {
+        "title": "Arrière-plan",
+        "guidance": "Expliquez les fondements scientifiques et contextuels nécessaires pour comprendre le sujet. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu’est-ce qui est déjà connu et pourquoi le sujet est-il important dans ce contexte ?",
+        "example": "",
+        "placeholder": "Décrivez les fondements scientifiques et contextuels nécessaires pour comprendre le sujet, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "problem-statement": {
+        "title": "Énoncé du problème",
+        "guidance": "Expliquez le problème de recherche précis et les conséquences de son non-résolution. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelle incertitude spécifique ou quel problème non résolu motive l’étude ?",
+        "example": "",
+        "placeholder": "Décrivez le problème de recherche précis et les conséquences s'il reste non résolu, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "knowledge-gap": {
+        "title": "Littérature/lacune de connaissances",
+        "guidance": "Expliquez les lacunes, les incohérences ou les limites des preuves existantes. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles sont les découvertes existantes, qu’est-ce qui reste inconnu et quelle valeur ajoutée cette étude apportera-t-elle ?",
+        "example": "",
+        "placeholder": "Décrivez les lacunes, les incohérences ou les limites des preuves existantes, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "research-questions": {
+        "title": "Questions de recherche",
+        "guidance": "Expliquez les questions ciblées et auxquelles il est possible de répondre, alignées sur la conception et les preuves disponibles. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "À quoi doit répondre exactement l’étude ? Les sous-questions sont-elles nécessaires ?",
+        "example": "",
+        "placeholder": "Décrivez des questions ciblées et auxquelles il est possible de répondre, alignées sur la conception et les preuves disponibles, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "aim": {
+        "title": "But",
+        "guidance": "Expliquez le seul objectif primordial de la recherche. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu’est-ce que l’étude entend finalement établir, comprendre ou développer ?",
+        "example": "",
+        "placeholder": "Décrivez l'objectif primordial de la recherche, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "specific-objectives": {
+        "title": "Objectifs spécifiques",
+        "guidance": "Expliquez les objectifs séquentiels et mesurables nécessaires pour atteindre le but. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles analyses, comparaisons ou résultats chaque objectif produira-t-il ?",
+        "example": "",
+        "placeholder": "Décrivez les objectifs séquentiels et mesurables nécessaires pour atteindre le but, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "methodology": {
+        "title": "Méthodologie",
+        "guidance": "Expliquez la conception, la justification, le cadre et les procédures de la recherche avec suffisamment de détails pour une évaluation scientifique. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Pourquoi cette conception est-elle appropriée ? Comment la rigueur, la validité ou la fiabilité seront-elles protégées ?",
+        "example": "",
+        "placeholder": "Décrire la conception, la justification, le cadre et les procédures de la recherche avec suffisamment de détails pour une évaluation scientifique, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "study-population": {
+        "title": "Population étudiée / Sources de données",
+        "guidance": "Expliquer la population, l’échantillon, les matériaux, les ensembles de données ou les archives et l’approche de sélection. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui ou quoi est inclus, exclu et échantillonné, et pourquoi ?",
+        "example": "",
+        "placeholder": "Décrire la population, l'échantillon, les matériaux, les ensembles de données ou les archives et l'approche de sélection, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "data-collection": {
+        "title": "Collecte de données",
+        "guidance": "Expliquer les instruments, les variables, les procédures, les contrôles de qualité et la gestion des données. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles données sont collectées, par qui, quand et avec quels outils validés ?",
+        "example": "",
+        "placeholder": "Décrire les instruments, les variables, les procédures, les contrôles de qualité et la gestion des données, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "data-analysis": {
+        "title": "Analyse des données",
+        "guidance": "Expliquer les méthodes d'analyse liées directement à chaque question de recherche. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles techniques statistiques, qualitatives ou informatiques répondront à chaque question ?",
+        "example": "",
+        "placeholder": "Décrire les méthodes d'analyse directement liées à chaque question de recherche, en utilisant la situation réelle, les preuves et les projets du candidat."
+      },
+      "ethics": {
+        "title": "Éthique",
+        "guidance": "Expliquez le consentement, la confidentialité, les risques, les avantages, les approbations et le traitement responsable des données. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles questions éthiques se posent et comment les participants, les communautés et les données seront-ils protégés ?",
+        "example": "",
+        "placeholder": "Décrivez le consentement, la confidentialité, les risques, les avantages, les approbations et le traitement responsable des données, en utilisant la situation réelle, les preuves et les projets du candidat."
+      },
+      "expected-results": {
+        "title": "Résultats attendus",
+        "guidance": "Expliquez les résultats plausibles ou les résultats de la recherche sans tirer de conclusions prédéterminées. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels éléments de preuve, ensembles de données, méthodes ou résultats l’étude devrait-elle générer ?",
+        "example": "",
+        "placeholder": "Décrire des résultats ou des résultats de recherche plausibles sans conclusions prédéterminées, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "significance": {
+        "title": "Importance/impact de la recherche",
+        "guidance": "Expliquer la contribution théorique, pratique, politique ou méthodologique. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui peut utiliser les résultats et quelles décisions ou recherches futures pourraient-ils améliorer ?",
+        "example": "",
+        "placeholder": "Décrire la contribution théorique, pratique, politique ou méthodologique, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "dissemination": {
+        "title": "Dissémination",
+        "guidance": "Expliquer la communication appropriée aux publics universitaires, politiques, praticiens et communautaires. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels produits et canaux atteindront chaque public ?",
+        "example": "",
+        "placeholder": "Décrire la communication appropriée aux publics universitaires, politiques, praticiens et communautaires, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "timeline": {
+        "title": "Chronologie",
+        "guidance": "Expliquer la séquence réaliste des approbations, de la collecte, de l'analyse et du reporting. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels sont les jalons, les dépendances et les dates d’achèvement ?",
+        "example": "",
+        "placeholder": "Décrire la séquence réaliste d'approbations, de collecte, d'analyse et de reporting, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "budget-justification": {
+        "title": "Justification budgétaire",
+        "guidance": "Expliquer la nécessité et le fondement du personnel de recherche, du travail sur le terrain, de l'équipement, des coûts d'analyse et de diffusion. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Pourquoi chaque coût majeur est-il essentiel et proportionné aux méthodes ?",
+        "example": "",
+        "placeholder": "Décrire la nécessité et le fondement du personnel de recherche, du travail sur le terrain, de l'équipement, des coûts d'analyse et de diffusion, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "research-team": {
+        "title": "Équipe de recherche",
+        "guidance": "Expliquer l’expertise complémentaire, les responsabilités et le soutien institutionnel des enquêteurs. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui dirige chaque fonction méthodologique et de gestion ?",
+        "example": "",
+        "placeholder": "Décrire l'expertise complémentaire, les responsabilités et le soutien institutionnel des enquêteurs, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "risks-limitations": {
+        "title": "Risques / Limites",
+        "guidance": "Expliquer les limites et les mesures d’atténuation scientifiques, de recrutement, de données, opérationnelles et interprétatives. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu’est-ce qui pourrait affaiblir la faisabilité ou l’inférence, et comment y remédier de manière transparente ?",
+        "example": "",
+        "placeholder": "Décrire les limites et les mesures d'atténuation scientifiques, de recrutement, de données, opérationnelles et interprétatives, en utilisant la situation réelle, les preuves et les plans du candidat."
+      }
+    }
+  },
+  "fellowship_leadership": {
+    "name": "Bourse / Leadership",
+    "description": "Idéal pour les programmes de leadership et de développement professionnel.",
+    "sections": {
+      "background": {
+        "title": "Parcours personnel/professionnel",
+        "guidance": "Expliquez le véritable parcours du candidat, son travail actuel, ses valeurs et le contexte pertinent. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles expériences ont façonné le candidat et sont directement liées à cette bourse ?",
+        "example": "",
+        "placeholder": "Décrivez le véritable parcours du candidat, son travail actuel, ses valeurs et le contexte pertinent, en utilisant la situation réelle, les preuves et les projets du candidat."
+      },
+      "motivation": {
+        "title": "Motivation",
+        "guidance": "Expliquez la véritable raison de votre candidature et le problème ou l'opportunité qui a motivé cette décision. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Pourquoi cette opportunité, au-delà du prestige ? Quel engagement personnel soutient l'intérêt du candidat ?",
+        "example": "",
+        "placeholder": "Décrivez la véritable raison de votre candidature et le problème ou l'opportunité qui a motivé cette décision, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "leadership-experience": {
+        "title": "Expérience de leadership",
+        "guidance": "Expliquez un exemple spécifique d'influence sur des personnes ou des systèmes, y compris les décisions, les défis et les résultats. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelle était la situation ? Qu’a fait personnellement le demandeur ? Qu’est-ce qui a changé et qu’est-ce qui a été appris ?",
+        "example": "",
+        "placeholder": "Décrivez un exemple spécifique d'influence sur des personnes ou des systèmes, y compris des décisions, des défis et des résultats, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "significant-achievement": {
+        "title": "Réalisation importante",
+        "guidance": "Expliquez une réalisation significative et la contribution distincte du candidat. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Pourquoi était-ce important ? Quels obstacles ont été surmontés ? Quelle preuve montre le résultat ?",
+        "example": "",
+        "placeholder": "Décrivez une réalisation significative et la contribution distincte du candidat, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "issue-of-interest": {
+        "title": "Défi ou question d’intérêt",
+        "guidance": "Expliquez la question dans laquelle le candidat est engagé et son point de vue éclairé à ce sujet. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui est concerné, quelle est la cause du problème et pourquoi est-ce important sur le plan personnel et professionnel ?",
+        "example": "",
+        "placeholder": "Décrivez la question sur laquelle le demandeur s'engage et son point de vue éclairé à ce sujet, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "proposed-project": {
+        "title": "Projet proposé/domaine de travail",
+        "guidance": "Expliquez le travail que le candidat envisage de faire progresser pendant ou après la bourse. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu’est-ce que le candidat va explorer ou construire, avec qui et vers quel résultat ?",
+        "example": "",
+        "placeholder": "Décrivez le travail que le candidat envisage de faire progresser pendant ou après la bourse, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "community-impact": {
+        "title": "Impact sur la communauté",
+        "guidance": "Expliquez comment le travail du candidat a bénéficié ou bénéficiera à une communauté définie. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui en profite, comment sont-ils impliqués et quelles preuves démontreront un impact significatif ?",
+        "example": "",
+        "placeholder": "Décrivez comment le travail du candidat a bénéficié ou bénéficiera à une communauté définie, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "career-goals": {
+        "title": "Objectifs de carrière",
+        "guidance": "Expliquer les objectifs spécifiques à court et à long terme fondés sur la trajectoire réelle du candidat. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quel rôle ou quelle contribution le candidat souhaite-t-il jouer au cours des deux à dix prochaines années ?",
+        "example": "",
+        "placeholder": "Décrivez des objectifs spécifiques à court et à long terme fondés sur la trajectoire réelle du candidat, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "why-fellowship": {
+        "title": "Pourquoi cette bourse",
+        "guidance": "Expliquez les caractéristiques spécifiques du programme, le réseau ou l'apprentissage qui correspondent aux objectifs du candidat. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels éléments nommés sont pertinents et pourquoi ne peuvent-ils pas être obtenus aussi efficacement ailleurs ?",
+        "example": "",
+        "placeholder": "Décrivez les caractéristiques spécifiques du programme, le réseau ou l'apprentissage qui correspondent aux objectifs du candidat, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "why-now": {
+        "title": "Pourquoi maintenant",
+        "guidance": "Expliquez pourquoi le stade et les circonstances actuels du demandeur en font le bon moment. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelle transition, opportunité ou contrainte rend la participation opportune ?",
+        "example": "",
+        "placeholder": "Décrivez pourquoi le stade et les circonstances actuels du demandeur en font le bon moment, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "applicant-contribution": {
+        "title": "Ce que le candidat apportera",
+        "guidance": "Expliquez l'expérience vécue, l'expertise, la perspective et la générosité que le candidat apporte à la cohorte. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Comment les pairs et la communauté des boursiers bénéficieront-ils de la participation du candidat ?",
+        "example": "",
+        "placeholder": "Décrivez l'expérience vécue, l'expertise, la perspective et la générosité que le candidat apporte à la cohorte, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "learning-goals": {
+        "title": "Ce que le candidat espère apprendre",
+        "guidance": "Expliquez les capacités, les perspectives et les relations spécifiques que le candidat entend développer. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles lacunes la bourse contribuera-t-elle à combler et comment l’apprentissage sera-t-il appliqué ?",
+        "example": "",
+        "placeholder": "Décrire les capacités, les perspectives et les relations spécifiques que le candidat entend développer, en utilisant sa situation réelle, ses preuves et ses plans."
+      },
+      "post-fellowship-plan": {
+        "title": "Plan post-bourse",
+        "guidance": "Expliquer les actions concrètes pour appliquer l'apprentissage, entretenir les relations et multiplier l'impact. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Que se passe-t-il au cours de la première année suivant le programme et qui sera impliqué ?",
+        "example": "",
+        "placeholder": "Décrire des actions concrètes pour appliquer l'apprentissage, entretenir des relations et multiplier l'impact, en utilisant la situation réelle, les preuves et les plans du candidat."
+      }
+    }
+  },
+  "scholarship_study": {
+    "name": "Bourse / Financement d'études",
+    "description": "Idéal pour les bourses et le financement des études universitaires.",
+    "sections": {
+      "personal-background": {
+        "title": "Antécédents personnels",
+        "guidance": "Expliquez les expériences formatrices du candidat et le contexte pertinent à son parcours éducatif. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles expériences ont façonné les intérêts, la résilience et la perspective du candidat ?",
+        "example": "",
+        "placeholder": "Décrivez les expériences formatrices du candidat et le contexte pertinent à son parcours éducatif, en utilisant la situation réelle, les preuves et les projets du candidat."
+      },
+      "academic-background": {
+        "title": "Formation académique",
+        "guidance": "Expliquer le programme d'études, la préparation et le développement intellectuel du candidat. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qu'est-ce qui a été étudié et comment a-t-il préparé le candidat au prochain programme ?",
+        "example": "",
+        "placeholder": "Décrivez le programme d'études, la préparation et le développement intellectuel du candidat, en utilisant la situation réelle, les preuves et les projets du candidat."
+      },
+      "academic-achievements": {
+        "title": "Réalisations académiques",
+        "guidance": "Expliquez les réalisations académiques spécifiques avec le contexte plutôt qu'un relevé de notes répété. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels résultats, projets ou distinctions démontrent le mieux la préparation et pourquoi ?",
+        "example": "",
+        "placeholder": "Décrivez les réalisations académiques spécifiques avec leur contexte plutôt qu'un relevé de notes répété, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "motivation-for-study": {
+        "title": "Motivation pour l'étude",
+        "guidance": "Expliquez les véritables raisons intellectuelles et pratiques de poursuivre des études plus approfondies. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles questions ou défis du monde réel motivent cette décision ?",
+        "example": "",
+        "placeholder": "Décrire les véritables raisons intellectuelles et pratiques de poursuivre des études plus approfondies, en utilisant la situation réelle, les preuves et les projets du candidat."
+      },
+      "chosen-field": {
+        "title": "Domaine/Programme choisi",
+        "guidance": "Expliquez pourquoi le domaine et le programme correspondent à la préparation et aux objectifs du candidat. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles matières, méthodes ou spécialisations sont essentielles au projet du candidat ?",
+        "example": "",
+        "placeholder": "Décrivez pourquoi le domaine et le programme correspondent à la préparation et aux objectifs du candidat, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "why-institution": {
+        "title": "Pourquoi cette institution/programme",
+        "guidance": "Expliquez les cours, professeurs, installations ou approches spécifiques qui font du programme un choix idéal. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles fonctionnalités nommées sont importantes et comment le candidat les utilisera-t-il ?",
+        "example": "",
+        "placeholder": "Décrivez les cours, les professeurs, les installations ou les approches spécifiques qui rendent le programme parfaitement adapté, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "career-goals": {
+        "title": "Objectifs de carrière",
+        "guidance": "Expliquez les objectifs crédibles à court et à long terme liés à l’étude proposée. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quel travail le candidat poursuivra-t-il après l'obtention de son diplôme et quelles capacités sont requises ?",
+        "example": "",
+        "placeholder": "Décrivez les objectifs crédibles à court et à long terme liés à l'étude proposée, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "leadership-extracurricular": {
+        "title": "Leadership / Expérience parascolaire",
+        "guidance": "Expliquer les expériences et leçons significatives en matière de leadership, de service, de travail ou parascolaires. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelle a été la contribution personnelle du candidat et qu’est-ce qui a changé en conséquence ?",
+        "example": "",
+        "placeholder": "Décrire des expériences et des leçons significatives en matière de leadership, de service, de travail ou parascolaires, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "community-contribution": {
+        "title": "Contribution communautaire",
+        "guidance": "Expliquez comment le candidat a contribué et a l'intention de contribuer à une communauté définie. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Qui en profite, qu’est-ce qui a déjà été fait et comment l’étude renforcera-t-elle la contribution future ?",
+        "example": "",
+        "placeholder": "Décrivez comment le demandeur a contribué et a l'intention de contribuer à une communauté définie, en utilisant la situation réelle, les preuves et les plans du demandeur."
+      },
+      "financial-need": {
+        "title": "Besoin financier",
+        "guidance": "Expliquez les circonstances financières pertinentes, les ressources disponibles et le déficit de financement de manière respectueuse et factuelle. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quels sont les coûts qui ne peuvent pas être couverts, quel soutien existe et comment le financement permettrait-il la participation ?",
+        "example": "",
+        "placeholder": "Décrivez la situation financière pertinente, les ressources disponibles et le déficit de financement de manière respectueuse et factuelle, en utilisant la situation réelle, les preuves et les projets du candidat."
+      },
+      "future-impact": {
+        "title": "Impact futur",
+        "guidance": "Expliquez comment les connaissances acquises et les réseaux créeront une valeur réaliste après l'étude. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles personnes, institutions ou secteurs pourraient en bénéficier, et à travers quelles actions ?",
+        "example": "",
+        "placeholder": "Décrivez comment les connaissances et les réseaux acquis créeront une valeur réaliste après l'étude, en utilisant la situation réelle, les preuves et les plans du candidat."
+      },
+      "strong-candidate": {
+        "title": "Pourquoi le candidat est un candidat fort",
+        "guidance": "Expliquez les preuves les plus solides de préparation, d’adéquation, de caractère et de contribution future sans allégations génériques. Utilisez des détails spécifiques et vérifiables issus du contexte réel du candidat. Reliez les preuves, les actions planifiées et les résultats escomptés au lieu de vous fier à des affirmations générales.",
+        "prompt": "Quelles sont les deux ou trois qualités prouvées par des expériences concrètes ?",
+        "example": "",
+        "placeholder": "Décrivez les preuves les plus solides de préparation, d'adéquation, de caractère et de contribution future sans allégations génériques, en utilisant la situation réelle, les preuves et les plans du candidat."
+      }
+    }
+  }
+}

@@ -8,6 +8,7 @@ export interface ProposalDocumentSourceSection {
 }
 
 export interface ProposalDocumentSource {
+  locale?: string;
   opportunityTitle: string;
   fundingOrganization?: string;
   templateTitle: string;
@@ -24,7 +25,7 @@ export interface ProposalDocumentSection extends ProposalDocumentSourceSection {
 
 export interface ProposalDocumentData {
   metadata: {
-    title: string; fundingOrganization: string; applicantDisplayName: string; applicantType: string; amountRequested?: number; currency?: string; projectLocation: string; projectDuration: string; contactPerson: string; contactEmail: string;
+    locale: string; title: string; fundingOrganization: string; applicantDisplayName: string; applicantType: string; amountRequested?: number; currency?: string; projectLocation: string; projectDuration: string; contactPerson: string; contactEmail: string;
     opportunityTitle: string;
     preparedOn: string;
     status: "draft" | "completed";
@@ -38,6 +39,8 @@ function cleanParagraphs(content: string) {
 }
 
 export function buildProposalDocument(source: ProposalDocumentSource, mode: "preview" | "export" = "preview"): ProposalDocumentData {
+  const french = source.locale === "fr";
+  const locale = french ? "fr-CI" : "en-GB";
   const ordered = source.sections.filter((section) => section.enabled !== false).slice().sort((a, b) => a.order - b.order);
   const incompleteRequiredCount = ordered.filter((section) => section.required && !section.content.trim()).length;
   const sections = ordered.filter((section) => mode === "preview" || section.required || section.content.trim()).map((section) => ({
@@ -48,10 +51,11 @@ export function buildProposalDocument(source: ProposalDocumentSource, mode: "pre
   }));
   return {
     metadata: {
-      title: source.proposalMetadata?.projectTitle || source.opportunityTitle || "Proposal",
+      locale: source.locale || "en",
+      title: source.proposalMetadata?.projectTitle || source.opportunityTitle || (french ? "Proposition" : "Proposal"),
       opportunityTitle: source.opportunityTitle,
       fundingOrganization: source.fundingOrganization || "",
-      applicantDisplayName: source.proposalMetadata?.applicantType === "individual" ? source.proposalMetadata.applicantName || "Applicant" : source.proposalMetadata?.applicantOrganization || source.proposalMetadata?.applicantName || "Applicant",
+      applicantDisplayName: source.proposalMetadata?.applicantType === "individual" ? source.proposalMetadata.applicantName || (french ? "Candidat" : "Applicant") : source.proposalMetadata?.applicantOrganization || source.proposalMetadata?.applicantName || (french ? "Candidat" : "Applicant"),
       applicantType: source.proposalMetadata?.applicantType || "",
       amountRequested: source.proposalMetadata?.amountRequested,
       currency: source.proposalMetadata?.currency,
@@ -59,7 +63,7 @@ export function buildProposalDocument(source: ProposalDocumentSource, mode: "pre
       projectDuration: source.proposalMetadata?.projectDuration || "",
       contactPerson: source.proposalMetadata?.contactPerson || "",
       contactEmail: source.proposalMetadata?.contactEmail || "",
-      preparedOn: new Intl.DateTimeFormat("en", { month: "long", year: "numeric", timeZone: "UTC" }).format(new Date()),
+      preparedOn: new Intl.DateTimeFormat(locale, { month: "long", year: "numeric", timeZone: "UTC" }).format(new Date()),
       status: source.status,
     },
     sections,
@@ -72,7 +76,7 @@ export function sanitizeProposalFilename(title: string) {
   return `${safe || "proposal"}-Proposal`;
 }
 
-export function formatFundingAmount(amount?: number, currency?: string) {
+export function formatFundingAmount(amount?: number, currency?: string, locale = "en") {
   if (!amount || !currency) return "";
-  return new Intl.NumberFormat("en", { style: "currency", currency, maximumFractionDigits: 0 }).format(amount);
+  return new Intl.NumberFormat(locale === "fr" ? "fr-CI" : "en-US", { style: "currency", currency, maximumFractionDigits: 0 }).format(amount);
 }
