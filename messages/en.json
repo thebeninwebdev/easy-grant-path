@@ -899,6 +899,7 @@
       "continueToPayment": "Continue to secure payment",
       "openingCheckout": "Opening payment…",
       "checkoutError": "The payment could not be initiated.",
+      "legalNotice": "By completing your purchase, you agree to our <terms>Terms of Service</terms> and acknowledge our <privacy>Privacy Policy</privacy> and <refund>Refund Policy</refund>.",
       "whatsappRequired": "Enter a WhatsApp number in international format, for example +225XXXXXXXXXX."
     },
     "starter": {
@@ -1018,6 +1019,7 @@
       "viewPaymentHistory": "View payment history"
     },
     "checkoutError": "Checkout could not be started.",
+    "legalNotice": "By completing your purchase, you agree to our <terms>Terms of Service</terms> and acknowledge our <privacy>Privacy Policy</privacy> and <refund>Refund Policy</refund>.",
     "openingCheckout": "Opening secure checkout…",
     "activate": {
       "title": "Unlock full access",
@@ -1195,6 +1197,391 @@
       },
       "paidNote": "Payment received — we will contact you on WhatsApp.",
       "backToDashboard": "Return to dashboard"
+    }
+  },
+  "Legal": {
+    "kicker": "Legal information",
+    "skipToContent": "Skip to policy content",
+    "homeLabel": "EasyGrantPath home",
+    "contact": "Contact",
+    "contents": "On this page",
+    "contentsLabel": "Policy contents",
+    "lastUpdated": "Last updated: {date}",
+    "relatedPolicies": "Related policies",
+    "footerLabel": "Legal and support links",
+    "terms": {
+      "title": "Terms of Service",
+      "shortTitle": "Terms of Service",
+      "summary": "These terms explain the rules for using EasyGrantPath, purchasing fixed-duration platform access, and requesting optional proposal support.",
+      "meta": {
+        "title": "Terms of Service",
+        "description": "Terms governing EasyGrantPath platform access, payments, proposal services, accounts, and acceptable use."
+      },
+      "sections": [
+        {
+          "id": "acceptance",
+          "title": "1. Acceptance of these terms",
+          "paragraphs": [
+            "These Terms of Service form an agreement between you and the operator of EasyGrantPath. By accessing the website, creating an account, or purchasing a service, you agree to these terms and the policies linked from them.",
+            "If you do not agree, do not use the platform or complete a purchase. If you use EasyGrantPath for an organization, you confirm that you are authorized to act for it."
+          ]
+        },
+        {
+          "id": "services",
+          "title": "2. What EasyGrantPath provides",
+          "paragraphs": [
+            "EasyGrantPath is a digital opportunity-discovery and application-support platform primarily serving Côte d'Ivoire and West Africa. It provides access to funding information, self-service proposal tools, and optional paid proposal review or writing assistance.",
+            "EasyGrantPath is not a grant-awarding body. Payments are for platform access or professional support, never for a grant or a promise of funding."
+          ]
+        },
+        {
+          "id": "eligibility",
+          "title": "3. Eligibility and registration",
+          "paragraphs": [
+            "You must have legal capacity to enter this agreement and provide accurate, current information. Registration requires a name, email address, password, and email verification. Additional profile details may be needed for particular features.",
+            "Do not create an account using another person's identity or misrepresent yourself or an organization."
+          ]
+        },
+        {
+          "id": "account-security",
+          "title": "4. Your account and responsibilities",
+          "paragraphs": [
+            "You are responsible for keeping sign-in credentials confidential, activity under your account, and promptly reporting suspected unauthorized use. Keep contact and profile details accurate.",
+            "You are responsible for reviewing opportunity requirements and for the truth, legality, and completeness of applications and documents you prepare or submit."
+          ]
+        },
+        {
+          "id": "platform-access",
+          "title": "5. Platform access, price, and duration",
+          "paragraphs": [
+            "Platform access is a one-off purchase for 30 days at the price and in the XOF currency shown before checkout. It is not an automatically renewing subscription.",
+            "After Paystack verifies payment, access starts at verification if prior access has expired. If access is active, another 30 days is added to the existing expiry. Access ends at the displayed expiry unless you purchase another period."
+          ]
+        },
+        {
+          "id": "payments",
+          "title": "6. Payments",
+          "paragraphs": [
+            "New purchases use Paystack-hosted checkout. Available methods depend on channels enabled by Paystack and the merchant account. Historical records may identify Flutterwave as provider.",
+            "Price, currency, product, and status are verified on the server before access or service is confirmed. You authorize the payment provider to process transaction information under its own terms and privacy practices."
+          ]
+        },
+        {
+          "id": "professional-services",
+          "title": "7. Proposal review and writing assistance",
+          "paragraphs": [
+            "Proposal review and proposal writing or full assistance are separate one-off services. After verified payment, the administrator is notified and the request appears on the administration dashboard.",
+            "Our team contacts you on the WhatsApp number supplied at checkout to agree scope, material, timing, and next steps. Work takes place outside the EasyGrantPath website; there is no online delivery workspace for these paid services.",
+            "You remain responsible for checking and approving final content and submitting it to the funder."
+          ]
+        },
+        {
+          "id": "acceptable-use",
+          "title": "8. Acceptable use",
+          "paragraphs": [
+            "Use EasyGrantPath only for lawful purposes and in a way that respects other users, funders, and our systems."
+          ],
+          "bullets": [
+            "Do not bypass access controls, probe security, introduce malicious code, or disrupt service.",
+            "Do not copy, resell, republish, or systematically extract platform content without legal or written permission.",
+            "Do not submit fraudulent applications, impersonate others, infringe rights, or upload unlawful or misleading material.",
+            "Do not use automated access that imposes unreasonable load or violates third-party source terms."
+          ]
+        },
+        {
+          "id": "opportunity-information",
+          "title": "9. Opportunity and third-party information",
+          "paragraphs": [
+            "Opportunity details come from funders and third parties and may change without notice. We aim to present credible information but do not warrant every listing is complete, error-free, current, or available.",
+            "Confirm deadlines, eligibility, conditions, and instructions on the official source. Third-party sites are governed by their own terms and policies."
+          ]
+        },
+        {
+          "id": "no-guarantee",
+          "title": "10. No guarantee of funding",
+          "paragraphs": [
+            "EasyGrantPath does not decide awards and cannot guarantee eligibility, selection, approval, payment, or any funding result. Recommendations, templates, reviews, and writing assistance are support, not a promise of success.",
+            "Funding decisions remain entirely with the relevant third-party funder."
+          ]
+        },
+        {
+          "id": "intellectual-property",
+          "title": "11. Intellectual property",
+          "paragraphs": [
+            "EasyGrantPath's original design, software, branding, curated material, templates, and guidance are protected by applicable law. You receive a limited, personal, non-exclusive, non-transferable right to use the platform for its intended purpose.",
+            "You retain rights in original content you enter or provide. You permit us to host, process, review, and return it as needed to provide the requested service."
+          ]
+        },
+        {
+          "id": "suspension",
+          "title": "12. Suspension and termination",
+          "paragraphs": [
+            "We may suspend or terminate access where reasonably necessary for fraud, non-payment, serious or repeated breach, security risk, unlawful activity, or harm. Where appropriate, we may provide notice or an opportunity to correct the issue.",
+            "Termination does not remove existing payment obligations or provisions that should continue by their nature."
+          ]
+        },
+        {
+          "id": "expiration-cancellation",
+          "title": "13. Expiration and cancellation",
+          "paragraphs": [
+            "Platform access expires after the purchased period and never renews automatically. You can stop using it and choose not to buy another period.",
+            "Cancellation of proposal services depends on whether work has begun and follows the Refund and Cancellation Policy."
+          ]
+        },
+        {
+          "id": "refunds",
+          "title": "14. Refunds",
+          "paragraphs": [
+            "Refund eligibility and requests are governed by our Refund and Cancellation Policy. It forms part of these terms and does not limit rights that cannot lawfully be excluded."
+          ]
+        },
+        {
+          "id": "availability",
+          "title": "15. Availability and interruptions",
+          "paragraphs": [
+            "We aim to keep EasyGrantPath available but do not promise uninterrupted or error-free operation. Maintenance, connectivity, provider outages, security events, or circumstances outside reasonable control may interrupt service.",
+            "We may improve, replace, or discontinue features and will take reasonable steps where a material change affects a paid service."
+          ]
+        },
+        {
+          "id": "liability",
+          "title": "16. Reasonable limitation of liability",
+          "paragraphs": [
+            "To the extent permitted by law, EasyGrantPath is not liable for funding decisions, missed third-party deadlines, funder changes, or indirect or consequential loss. Nothing excludes liability or consumer rights that cannot legally be excluded.",
+            "Independently verify important information and keep copies of application material."
+          ]
+        },
+        {
+          "id": "updates",
+          "title": "17. Changes to these terms",
+          "paragraphs": [
+            "We may update these terms for service, legal, or operational changes. We will publish a new last-updated date and provide additional notice where appropriate. Continued use after an update takes effect means you accept it."
+          ]
+        },
+        {
+          "id": "law-disputes",
+          "title": "18. Applicable law and disputes",
+          "paragraphs": [
+            "EasyGrantPath principally serves customers in Côte d'Ivoire and West Africa. Applicable law and courts depend on the verified legal identity and establishment of the operator, your location, and mandatory consumer rules.",
+            "Contact us before formal proceedings so we can try to resolve the concern fairly. Nothing removes access to a court, regulator, or mandatory remedy."
+          ]
+        },
+        {
+          "id": "contact",
+          "title": "19. Contact",
+          "paragraphs": [
+            "Questions about these terms or the service can be sent to support@easygrantpath.com."
+          ]
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "shortTitle": "Privacy Policy",
+      "summary": "This policy explains what personal information EasyGrantPath handles, why it is used, who may receive it, and the choices available to you.",
+      "meta": {
+        "title": "Privacy Policy",
+        "description": "How EasyGrantPath collects, uses, stores, shares, and protects account, payment, proposal, and service information."
+      },
+      "sections": [
+        {
+          "id": "introduction",
+          "title": "1. Who this policy covers",
+          "paragraphs": [
+            "This policy applies to EasyGrantPath visitors, account holders, paying customers, and people who submit information for proposal or verification services.",
+            "The operator's verified legal name, registration details, and physical address are not published in the current product configuration and should be confirmed before final legal approval."
+          ]
+        },
+        {
+          "id": "information-collected",
+          "title": "2. Account and profile information",
+          "paragraphs": [
+            "At registration, we collect name, email, password-based authentication record, email-verification status, session and password-reset information, and account role or status.",
+            "Profiles may include full name, applicant type, country, interests, opportunity preferences, goals, organization details, saved opportunities, access status, and activity dates. A WhatsApp number is collected for paid assistance and saved to your profile only when you choose that option."
+          ]
+        },
+        {
+          "id": "verification",
+          "title": "3. Identity and organization verification",
+          "paragraphs": [
+            "If you use verification features, we may collect identity-document type and files, organization registration documents, an authorized representative's identification, file metadata, submission status, review notes, and review history.",
+            "These files may contain sensitive identifying information and are collected only for the relevant verification feature."
+          ]
+        },
+        {
+          "id": "payments",
+          "title": "4. Payment information",
+          "paragraphs": [
+            "We record customer name and email, product, amount, currency, transaction reference, provider, status, payment method description, timestamps, and related service-request information.",
+            "New payments use Paystack-hosted checkout. EasyGrantPath does not directly receive full card, bank, or mobile-money credentials entered there. Paystack processes them under its own privacy terms. Historical records may refer to Flutterwave."
+          ]
+        },
+        {
+          "id": "proposals-documents",
+          "title": "5. Proposals and assistance material",
+          "paragraphs": [
+            "The self-service workspace stores project metadata, applicant and organization information, funding amounts, locations, contact details, draft answers, progress, and proposal content you enter.",
+            "Paid review or writing is coordinated through WhatsApp. Material shared through WhatsApp or another agreed channel is handled to deliver the service and may also be subject to that provider's privacy practices."
+          ]
+        },
+        {
+          "id": "technical-information",
+          "title": "6. Cookies and technical information",
+          "paragraphs": [
+            "EasyGrantPath uses cookies or similar storage for sign-in sessions, security, language preference, and core operation. Servers and providers may process IP address, browser or device details, request times, errors, and security or delivery logs.",
+            "The current application does not identify a dedicated third-party advertising or behavioral analytics service. This policy and required controls should be updated if one is introduced."
+          ]
+        },
+        {
+          "id": "uses",
+          "title": "7. How we use information",
+          "paragraphs": [
+            "We use information to create and secure accounts; verify emails; personalize opportunity access; store proposals and saved items; process payments; activate access; coordinate assistance; review verification submissions; send service emails; support customers; prevent abuse; maintain records; and improve reliability.",
+            "Payment for access or assistance is never treated as evidence that you are entitled to a grant."
+          ]
+        },
+        {
+          "id": "legal-bases",
+          "title": "8. Legal bases where applicable",
+          "paragraphs": [
+            "Depending on applicable law, processing may be needed to perform our contract, take requested pre-contract steps, comply with legal duties, protect legitimate interests such as security and improvement, or act on consent.",
+            "Where consent applies, you may withdraw it for future processing. Withdrawal does not invalidate earlier lawful processing and may affect a feature that needs the information."
+          ]
+        },
+        {
+          "id": "sharing",
+          "title": "9. Service providers and sharing",
+          "paragraphs": [
+            "We share information as reasonably needed with providers supporting the service, including Paystack for payments, WhatsApp for requested communications, email-delivery providers, database and hosting providers, private verification-file storage, and technical suppliers.",
+            "We may disclose information where law requires, to protect users or the platform, during a business reorganization, or at your direction. We do not claim information is never shared because these operational disclosures are necessary."
+          ]
+        },
+        {
+          "id": "storage-security",
+          "title": "10. Storage and security",
+          "paragraphs": [
+            "Account, profile, proposal, payment, and request records use configured database infrastructure. Verification documents use configured private file storage. We apply access controls, server-side payment verification, restricted administrative functions, and reasonable safeguards.",
+            "No online system is completely secure. Avoid sending unnecessary sensitive information and contact us promptly about suspected incidents."
+          ]
+        },
+        {
+          "id": "retention",
+          "title": "11. Retention and deletion",
+          "paragraphs": [
+            "We retain information as needed to provide accounts and services, keep transaction and support records, resolve disputes, meet legal or accounting duties, protect security, and enforce agreements. Duration varies by record and legal requirement.",
+            "There is no single automatic deletion period for every category. You may request deletion, subject to records that must be retained for legal, security, payment, or dispute purposes."
+          ]
+        },
+        {
+          "id": "international-transfers",
+          "title": "12. International processing",
+          "paragraphs": [
+            "EasyGrantPath serves West African users and uses technology and communications providers that may process information in other countries with different data-protection rules.",
+            "Where required, reasonable lawful safeguards should be used. The operator should verify production-provider locations and transfer mechanisms during legal review."
+          ]
+        },
+        {
+          "id": "rights",
+          "title": "13. Your privacy rights",
+          "paragraphs": [
+            "Depending on applicable law, you may request access, correction, deletion, restriction, objection, portability, or consent withdrawal, and may complain to a competent authority.",
+            "Email support@easygrantpath.com from your registered address and describe your request. We may verify identity and may retain or refuse part where law permits or requires."
+          ]
+        },
+        {
+          "id": "children",
+          "title": "14. Children's privacy",
+          "paragraphs": [
+            "EasyGrantPath is not directed to children who cannot lawfully consent or enter these terms. A parent, guardian, or authorized institution should be involved where law requires.",
+            "Contact us if you believe a child provided information without appropriate authorization."
+          ]
+        },
+        {
+          "id": "changes-contact",
+          "title": "15. Changes and contact",
+          "paragraphs": [
+            "We may update this policy as services, providers, or legal requirements change. We will publish the current version and date, with additional notice for material changes where appropriate.",
+            "Privacy questions and requests can be sent to support@easygrantpath.com."
+          ]
+        }
+      ]
+    },
+    "refund": {
+      "title": "Refund and Cancellation Policy",
+      "shortTitle": "Refund & Cancellation",
+      "summary": "This policy explains how cancellations, duplicate or incorrect charges, access failures, and refund requests are handled for each EasyGrantPath product.",
+      "meta": {
+        "title": "Refund and Cancellation Policy",
+        "description": "Refund and cancellation rules for EasyGrantPath platform access, proposal review, writing assistance, and payment errors."
+      },
+      "sections": [
+        {
+          "id": "general",
+          "title": "1. Fair review of requests",
+          "paragraphs": [
+            "Requests are reviewed fairly based on the product, payment record, whether access or work was provided, committed costs, and applicable law. This policy does not impose a blanket no-refund rule.",
+            "Nothing here limits consumer-protection rights or remedies that cannot lawfully be excluded."
+          ]
+        },
+        {
+          "id": "platform-access",
+          "title": "2. Platform access",
+          "paragraphs": [
+            "Platform access provides 30 days. After Paystack verifies payment, access begins at verification if prior access expired, or 30 days are added to an active period. It is a one-off purchase and never renews automatically.",
+            "There is no recurring plan to cancel. Stop using the platform and do not buy another period. If access was correctly activated, a refund is not automatic merely because you changed your mind or did not use every day; requests are still reviewed under applicable law.",
+            "A refund may be appropriate for a confirmed duplicate or incorrect charge, or where successful payment did not provide purchased access and we cannot correct it within a reasonable time."
+          ]
+        },
+        {
+          "id": "proposal-review",
+          "title": "3. Proposal review",
+          "paragraphs": [
+            "You may cancel before review work starts. If no work or non-recoverable cost is committed, the request will normally qualify for a full refund, subject to provider and legal requirements.",
+            "After work begins, we assess work performed, agreed scope, and committed costs; any refund may be partial. After completed delivery, eligibility depends on service failure, duplicate or incorrect charge, or applicable rights."
+          ]
+        },
+        {
+          "id": "proposal-writing",
+          "title": "4. Proposal writing or full assistance",
+          "paragraphs": [
+            "You may cancel before work begins. If no work or non-recoverable cost is committed, the request will normally qualify for a full refund, subject to provider and legal requirements.",
+            "Once research, drafting, consultation, or agreed work begins, completed work and committed costs affect any refund. A fair partial refund may cover the unperformed portion. Completed work is not automatically refundable unless service was not provided as agreed or law requires a remedy."
+          ]
+        },
+        {
+          "id": "payment-errors",
+          "title": "5. Payment errors and wrong purchases",
+          "paragraphs": [
+            "Contact us promptly for a duplicate payment, a failed transaction where you were charged, successful payment without access or a service request, an incorrect amount, or purchase of the wrong service.",
+            "We will check EasyGrantPath and provider records. A pending or failed display alone does not prove funds settled. If a successful charge is confirmed, we will correct access or service, reverse an eligible duplicate or incorrect charge, or explain next steps.",
+            "For a wrong service, do not begin or accept work. Contact us to assess cancellation, refund, or a documented transfer where operationally possible."
+          ]
+        },
+        {
+          "id": "request-process",
+          "title": "6. How to request a refund",
+          "paragraphs": [
+            "Email support@easygrantpath.com from your registered address. Include full name, registered email, transaction reference, purchase date, product, amount, reason, and any receipt or screenshot that identifies the transaction.",
+            "For professional services, state whether our team contacted you, work started, and anything delivered. Missing information may delay review. Never email full card or bank details, mobile-money PIN, password, or one-time code."
+          ]
+        },
+        {
+          "id": "processing",
+          "title": "7. Review and processing time",
+          "paragraphs": [
+            "We investigate as reasonably practicable. We do not promise a fixed period because verification, payment method, Paystack procedures, banking networks, and applicable rules affect timing.",
+            "Approved refunds normally use the appropriate provider or original route where supported. Your bank, mobile-money operator, issuer, or provider may need additional time before funds appear."
+          ]
+        },
+        {
+          "id": "statutory-rights",
+          "title": "8. Statutory rights and contact",
+          "paragraphs": [
+            "Nothing in this policy overrides mandatory consumer, payment, or contract rights. Where a non-waivable legal right conflicts with this policy, that right prevails.",
+            "Questions, cancellations, and refund requests should be sent to support@easygrantpath.com."
+          ]
+        }
+      ]
     }
   },
   "Errors": {

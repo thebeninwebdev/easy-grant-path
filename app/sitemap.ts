@@ -1,6 +1,6 @@
 import type {MetadataRoute} from "next";
 
-const localizedRoutes = ["", "/contact", "/sign-in", "/sign-up", "/forgot-password"] as const;
+const localizedRoutes = ["", "/contact", "/terms", "/privacy", "/refund-policy", "/sign-in", "/sign-up", "/forgot-password"] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = (process.env.NEXT_PUBLIC_APP_URL || "https://easygrantpath.com").replace(/\/$/, "");
