@@ -22,7 +22,8 @@ export function Homepage({ opportunityShowcase }: { opportunityShowcase: ReactNo
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced || !root.current) return;
+    const changingLocale = Boolean(document.documentElement.dataset.localeTransitionTo);
+    if (reduced || changingLocale || !root.current) return;
     let cancelled = false;
     let context: { revert: () => void } | undefined;
 

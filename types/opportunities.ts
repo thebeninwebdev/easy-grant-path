@@ -5,5 +5,11 @@ export const SOURCE_TYPES = ["api", "scraper", "rss", "manual", "aggregator"] as
 export type OpportunityType = (typeof OPPORTUNITY_TYPES)[number]; export type OpportunityStatus = (typeof OPPORTUNITY_STATUSES)[number]; export type VerificationStatus = (typeof VERIFICATION_STATUSES)[number]; export type SourceType = (typeof SOURCE_TYPES)[number];
 export interface RawOpportunity { id?: string; data: Record<string, unknown>; }
 export interface NormalizedOpportunity { externalId: string; title: string; summary?: string; description?: string; organization?: string; agency?: string; type?: OpportunityType; countries?: string[]; eligibleCountries?: string[]; applicantTypes?: string[]; sectors?: string[]; fundingMin?: number; fundingMax?: number; currency?: string; openingDate?: Date; deadline?: Date; applicationUrl?: string; officialUrl: string; discoveryUrl?: string; opportunityNumber?: string; sourceLastUpdatedAt?: Date; declaredStatus?: "open" | "closed" | "cancelled" | "withdrawn" | "suspended"; metadata?: Record<string, unknown>; }
-export interface RelevanceResult { relevant: boolean; score: number; reasons: string[]; }
+export const RELEVANCE_CLASSIFICATIONS = ["relevant", "potentially_relevant", "irrelevant"] as const;
+export const RELEVANCE_CONFIDENCE_LEVELS = ["high", "medium", "low"] as const;
+export const ELIGIBILITY_ASSESSMENTS = ["explicit_country", "west_africa", "africa", "worldwide", "uncertain", "explicitly_ineligible", "no_target_evidence"] as const;
+export type RelevanceClassification = (typeof RELEVANCE_CLASSIFICATIONS)[number];
+export type RelevanceConfidence = (typeof RELEVANCE_CONFIDENCE_LEVELS)[number];
+export type EligibilityAssessment = (typeof ELIGIBILITY_ASSESSMENTS)[number];
+export interface RelevanceResult { relevant: boolean; classification: RelevanceClassification; confidence: RelevanceConfidence; eligibility: EligibilityAssessment; score: number; reasons: string[]; }
 export interface OpportunitySource { slug: string; name: string; type: SourceType; fetch(): Promise<RawOpportunity[]>; normalize(raw: RawOpportunity): Promise<NormalizedOpportunity | null>; assessRelevance(opportunity: NormalizedOpportunity): RelevanceResult; }

@@ -10,6 +10,10 @@ EasyGrantPath synchronizes official sources through the protected `POST /api/int
 | `afdb-accf` | https://accf.afdb.org/how-we-work/call-for-proposals | Official HTML parser | Daily; current ordinary retrieval returned HTTP 402, so a failed run is truthful and records remain unchanged |
 | `un-mptf` | https://mptf.undp.org/page/funding-call-proposals | Structured official HTML heading/block parser | Daily; extracts calls, not the landing page |
 
+Relevance assessment is context-aware and Unicode-normalized. It distinguishes confirmed country, West African, African, and worldwide eligibility from credible calls whose eligibility still needs review, while excluding explicit U.S.-only/EU-only restrictions, procurement, recruitment, and expired calls. Potentially relevant records retain uncertainty metadata and, like all automated imports, remain `needs_review` until an administrator approves them.
+
+Sync-run diagnostics separate normalized, relevant, potentially relevant, explicitly ineligible, duplicate, invalid, expired, created, updated, and failed counts while preserving the legacy `skipped` and `irrelevant` fields.
+
 The HTTP client is HTTPS-only, has a 15-second timeout, three bounded attempts, response-size limits, same-host redirect validation, a declared user agent, and bounded listing traversal. No CAPTCHA, login, or anti-bot measure is bypassed. If an official page is unavailable, use the normal admin manual-entry review flow and retain the official URL.
 
 `SYNC_SECRET` and `EASYGRANTPATH_SYNC_URL` are required GitHub Actions secrets. Dispatch the workflow with `source=all` or one registered slug. Add UNDP offices by editing `sources/undp/country-config.ts`. Duplicate identity checks use source/external ID, canonical official URL, opportunity number, and an accent-insensitive title/organization/deadline fingerprint; cross-source matches are skipped conservatively.

@@ -12,6 +12,12 @@ export interface SyncResult {
   source: string;
   fetched: number;
   normalized: number;
+  relevant: number;
+  potentiallyRelevant: number;
+  explicitlyIneligible: number;
+  duplicate: number;
+  invalid: number;
+  expired: number;
   created: number;
   updated: number;
   skipped: number;
@@ -22,6 +28,7 @@ export interface SyncResult {
 }
 
 const IMAGE_REFRESH_MS = 30 * 86_400_000;
+export const NEW_OPPORTUNITY_VERIFICATION_STATUS = "needs_review" as const;
 
 function approved(value: unknown) {
   return Boolean(value && typeof value === "object" && (value as { reviewStatus?: string }).reviewStatus === "approved");
@@ -58,7 +65,11 @@ export async function syncSource(slug: string): Promise<SyncResult> {
   const activeRun = await SourceSyncRun.exists({ sourceSlug: slug, status: "running" });
   if (activeRun) throw new Error("Opportunity source " + slug + " already has a running sync");
   const run = await SourceSyncRun.create({ sourceSlug: slug, startedAt });
-  const metrics = { fetched: 0, normalized: 0, created: 0, updated: 0, skipped: 0, irrelevant: 0, failed: 0 };
+  const metrics = {
+    fetched: 0, normalized: 0, relevant: 0, potentiallyRelevant: 0,
+    explicitlyIneligible: 0, duplicate: 0, invalid: 0, expired: 0,
+    created: 0, updated: 0, skipped: 0, irrelevant: 0, failed: 0,
+  };
 
   try {
     logger.info("Opportunity sync started", { source: slug });
@@ -67,18 +78,26 @@ export async function syncSource(slug: string): Promise<SyncResult> {
     for (const raw of rawOpportunities) {
       try {
         const opportunity = await source.normalize(raw);
-        if (!opportunity) { metrics.skipped++; continue; }
+        if (!opportunity) { metrics.invalid++; metrics.skipped++; continue; }
         metrics.normalized++;
         const relevance = source.assessRelevance(opportunity);
-        if (!relevance.relevant) { metrics.irrelevant++; continue; }
+        if (!relevance.relevant) {
+          metrics.irrelevant++;
+          if (relevance.eligibility === "explicitly_ineligible") metrics.explicitlyIneligible++;
+          continue;
+        }
+        if (relevance.classification === "potentially_relevant") metrics.potentiallyRelevant++;
+        else metrics.relevant++;
 
         const now = new Date();
+        const opportunityStatus = getOpportunityStatus(opportunity.openingDate, opportunity.deadline, now, 14, opportunity.declaredStatus);
+        if (opportunityStatus === "closed") { metrics.expired++; metrics.skipped++; continue; }
         const existing = await Opportunity.findOne({
           "source.slug": slug,
           "source.externalId": opportunity.externalId,
         }).select("_id opportunityImage organizationLogo metadata").lean();
         const duplicate = existing ? null : await findDuplicateOpportunity(opportunity);
-        if (duplicate) { metrics.skipped++; logger.warn("Possible cross-source duplicate skipped", { source: slug, duplicateId: String(duplicate._id), reason: duplicate.reason }); continue; }
+        if (duplicate) { metrics.duplicate++; metrics.skipped++; logger.warn("Possible cross-source duplicate skipped", { source: slug, duplicateId: String(duplicate._id), reason: duplicate.reason }); continue; }
         const refresh = imageRefreshDecision(existing as {
           opportunityImage?: unknown;
           organizationLogo?: unknown;
@@ -112,12 +131,20 @@ export async function syncSource(slug: string): Promise<SyncResult> {
           fingerprint: opportunityFingerprint(opportunity),
           relevanceScore: relevance.score,
           relevanceReasons: relevance.reasons,
-          status: getOpportunityStatus(opportunity.openingDate, opportunity.deadline, now, 14, opportunity.declaredStatus),
+          status: opportunityStatus,
           metadata: {
             ...(opportunity.metadata ?? {}),
             ...(opportunity.declaredStatus ? { sourceDeclaredStatus: opportunity.declaredStatus } : {}),
             ...(duplicate ? { possibleDuplicate: { id: String(duplicate._id), title: String(duplicate.title), reason: duplicate.reason } } : {}),
             ...((existing?.metadata as Record<string, unknown> | undefined) ?? {}),
+            relevanceAssessment: {
+              classification: relevance.classification,
+              confidence: relevance.confidence,
+              eligibility: relevance.eligibility,
+              score: relevance.score,
+              reasons: relevance.reasons,
+            },
+            eligibilityUncertain: relevance.classification === "potentially_relevant",
             ...(extracted?.meta.images ? { imageResearch: extracted.meta.images, imageCheckedAt: now } : {}),
           },
         };
@@ -143,7 +170,7 @@ export async function syncSource(slug: string): Promise<SyncResult> {
             ...(extracted?.data.opportunityImage ? { opportunityImage: extracted.data.opportunityImage } : {}),
             ...(extracted?.data.organizationLogo ? { organizationLogo: extracted.data.organizationLogo } : {}),
             source: { slug, name: source.name, type: source.type, externalId: opportunity.externalId },
-            verificationStatus: "needs_review",
+            verificationStatus: NEW_OPPORTUNITY_VERIFICATION_STATUS,
           });
           metrics.created++;
         }

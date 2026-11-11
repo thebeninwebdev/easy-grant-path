@@ -1,4 +1,5 @@
 import { normalizePlainText, sanitizeOpportunityHtml } from "@/lib/opportunity-content";
+import { detectOpportunityType } from "@/sources/shared/relevance";
 import type { NormalizedOpportunity, RawOpportunity } from "@/types/opportunities";
 
 function getString(data: Record<string, unknown>, ...keys: string[]) {
@@ -45,6 +46,16 @@ export function normalizeGrantsGov(raw: RawOpportunity): NormalizedOpportunity |
   const description = sanitizeOpportunityHtml(rawDescription) ?? undefined;
   const agency = plain(getString(opportunity, "agencyName", "agency") ?? getString(synopsis, "agencyName"));
   const summary = plain(getString(opportunity, "description", "synopsis"), 1_000);
+  const applicantTypes = strings(synopsis.applicantTypes ?? opportunity.applicantTypes);
+  const eligibleCountries = strings(
+    synopsis.eligibleCountries
+      ?? synopsis.countries
+      ?? synopsis.geographicScope
+      ?? opportunity.eligibleCountries
+      ?? opportunity.countries
+      ?? opportunity.geographicScope,
+  );
+  const type = detectOpportunityType([title, summary, description].filter(Boolean).join(" "));
 
   return {
     externalId: id,
@@ -53,7 +64,10 @@ export function normalizeGrantsGov(raw: RawOpportunity): NormalizedOpportunity |
     description,
     organization: agency,
     agency,
-    applicantTypes: strings(synopsis.applicantTypes ?? opportunity.applicantTypes),
+    type: type ?? "grant",
+    applicantTypes,
+    eligibleCountries,
+    countries: eligibleCountries,
     sectors: strings(synopsis.fundingCategories ?? opportunity.fundingCategories),
     fundingMin: Number(getString(synopsis, "awardFloor", "awardFloorAmt")) || undefined,
     fundingMax: Number(getString(synopsis, "awardCeiling", "awardCeilingAmt")) || undefined,
@@ -64,6 +78,6 @@ export function normalizeGrantsGov(raw: RawOpportunity): NormalizedOpportunity |
     discoveryUrl: `https://www.grants.gov/search-results-detail/${encodeURIComponent(id)}`,
     opportunityNumber: plain(getString(opportunity, "opportunityNumber", "number")),
     sourceLastUpdatedAt: getDate(getString(opportunity, "lastUpdatedDate", "lastUpdated")),
-    metadata: {},
+    metadata: { eligibilityUncertain: !eligibleCountries.length && !applicantTypes.some((value) => /foreign|international/i.test(value)) },
   };
 }
