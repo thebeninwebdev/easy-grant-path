@@ -75,6 +75,7 @@
     "language": "Language",
     "switchToFrench": "Switch to French",
     "switchToEnglish": "Switch to English",
+    "switchingLanguage": "Switching language…",
     "mainLabel": "Main navigation",
     "mobileLabel": "Mobile navigation",
     "support": "Support",
@@ -691,11 +692,12 @@
       "grant": "Grant",
       "fellowship": "Fellowship",
       "scholarship": "Scholarship",
-      "loan": "Loan",
+      "research_support": "Research support",
+      "startup_funding": "Startup funding",
+      "tender": "Tender",
       "prize": "Prize",
       "competition": "Competition",
       "accelerator": "Accelerator",
-      "incubator": "Incubator",
       "other": "Other"
     },
     "card": {

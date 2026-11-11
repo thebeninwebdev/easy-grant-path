@@ -28,7 +28,8 @@
     "verification:storage-check": "node scripts/check-verification-storage.mjs",
     "verification:legacy-report": "node scripts/report-legacy-verification-files.mjs",
     "sync:local": "node scripts/sync-opportunities-local.mjs",
-    "i18n:check": "node scripts/check-translations.cjs"
+    "i18n:check": "node scripts/check-translations.cjs",
+    "test:i18n-experience": "node scripts/test-language-experience.mjs"
   },
   "dependencies": {
     "@better-auth/mongo-adapter": "^1.7.15",
