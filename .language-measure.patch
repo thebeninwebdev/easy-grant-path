@@ -1,0 +1,15 @@
+*** Begin Patch
+*** Update File: scripts/measure-language-experience.mjs
+@@
+   async function navigate(path) {
+     await session.send("Page.navigate", {url: baseUrl + path});
+-    const ready = await waitFor(session, "document.readyState === 'complete' && document.querySelector('button[lang]') && ({path: location.pathname, locale: document.documentElement.lang})");
++    const ready = await waitFor(session, "document.readyState === 'complete' && document.querySelector('button[lang]') && ({path: location.pathname, locale: document.documentElement.lang})", 5_000);
++    if (!ready) {
++      const state = await evaluate(session, "({path: location.pathname, readyState: document.readyState, title: document.title, body: document.body?.innerText.slice(0, 200)})");
++      throw new Error(`Browser did not become ready for ${path}: ${JSON.stringify(state)}`);
++    }
+@@
+-    const result = await waitFor(session, "window.__languageMeasurement?.completeMs && window.__languageMeasurement", 10_000)
++    const result = await waitFor(session, "window.__languageMeasurement?.completeMs && window.__languageMeasurement", 3_000)
+*** End Patch
