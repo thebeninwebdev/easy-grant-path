@@ -911,12 +911,12 @@
         "description": "Do you already have a proposal? Our team can review it and help you identify areas for improvement before submission."
       },
       "writing": {
-        "name": "Have your proposal written",
-        "action": "Have my proposal written",
-        "description": "Need help preparing your proposal? Our team can help you develop it for your financing opportunity."
+        "name": "Proposal creation",
+        "action": "Create my proposal",
+        "description": "Need help preparing your proposal? Our team can help you develop it for your funding opportunity."
       },
       "priceUnavailable": "Price currently not available",
-      "notConfigured": "Online payment is not yet configured for this service.",
+      "notConfigured": "This service is currently unavailable for your account.",
       "paymentAmount": "Payment amount",
       "whatsappLabel": "Number WhatsApp",
       "whatsappPlaceholder": "+229XXXXXXXX",
@@ -990,8 +990,8 @@
         "date": "Date"
       },
       "products": {
-        "proposal_writing": "Proposal writing",
-        "proposal_review": "Proposal revision",
+        "proposal_writing": "Proposal creation",
+        "proposal_review": "Proposal review",
         "platform_access": "Access to the platform"
       },
       "whatsappNote": "Payment received. We will contact you on WhatsApp.",
@@ -1039,12 +1039,13 @@
       "details": {
         "service": "Service",
         "proposal": "Proposal",
+        "amount": "Amount paid",
         "reference": "Payment reference",
         "contactNumber": "Contact number"
       },
       "services": {
-        "proposal_writing": "Proposal writing",
-        "proposal_review": "Proposal revision",
+        "proposal_writing": "Proposal creation",
+        "proposal_review": "Proposal review",
         "platform_access": "Access EasyGrantPath"
       },
       "checkAgain": "Check again",
@@ -1209,7 +1210,7 @@
     "meta": "Professional Services",
     "kicker": "Professional support",
     "title": "Professional proposal services",
-    "description": "EasyGrantPath offers paid proposal review and writing assistance. Our team manages work and communication via WhatsApp.",
+    "description": "EasyGrantPath offers paid proposal review and creation assistance. Our team manages work and communication via WhatsApp.",
     "howItWorks": {
       "title": "How it works",
       "steps": {

@@ -911,12 +911,12 @@
         "description": "Vous avez déjà une proposition ? Notre équipe peut la réviser et vous aider à identifier les points à améliorer avant soumission."
       },
       "writing": {
-        "name": "Faire rédiger votre proposition",
-        "action": "Faire rédiger ma proposition",
+        "name": "Création de proposition",
+        "action": "Créer ma proposition",
         "description": "Besoin d'aide pour préparer votre proposition ? Notre équipe peut vous aider à la développer pour votre opportunité de financement."
       },
       "priceUnavailable": "Prix actuellement non disponible",
-      "notConfigured": "Le paiement en ligne n'est pas encore configuré pour ce service.",
+      "notConfigured": "Ce service est actuellement indisponible pour votre compte.",
       "paymentAmount": "Montant du paiement",
       "whatsappLabel": "Numéro WhatsApp",
       "whatsappPlaceholder": "+229XXXXXXXX",
@@ -990,7 +990,7 @@
         "date": "Date"
       },
       "products": {
-        "proposal_writing": "Rédaction de proposition",
+        "proposal_writing": "Création de proposition",
         "proposal_review": "Révision de proposition",
         "platform_access": "Accès à la plateforme"
       },
@@ -1039,11 +1039,12 @@
       "details": {
         "service": "Service",
         "proposal": "Proposition",
+        "amount": "Montant payé",
         "reference": "Référence de paiement",
         "contactNumber": "Numéro de contact"
       },
       "services": {
-        "proposal_writing": "Rédaction de proposition",
+        "proposal_writing": "Création de proposition",
         "proposal_review": "Révision de proposition",
         "platform_access": "Accès EasyGrantPath"
       },
@@ -1209,7 +1210,7 @@
     "meta": "Services professionnels",
     "kicker": "Support professionnel",
     "title": "Services professionnels de proposition",
-    "description": "EasyGrantPath propose une révision et une assistance à la rédaction de propositions payantes. Notre équipe gère le travail et la communication via WhatsApp.",
+    "description": "EasyGrantPath propose des services payants de révision et de création de propositions. Notre équipe gère le travail et la communication via WhatsApp.",
     "howItWorks": {
       "title": "Comment ça fonctionne",
       "steps": {

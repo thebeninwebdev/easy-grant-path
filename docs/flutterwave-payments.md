@@ -24,7 +24,7 @@ A key in the wrong mode disables checkout. Production never falls back to a test
 
 ## Required server configuration
 
-All prices are minor currency units and are read only on the server. A product is unavailable until every setting listed for it is valid; there are no code defaults or client-supplied amounts.
+Platform access pricing is read only on the server. A product is unavailable until every setting listed for it is valid; there are no client-supplied amounts.
 
 ```env
 FLW_SECRET_KEY=FLWSECK_TEST-...
@@ -35,15 +35,12 @@ PLATFORM_ACCESS_PRICE_MINOR=<approved-price>
 PLATFORM_ACCESS_CURRENCY=<ISO-4217-currency>
 PLATFORM_ACCESS_DURATION_DAYS=<positive-integer>
 
-PROPOSAL_WRITING_PRICE_MINOR=<approved-price>
-PROPOSAL_WRITING_CURRENCY=<ISO-4217-currency>
-PROPOSAL_REVIEW_PRICE_MINOR=<approved-price>
-PROPOSAL_REVIEW_CURRENCY=<ISO-4217-currency>
-
 ADMIN_NOTIFICATION_EMAIL=support@example.com
 RESEND_API_KEY=re_...
 RESEND_FROM_EMAIL=EasyGrantPath <payments@verified-domain.example>
 ```
+
+Proposal service pricing is account-based and defined centrally in `lib/proposal-service-pricing.ts`; the authenticated profile classification is resolved by the current Paystack checkout flow. These legacy Flutterwave settings apply only to historical verification and reconciliation.
 
 The public Flutterwave key is optional because Standard checkout is initialized server-side. Never put the secret key or webhook secret in a `NEXT_PUBLIC_` variable.
 

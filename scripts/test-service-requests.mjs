@@ -4,6 +4,26 @@ import { readFile } from "node:fs/promises";
 import { paystackAmountFromStoredAmount, validatePaystackTransaction, verifyLegacyPaystackWebhookSignature, verifyPaystackWebhookSignature } from "../lib/paystack-policy.ts";
 import { safeSecretEqual, validateFlutterwaveTransaction } from "../lib/flutterwave-policy.ts";
 import { normalizeWhatsappNumber, whatsappUrl } from "../lib/service-request-policy.ts";
+import { getProposalServicePrice, resolveProposalPricingCategory } from "../lib/proposal-service-pricing.ts";
+
+const expectedPrices = [
+  ["proposal_review", "individual", 7_500],
+  ["proposal_review", "startup_sme", 12_500],
+  ["proposal_review", "ngo_nonprofit", 12_500],
+  ["proposal_writing", "individual", 15_000],
+  ["proposal_writing", "startup_sme", 25_000],
+  ["proposal_writing", "ngo_nonprofit", 25_000],
+];
+for (const [service, applicantType, amountMinor] of expectedPrices) {
+  assert.deepEqual(getProposalServicePrice(service, applicantType), { amountMinor, currency: "XOF", category: applicantType === "individual" ? "individual" : "organization" });
+}
+assert.equal(resolveProposalPricingCategory("student"), "individual");
+assert.equal(resolveProposalPricingCategory("researcher_academic"), "individual");
+assert.equal(resolveProposalPricingCategory("community_organization"), "organization");
+assert.equal(getProposalServicePrice("proposal_review", "other"), null);
+assert.equal(getProposalServicePrice("proposal_review", ""), null);
+assert.equal(getProposalServicePrice("proposal_review", undefined), null);
+assert.equal(getProposalServicePrice("proposal_review", "tampered"), null);
 
 assert.equal(normalizeWhatsappNumber("+234 801 234 5678"), "+2348012345678");
 assert.equal(normalizeWhatsappNumber("08012345678"), null);
@@ -46,13 +66,22 @@ const flutterVerified = { id: 12345, status: "successful", tx_ref: flutterExpect
 assert.equal(validateFlutterwaveTransaction(flutterExpected, flutterVerified, "test").valid, true);
 
 const read = (path) => readFile(new URL("../" + path, import.meta.url), "utf8");
-const [checkout, webhook, payments, paymentModel, requestModel, config, products, callback] = await Promise.all([
-  read("app/api/payments/checkout/route.ts"), read("app/api/webhooks/paystack/route.ts"), read("lib/payments.ts"), read("models/Payment.ts"), read("models/ServiceRequest.ts"), read("lib/paystack-config.ts"), read("lib/payment-products.ts"), read("app/dashboard/payments/callback/page.tsx"),
+const [checkout, webhook, payments, paymentModel, requestModel, config, products, callback, email, adminRequests, en, fr] = await Promise.all([
+  read("app/api/payments/checkout/route.ts"), read("app/api/webhooks/paystack/route.ts"), read("lib/payments.ts"), read("models/Payment.ts"), read("models/ServiceRequest.ts"), read("lib/paystack-config.ts"), read("lib/payment-products.ts"), read("app/dashboard/payments/callback/page.tsx"), read("lib/email.ts"), read("app/admin/service-requests/page.tsx"), read("messages/en.json"), read("messages/fr.json"),
 ]);
 assert.ok(checkout.indexOf("getCurrentSession()") < checkout.indexOf("readJsonBody(request)"));
 assert.doesNotMatch(checkout, /amountMinor|currency/);
+assert.match(checkout, /if \(!session\)/);
 assert.match(webhook, /paystack-signature/); assert.match(webhook, /x-paystack-signature/); assert.match(webhook, /PaymentWebhookEvent/); assert.match(webhook, /verifyAndFulfillPayment/);
 assert.match(payments, /verifyPaystackTransaction/); assert.match(payments, /validatePaystackTransaction/); assert.match(payments, /verifyFlutterwaveTransaction/); assert.match(payments, /fulfillmentStartedAt/);
+assert.ok(payments.indexOf("UserProfile.findOne") < payments.indexOf("getPaymentProduct(input.productId, profile.applicantType)"));
+assert.match(payments, /PROFILE_CLASSIFICATION_REQUIRED/); assert.match(payments, /applicantTypeSnapshot/);
 assert.match(paymentModel, /enum: \["flutterwave", "paystack"\]/); assert.match(paymentModel, /provider: 1, providerTransactionId: 1/);
-assert.match(requestModel, /paymentProvider: 1, providerTransactionId: 1/); assert.match(config, /PAYSTACK_WEBHOOK_SECRET/); assert.match(config, /sk_live_/); assert.match(products, /PLATFORM_ACCESS_PRICE_MINOR/); assert.match(callback, /query.reference \|\| query.tx_ref/);
+assert.match(requestModel, /paymentProvider: 1, providerTransactionId: 1/); assert.match(requestModel, /applicantTypeSnapshot/); assert.match(config, /PAYSTACK_WEBHOOK_SECRET/); assert.match(config, /sk_live_/); assert.match(products, /PLATFORM_ACCESS_PRICE_MINOR/); assert.match(products, /PLATFORM_ACCESS_CURRENCY/); assert.match(products, /PLATFORM_ACCESS_DURATION_DAYS/); assert.match(callback, /query.reference \|\| query.tx_ref/);
+assert.match(email, /Account classification/); assert.match(adminRequests, /applicantTypeLabel/);
+const enMessages = JSON.parse(en), frMessages = JSON.parse(fr);
+assert.equal(enMessages.Payments.history.products.proposal_writing, "Proposal creation");
+assert.equal(frMessages.Payments.history.products.proposal_writing, "Création de proposition");
+assert.equal(enMessages.Payments.callback.details.amount, "Amount paid");
+assert.equal(frMessages.Payments.callback.details.amount, "Montant payé");
 console.log("Paystack payment policy tests passed");

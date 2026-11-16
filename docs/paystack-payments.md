@@ -20,14 +20,12 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 PLATFORM_ACCESS_PRICE_MINOR=5000
 PLATFORM_ACCESS_CURRENCY=XOF
 PLATFORM_ACCESS_DURATION_DAYS=30
-PROPOSAL_WRITING_PRICE_MINOR=10000
-PROPOSAL_WRITING_CURRENCY=XOF
-PROPOSAL_REVIEW_PRICE_MINOR=5000
-PROPOSAL_REVIEW_CURRENCY=XOF
 ADMIN_NOTIFICATION_EMAIL=operations@example.com
 RESEND_API_KEY=re_...
 RESEND_FROM_EMAIL=EasyGrantPath <billing@example.com>
 ```
+
+Proposal service prices are defined centrally in `lib/proposal-service-pricing.ts`, not in environment variables. Checkout resolves the authenticated customer's stored `UserProfile.applicantType`, stores the resulting XOF amount and classification snapshot, and rejects missing or unsupported classifications. Platform access remains independently configured by the `PLATFORM_ACCESS_*` variables above.
 
 `PAYSTACK_WEBHOOK_SIGNING_SECRET` is supported only as a temporary alias for deployment migration. The public key is not required because checkout is initialized solely on the server. Local development and Vercel Preview require `sk_test_`; a production deployment requires `sk_live_`, HTTPS, and never falls back to test credentials.
 
