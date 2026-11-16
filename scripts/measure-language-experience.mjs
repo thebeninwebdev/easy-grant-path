@@ -3,7 +3,7 @@ import {mkdtemp, rm} from "node:fs/promises";
 import {tmpdir} from "node:os";
 import {join} from "node:path";
 
-const baseUrl = process.env.LANGUAGE_EXPERIENCE_URL || "http://127.0.0.1:3100";
+const baseUrl = process.env.LANGUAGE_EXPERIENCE_URL || "http://localhost:3000";
 const browserPath = process.env.EDGE_PATH || "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
 const debuggingPort = Number(process.env.EDGE_DEBUGGING_PORT || 9223);
 const profileDirectory = await mkdtemp(join(tmpdir(), "easy-grant-path-language-"));
@@ -134,7 +134,7 @@ async function run() {
 
   async function navigate(path) {
     await session.send("Page.navigate", {url: baseUrl + path});
-    const ready = await waitFor(session, "document.readyState === 'complete' && document.querySelector('button[lang]') && ({path: location.pathname, locale: document.documentElement.lang})");
+    const ready = await waitFor(session, "document.readyState === 'complete' && document.querySelector('[data-language-switcher][data-ready=true]') && ({path: location.pathname, locale: document.documentElement.lang})");
     await delay(250);
     return ready;
   }
@@ -168,8 +168,8 @@ async function run() {
 
   const scenarios = [];
   await navigate("/en?probe=home#mission");
-  scenarios.push({scenario: "homepage en-to-fr", result: await switchLocale("fr", "/", "Un chemin plus simple")});
-  scenarios.push({scenario: "homepage fr-to-en", result: await switchLocale("en", "/en", "A clearer path")});
+  scenarios.push({scenario: "homepage en-to-fr", result: await switchLocale("fr", "/", "Votre ambition")});
+  scenarios.push({scenario: "homepage fr-to-en", result: await switchLocale("en", "/en", "Your ambition")});
   await navigate("/en/sign-in?callbackURL=%2Fdashboard#form");
   scenarios.push({scenario: "sign-in en-to-fr", result: await switchLocale("fr", "/sign-in", "Bon retour")});
   scenarios.push({scenario: "sign-in fr-to-en", result: await switchLocale("en", "/en/sign-in", "Welcome back")});
@@ -183,5 +183,9 @@ try {
   await run();
 } finally {
   browser.kill();
-  await rm(profileDirectory, {recursive: true, force: true});
+  await delay(250);
+  for (let attempt = 0; attempt < 5; attempt += 1) {
+    try { await rm(profileDirectory, {recursive: true, force: true}); break; }
+    catch { await delay(250); }
+  }
 }

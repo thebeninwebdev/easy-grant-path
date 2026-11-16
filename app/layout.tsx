@@ -14,7 +14,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       lang={locale}
       className="h-full antialiased"
     >
-      <body className="flex min-h-full flex-col bg-background font-sans text-foreground"><NextIntlClientProvider messages={messages}>{children}<Toaster richColors /></NextIntlClientProvider></body>
+      <body className="flex min-h-full flex-col bg-background font-sans text-foreground"><NextIntlClientProvider locale={locale} messages={messages}>{children}<Toaster richColors /></NextIntlClientProvider></body>
     </html>
   );
 }

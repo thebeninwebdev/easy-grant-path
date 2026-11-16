@@ -22,8 +22,7 @@ export function Homepage({ opportunityShowcase }: { opportunityShowcase: ReactNo
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const changingLocale = Boolean(document.documentElement.dataset.localeTransitionTo);
-    if (reduced || changingLocale || !root.current) return;
+    if (reduced || !root.current) return;
     let cancelled = false;
     let context: { revert: () => void } | undefined;
 
@@ -33,14 +32,6 @@ export function Homepage({ opportunityShowcase }: { opportunityShowcase: ReactNo
       gsap.registerPlugin(triggerModule.ScrollTrigger);
       context = gsap.context(() => {
         gsap.to("[data-parallax]", { yPercent: 7, ease: "none", scrollTrigger: { trigger: "[data-hero]", start: "top top", end: "bottom top", scrub: 0.8 } });
-        gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((element) => {
-          gsap.from(element, { y: 54, opacity: 0, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: element, start: "top 86%", once: true } });
-        });
-
-        const processTimeline = gsap.timeline({ scrollTrigger: { trigger: "[data-process]", start: "top 72%", once: true } });
-        processTimeline
-          .to("[data-process-line]", { scaleX: 1, duration: 0.7, stagger: 0.12, ease: "power2.out" })
-          .from("[data-process-card]", { y: 34, opacity: 0, duration: 0.72, stagger: 0.14, ease: "power3.out" }, 0.08);
       }, root);
 
       triggerModule.ScrollTrigger.refresh();

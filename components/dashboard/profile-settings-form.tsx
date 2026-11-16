@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
 import { Building2, Check, ChevronRight, KeyRound, LogOut, ShieldCheck, UserRound, WalletCards } from 'lucide-react';
 import { toast } from 'sonner';
 import { authClient } from '@/lib/auth-client';
@@ -70,10 +69,6 @@ export function AccountSettingsWorkspace({ account, funding, organization, verif
     window.addEventListener('beforeunload', warn);
     return () => window.removeEventListener('beforeunload', warn);
   }, [hasUnsavedChanges]);
-
-  useEffect(() => {
-    if (!organizationApplicant && active === 'organization') setActive('funding');
-  }, [active, organizationApplicant]);
 
   function setError(section: Section, message = '') { setErrors((current) => ({ ...current, [section]: message })); }
   function toggle(key: 'interests' | 'opportunityTypes', value: string, max: number) {

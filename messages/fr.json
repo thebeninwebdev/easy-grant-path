@@ -76,6 +76,7 @@
     "switchToFrench": "Passer en français",
     "switchToEnglish": "Passer à l’anglais",
     "switchingLanguage": "Changement de langue…",
+    "languageSwitchFailed": "Le changement de langue n’a pas abouti. Veuillez réessayer.",
     "mainLabel": "Navigation principale",
     "mobileLabel": "Navigation mobile",
     "support": "Accompagnement",
@@ -582,6 +583,12 @@
     },
     "teaser": {
       "step": "Étape 3 sur 3",
+      "match": {
+        "strongTitle": "Une opportunité qui correspond à votre profil",
+        "previewTitle": "Aperçu d’une opportunité actuelle",
+        "strongDescription": "Voici une opportunité réelle correspondant à votre profil. Débloquez les détails complets et les autres opportunités vérifiées.",
+        "previewDescription": "Voici une opportunité actuelle issue d’une source officielle. Activez votre accès à mesure que d’autres opportunités sont vérifiées et associées à votre profil."
+      },
       "noOpportunity": {
         "title": "Votre profil est prêt",
         "description": "Activez votre accès pour parcourir toutes les opportunités vérifiées et commencer à candidater.",
@@ -637,6 +644,9 @@
       "matchesTitle": "Correspondances personnalisées",
       "matchesDescription": "Opportunités analysées par rapport à votre profil. Les scores de correspondance sont basés sur votre pays, votre type de candidat et vos intérêts.",
       "searchPlaceholder": "Rechercher des opportunités…",
+      "searchLabel": "Rechercher des opportunités",
+      "openFilters": "Ouvrir les filtres ({count} actifs)",
+      "showResults": "Afficher les résultats ({count})",
       "filterButton": "Filtres",
       "applyFilters": "Appliquer les filtres",
       "applySort": "Appliquer le tri",
@@ -669,6 +679,14 @@
     },
     "filters": {
       "title": "Filtrer les opportunités",
+      "description": "Affinez la liste selon les financements qui correspondent à vos besoins.",
+      "chooseOne": "Choisissez une option",
+      "optional": "Facultatif",
+      "countryPlaceholder": "p. ex. Nigéria",
+      "sectorPlaceholder": "p. ex. Éducation",
+      "deadlineHint": "Quand pouvez-vous candidater ?",
+      "sortTitle": "Trier les opportunités",
+      "sortDescription": "Choisissez l’ordre des opportunités vérifiées.",
       "type": "Type",
       "country": "Pays",
       "sector": "Secteur",
@@ -715,7 +733,8 @@
       "removeBookmark": "Retirer le signet",
       "savedToast": "Opportunité sauvegardée.",
       "removedToast": "Opportunité retirée des favoris.",
-      "saveError": "Impossible de mettre à jour cette opportunité sauvegardée."
+      "saveError": "Impossible de mettre à jour cette opportunité sauvegardée.",
+      "websiteIcon": "Icône du site web de {organization}"
     },
     "detail": {
       "backToOpportunities": "Retour aux opportunités",
@@ -808,23 +827,30 @@
       "createButton": "Créer ma proposition",
       "creating": "Création en cours…",
       "recommended": "Recommandé",
+      "recommendedForOpportunity": "Recommandé pour cette opportunité",
       "general": "Général",
       "description": "Choisissez une opportunité de financement ou commencez avec un modèle général réutilisable.",
       "opportunityHelp": "Sélectionnez une opportunité active, ou conservez une proposition générale.",
       "generalOption": "Proposition générale — aucune opportunité pour l''instant",
       "existingTitle": "Vous avez déjà une proposition pour cette opportunité.",
       "existingDescription": "Reprenez-la pour conserver votre progression.",
-      "specificTemplateHelp": "Les modèles propres à l''opportunité sont privilégiés ; des modèles généraux adaptés peuvent servir de solution de repli.",
+      "specificTemplateHelp": "Le meilleur modèle disponible pour cette opportunité est sélectionné automatiquement.",
       "generalTemplateHelp": "Choisissez un modèle général réutilisable publié.",
       "structuredTemplate": "Un modèle structuré avec des conseils section par section.",
-      "noOpportunityTemplate": "Aucun modèle publié n''est disponible pour cette opportunité.",
+      "noOpportunityTemplate": "Aucun modèle valide n''est disponible pour cette opportunité.",
       "noGeneralTemplate": "Aucun modèle général publié n''est disponible.",
       "continueTitle": "Continuer votre proposition",
       "readyTitle": "Prêt à commencer",
       "generalProposal": "Proposition de financement générale",
       "templateRequired": "Modèle requis",
       "continueExisting": "Continuer la proposition existante",
-      "recentGeneral": "Propositions générales récentes"
+      "recentGeneral": "Propositions générales récentes",
+      "selectedTemplate": "Modèle de proposition sélectionné",
+      "includedSections": "Sections incluses",
+      "required": "Obligatoire",
+      "optional": "Facultatif",
+      "wordLimit": "{count} mots maximum",
+      "moreSections": "{count, plural, one {# section supplémentaire} other {# sections supplémentaires}}"
     },
     "workspace": {
       "saving": "Enregistrement…",
@@ -907,9 +933,14 @@
     "starter": {
       "title": "Démarrer une proposition",
       "generalTemplate": "Modèle général",
+      "recommendedForOpportunity": "Recommandé pour cette opportunité",
       "continueDescription": "Reprenez votre proposition existante sans perdre votre progression.",
       "generalDescription": "Un modèle réutilisable adapté est disponible pour cette opportunité.",
-      "specificDescription": "Utilisez la structure publiée pour cette opportunité.",
+      "specificDescription": "Utilisez la structure préparée spécifiquement pour cette opportunité.",
+      "includedSections": "Sections incluses",
+      "required": "Obligatoire",
+      "optional": "Facultatif",
+      "moreSections": "{count, plural, one {# section supplémentaire} other {# sections supplémentaires}}",
       "benefits": {
         "basedOnOpportunity": "Adapté à cette opportunité",
         "guidedSections": "Conseils section par section",
@@ -1161,6 +1192,7 @@
         }
       },
       "backToDashboard": "Retour aux opportunités",
+      "recently": "récemment",
       "form": {
         "required": "Documents requis",
         "registrationProgress": "L’enregistrement est en cours. L’approbation restera provisoire jusqu’à la vérification de l’enregistrement.",

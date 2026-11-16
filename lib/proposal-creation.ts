@@ -12,9 +12,10 @@ export function isGeneralProposalTemplate(template: Pick<ProposalTemplateCandida
 }
 
 export function canUseProposalTemplate(template: ProposalTemplateCandidate, opportunityId?: string) {
-  if (template.status !== "published" || template.sectionCount < 1) return false;
-  if (!opportunityId) return isGeneralProposalTemplate(template);
-  return isGeneralProposalTemplate(template) || template.opportunityId === opportunityId;
+  if (template.sectionCount < 1) return false;
+  if (!opportunityId) return template.status === "published" && isGeneralProposalTemplate(template);
+  if (template.opportunityId === opportunityId && !isGeneralProposalTemplate(template)) return true;
+  return template.status === "published" && isGeneralProposalTemplate(template);
 }
 
 export function proposalCreationAction(existingApplicationId: string | null) {

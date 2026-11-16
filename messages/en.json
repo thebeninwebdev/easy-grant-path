@@ -76,6 +76,7 @@
     "switchToFrench": "Switch to French",
     "switchToEnglish": "Switch to English",
     "switchingLanguage": "Switching language…",
+    "languageSwitchFailed": "Language change did not complete. Please try again.",
     "mainLabel": "Main navigation",
     "mobileLabel": "Mobile navigation",
     "support": "Support",
@@ -171,7 +172,7 @@
           "detail": "Startups, fellowships and development grants"
         },
         "BJ": {
-          "name": "Benign",
+          "name": "Benin",
           "detail": "Agriculture, youth and community initiatives"
         }
       },
@@ -407,7 +408,7 @@
       "description": "Some quick information to personalize your experience.",
       "step": "Step 1 of 2",
       "accountTypeLabel": "I am…",
-      "individual": "Particular",
+      "individual": "Individual",
       "individualDesc": "I am applying as a person.",
       "business": "Business",
       "businessDesc": "I represent a for-profit business or social enterprise.",
@@ -443,7 +444,7 @@
       "women_girls": "Women and Girls",
       "youth": "Youth development",
       "community_development": "Community development",
-      "research": "Search / Other"
+      "research": "Research / Other"
     },
     "opportunityTypes": {
       "grant": "Grants",
@@ -453,13 +454,13 @@
       "other": "Other"
     },
     "accountTypes": {
-      "individual": "Particular",
+      "individual": "Individual",
       "startup_sme": "Business",
       "ngo_nonprofit": "NGO / Association"
     },
     "countries": {
       "CI": "Ivory Coast",
-      "BJ": "Benign",
+      "BJ": "Benin",
       "BF": "Burkina Faso",
       "GH": "Ghana",
       "GN": "Guinea",
@@ -526,13 +527,13 @@
       "greetingDefault": "Good morning",
       "completeProfile": "Complete your profile",
       "completeProfileDesc": "Complete your profile to unlock your personalized recommendations.",
-      "editButton": "To modify",
+      "editButton": "Edit",
       "metrics": {
         "savedOpportunities": "Saved Opportunities",
         "savedNote": "Opportunities in your list",
         "proposals": "Proposals",
         "proposalsNote": "Current and completed proposals",
-        "matches": "Correspondence",
+        "matches": "Potential matches",
         "matchesNote": "Opportunities that suit you",
         "daysRemaining": "days left",
         "dueToday": "Due today",
@@ -543,11 +544,11 @@
         "country": "Country",
         "applicant": "Type of candidate",
         "interests": "Interests",
-        "lookingFor": "Research"
+        "lookingFor": "Looking for"
       },
       "verification": {
         "identity": "Identity verification",
-        "organization": "Organization Check",
+        "organization": "Organization verification",
         "verified": "Verified",
         "underReview": "Under review",
         "actionRequired": "Action required",
@@ -557,7 +558,7 @@
         "reviewNote": "Review the note and resubmit your documents.",
         "reviewAndResubmit": "Revise and resubmit",
         "viewStatus": "View status",
-        "startVerification": "Start checking"
+        "startVerification": "Start verification"
       },
       "recentMatches": {
         "title": "Recent matches",
@@ -582,6 +583,12 @@
     },
     "teaser": {
       "step": "Step 3 of 3",
+      "match": {
+        "strongTitle": "A matching opportunity for you",
+        "previewTitle": "A current opportunity preview",
+        "strongDescription": "Here is one real opportunity based on your profile. Unlock full details and the remaining verified opportunities.",
+        "previewDescription": "Here is one current opportunity from an official source. Unlock access as more opportunities are reviewed and matched to your profile."
+      },
       "noOpportunity": {
         "title": "Your profile is ready",
         "description": "Activate your access to browse all verified opportunities and start applying.",
@@ -637,6 +644,9 @@
       "matchesTitle": "Personalized matches",
       "matchesDescription": "Opportunities analyzed in relation to your profile. Match scores are based on your country, candidate type, and interests.",
       "searchPlaceholder": "Look for opportunities…",
+      "searchLabel": "Search opportunities",
+      "openFilters": "Open filters ({count} active)",
+      "showResults": "Show results ({count})",
       "filterButton": "Filters",
       "applyFilters": "Apply filters",
       "applySort": "Apply sorting",
@@ -669,6 +679,14 @@
     },
     "filters": {
       "title": "Filter opportunities",
+      "description": "Narrow the list to funding that fits your needs.",
+      "chooseOne": "Choose one",
+      "optional": "Optional",
+      "countryPlaceholder": "e.g. Nigeria",
+      "sectorPlaceholder": "e.g. Education",
+      "deadlineHint": "When can you apply?",
+      "sortTitle": "Sort opportunities",
+      "sortDescription": "Choose how verified opportunities should be ordered.",
       "type": "Kind",
       "country": "Country",
       "sector": "Sector",
@@ -715,7 +733,8 @@
       "removeBookmark": "Remove bookmark",
       "savedToast": "Saved for later.",
       "removedToast": "Removed from saved opportunities.",
-      "saveError": "Could not update this saved opportunity."
+      "saveError": "Could not update this saved opportunity.",
+      "websiteIcon": "{organization} website icon"
     },
     "detail": {
       "backToOpportunities": "Back to opportunities",
@@ -808,23 +827,30 @@
       "createButton": "Create my proposal",
       "creating": "Creation in progress…",
       "recommended": "Recommended",
+      "recommendedForOpportunity": "Recommended for this opportunity",
       "general": "General",
       "description": "Choose a funding opportunity or begin with a reusable general template.",
       "opportunityHelp": "Select an active opportunity, or leave this as a general proposal.",
       "generalOption": "General proposal — no opportunity yet",
       "existingTitle": "You already have a proposal for this opportunity.",
       "existingDescription": "Continue it to preserve your existing progress.",
-      "specificTemplateHelp": "Opportunity-specific templates are preferred; suitable general templates are available as fallbacks.",
+      "specificTemplateHelp": "The best available template for this opportunity is selected automatically.",
       "generalTemplateHelp": "Choose a published reusable general template.",
       "structuredTemplate": "A structured proposal template with section-by-section guidance.",
-      "noOpportunityTemplate": "No published template is available for this opportunity.",
+      "noOpportunityTemplate": "No valid template is available for this opportunity.",
       "noGeneralTemplate": "No published general template is available.",
       "continueTitle": "Continue your proposal",
       "readyTitle": "Ready to begin",
       "generalProposal": "General funding proposal",
       "templateRequired": "Template required",
       "continueExisting": "Continue existing proposal",
-      "recentGeneral": "Recent general proposals"
+      "recentGeneral": "Recent general proposals",
+      "selectedTemplate": "Selected proposal template",
+      "includedSections": "Included sections",
+      "required": "Required",
+      "optional": "Optional",
+      "wordLimit": "{count} words max",
+      "moreSections": "{count, plural, one {# more section} other {# more sections}}"
     },
     "workspace": {
       "saving": "Registration…",
@@ -907,9 +933,14 @@
     "starter": {
       "title": "Proposal Starter",
       "generalTemplate": "General template",
+      "recommendedForOpportunity": "Recommended for this opportunity",
       "continueDescription": "Continue your existing proposal workspace without losing progress.",
       "generalDescription": "A suitable reusable template is available for this opportunity.",
-      "specificDescription": "Use the published structure prepared for this opportunity.",
+      "specificDescription": "Use the structure prepared specifically for this opportunity.",
+      "includedSections": "Included sections",
+      "required": "Required",
+      "optional": "Optional",
+      "moreSections": "{count, plural, one {# more section} other {# more sections}}",
       "benefits": {
         "basedOnOpportunity": "Based on this opportunity",
         "guidedSections": "Section-by-section guidance",
@@ -1132,7 +1163,7 @@
       "recently": "recently"
     },
     "organization": {
-      "meta": "Organization Check",
+      "meta": "Organization verification",
       "title": "Check your organization",
       "description": "Submit the required documents for your organization's registration stage.",
       "submit": "Submit for review",
@@ -1161,6 +1192,7 @@
         }
       },
       "backToDashboard": "Back to opportunities",
+      "recently": "recently",
       "form": {
         "required": "Required documents",
         "registrationProgress": "Registration is in progress. Approval will be provisional until registration can be verified.",

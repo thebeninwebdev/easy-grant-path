@@ -30,31 +30,54 @@ async function requireProposalUserId() {
   return userId;
 }
 
-const publishedTemplateFilter = { status: "published", sections: { $elemMatch: { $or: [{ enabled: true }, { enabled: { $exists: false } }] } } } as const;
+const enabledTemplateFilter = { sections: { $elemMatch: { $or: [{ enabled: true }, { enabled: { $exists: false } }] } } };
+const publishedTemplateFilter = { status: "published", ...enabledTemplateFilter };
+const generalTemplateFilter = { $or: [{ scope: "general" }, { opportunityId: { $exists: false } }] };
+
+function templateCandidate(template: SerializedProposalTemplate) {
+  return {
+    id: template.id,
+    opportunityId: template.opportunityId,
+    scope: template.scope,
+    templateType: template.templateType,
+    status: template.status,
+    sectionCount: template.sections.filter((section) => section.enabled).length,
+  };
+}
+
+function recommendationType(opportunity: Record<string, unknown>) {
+  return buildProposalRecommendation({
+    title: String(opportunity.title),
+    description: String(opportunity.description || ""),
+    type: String(opportunity.type),
+    sectors: (opportunity.sectors || []) as string[],
+  }).recommendedTemplateType;
+}
+
+function chooseRecommendedTemplate(templates: SerializedProposalTemplate[], opportunityId: string, opportunity: Record<string, unknown>) {
+  const selected = chooseFallbackTemplate(templates.map(templateCandidate), opportunityId, recommendationType(opportunity));
+  return selected ? templates.find((template) => template.id === selected.id) || null : null;
+}
+
+async function resolveRecommendedTemplate(opportunityId: string, opportunity: Record<string, unknown>, locale: SupportedLocale) {
+  const [specific, general] = await Promise.all([
+    ProposalTemplate.findOne({ opportunityId, ...enabledTemplateFilter }).lean(),
+    ProposalTemplate.find({ ...generalTemplateFilter, ...publishedTemplateFilter }).sort({ updatedAt: -1 }).lean(),
+  ]);
+  const templates = [specific, ...general]
+    .filter((item): item is NonNullable<typeof item> => Boolean(item))
+    .map((item) => localizeProposalTemplate(serializeTemplate(item as unknown as Record<string, unknown>), locale));
+  return chooseRecommendedTemplate(templates, opportunityId, opportunity);
+}
 
 export async function getAdminProposalContext(opportunityId: string) { await connection(); if (!isValidObjectId(opportunityId)) return null; await connectToDatabase(); const [opportunity, template] = await Promise.all([Opportunity.findById(opportunityId).lean(), ProposalTemplate.findOne({ opportunityId }).lean()]); if (!opportunity) return null; const contextOpportunity = { id: String(opportunity._id), title: String(opportunity.title), summary: opportunity.summary || "", description: opportunity.description || "", organization: String(opportunity.agency || opportunity.organization || "Organization not provided"), type: String(opportunity.type), deadline: iso(opportunity.deadline), applicantTypes: opportunity.applicantTypes || [], sectors: opportunity.sectors || [], eligibleCountries: opportunity.eligibleCountries || [], officialUrl: opportunity.officialUrl || null, metadata: (opportunity.metadata || {}) as Record<string, unknown> }; return { opportunity: contextOpportunity, recommendation: buildProposalRecommendation(contextOpportunity), template: template ? serializeTemplate(template as unknown as Record<string, unknown>) : null }; }
-export async function getPublishedTemplate(opportunityId: string, locale: SupportedLocale = "en") {
+export async function getRecommendedTemplateForOpportunity(opportunityId: string, locale: SupportedLocale = "en") {
   await connection();
   if (!isValidObjectId(opportunityId)) return null;
   await connectToDatabase();
-  const [opportunity, specific, general] = await Promise.all([
-    Opportunity.findById(opportunityId).lean(),
-    ProposalTemplate.findOne({ opportunityId, ...publishedTemplateFilter }).lean(),
-    ProposalTemplate.find({ $or: [{ scope: "general" }, { opportunityId: { $exists: false } }], ...publishedTemplateFilter }).sort({ updatedAt: -1 }).lean(),
-  ]);
-  if (specific) return localizeProposalTemplate(serializeTemplate(specific as unknown as Record<string, unknown>), locale);
+  const opportunity = await Opportunity.findById(opportunityId).lean();
   if (!opportunity) return null;
-  const recommendation = buildProposalRecommendation({
-    title: String(opportunity.title), description: String(opportunity.description || ""),
-    type: String(opportunity.type), sectors: opportunity.sectors || [],
-  });
-  const serialized = general.map((item) => localizeProposalTemplate(serializeTemplate(item as unknown as Record<string, unknown>), locale));
-  const selected = chooseFallbackTemplate(
-    serialized.map((item) => ({ id: item.id, opportunityId: item.opportunityId, scope: item.scope, templateType: item.templateType, status: item.status, sectionCount: item.sections.length })),
-    opportunityId,
-    recommendation.recommendedTemplateType,
-  );
-  return selected ? serialized.find((item) => item.id === selected.id) || null : null;
+  return resolveRecommendedTemplate(opportunityId, opportunity as unknown as Record<string, unknown>, locale);
 }
 export async function getExistingApplicationForOpportunity(opportunityId: string) {
   await connection();
@@ -65,25 +88,29 @@ export async function getExistingApplicationForOpportunity(opportunityId: string
 export async function getProposalCreationOptions(locale: SupportedLocale = "en") {
   await connection();
   const userId = await requireProposalUserId();
-  const [opportunities, rawTemplates, existing] = await Promise.all([
+  const [opportunities, existing] = await Promise.all([
     Opportunity.find({ verificationStatus: "verified", status: { $in: ["open", "closing_soon", "upcoming"] } })
       .select("title agency organization type sectors description deadline translations metadata").sort({ deadline: 1, title: 1 }).limit(100).lean(),
-    ProposalTemplate.find(publishedTemplateFilter).sort({ updatedAt: -1 }).lean(),
     ProposalApplication.find({ userId }).select("_id opportunityId proposalTemplateId opportunityTitleSnapshot proposalMetadata updatedAt").sort({ updatedAt: -1 }).lean(),
   ]);
+  const opportunityIds = opportunities.map((opportunity) => opportunity._id);
+  const rawTemplates = await ProposalTemplate.find({
+    $or: [
+      { opportunityId: { $in: opportunityIds }, ...enabledTemplateFilter },
+      { $and: [generalTemplateFilter, publishedTemplateFilter] },
+    ],
+  }).sort({ updatedAt: -1 }).lean();
   const templates = rawTemplates.map((item) => localizeProposalTemplate(serializeTemplate(item as unknown as Record<string, unknown>), locale));
-  const generalTemplates = templates.filter((template) => isGeneralProposalTemplate(template));
+  const generalTemplates = templates.filter((template) => template.status === "published" && isGeneralProposalTemplate(template));
   const existingByOpportunity = new Map(existing.filter((item) => item.opportunityId).map((item) => [String(item.opportunityId), String(item._id)]));
   return {
-    templates: templates.map((template) => ({ id: template.id, opportunityId: template.opportunityId, scope: template.scope, title: template.title, description: template.description, templateType: template.templateType })),
+    templates: templates.map((template) => ({ id: template.id, opportunityId: template.opportunityId, scope: template.scope, title: template.title, description: template.description, templateType: template.templateType, sections: template.sections.filter((section) => section.enabled).map((section) => ({ key: section.key, title: section.title, required: section.required, wordLimit: section.wordLimit })) })),
     opportunities: opportunities.map((opportunity) => {
       const id = String(opportunity._id);
       const localized = serializePublicOpportunity(opportunity as unknown as Record<string, unknown>, locale);
-      const recommended = buildProposalRecommendation({ title: String(opportunity.title), description: String(opportunity.description || ""), type: String(opportunity.type), sectors: opportunity.sectors || [] }).recommendedTemplateType;
-      const applicableTemplateIds = templates.filter((template) =>
-        template.opportunityId === id || (isGeneralProposalTemplate(template) && (template.templateType === recommended || template.templateType === "general"))
-      ).map((template) => template.id);
-      return { id, title: localized.title, organization: String(localized.agency || localized.organization || (locale === "fr" ? "Organisation non fournie" : "Organization not provided")), type: String(opportunity.type), deadline: iso(opportunity.deadline), recommendedTemplateType: recommended, applicableTemplateIds, existingApplicationId: existingByOpportunity.get(id) || null };
+      const recommended = recommendationType(opportunity as unknown as Record<string, unknown>);
+      const selected = chooseRecommendedTemplate(templates, id, opportunity as unknown as Record<string, unknown>);
+      return { id, title: localized.title, organization: String(localized.agency || localized.organization || (locale === "fr" ? "Organisation non fournie" : "Organization not provided")), type: String(opportunity.type), deadline: iso(opportunity.deadline), recommendedTemplateType: recommended, recommendedTemplateId: selected?.id || null, applicableTemplateIds: selected ? [selected.id] : [], existingApplicationId: existingByOpportunity.get(id) || null };
     }),
     generalTemplates: generalTemplates.map((template) => template.id),
     recentGeneralProposals: existing.filter((item) => !item.opportunityId).slice(0, 5).map((item) => {
@@ -108,15 +135,17 @@ export async function startProposal(input: StartProposalInput) {
     : null;
   if (opportunityId && !opportunity) throw new AppError("Opportunity not found or unavailable.", "NOT_FOUND", 404);
 
-  let template = templateId ? await ProposalTemplate.findOne({ _id: templateId, ...publishedTemplateFilter }).lean() : null;
-  if (!template && !templateId && opportunityId) {
-    const selected = await getPublishedTemplate(opportunityId, locale);
-    if (selected) template = await ProposalTemplate.findById(selected.id).lean();
+  let template = opportunityId && opportunity
+    ? await resolveRecommendedTemplate(opportunityId, opportunity as unknown as Record<string, unknown>, locale)
+    : null;
+  if (!opportunityId && templateId) {
+    const rawTemplate = await ProposalTemplate.findOne({ _id: templateId, ...publishedTemplateFilter }).lean();
+    template = rawTemplate ? localizeProposalTemplate(serializeTemplate(rawTemplate as unknown as Record<string, unknown>), locale) : null;
   }
-  if (!template) throw new AppError("Choose an available published proposal template.", "NOT_FOUND", 404);
+  if (!template) throw new AppError("Choose an available proposal template.", "NOT_FOUND", 404);
 
-  const serializedTemplate = localizeProposalTemplate(serializeTemplate(template as unknown as Record<string, unknown>), locale);
-  const candidate = { id: serializedTemplate.id, opportunityId: serializedTemplate.opportunityId, scope: serializedTemplate.scope, templateType: serializedTemplate.templateType, status: serializedTemplate.status, sectionCount: serializedTemplate.sections.filter((section) => section.enabled).length };
+  const serializedTemplate = template;
+  const candidate = templateCandidate(serializedTemplate);
   if (!canUseProposalTemplate(candidate, opportunityId)) throw new AppError("This template cannot be used for the selected proposal.", "FORBIDDEN", 403);
 
   const templateSections = serializedTemplate.sections.filter((section) => section.enabled !== false).slice().sort((a, b) => a.order - b.order);
@@ -127,7 +156,7 @@ export async function startProposal(input: StartProposalInput) {
     locale,
     ...(opportunityId ? { opportunityId } : {}),
     proposalKind: opportunityId ? "opportunity" : "general",
-    proposalTemplateId: template._id,
+    proposalTemplateId: serializedTemplate.id,
     opportunityTitleSnapshot: localizedOpportunity ? localizedOpportunity.title : locale === "fr" ? "Proposition de financement générale" : "General funding proposal",
     organizationSnapshot: fundingOrganization,
     fundingOrganizationSnapshot: fundingOrganization,

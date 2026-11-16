@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { Link } from '@/i18n/navigation';
 import { ArrowRight, Bookmark, CalendarClock, CheckCircle2, FileText, MapPin, Settings, ShieldCheck, Sparkles, Target } from 'lucide-react';
 import { formatDate, humanize } from '@/components/admin/opportunities/opportunity-formatters';
 import { MatchedOpportunityCard } from '@/components/opportunities/matched-opportunity-card';
