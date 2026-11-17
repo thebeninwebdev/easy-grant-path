@@ -3,6 +3,7 @@ import { randomUUID } from "node:crypto";
 import { connection } from "next/server";
 import { requireAdmin } from "@/lib/admin-auth";
 import { connectToDatabase } from "@/lib/db";
+import { ensureCheckoutTransactionIndexes } from "@/lib/checkout-index-migration";
 import { AppError } from "@/lib/errors";
 import { logger } from "@/lib/logger";
 import { createFlutterwaveCheckout, verifyFlutterwaveTransaction } from "@/lib/flutterwave";
@@ -29,7 +30,9 @@ export async function initializePaymentCheckout(user: SessionUser, input: { prod
   if (!hasAdminRole(user.role)) await assertIdentityVerificationApproved(user.id);
   const config = getPaystackConfig();
   if (!config.enabled || !config.environment) throw new AppError("Paystack checkout is unavailable because no valid payment environment is configured.", "PAYMENT_UNAVAILABLE", 503);
-  await connectToDatabase();
+  // Upgrade legacy MongoDB indexes before inserting a pending payment. A compound
+  // sparse index incorrectly treats multiple missing transaction IDs as duplicates.
+  await ensureCheckoutTransactionIndexes();
   const profile = await UserProfile.findOne({ userId: user.id }).lean();
   if (!profile) throw new AppError("Complete your profile before purchasing this product.", "PROFILE_REQUIRED", 400);
   const product = getPaymentProduct(input.productId, profile.applicantType);
