@@ -19,7 +19,6 @@ import { Payment } from "@/models/Payment";
 import { UserProfile } from "@/models/UserProfile";
 import { localizedPath } from "@/i18n/paths";
 import type { SupportedLocale } from "@/lib/config";
-import { hasAdminRole } from "@/lib/admin-auth";
 import { assertIdentityVerificationApproved } from "@/lib/dashboard-access";
 type SessionUser = { id: string; name?: string | null; email: string; role?: string | null };
 type PaymentShape = { _id: unknown; provider: "flutterwave" | "paystack"; userId: string; customerName: string; customerEmail: string; reference: string; category: string; productId: string; amountMinor: number; currency: string; environment: "test" | "live"; status: string; paymentMethod?: string; createdAt?: Date; verifiedAt?: Date; serviceRequestId?: unknown; metadata?: { whatsappNumber?: string; durationDays?: number; applicantTypeSnapshot?: string } };
@@ -27,7 +26,7 @@ const assistance = (id: string): id is "proposal_writing" | "proposal_review" =>
 function reference(productId: string, environment: "test" | "live") { return `EGP-${environment === "live" ? "L" : "T"}-${productId === "proposal_writing" ? "PW" : productId === "proposal_review" ? "PR" : "SUB"}-${randomUUID().replace(/-/g, "")}`; }
 function publicPayment(payment: PaymentShape) { return { id: String(payment._id), reference: payment.reference, category: payment.category, productId: payment.productId, amountMinor: payment.amountMinor, currency: payment.currency, environment: payment.environment, status: payment.status, paymentMethod: payment.paymentMethod || null, createdAt: payment.createdAt, verifiedAt: payment.verifiedAt || null, whatsappNumber: payment.metadata?.whatsappNumber || null }; }
 export async function initializePaymentCheckout(user: SessionUser, input: { productId: string; whatsappNumber?: string; saveWhatsapp?: boolean; locale?: SupportedLocale }) {
-  if (!hasAdminRole(user.role)) await assertIdentityVerificationApproved(user.id);
+  await assertIdentityVerificationApproved(user.id);
   const config = getPaystackConfig();
   if (!config.enabled || !config.environment) throw new AppError("Paystack checkout is unavailable because no valid payment environment is configured.", "PAYMENT_UNAVAILABLE", 503);
   // Upgrade legacy MongoDB indexes before inserting a pending payment. A compound
