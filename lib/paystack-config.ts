@@ -1,4 +1,5 @@
 import "server-only";
+import { AppError } from "@/lib/errors";
 import { resolvePaystackCredentials, type PaymentEnvironment } from "@/lib/paystack-config-policy";
 export type { PaymentEnvironment } from "@/lib/paystack-config-policy";
 
@@ -43,12 +44,12 @@ export function getPaystackDiagnostics() {
 
 export function assertPaystackConfig(environment?: PaymentEnvironment) {
   const config = getPaystackConfig(environment);
-  if (!config.enabled) throw new Error("Paystack is not safely configured for this deployment environment.");
+  if (!config.enabled) throw new AppError("Paystack checkout is unavailable because its payment environment is not configured.", "PAYMENT_UNAVAILABLE", 503);
   return config;
 }
 
 export function assertPaystackCredentials(environment: PaymentEnvironment) {
   const config = getPaystackConfig(environment);
-  if (!config.credentialsValid || !config.secretKey) throw new Error(`Paystack ${environment} credentials are unavailable.`);
+  if (!config.credentialsValid || !config.secretKey) throw new AppError(`Paystack ${environment} credentials are unavailable.`, "PAYMENT_ENVIRONMENT_UNAVAILABLE", 503);
   return { ...config, environment, secretKey: config.secretKey };
 }
