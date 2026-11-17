@@ -25,9 +25,9 @@ function checkoutErrorDiagnostic(error: unknown) {
     ? error.message
     : error instanceof Error
       ? error.message
-          .replace(/mongodb(?:\\+srv)?:\\/\\/[^\\s]+/gi, "[redacted database URI]")
+          .replace(/mongodb(?:\+srv)?:\/\/[^\s]+/gi, "[redacted database URI]")
           .replace(/sk_(?:live|test)_[a-z0-9]+/gi, "[redacted payment key]")
-          .replace(/Bearer\\s+[^\\s]+/gi, "Bearer [redacted]")
+          .replace(/Bearer\s+[^\s]+/gi, "Bearer [redacted]")
           .slice(0, 300)
       : undefined;
 
