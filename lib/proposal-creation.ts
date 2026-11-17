@@ -14,7 +14,7 @@ export function isGeneralProposalTemplate(template: Pick<ProposalTemplateCandida
 export function canUseProposalTemplate(template: ProposalTemplateCandidate, opportunityId?: string) {
   if (template.sectionCount < 1) return false;
   if (!opportunityId) return template.status === "published" && isGeneralProposalTemplate(template);
-  if (template.opportunityId === opportunityId && !isGeneralProposalTemplate(template)) return true;
+  if (template.opportunityId === opportunityId && !isGeneralProposalTemplate(template)) return template.status === "published";
   return template.status === "published" && isGeneralProposalTemplate(template);
 }
 

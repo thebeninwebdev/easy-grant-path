@@ -1,7 +1,6 @@
 "use client";
 
 import {useLocale, useTranslations} from "next-intl";
-import {useSearchParams} from "next/navigation";
 import {useCallback, useEffect, useRef, useState, useTransition} from "react";
 import type {SupportedLocale} from "@/lib/config";
 import {usePathname, useRouter} from "@/i18n/navigation";
@@ -14,16 +13,17 @@ export function LanguageSwitcher({className, compact = false}: {className?: stri
   const t = useTranslations("Navigation");
   const pathname = usePathname();
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [, startTransition] = useTransition();
   const [pendingLocale, setPendingLocale] = useState<SupportedLocale | null>(null);
   const [failed, setFailed] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const switcherRef = useRef<HTMLDivElement>(null);
   const pendingLocaleRef = useRef<SupportedLocale | null>(null);
   const timeoutRef = useRef<number | undefined>(undefined);
   const isPending = pendingLocale !== null && pendingLocale !== locale;
 
   useEffect(() => {
+    setMounted(true);
     if (switcherRef.current) switcherRef.current.dataset.ready = "true";
   }, []);
 
@@ -44,7 +44,7 @@ export function LanguageSwitcher({className, compact = false}: {className?: stri
   const changeLocale = useCallback((nextLocale: SupportedLocale) => {
     if (nextLocale === locale || pendingLocaleRef.current) return;
 
-    const query = searchParams.toString();
+    const query = typeof window !== "undefined" ? window.location.search.replace(/^\?/, "") : "";
     const hash = window.location.hash;
     const destination = pathname + (query ? `?${query}` : "") + hash;
 
@@ -61,7 +61,7 @@ export function LanguageSwitcher({className, compact = false}: {className?: stri
     startTransition(() => {
       router.replace(destination, {locale: nextLocale, scroll: false});
     });
-  }, [locale, pathname, router, searchParams]);
+  }, [locale, pathname, router]);
 
   return (
     <div
@@ -71,6 +71,7 @@ export function LanguageSwitcher({className, compact = false}: {className?: stri
       aria-label={t("changeLanguage")}
       aria-busy={isPending}
       data-language-switcher="true"
+      data-ready={mounted ? "true" : undefined}
       data-pending={isPending || undefined}
     >
       <span className="sr-only" aria-live="polite">{isPending ? t("switchingLanguage") : failed ? t("languageSwitchFailed") : ""}</span>

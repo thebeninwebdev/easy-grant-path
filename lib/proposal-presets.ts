@@ -1,8 +1,13 @@
+import { createHash } from "node:crypto";
 import type { OpportunityType } from "@/types/opportunities";
 import type { ProposalTemplateSectionInput } from "@/lib/validation/proposal";
 
 export const PROPOSAL_STARTER_IDS = ["general", "ngo_community_development", "startup_sme", "youth_employment_skills", "women_girls_empowerment", "agriculture_food_security", "climate_environment", "education", "health_public_health", "research_academic", "fellowship_leadership", "scholarship_study"] as const;
 export type ProposalStarterId = (typeof PROPOSAL_STARTER_IDS)[number];
+
+export function getBuiltinTemplateId(starterId: string): string {
+  return createHash("md5").update(`builtin-proposal-template:${starterId}`).digest("hex").slice(0, 24);
+}
 type Spec = readonly [key: string, title: string, focus: string, questions: string, wordLimit: number, required?: boolean, example?: string];
 export interface ProposalStarter { id: ProposalStarterId; name: string; description: string; recommendedOpportunityTypes: OpportunityType[]; recommendedSectors: string[]; sections: ProposalTemplateSectionInput[] }
 

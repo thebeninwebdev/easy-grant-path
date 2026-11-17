@@ -17,12 +17,12 @@ assert.equal(canUseProposalTemplate(specificTemplate), false, "an opportunity te
 assert.equal(canUseProposalTemplate(specificTemplate, "opportunity-1"), true, "the matching opportunity can use its template");
 assert.equal(canUseProposalTemplate(specificTemplate, "opportunity-2"), false, "another opportunity cannot use a specific template");
 assert.equal(canUseProposalTemplate({ ...generalTemplate, status: "draft" }), false, "draft templates remain unavailable");
-assert.equal(canUseProposalTemplate({ ...specificTemplate, status: "draft" }, "opportunity-1"), true, "a draft recommendation is available to its opportunity");
-assert.equal(canUseProposalTemplate({ ...specificTemplate, status: "unpublished" }, "opportunity-1"), true, "an unpublished recommendation is available to its opportunity");
+assert.equal(canUseProposalTemplate({ ...specificTemplate, status: "draft" }, "opportunity-1"), false, "an unpublished custom template is not publicly available");
+assert.equal(canUseProposalTemplate({ ...specificTemplate, status: "unpublished" }, "opportunity-1"), false, "an unpublished custom template is not publicly available");
 assert.equal(canUseProposalTemplate({ ...specificTemplate, status: "draft" }, "opportunity-2"), false, "a draft recommendation is unavailable to unrelated opportunities");
 assert.equal(canUseProposalTemplate({ ...generalTemplate, sectionCount: 0 }), false, "empty templates remain unavailable");
 assert.equal(chooseFallbackTemplate([generalTemplate, specificTemplate], "opportunity-1", "general")?.id, "specific-1", "opportunity-specific templates take priority");
-assert.equal(chooseFallbackTemplate([generalTemplate, { ...specificTemplate, status: "draft" }], "opportunity-1", "general")?.id, "specific-1", "a draft opportunity recommendation takes priority over a published general template");
+assert.equal(chooseFallbackTemplate([generalTemplate, { ...specificTemplate, status: "draft" }], "opportunity-1", "general")?.id, "general-1", "an unpublished custom template falls back safely to general/recommended");
 assert.equal(chooseFallbackTemplate([generalTemplate, { ...specificTemplate, status: "draft", sectionCount: 0 }], "opportunity-1", "general")?.id, "general-1", "an empty recommendation falls back safely");
 assert.equal(chooseFallbackTemplate([generalTemplate, matchingGeneralTemplate], "opportunity-2", "startup_sme")?.id, "startup-general", "matching logic takes priority over the generic published template");
 assert.equal(chooseFallbackTemplate([generalTemplate, { ...matchingGeneralTemplate, status: "draft" }], "opportunity-2", "startup_sme")?.id, "general-1", "matching logic never exposes an unpublished general template");

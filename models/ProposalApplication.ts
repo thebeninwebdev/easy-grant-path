@@ -18,7 +18,7 @@ const proposalApplicationSchema = new Schema({
   locale: { type: String, enum: ["fr", "en"] },
   opportunityId: { type: Schema.Types.ObjectId, ref: "Opportunity" },
   proposalKind: { type: String, enum: ["opportunity", "general"], default: "opportunity", index: true },
-  proposalTemplateId: { type: Schema.Types.ObjectId, ref: "ProposalTemplate", required: true },
+  proposalTemplateId: { type: Schema.Types.ObjectId, ref: "ProposalTemplate", required: false },
   opportunityTitleSnapshot: { type: String, required: true },
   // Legacy field: this is the funding organization, never the applicant.
   organizationSnapshot: String,

@@ -11,7 +11,9 @@ import { Opportunity } from "@/models/Opportunity";
 import { ProposalApplication } from "@/models/ProposalApplication";
 import { ProposalTemplate } from "@/models/ProposalTemplate";
 import { UserProfile } from "@/models/UserProfile";
-import { buildProposalRecommendation } from "@/lib/proposal-recommendation";
+import { buildProposalRecommendation, applyRecommendationSections } from "@/lib/proposal-recommendation";
+import { getProposalStarter, getBuiltinTemplateId, PROPOSAL_STARTER_IDS, type ProposalStarterId } from "@/lib/proposal-presets";
+import type { ProposalTemplateSectionInput } from "@/lib/validation/proposal";
 import { localizeProposalTemplate } from "@/lib/proposal-localization";
 import { serializePublicOpportunity } from "@/lib/public-opportunities";
 import type { SupportedLocale } from "@/lib/config";
@@ -54,20 +56,45 @@ function recommendationType(opportunity: Record<string, unknown>) {
   }).recommendedTemplateType;
 }
 
+export { createBuiltinProposalTemplate } from "./proposal-resolver";
+
+export async function resolveProposalTemplateForOpportunity(
+  opportunity: Record<string, unknown> | { _id?: unknown; id?: string; title: string; [key: string]: unknown },
+  locale: SupportedLocale = "en"
+): Promise<SerializedProposalTemplate> {
+  try {
+    await connectToDatabase();
+  } catch {
+    // In environments without a live database, proceed to built-in fallbacks
+  }
+  const rawId = opportunity._id || (opportunity as { id?: string }).id;
+  const opportunityId = rawId ? String(rawId) : "";
+
+  return resolveGuaranteedProposalTemplate({
+    opportunity,
+    locale,
+    findCustomTemplate: async (id: string) => {
+      if (!isValidObjectId(id)) return null;
+      return ProposalTemplate.findOne({
+        opportunityId: id,
+        scope: "opportunity",
+        status: "published",
+        ...enabledTemplateFilter,
+      }).lean();
+    },
+    findGeneralTemplate: async (templateType: string) => {
+      return ProposalTemplate.findOne({
+        ...generalTemplateFilter,
+        templateType,
+        ...publishedTemplateFilter,
+      }).sort({ updatedAt: -1 }).lean();
+    },
+  });
+}
+
 function chooseRecommendedTemplate(templates: SerializedProposalTemplate[], opportunityId: string, opportunity: Record<string, unknown>) {
   const selected = chooseFallbackTemplate(templates.map(templateCandidate), opportunityId, recommendationType(opportunity));
   return selected ? templates.find((template) => template.id === selected.id) || null : null;
-}
-
-async function resolveRecommendedTemplate(opportunityId: string, opportunity: Record<string, unknown>, locale: SupportedLocale) {
-  const [specific, general] = await Promise.all([
-    ProposalTemplate.findOne({ opportunityId, ...enabledTemplateFilter }).lean(),
-    ProposalTemplate.find({ ...generalTemplateFilter, ...publishedTemplateFilter }).sort({ updatedAt: -1 }).lean(),
-  ]);
-  const templates = [specific, ...general]
-    .filter((item): item is NonNullable<typeof item> => Boolean(item))
-    .map((item) => localizeProposalTemplate(serializeTemplate(item as unknown as Record<string, unknown>), locale));
-  return chooseRecommendedTemplate(templates, opportunityId, opportunity);
 }
 
 export async function getAdminProposalContext(opportunityId: string) { await connection(); if (!isValidObjectId(opportunityId)) return null; await connectToDatabase(); const [opportunity, template] = await Promise.all([Opportunity.findById(opportunityId).lean(), ProposalTemplate.findOne({ opportunityId }).lean()]); if (!opportunity) return null; const contextOpportunity = { id: String(opportunity._id), title: String(opportunity.title), summary: opportunity.summary || "", description: opportunity.description || "", organization: String(opportunity.agency || opportunity.organization || "Organization not provided"), type: String(opportunity.type), deadline: iso(opportunity.deadline), applicantTypes: opportunity.applicantTypes || [], sectors: opportunity.sectors || [], eligibleCountries: opportunity.eligibleCountries || [], officialUrl: opportunity.officialUrl || null, metadata: (opportunity.metadata || {}) as Record<string, unknown> }; return { opportunity: contextOpportunity, recommendation: buildProposalRecommendation(contextOpportunity), template: template ? serializeTemplate(template as unknown as Record<string, unknown>) : null }; }
@@ -77,7 +104,7 @@ export async function getRecommendedTemplateForOpportunity(opportunityId: string
   await connectToDatabase();
   const opportunity = await Opportunity.findById(opportunityId).lean();
   if (!opportunity) return null;
-  return resolveRecommendedTemplate(opportunityId, opportunity as unknown as Record<string, unknown>, locale);
+  return resolveProposalTemplateForOpportunity(opportunity as unknown as Record<string, unknown>, locale);
 }
 export async function getExistingApplicationForOpportunity(opportunityId: string) {
   await connection();
@@ -96,23 +123,74 @@ export async function getProposalCreationOptions(locale: SupportedLocale = "en")
   const opportunityIds = opportunities.map((opportunity) => opportunity._id);
   const rawTemplates = await ProposalTemplate.find({
     $or: [
-      { opportunityId: { $in: opportunityIds }, ...enabledTemplateFilter },
+      { opportunityId: { $in: opportunityIds }, status: "published", ...enabledTemplateFilter },
       { $and: [generalTemplateFilter, publishedTemplateFilter] },
     ],
   }).sort({ updatedAt: -1 }).lean();
-  const templates = rawTemplates.map((item) => localizeProposalTemplate(serializeTemplate(item as unknown as Record<string, unknown>), locale));
-  const generalTemplates = templates.filter((template) => template.status === "published" && isGeneralProposalTemplate(template));
+
+  const templatesMap = new Map<string, SerializedProposalTemplate>();
+  for (const item of rawTemplates) {
+    const serialized = serializeTemplate(item as unknown as Record<string, unknown>);
+    if (serialized.sections.filter((s) => s.enabled).length >= 1) {
+      templatesMap.set(serialized.id, localizeProposalTemplate(serialized, locale));
+    }
+  }
+
+  // Ensure universal built-in template is available
+  const universalBuiltin = createBuiltinProposalTemplate("general", locale, { universalFallback: true });
+  if (!templatesMap.has(universalBuiltin.id)) {
+    templatesMap.set(universalBuiltin.id, universalBuiltin);
+  }
+
   const existingByOpportunity = new Map(existing.filter((item) => item.opportunityId).map((item) => [String(item.opportunityId), String(item._id)]));
-  return {
-    templates: templates.map((template) => ({ id: template.id, opportunityId: template.opportunityId, scope: template.scope, title: template.title, description: template.description, templateType: template.templateType, sections: template.sections.filter((section) => section.enabled).map((section) => ({ key: section.key, title: section.title, required: section.required, wordLimit: section.wordLimit })) })),
-    opportunities: opportunities.map((opportunity) => {
+
+  const resolvedOpportunities = await Promise.all(
+    opportunities.map(async (opportunity) => {
       const id = String(opportunity._id);
       const localized = serializePublicOpportunity(opportunity as unknown as Record<string, unknown>, locale);
-      const recommended = recommendationType(opportunity as unknown as Record<string, unknown>);
-      const selected = chooseRecommendedTemplate(templates, id, opportunity as unknown as Record<string, unknown>);
-      return { id, title: localized.title, organization: String(localized.agency || localized.organization || (locale === "fr" ? "Organisation non fournie" : "Organization not provided")), type: String(opportunity.type), deadline: iso(opportunity.deadline), recommendedTemplateType: recommended, recommendedTemplateId: selected?.id || null, applicableTemplateIds: selected ? [selected.id] : [], existingApplicationId: existingByOpportunity.get(id) || null };
-    }),
-    generalTemplates: generalTemplates.map((template) => template.id),
+      const recommendedType = recommendationType(opportunity as unknown as Record<string, unknown>);
+      
+      const resolved = await resolveProposalTemplateForOpportunity(opportunity as unknown as Record<string, unknown>, locale);
+      if (!templatesMap.has(resolved.id)) {
+        templatesMap.set(resolved.id, resolved);
+      }
+
+      return {
+        id,
+        title: localized.title,
+        organization: String(localized.agency || localized.organization || (locale === "fr" ? "Organisation non fournie" : "Organization not provided")),
+        type: String(opportunity.type),
+        deadline: iso(opportunity.deadline),
+        recommendedTemplateType: recommendedType,
+        recommendedTemplateId: resolved.id,
+        applicableTemplateIds: [resolved.id],
+        existingApplicationId: existingByOpportunity.get(id) || null,
+      };
+    })
+  );
+
+  const allTemplates = Array.from(templatesMap.values());
+  const generalTemplates = allTemplates
+    .filter((template) => template.status === "published" && isGeneralProposalTemplate(template))
+    .map((template) => template.id);
+
+  return {
+    templates: allTemplates.map((template) => ({
+      id: template.id,
+      opportunityId: template.opportunityId,
+      scope: template.scope,
+      title: template.title,
+      description: template.description,
+      templateType: template.templateType,
+      sections: template.sections.filter((section) => section.enabled).map((section) => ({
+        key: section.key,
+        title: section.title,
+        required: section.required,
+        wordLimit: section.wordLimit,
+      })),
+    })),
+    opportunities: resolvedOpportunities,
+    generalTemplates: generalTemplates.length ? generalTemplates : [universalBuiltin.id],
     recentGeneralProposals: existing.filter((item) => !item.opportunityId).slice(0, 5).map((item) => {
       const metadata = (item.proposalMetadata || {}) as { projectTitle?: string };
       return { id: String(item._id), title: metadata.projectTitle || String(item.opportunityTitleSnapshot), updatedAt: iso(item.updatedAt) };
@@ -135,14 +213,26 @@ export async function startProposal(input: StartProposalInput) {
     : null;
   if (opportunityId && !opportunity) throw new AppError("Opportunity not found or unavailable.", "NOT_FOUND", 404);
 
-  let template = opportunityId && opportunity
-    ? await resolveRecommendedTemplate(opportunityId, opportunity as unknown as Record<string, unknown>, locale)
-    : null;
-  if (!opportunityId && templateId) {
+  let template: SerializedProposalTemplate | null = null;
+  if (opportunityId && opportunity) {
+    template = await resolveProposalTemplateForOpportunity(opportunity as unknown as Record<string, unknown>, locale);
+  } else if (templateId) {
     const rawTemplate = await ProposalTemplate.findOne({ _id: templateId, ...publishedTemplateFilter }).lean();
-    template = rawTemplate ? localizeProposalTemplate(serializeTemplate(rawTemplate as unknown as Record<string, unknown>), locale) : null;
+    if (rawTemplate) {
+      template = localizeProposalTemplate(serializeTemplate(rawTemplate as unknown as Record<string, unknown>), locale);
+    } else {
+      for (const starterId of PROPOSAL_STARTER_IDS) {
+        if (getBuiltinTemplateId(starterId) === templateId) {
+          template = createBuiltinProposalTemplate(starterId, locale);
+          break;
+        }
+      }
+    }
   }
-  if (!template) throw new AppError("Choose an available proposal template.", "NOT_FOUND", 404);
+
+  if (!template) {
+    template = createBuiltinProposalTemplate("general", locale, { universalFallback: true });
+  }
 
   const serializedTemplate = template;
   const candidate = templateCandidate(serializedTemplate);

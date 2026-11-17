@@ -508,7 +508,7 @@
   },
   "Dashboard": {
     "nav": {
-      "overview": "Preview",
+      "overview": "Overview",
       "discoverOpportunities": "Discover opportunities",
       "myMatches": "My matches",
       "savedOpportunities": "Saved Opportunities",
@@ -580,6 +580,110 @@
         "title": "Need professional help?",
         "description": "Self-service proposals are written in EasyGrantPath. For professional writing or editing, our team works with you via WhatsApp."
       }
+    },
+    "workspace": {
+      "meta": "Funding workspace",
+      "welcome": {
+        "kicker": "Your funding workspace",
+        "title": "Welcome, {name}",
+        "description": "Track promising opportunities, keep proposals moving, and stay ahead of every deadline.",
+        "continueProposal": "Continue proposal",
+        "exploreOpportunities": "Explore opportunities",
+        "createProposal": "Create proposal"
+      },
+      "metrics": {
+        "label": "Workspace summary",
+        "matches": "Potential matches",
+        "matchesNote": "Selected for your profile",
+        "closingSoon": "Closing soon",
+        "closingSoonNote": "Deadlines within 14 days",
+        "proposals": "Proposals",
+        "proposalsNote": "Current and completed"
+      },
+      "recommendations": {
+        "title": "Recommended for you",
+        "description": "Current opportunities selected from your funding profile.",
+        "viewAll": "View all matches",
+        "emptyTitle": "No matches yet",
+        "emptyDescription": "Update your funding preferences to improve your recommendations.",
+        "editPreferences": "Edit preferences"
+      },
+      "activeProposal": {
+        "sectionTitle": "Active proposal",
+        "sectionDescription": "Continue the proposal that needs your attention next.",
+        "inProgress": "In progress",
+        "updated": "Updated {date}",
+        "progress": "{progress}% complete",
+        "progressLabel": "Proposal progress",
+        "deadline": "Due {date}",
+        "continueWriting": "Continue writing",
+        "recently": "recently",
+        "today": "today",
+        "yesterday": "yesterday",
+        "daysAgo": "{count} days ago",
+        "emptyTitle": "No active proposal",
+        "emptyDescription": "Start with a guided structure when you are ready to prepare an application.",
+        "startProposal": "Start a proposal"
+      },
+      "deadlines": {
+        "title": "Upcoming deadlines",
+        "description": "The nearest opportunity deadlines, ordered for quick action.",
+        "dueToday": "Due today",
+        "oneDay": "1 day left",
+        "days": "{count} days left",
+        "viewDetails": "View details",
+        "emptyTitle": "No urgent deadlines",
+        "emptyDescription": "Nothing in your matches closes within the next 14 days."
+      },
+      "profile": {
+        "title": "Funding profile",
+        "edit": "Edit",
+        "country": "Country",
+        "applicant": "Applicant",
+        "interests": "Interests",
+        "lookingFor": "Looking for",
+        "applicantTypes": {
+          "individual": "Individual",
+          "student": "Student",
+          "startup_sme": "Startup or SME",
+          "ngo_nonprofit": "NGO or nonprofit",
+          "researcher_academic": "Researcher or academic",
+          "community_organization": "Community organization",
+          "other": "Other"
+        },
+        "opportunityTypes": {
+          "grant": "Grant",
+          "fellowship": "Fellowship",
+          "scholarship": "Scholarship",
+          "accelerator": "Accelerator",
+          "startup_funding": "Startup funding",
+          "competition": "Competition",
+          "prize": "Prize",
+          "research_support": "Research support",
+          "other": "Other"
+        }
+      },
+      "verification": {
+        "identity": "Identity verification",
+        "organization": "Organization verification",
+        "verified": "Verified",
+        "underReview": "Under review",
+        "actionRequired": "Action required",
+        "notStarted": "Not started",
+        "verifiedDescription": "Your verification is approved and up to date.",
+        "pendingDescription": "Your documents are being reviewed. You can check the latest status at any time.",
+        "actionDescription": "Review the verification note and submit the requested update.",
+        "notStartedDescription": "Complete verification to unlock all eligible platform actions.",
+        "resolveAction": "Resolve action",
+        "viewStatus": "View status",
+        "startVerification": "Start verification"
+      },
+      "assistance": {
+        "title": "Need an expert hand?",
+        "description": "Professional proposal writing and review remain available when you want focused human support.",
+        "action": "Explore assistance"
+      },
+      "unsubscribed": {}
     },
     "teaser": {
       "step": "Step 4 of 4",

@@ -1,8 +1,7 @@
-import "server-only";
-import en from "@/messages/proposal-presets/en.json";
-import fr from "@/messages/proposal-presets/fr.json";
-import { normalizeProposalStarterId } from "@/lib/proposal-presets";
-import type { SupportedLocale } from "@/lib/config";
+import en from "../messages/proposal-presets/en.json" with { type: "json" };
+import fr from "../messages/proposal-presets/fr.json" with { type: "json" };
+import { normalizeProposalStarterId } from "./proposal-presets.ts";
+import type { SupportedLocale } from "./config.ts";
 
 type LocalizableSection = { key: string; title: string; guidance: string; prompt?: string; example?: string; placeholder?: string };
 type LocalizableTemplate<TSection extends LocalizableSection> = { title: string; description: string; templateType: string; sections: TSection[] };

@@ -581,6 +581,110 @@
         "description": "Les propositions en libre-service sont rédigées dans EasyGrantPath. Pour une rédaction ou révision professionnelle, notre équipe travaille avec vous via WhatsApp."
       }
     },
+    "workspace": {
+      "meta": "Espace de financement",
+      "welcome": {
+        "kicker": "Votre espace de financement",
+        "title": "Bienvenue, {name}",
+        "description": "Suivez les opportunités prometteuses, faites avancer vos propositions et anticipez chaque échéance.",
+        "continueProposal": "Continuer la proposition",
+        "exploreOpportunities": "Explorer les opportunités",
+        "createProposal": "Créer une proposition"
+      },
+      "metrics": {
+        "label": "Résumé de l’espace",
+        "matches": "Correspondances",
+        "matchesNote": "Sélectionnées pour votre profil",
+        "closingSoon": "Bientôt clôturées",
+        "closingSoonNote": "Échéances sous 14 jours",
+        "proposals": "Propositions",
+        "proposalsNote": "En cours et terminées"
+      },
+      "recommendations": {
+        "title": "Recommandées pour vous",
+        "description": "Opportunités actuelles sélectionnées selon votre profil de financement.",
+        "viewAll": "Voir toutes les correspondances",
+        "emptyTitle": "Aucune correspondance",
+        "emptyDescription": "Mettez à jour vos préférences pour améliorer vos recommandations.",
+        "editPreferences": "Modifier les préférences"
+      },
+      "activeProposal": {
+        "sectionTitle": "Proposition active",
+        "sectionDescription": "Reprenez la proposition qui demande votre attention en priorité.",
+        "inProgress": "En cours",
+        "updated": "Mise à jour {date}",
+        "progress": "{progress} % terminée",
+        "progressLabel": "Progression de la proposition",
+        "deadline": "Échéance : {date}",
+        "continueWriting": "Continuer la rédaction",
+        "recently": "récemment",
+        "today": "aujourd’hui",
+        "yesterday": "hier",
+        "daysAgo": "il y a {count} jours",
+        "emptyTitle": "Aucune proposition active",
+        "emptyDescription": "Commencez avec une structure guidée lorsque vous êtes prêt à préparer une candidature.",
+        "startProposal": "Commencer une proposition"
+      },
+      "deadlines": {
+        "title": "Échéances à venir",
+        "description": "Les échéances les plus proches, classées pour agir rapidement.",
+        "dueToday": "Échéance aujourd’hui",
+        "oneDay": "1 jour restant",
+        "days": "{count} jours restants",
+        "viewDetails": "Voir les détails",
+        "emptyTitle": "Aucune échéance urgente",
+        "emptyDescription": "Aucune de vos correspondances ne clôture dans les 14 prochains jours."
+      },
+      "profile": {
+        "title": "Profil de financement",
+        "edit": "Modifier",
+        "country": "Pays",
+        "applicant": "Candidat",
+        "interests": "Centres d’intérêt",
+        "lookingFor": "Recherche",
+        "applicantTypes": {
+          "individual": "Particulier",
+          "student": "Étudiant",
+          "startup_sme": "Startup ou PME",
+          "ngo_nonprofit": "ONG ou association",
+          "researcher_academic": "Chercheur ou universitaire",
+          "community_organization": "Organisation communautaire",
+          "other": "Autre"
+        },
+        "opportunityTypes": {
+          "grant": "Subvention",
+          "fellowship": "Fellowship",
+          "scholarship": "Bourse d’études",
+          "accelerator": "Accélérateur",
+          "startup_funding": "Financement de startup",
+          "competition": "Concours",
+          "prize": "Prix",
+          "research_support": "Soutien à la recherche",
+          "other": "Autre"
+        }
+      },
+      "verification": {
+        "identity": "Vérification d’identité",
+        "organization": "Vérification d’organisation",
+        "verified": "Vérifiée",
+        "underReview": "En cours d’examen",
+        "actionRequired": "Action requise",
+        "notStarted": "Non commencée",
+        "verifiedDescription": "Votre vérification est approuvée et à jour.",
+        "pendingDescription": "Vos documents sont en cours d’examen. Vous pouvez consulter le statut à tout moment.",
+        "actionDescription": "Consultez la note de vérification et soumettez la mise à jour demandée.",
+        "notStartedDescription": "Terminez la vérification pour débloquer toutes les actions autorisées.",
+        "resolveAction": "Résoudre le problème",
+        "viewStatus": "Voir le statut",
+        "startVerification": "Commencer la vérification"
+      },
+      "assistance": {
+        "title": "Besoin d’un regard expert ?",
+        "description": "La rédaction et la révision professionnelles restent disponibles lorsque vous souhaitez un accompagnement humain ciblé.",
+        "action": "Découvrir l’accompagnement"
+      },
+      "unsubscribed": {}
+    },
     "teaser": {
       "step": "Étape 4 sur 4",
       "match": {
