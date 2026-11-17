@@ -4,6 +4,7 @@ import { connection } from "next/server";
 import { requireAdmin } from "@/lib/admin-auth";
 import { connectToDatabase } from "@/lib/db";
 import { AppError } from "@/lib/errors";
+import { logger } from "@/lib/logger";
 import { createFlutterwaveCheckout, verifyFlutterwaveTransaction } from "@/lib/flutterwave";
 import { getFlutterwaveConfig } from "@/lib/flutterwave-config";
 import { createPaystackCheckout, verifyPaystackTransaction } from "@/lib/paystack";
@@ -67,6 +68,7 @@ export async function initializePaymentCheckout(user: SessionUser, input: { prod
     },
   });
 
+  let checkoutStage = "create_assistance_request";
   try {
     if (assistance(product.id) && whatsapp && applicantTypeSnapshot) {
       const request = await createPendingAssistanceRequest({
@@ -83,15 +85,43 @@ export async function initializePaymentCheckout(user: SessionUser, input: { prod
       });
       await Payment.updateOne({ _id: payment._id }, { $set: { serviceRequestId: request._id } });
     }
+    checkoutStage = "initialize_paystack";
     const amount = paystackAmountFromStoredAmount(product.amountMinor, product.currency);
     if (amount === null) throw new AppError("Only whole XOF prices are supported for Paystack checkout.", "PRODUCT_UNAVAILABLE", 409);
     const result = await createPaystackCheckout({ reference: txRef, amount, currency: "XOF", callbackUrl: config.appUrl + localizedPath("/dashboard/payments/callback", input.locale || "fr"), customer: { email: user.email, name: payment.customerName }, paymentId: String(payment._id), productId: product.id, environment: config.environment });
     if (typeof result.authorization_url !== "string" || !result.authorization_url.startsWith("https://checkout.paystack.com/")) throw new AppError("Paystack returned an invalid checkout link.", "PAYSTACK_ERROR", 502);
+    checkoutStage = "persist_checkout_link";
     await Payment.updateOne({ _id: payment._id, status: "pending" }, { $set: { checkoutLink: result.authorization_url } });
     return { checkoutUrl: result.authorization_url, reference: txRef, environment: config.environment };
   } catch (error) {
-    await Payment.updateOne({ _id: payment._id, status: "pending" }, { $set: { status: "failed", failureCode: "CHECKOUT_INITIALIZATION_FAILED", failureMessage: "Checkout initialization failed." } });
-    if (assistance(product.id)) await markAssistanceRequestTerminal(txRef, "failed");
+    logger.error("Checkout initialization stage failed", {
+      stage: checkoutStage,
+      productId: product.id,
+      paymentEnvironment: config.environment,
+      errorType: error instanceof Error ? error.name : typeof error,
+      errorCode: error instanceof AppError ? error.code : "UNEXPECTED_ERROR",
+    });
+
+    // Independently attempt both cleanup steps. A cleanup failure must never
+    // replace the original Paystack or persistence error seen by the caller.
+    const cleanups: Promise<unknown>[] = [
+      Payment.updateOne(
+        { _id: payment._id, status: "pending" },
+        { $set: { status: "failed", failureCode: "CHECKOUT_INITIALIZATION_FAILED", failureMessage: "Checkout initialization failed." } },
+      ),
+    ];
+    if (assistance(product.id)) cleanups.push(markAssistanceRequestTerminal(txRef, "failed"));
+
+    const results = await Promise.allSettled(cleanups);
+    for (const [index, result] of results.entries()) {
+      if (result.status === "rejected") {
+        logger.error("Checkout cleanup failed", {
+          stage: index === 0 ? "payment_record" : "assistance_request",
+          productId: product.id,
+          errorType: result.reason instanceof Error ? result.reason.name : typeof result.reason,
+        });
+      }
+    }
     throw error;
   }
 }
