@@ -1,5 +1,6 @@
 import "server-only";
 import { AppError } from "@/lib/errors";
+import { logger } from "@/lib/logger";
 import { assertPaystackConfig, assertPaystackCredentials, type PaymentEnvironment } from "@/lib/paystack-config";
 import type { PaystackTransaction } from "@/lib/paystack-policy";
 
@@ -10,7 +11,19 @@ async function request<T>(path: string, environment: PaymentEnvironment, init?: 
   try { response = await fetch(`${config.apiBaseUrl}${path}`, { ...init, headers: { Authorization: `Bearer ${config.secretKey}`, "Content-Type": "application/json", Accept: "application/json", ...(init?.headers || {}) }, cache: "no-store", signal: AbortSignal.timeout(15_000) }); }
   catch { throw checkout ? new AppError("Paystack checkout is temporarily unavailable.", "PAYMENT_INITIALIZATION_FAILED", 503) : new AppError("Payment verification is temporarily unavailable. We will keep checking your payment.", "PAYMENT_VERIFICATION_PENDING", 503); }
   const payload = await response.json().catch(() => null) as Response<T> | null;
-  if (!response.ok || !payload?.status || !payload.data) throw new AppError(response.status >= 500 ? "Paystack is temporarily unavailable." : "Paystack could not complete this request.", "PAYSTACK_ERROR", response.status >= 500 ? 503 : 502);
+  if (!response.ok || !payload?.status || !payload.data) {
+    logger.error("Paystack API request rejected", {
+      action: checkout ? "initialize_checkout" : "verify_transaction",
+      paymentEnvironment: environment,
+      httpStatus: response.status,
+      providerMessage: typeof payload?.message === "string" ? payload.message.slice(0, 180) : undefined,
+    });
+    throw new AppError(
+      response.status >= 500 ? "Paystack is temporarily unavailable." : "Paystack could not complete this request.",
+      "PAYSTACK_ERROR",
+      response.status >= 500 ? 503 : 502,
+    );
+  }
   return payload.data;
 }
 export function createPaystackCheckout(input: { reference: string; amount: number; currency: "XOF"; callbackUrl: string; customer: { email: string; name: string }; paymentId: string; productId: string; environment: "test" | "live" }) {
