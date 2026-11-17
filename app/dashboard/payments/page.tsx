@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
-import { requireCurrentUserId } from "@/lib/development-user";
+import { requireApprovedIdentityForPage } from "@/lib/dashboard-access";
 import { formatPaymentAmount } from "@/lib/payment-products";
 import { listUserPayments } from "@/lib/payments";
 import { getDevelopmentProfileForUserId, hasActiveAccess } from "@/lib/user-profile";
@@ -10,7 +10,8 @@ import type { SupportedLocale } from "@/lib/config";
 export const instant = false;
 export async function generateMetadata(): Promise<Metadata> { const t = await getTranslations("Payments.meta"); return { title: t("history") }; }
 export default async function PaymentHistoryPage() {
-  const [userId, locale, t] = await Promise.all([requireCurrentUserId(), getLocale() as Promise<SupportedLocale>, getTranslations("Payments.history")]);
+  const [session, locale, t] = await Promise.all([requireApprovedIdentityForPage(), getLocale() as Promise<SupportedLocale>, getTranslations("Payments.history")]);
+  const userId = session.user.id;
   const [payments, profile] = await Promise.all([listUserPayments(userId), getDevelopmentProfileForUserId(userId)]);
   const active = hasActiveAccess(profile);
   return <main className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8"><header><p className="text-sm font-medium text-primary">{t("kicker")}</p><h1 className="mt-1 text-3xl font-semibold tracking-tight">{t("title")}</h1><p className="mt-2 text-muted-foreground">{t("description")}</p></header>
