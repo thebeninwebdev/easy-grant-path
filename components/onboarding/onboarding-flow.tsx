@@ -106,7 +106,7 @@ export function OnboardingFlow({ profile, accountName }: { profile: Profile | nu
           onboardingCompleted: true,
           onboardingSkipped: false,
         });
-        router.push("/dashboard/teaser");
+        router.push("/dashboard/verification/identity");
       }
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : t("flow.registrationFailed"));
@@ -123,7 +123,7 @@ export function OnboardingFlow({ profile, accountName }: { profile: Profile | nu
           <span className="text-xs font-medium text-muted-foreground">{t("flow.step", {step})}</span>
         </header>
         <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-muted">
-          <div className="h-full rounded-full bg-primary transition-all" style={{ width: `${step / 3 * 100}%` }} />
+          <div className="h-full rounded-full bg-primary transition-all" style={{ width: `${step / 4 * 100}%` }} />
         </div>
 
         {step === 1 ? (

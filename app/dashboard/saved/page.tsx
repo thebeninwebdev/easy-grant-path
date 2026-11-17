@@ -11,6 +11,7 @@ import { listSavedOpportunities } from "@/lib/saved-opportunities";
 import { getDevelopmentProfile, hasActiveAccess, isRegistrationProfileComplete } from "@/lib/user-profile";
 import { formatCurrency, formatDate } from "@/lib/i18n-format";
 import type { SupportedLocale } from "@/lib/config";
+import { requireApprovedIdentityForPage } from "@/lib/dashboard-access";
 
 export const instant = false;
 export async function generateMetadata(): Promise<Metadata> { const t = await getTranslations("Opportunities.meta"); return { title: t("saved") }; }
@@ -18,6 +19,7 @@ export async function generateMetadata(): Promise<Metadata> { const t = await ge
 export default async function SavedOpportunitiesPage() {
   const [locale, t, common, profile] = await Promise.all([getLocale() as Promise<SupportedLocale>, getTranslations("Opportunities"), getTranslations("Common"), getDevelopmentProfile()]);
   if (!profile || !isRegistrationProfileComplete(profile)) redirect("/dashboard/onboarding");
+  await requireApprovedIdentityForPage();
   if (!hasActiveAccess(profile)) redirect("/dashboard/teaser");
   const items = await listSavedOpportunities(locale);
   return <main className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8"><header><p className="text-sm font-medium text-primary">{t("saved.kicker")}</p><h1 className="mt-2 text-3xl font-semibold tracking-tight">{t("saved.title")}</h1><p className="mt-2 text-muted-foreground">{t("saved.description")}</p></header>

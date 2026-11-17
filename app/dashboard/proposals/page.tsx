@@ -11,11 +11,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { listProposalApplications } from "@/lib/proposals";
 import { getDevelopmentProfile, hasActiveAccess, isRegistrationProfileComplete } from "@/lib/user-profile";
 import { ProfessionalProposalServices } from "@/components/services/professional-proposal-services";
+import { requireApprovedIdentityForPage } from "@/lib/dashboard-access";
 export const instant = false;
 export async function generateMetadata(): Promise<Metadata> { const t = await getTranslations("Proposals.meta"); return { title: t("list") }; }
 export default async function ProposalsPage({ searchParams }: { searchParams: Promise<{ status?: string }> }) {
   const [profile, locale, t, params] = await Promise.all([getDevelopmentProfile(), getLocale() as Promise<SupportedLocale>, getTranslations("Proposals"), searchParams]);
   if (!profile || !isRegistrationProfileComplete(profile)) redirect("/dashboard/onboarding");
+  await requireApprovedIdentityForPage();
   if (!hasActiveAccess(profile)) redirect("/dashboard/teaser");
   const filter = params.status === "completed" ? "completed" : params.status === "in-progress" ? "in-progress" : "all";
   const all = await listProposalApplications(), items = all.filter((item) => filter === "all" || (filter === "completed" ? item.status === "completed" : item.status !== "completed"));

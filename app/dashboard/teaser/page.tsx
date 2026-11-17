@@ -8,6 +8,7 @@ import { getRegistrationOpportunity } from "@/lib/registration-opportunity";
 import { getDevelopmentProfile, hasActiveAccess, isRegistrationProfileComplete } from "@/lib/user-profile";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+import { requireApprovedIdentityForPage } from "@/lib/dashboard-access";
 
 export const instant = false;
 
@@ -15,6 +16,7 @@ export default async function TeaserPage() {
   const [t, opportunityT] = await Promise.all([getTranslations("Dashboard.teaser"), getTranslations("Opportunities")]);
   const profile = await getDevelopmentProfile();
   if (!isRegistrationProfileComplete(profile)) redirect("/dashboard/onboarding");
+  await requireApprovedIdentityForPage();
   if (hasActiveAccess(profile)) redirect("/dashboard");
 
   const match = await getRegistrationOpportunity(profile!);

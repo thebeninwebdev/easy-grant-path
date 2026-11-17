@@ -482,7 +482,7 @@
       "saveFailed": "We were unable to record. Check your connection and try again."
     },
     "flow": {
-      "step": "Step {step} of 3",
+      "step": "Step {step} of 4",
       "question": "What best describes you?",
       "questionDesc": "This helps us show you the most relevant opportunities.",
       "details": "A few quick details",
@@ -496,7 +496,7 @@
       "preferredType": "What type of opportunities interest you most?",
       "back": "Back",
       "continue": "Continue",
-      "seeMatch": "See my match",
+      "seeMatch": "Continue to identity verification",
       "saving": "Saving…",
       "individualDesc": "I am applying for opportunities as a person.",
       "startup_smeDesc": "I represent a for-profit business or social enterprise.",
@@ -582,7 +582,7 @@
       }
     },
     "teaser": {
-      "step": "Step 3 of 3",
+      "step": "Step 4 of 4",
       "match": {
         "strongTitle": "A matching opportunity for you",
         "previewTitle": "A current opportunity preview",
@@ -920,6 +920,8 @@
       "paymentUnavailable": "Online payment is temporarily unavailable. Please try again later or contact support.",
       "classificationIncomplete": "Complete your account classification before purchasing this service.",
       "emailNotVerified": "Verify your email address before continuing to payment.",
+      "identityVerificationRequired": "Complete identity verification and wait for approval before continuing to payment.",
+      "openIdentityVerification": "Open identity verification",
       "invalidCheckout": "Review your payment details and WhatsApp number, then try again.",
       "paymentAmount": "Payment amount",
       "whatsappLabel": "Number WhatsApp",
@@ -1057,6 +1059,8 @@
       "viewPaymentHistory": "View payment history"
     },
     "checkoutError": "Checkout could not be started.",
+    "identityVerificationRequired": "Your identity must be approved before payment can begin.",
+    "goToIdentityVerification": "Go to identity verification",
     "legalNotice": "By completing your purchase, you agree to our <terms>Terms of Service</terms> and acknowledge our <privacy>Privacy Policy</privacy> and <refund>Refund Policy</refund>.",
     "openingCheckout": "Opening secure checkout…",
     "activate": {
@@ -1124,7 +1128,29 @@
     "identity": {
       "meta": "Identity verification",
       "title": "Verify your identity",
-      "description": "Submit government-issued ID to verify your account.",
+      "description": "Submit a government-issued identity document. An authorized administrator must approve it before you can enter the platform.",
+      "approvalRequired": "Identity approval is required for individual and organization account holders.",
+      "continueButton": "Continue to EasyGrantPath",
+      "uploadProgress": "Secure upload progress",
+      "supportPrompt": "Need help with identity verification?",
+      "supportLink": "Contact support",
+      "progress": {
+        "label": "Onboarding progress",
+        "kicker": "Account setup",
+        "current": "Step 3 of 4",
+        "steps": {
+          "account": "Account",
+          "profile": "Profile",
+          "identity": "Identity",
+          "access": "Access"
+        }
+      },
+      "instructions": {
+        "title": "Before you upload",
+        "valid": "Use a valid national identity card, passport, driving license, or other government-issued ID.",
+        "clear": "Make sure the full document is visible, readable, and not expired.",
+        "private": "Your file is stored privately and is only available to authorized reviewers."
+      },
       "documentType": "Document type",
       "nationalId": "National identity card",
       "passport": "Passport",
@@ -1148,11 +1174,16 @@
       "statuses": {
         "pending": {
           "title": "Verification under review",
-          "description": "Submitted {date}. Duplicate submissions are disabled during review."
+          "description": "Submitted {date}. Duplicate submissions are disabled while an administrator reviews your document.",
+          "accessLocked": "Platform access will become available after approval."
         },
         "verified": {
           "title": "Verified identity",
-          "description": "No additional action required."
+          "description": "Your identity has been approved. You can now continue to the next access step."
+        },
+        "provisional": {
+          "title": "Full approval is still required",
+          "description": "A provisional status does not authorize platform access. Please wait for a final administrative decision or contact support."
         },
         "actionRequired": {
           "title": "Changes requested",
@@ -1164,7 +1195,6 @@
           "contactSupport": "Contact support"
         }
       },
-      "backToDashboard": "Back to opportunities",
       "recently": "recently"
     },
     "organization": {

@@ -15,6 +15,7 @@ import { listSavedOpportunityIds } from '@/lib/saved-opportunities';
 import { firstName, getDevelopmentProfile, hasActiveAccess, isRegistrationProfileComplete } from '@/lib/user-profile';
 import { getIdentityVerification, getOrganizationVerification } from '@/lib/verification';
 import { ProfessionalProposalServices } from '@/components/services/professional-proposal-services';
+import { requireApprovedIdentityForPage } from '@/lib/dashboard-access';
 
 export const metadata: Metadata = { title: 'Dashboard overview' };
 export const instant = false;
@@ -68,6 +69,7 @@ function UnsubscribedDashboard({ name, applicantType }: { name: string; applican
 export default async function DashboardPage() {
   const profile = await getDevelopmentProfile();
   if (!profile || !isRegistrationProfileComplete(profile)) redirect('/dashboard/onboarding');
+  await requireApprovedIdentityForPage();
   if (!hasActiveAccess(profile)) return <UnsubscribedDashboard name={firstName(profile.fullName)} applicantType={profile.applicantType} />;
   const organizationApplicant = isOrganizationApplicantType(profile.applicantType);
   const [opportunityData, proposals, savedIds, verification] = await Promise.all([

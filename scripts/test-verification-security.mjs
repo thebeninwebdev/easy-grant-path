@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { canAdminTransitionVerification, canUserSubmitVerification, detectDocumentContent, requiredOrganizationDocumentTypes, resolvedOrganizationApprovalStatus, sanitizeDocumentFilename } from "../lib/verification-policy.ts";
+import { canAdminTransitionVerification, canUserSubmitVerification, detectDocumentContent, isIdentityVerificationApproved, requiredOrganizationDocumentTypes, resolvedOrganizationApprovalStatus, sanitizeDocumentFilename } from "../lib/verification-policy.ts";
 const pdf = new Uint8Array([...Buffer.from("%PDF-1.7\nbody\n%%EOF")]);
 const png = new Uint8Array([0x89,0x50,0x4e,0x47,0x0d,0x0a,0x1a,0x0a,1,2,3,0x49,0x45,0x4e,0x44]);
 const jpg = new Uint8Array([0xff,0xd8,0xff,1,2,0xff,0xd9]);
@@ -20,6 +20,8 @@ assert.equal(canAdminTransitionVerification("pending", "verified"), true);
 assert.equal(canAdminTransitionVerification("pending", "rejected"), true);
 assert.equal(canAdminTransitionVerification("verified", "verified"), false);
 assert.equal(canAdminTransitionVerification("verified", "action_required"), true);
+assert.equal(isIdentityVerificationApproved("verified"), true);
+for (const status of ["unverified", "pending", "provisional", "action_required", "rejected"]) assert.equal(isIdentityVerificationApproved(status), false, `${status} must not authorize platform access`);
 assert.equal(sanitizeDocumentFilename("../../ passport<script>.pdf", "pdf").includes("/"), false);
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 const [identity, organization, upload, storage, userDownload, adminDownload, admin, service, audit] = await Promise.all([
@@ -46,4 +48,15 @@ assert.match(service, /canUserSubmitVerification/);
 assert.match(service, /CONCURRENT_UPDATE/);
 assert.match(audit, /immutable: true/);
 assert.match(audit, /denyMutation/);
+const [guard, payment, applicationList, applicationItem, saved, onboarding, identityPage] = await Promise.all([
+  read("lib/dashboard-access.ts"), read("lib/payments.ts"), read("app/api/applications/route.ts"), read("app/api/applications/[id]/route.ts"), read("app/api/saved-opportunities/route.ts"), read("components/onboarding/onboarding-flow.tsx"), read("app/dashboard/verification/identity/page.tsx"),
+]);
+assert.match(guard, /IDENTITY_VERIFICATION_REQUIRED/);
+assert.match(guard, /verificationStatus: status/);
+assert.match(payment, /assertIdentityVerificationApproved\(user\.id\)/);
+for (const route of [applicationList, applicationItem, saved]) assert.match(route, /requireApprovedIdentityForApi\(\)/);
+assert.match(onboarding, /router\.push\("\/dashboard\/verification\/identity"\)/);
+assert.match(identityPage, /status === "pending"/);
+assert.match(identityPage, /status === "provisional"/);
+assert.match(identityPage, /status === "verified"/);
 console.log("verification security tests passed");

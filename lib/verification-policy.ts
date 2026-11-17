@@ -3,6 +3,10 @@ export type VerificationStatus = (typeof VERIFICATION_STATUSES)[number];
 export type AdminReviewTarget = "verified" | "action_required" | "rejected";
 export type OrganizationRegistrationStatus = "registered" | "in_progress" | "not_registered";
 
+export function isIdentityVerificationApproved(status: VerificationStatus | null | undefined) {
+  return status === "verified";
+}
+
 export function canUserSubmitVerification(status: VerificationStatus | null | undefined) {
   return !status || status === "unverified" || status === "action_required";
 }

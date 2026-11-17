@@ -5,7 +5,7 @@ const schema = new Schema({
   userId: { type: String, required: true, unique: true, index: true },
   documentType: { type: String, enum: ["national_id", "passport", "drivers_license", "other_government_id"], required: true },
   documentFile: { type: file, required: true },
-  verificationStatus: { type: String, enum: ["unverified", "pending", "verified", "action_required", "rejected"], default: "unverified", index: true },
+  verificationStatus: { type: String, enum: ["unverified", "pending", "verified", "provisional", "action_required", "rejected"], default: "unverified", index: true },
   submittedAt: Date, reviewedAt: Date, reviewedBy: String, rejectionReason: String, reviewNote: String,
   reviewHistory: { type: [history], default: [] },
 }, { timestamps: true });

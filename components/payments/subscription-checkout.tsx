@@ -8,15 +8,18 @@ import type { SupportedLocale } from "@/lib/config";
 export function SubscriptionCheckout({ label }: { label: string }) {
   const locale = useLocale() as SupportedLocale;
   const t = useTranslations("Payments");
-  const [busy, setBusy] = useState(false), [error, setError] = useState("");
+  const [busy, setBusy] = useState(false), [error, setError] = useState(""), [verificationRequired, setVerificationRequired] = useState(false);
   async function start() {
-    setBusy(true); setError("");
+    setBusy(true); setError(""); setVerificationRequired(false);
     try {
       const response = await fetch("/api/payments/checkout", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ productId: "platform_access", locale }) });
       const payload = await response.json().catch(() => null);
-      if (!response.ok || !payload?.data?.checkoutUrl) throw new Error();
+      if (!response.ok || !payload?.data?.checkoutUrl) {
+        if (payload?.error?.code === "IDENTITY_VERIFICATION_REQUIRED") { setBusy(false); setVerificationRequired(true); setError(t("identityVerificationRequired")); return; }
+        throw new Error();
+      }
       window.location.assign(payload.data.checkoutUrl);
     } catch { setBusy(false); setError(t("checkoutError")); }
   }
-  return <div className="mt-7">{error ? <p role="alert" className="mb-3 text-sm text-destructive">{error}</p> : null}<Button className="w-full" disabled={busy} onClick={() => void start()}>{busy ? <LoaderCircle className="size-4 animate-spin" /> : <CreditCard className="size-4" />}{busy ? t("openingCheckout") : label}</Button><p className="mt-3 text-center text-xs leading-5 text-muted-foreground">{t.rich("legalNotice", { terms: (chunks) => <Link className="underline underline-offset-2 hover:text-foreground" href="/terms">{chunks}</Link>, privacy: (chunks) => <Link className="underline underline-offset-2 hover:text-foreground" href="/privacy">{chunks}</Link>, refund: (chunks) => <Link className="underline underline-offset-2 hover:text-foreground" href="/refund-policy">{chunks}</Link> })}</p></div>;
+  return <div className="mt-7">{error ? <div role="alert" className="mb-3 text-sm text-destructive"><p>{error}</p>{verificationRequired ? <Link className="mt-2 inline-block font-medium underline underline-offset-4" href="/dashboard/verification/identity">{t("goToIdentityVerification")}</Link> : null}</div> : null}<Button className="w-full" disabled={busy} onClick={() => void start()}>{busy ? <LoaderCircle className="size-4 animate-spin" /> : <CreditCard className="size-4" />}{busy ? t("openingCheckout") : label}</Button><p className="mt-3 text-center text-xs leading-5 text-muted-foreground">{t.rich("legalNotice", { terms: (chunks) => <Link className="underline underline-offset-2 hover:text-foreground" href="/terms">{chunks}</Link>, privacy: (chunks) => <Link className="underline underline-offset-2 hover:text-foreground" href="/privacy">{chunks}</Link>, refund: (chunks) => <Link className="underline underline-offset-2 hover:text-foreground" href="/refund-policy">{chunks}</Link> })}</p></div>;
 }

@@ -18,6 +18,7 @@ import { getRegistrationOpportunity, type OpportunityPreview } from "@/lib/regis
 import { getExistingApplicationForOpportunity, getRecommendedTemplateForOpportunity } from "@/lib/proposals";
 import { listSavedOpportunityIds } from '@/lib/saved-opportunities';
 import { getDevelopmentProfile, hasActiveAccess, isRegistrationProfileComplete } from "@/lib/user-profile";
+import { requireApprovedIdentityForPage } from "@/lib/dashboard-access";
 
 export const instant = false;
 
@@ -50,6 +51,7 @@ async function LockedOpportunityDetail({ opportunity }: { opportunity: Opportuni
 export default async function OpportunityDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const [locale, t, common, profile] = await Promise.all([getLocale() as Promise<SupportedLocale>, getTranslations("Opportunities"), getTranslations("Common"), getDevelopmentProfile()]);
   if (!profile || !isRegistrationProfileComplete(profile)) redirect("/dashboard/onboarding");
+  await requireApprovedIdentityForPage();
   const slug = (await params).slug;
 
   if (!hasActiveAccess(profile)) {

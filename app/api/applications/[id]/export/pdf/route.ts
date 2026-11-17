@@ -3,9 +3,11 @@ import { buildProposalDocument, sanitizeProposalFilename } from "@/lib/proposal-
 import { renderProposalPdf } from "@/lib/proposal-exports";
 import { getProposalApplication } from "@/lib/proposals";
 import { errorResponse } from "@/lib/api-response";
+import { requireApprovedIdentityForApi } from "@/lib/dashboard-access";
 
 export async function GET(_request: Request, context: { params: Promise<{ id: string }> }) {
   try {
+    await requireApprovedIdentityForApi();
     const application = await getProposalApplication((await context.params).id);
     if (!application) throw new AppError("Proposal not found.", "NOT_FOUND", 404);
     const document = buildProposalDocument(application, "export");

@@ -6,6 +6,7 @@ import { getOrganizationProfileForUserId } from '@/lib/organization-profile';
 import { isOrganizationApplicantType } from '@/lib/applicant-types';
 import { getDevelopmentProfileForUserId, hasActiveAccess, isRegistrationProfileComplete } from '@/lib/user-profile';
 import { getIdentityVerificationForUserId, getOrganizationVerificationForUserId } from '@/lib/verification';
+import { requireApprovedIdentityForPage } from '@/lib/dashboard-access';
 
 export const metadata: Metadata = { title: 'Account & Profile' };
 export const instant = false;
@@ -15,6 +16,7 @@ export default async function SettingsPage() {
   if (!session?.user.emailVerified) redirect('/sign-in');
   const profile = await getDevelopmentProfileForUserId(session.user.id);
   if (!profile || !isRegistrationProfileComplete(profile)) redirect('/dashboard/onboarding');
+  await requireApprovedIdentityForPage();
   if (!hasActiveAccess(profile)) redirect('/dashboard/teaser');
   const organizationApplicant = isOrganizationApplicantType(profile.applicantType);
   const [organization, verification] = await Promise.all([

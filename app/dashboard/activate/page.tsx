@@ -7,10 +7,12 @@ import { SubscriptionCheckout } from "@/components/payments/subscription-checkou
 import { getPaymentProduct, formatPaymentAmount } from "@/lib/payment-products";
 import { getDevelopmentProfile, hasActiveAccess, isRegistrationProfileComplete } from "@/lib/user-profile";
 import type { SupportedLocale } from "@/lib/config";
+import { requireApprovedIdentityForPage } from "@/lib/dashboard-access";
 export const instant = false;
 export default async function ActivatePage() {
   const [profile, locale, t] = await Promise.all([getDevelopmentProfile(), getLocale() as Promise<SupportedLocale>, getTranslations("Payments.activate")]);
   if (!isRegistrationProfileComplete(profile)) redirect("/dashboard/onboarding");
+  await requireApprovedIdentityForPage();
   if (hasActiveAccess(profile)) redirect("/dashboard");
   const plan = getPaymentProduct("platform_access");
   const label = plan ? t("payForDays", { price: formatPaymentAmount(plan.amountMinor, plan.currency, locale), days: plan.durationDays ?? 0 }) : t("continuePayment");

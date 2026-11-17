@@ -482,7 +482,7 @@
       "saveFailed": "Nous n'avons pas pu enregistrer. Vérifiez votre connexion et réessayez."
     },
     "flow": {
-      "step": "Étape {step} sur 3",
+      "step": "Étape {step} sur 4",
       "question": "Quelle situation vous décrit le mieux ?",
       "questionDesc": "Cette information nous aide à vous proposer les opportunités les plus pertinentes.",
       "details": "Quelques informations rapides",
@@ -496,7 +496,7 @@
       "preferredType": "Quel type d’opportunité vous intéresse le plus ?",
       "back": "Retour",
       "continue": "Continuer",
-      "seeMatch": "Voir ma correspondance",
+      "seeMatch": "Continuer vers la vérification d'identité",
       "saving": "Enregistrement…",
       "individualDesc": "Je recherche des opportunités en mon nom.",
       "startup_smeDesc": "Je représente une entreprise ou une entreprise sociale.",
@@ -582,7 +582,7 @@
       }
     },
     "teaser": {
-      "step": "Étape 3 sur 3",
+      "step": "Étape 4 sur 4",
       "match": {
         "strongTitle": "Une opportunité qui correspond à votre profil",
         "previewTitle": "Aperçu d’une opportunité actuelle",
@@ -920,6 +920,8 @@
       "paymentUnavailable": "Le paiement en ligne est temporairement indisponible. Réessayez plus tard ou contactez le support.",
       "classificationIncomplete": "Complétez la classification de votre compte avant d'acheter ce service.",
       "emailNotVerified": "Vérifiez votre adresse e-mail avant de poursuivre le paiement.",
+      "identityVerificationRequired": "Terminez la vérification d'identité et attendez son approbation avant de poursuivre le paiement.",
+      "openIdentityVerification": "Ouvrir la vérification d'identité",
       "invalidCheckout": "Vérifiez vos informations de paiement et votre numéro WhatsApp, puis réessayez.",
       "paymentAmount": "Montant du paiement",
       "whatsappLabel": "Numéro WhatsApp",
@@ -1057,6 +1059,8 @@
       "viewPaymentHistory": "Voir l'historique des paiements"
     },
     "checkoutError": "Le paiement n''a pas pu être lancé.",
+    "identityVerificationRequired": "Votre identité doit être approuvée avant le lancement du paiement.",
+    "goToIdentityVerification": "Accéder à la vérification d'identité",
     "legalNotice": "En finalisant votre achat, vous acceptez nos <terms>Conditions d'utilisation</terms> et reconnaissez notre <privacy>Politique de confidentialité</privacy> et notre <refund>Politique de remboursement</refund>.",
     "openingCheckout": "Ouverture du paiement sécurisé…",
     "activate": {
@@ -1124,7 +1128,29 @@
     "identity": {
       "meta": "Vérification d'identité",
       "title": "Vérifiez votre identité",
-      "description": "Soumettez une pièce d'identité officielle pour vérifier votre compte.",
+      "description": "Soumettez une pièce d'identité officielle. Un administrateur autorisé doit l'approuver avant que vous puissiez accéder à la plateforme.",
+      "approvalRequired": "L'approbation de l'identité est obligatoire pour les titulaires de comptes individuels et d'organisation.",
+      "continueButton": "Continuer vers EasyGrantPath",
+      "uploadProgress": "Progression du téléversement sécurisé",
+      "supportPrompt": "Besoin d'aide pour la vérification d'identité ?",
+      "supportLink": "Contacter le support",
+      "progress": {
+        "label": "Progression de l'intégration",
+        "kicker": "Configuration du compte",
+        "current": "Étape 3 sur 4",
+        "steps": {
+          "account": "Compte",
+          "profile": "Profil",
+          "identity": "Identité",
+          "access": "Accès"
+        }
+      },
+      "instructions": {
+        "title": "Avant le téléversement",
+        "valid": "Utilisez une carte nationale d'identité, un passeport, un permis de conduire ou une autre pièce officielle en cours de validité.",
+        "clear": "Assurez-vous que le document complet est visible, lisible et non expiré.",
+        "private": "Votre fichier est stocké de manière privée et n'est accessible qu'aux examinateurs autorisés."
+      },
       "documentType": "Type de document",
       "nationalId": "Carte nationale d'identité",
       "passport": "Passeport",
@@ -1148,11 +1174,16 @@
       "statuses": {
         "pending": {
           "title": "Vérification en cours d'examen",
-          "description": "Soumis {date}. Les soumissions en double sont désactivées pendant l'examen."
+          "description": "Soumis {date}. Les soumissions en double sont désactivées pendant l'examen administratif.",
+          "accessLocked": "L'accès à la plateforme sera disponible après approbation."
         },
         "verified": {
           "title": "Identité vérifiée",
-          "description": "Aucune action supplémentaire requise."
+          "description": "Votre identité a été approuvée. Vous pouvez maintenant passer à l'étape d'accès suivante."
+        },
+        "provisional": {
+          "title": "L'approbation définitive reste obligatoire",
+          "description": "Un statut provisoire n'autorise pas l'accès à la plateforme. Attendez la décision administrative finale ou contactez le support."
         },
         "actionRequired": {
           "title": "Modifications demandées",
@@ -1164,7 +1195,6 @@
           "contactSupport": "Contacter le support"
         }
       },
-      "backToDashboard": "Retour aux opportunités",
       "recently": "récemment"
     },
     "organization": {

@@ -1,6 +1,7 @@
 import { errorResponse, successResponse } from '@/lib/api-response';
 import { AppError } from '@/lib/errors';
 import { removeSavedOpportunity, saveOpportunity } from '@/lib/saved-opportunities';
+import { requireApprovedIdentityForApi } from '@/lib/dashboard-access';
 
 async function opportunityId(request: Request) {
   const body: unknown = await request.json().catch(() => null);
@@ -11,11 +12,11 @@ async function opportunityId(request: Request) {
 }
 
 export async function POST(request: Request) {
-  try { await saveOpportunity(await opportunityId(request)); return successResponse({ saved: true }, { status: 201 }); }
+  try { await requireApprovedIdentityForApi(); await saveOpportunity(await opportunityId(request)); return successResponse({ saved: true }, { status: 201 }); }
   catch (error) { return errorResponse(error); }
 }
 
 export async function DELETE(request: Request) {
-  try { await removeSavedOpportunity(await opportunityId(request)); return successResponse({ saved: false }); }
+  try { await requireApprovedIdentityForApi(); await removeSavedOpportunity(await opportunityId(request)); return successResponse({ saved: false }); }
   catch (error) { return errorResponse(error); }
 }

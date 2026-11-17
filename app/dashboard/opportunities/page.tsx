@@ -12,6 +12,7 @@ import { listSavedOpportunityIds } from "@/lib/saved-opportunities";
 import { getDevelopmentProfile, hasActiveAccess, isRegistrationProfileComplete } from "@/lib/user-profile";
 import { formatNumber } from "@/lib/i18n-format";
 import type { SupportedLocale } from "@/lib/config";
+import { requireApprovedIdentityForPage } from "@/lib/dashboard-access";
 
 export const instant = false;
 export async function generateMetadata(): Promise<Metadata> { const t = await getTranslations("Opportunities.meta"); return { title: t("discover") }; }
@@ -44,6 +45,7 @@ export default async function OpportunitiesPage({ searchParams }: { searchParams
   const filters = parsePublicOpportunityFilters(params), matches = first(params.view) === "matches";
   const profile = await getDevelopmentProfile();
   if (!profile || !isRegistrationProfileComplete(profile)) redirect("/dashboard/onboarding");
+  await requireApprovedIdentityForPage();
   if (!hasActiveAccess(profile)) redirect("/dashboard/teaser");
   const savedPromise = listSavedOpportunityIds();
   let items: Array<{ opportunity: PublicOpportunity; match?: MatchedOpportunity["match"] }>, total: number;

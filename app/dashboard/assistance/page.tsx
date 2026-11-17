@@ -2,18 +2,18 @@ import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { ProposalAssistanceActions } from "@/components/services/proposal-assistance-actions";
-import { getCurrentSession } from "@/lib/development-user";
 import { connectToDatabase } from "@/lib/db";
 import { UserProfile } from "@/models/UserProfile";
 import { formatServicePrice, getAssistanceServiceConfig } from "@/lib/service-request-config";
 import { listUserAssistanceRequests } from "@/lib/service-requests";
 import { formatDate } from "@/lib/i18n-format";
 import type { SupportedLocale } from "@/lib/config";
+import { requireApprovedIdentityForPage } from "@/lib/dashboard-access";
 
 export const instant = false;
 export async function generateMetadata(): Promise<Metadata> { const t = await getTranslations("Assistance"); return { title: t("meta") }; }
 export default async function AssistancePage() {
-  const session = await getCurrentSession(); if (!session) return null;
+  const session = await requireApprovedIdentityForPage();
   const [locale, t, payments] = await Promise.all([getLocale() as Promise<SupportedLocale>, getTranslations("Assistance"), getTranslations("Payments")]);
   await connectToDatabase();
   const [profile, items] = await Promise.all([UserProfile.findOne({ userId: session.user.id }).lean(), listUserAssistanceRequests(session.user.id)]);
