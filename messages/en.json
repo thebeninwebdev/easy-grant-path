@@ -578,7 +578,16 @@
       },
       "needHelp": {
         "title": "Need professional help?",
-        "description": "Self-service proposals are written in EasyGrantPath. For professional writing or editing, our team works with you via WhatsApp."
+        "description": "Self-service proposals are written in EasyGrantPath. For professional writing or editing, our team works with you via WhatsApp.",
+        "action": "Explore proposal services"
+      },
+      "refresh": {
+        "workspace": "Your funding workspace",
+        "welcome": "Welcome, {name}",
+        "summary": "Your grants, proposal drafts, and upcoming deadlines in one place.",
+        "continueProposal": "Continue proposal",
+        "exploreGrants": "Explore grants",
+        "newProposal": "New proposal"
       }
     },
     "workspace": {
@@ -683,7 +692,17 @@
         "description": "Professional proposal writing and review remain available when you want focused human support.",
         "action": "Explore assistance"
       },
-      "unsubscribed": {}
+      "unsubscribed": {
+        "title": "Explore EasyGrantPath access",
+        "description": "Manage your profile, payment history, and proposal support without an active subscription. Activate access to unlock matched opportunities and subscriber tools.",
+        "activate": "View access options",
+        "payments": "Payment history",
+        "cards": {
+          "profile": { "title": "Profile", "description": "Keep your funding details up to date.", "action": "Manage profile" },
+          "support": { "title": "Proposal support", "description": "Request professional proposal writing or review support.", "action": "Get support" },
+          "opportunities": { "title": "Opportunities", "description": "Preview what subscriber access unlocks.", "action": "Preview access" }
+        }
+      }
     },
     "teaser": {
       "step": "Step 4 of 4",

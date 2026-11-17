@@ -1,126 +1,81 @@
-import type { Metadata } from 'next';
-import { redirect } from 'next/navigation';
-import { Link } from '@/i18n/navigation';
-import { ArrowRight, Bookmark, CalendarClock, CheckCircle2, FileText, MapPin, Settings, ShieldCheck, Sparkles, Target } from 'lucide-react';
-import { formatDate, humanize } from '@/components/admin/opportunities/opportunity-formatters';
-import { MatchedOpportunityCard } from '@/components/opportunities/matched-opportunity-card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { getDashboardOpportunityData } from '@/lib/dashboard-data';
-import { isOrganizationApplicantType } from '@/lib/applicant-types';
-import { applicantName, countryName, interestName } from '@/lib/opportunity-matching';
-import { listProposalApplications } from '@/lib/proposals';
-import { listSavedOpportunityIds } from '@/lib/saved-opportunities';
-import { firstName, getDevelopmentProfile, hasActiveAccess, isRegistrationProfileComplete } from '@/lib/user-profile';
-import { getIdentityVerification, getOrganizationVerification } from '@/lib/verification';
-import { ProfessionalProposalServices } from '@/components/services/professional-proposal-services';
-import { requireApprovedIdentityForPage } from '@/lib/dashboard-access';
+import type { Metadata } from "next";
+import { redirect } from "next/navigation";
+import { getLocale, getTranslations } from "next-intl/server";
+import { ArrowRight, Bookmark, CalendarClock, CheckCircle2, FilePlus2, FileText, LifeBuoy, MapPin, ShieldCheck, Sparkles, Target } from "lucide-react";
+import { Link } from "@/i18n/navigation";
+import { MatchedOpportunityCard } from "@/components/opportunities/matched-opportunity-card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import type { SupportedLocale } from "@/lib/config";
+import { requireApprovedIdentityForPage } from "@/lib/dashboard-access";
+import { getDashboardOpportunityData } from "@/lib/dashboard-data";
+import { displayCountry, formatDate, formatRelativeDate } from "@/lib/i18n-format";
+import { isOrganizationApplicantType } from "@/lib/applicant-types";
+import { interestName } from "@/lib/opportunity-matching";
+import { listProposalApplications } from "@/lib/proposals";
+import { listSavedOpportunityIds } from "@/lib/saved-opportunities";
+import { firstName, getDevelopmentProfile, hasActiveAccess, isRegistrationProfileComplete } from "@/lib/user-profile";
+import { getIdentityVerification, getOrganizationVerification } from "@/lib/verification";
 
-export const metadata: Metadata = { title: 'Dashboard overview' };
 export const instant = false;
-
-function daysRemaining(value: string) {
-  const days = Math.ceil((new Date(value).getTime() - Date.now()) / 86_400_000);
-  return days === 0 ? 'Due today' : days === 1 ? '1 day remaining' : `${days} days remaining`;
-}
+export async function generateMetadata(): Promise<Metadata> { const t = await getTranslations("Dashboard.overview"); return { title: t("meta") }; }
 
 function Metric({ icon: Icon, label, value, note }: { icon: typeof Target; label: string; value: number; note: string }) {
-  return <Card><CardContent className='flex items-center gap-4 p-5'><span className='flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary'><Icon className='size-5' /></span><div><p className='text-2xl font-semibold'>{value}</p><p className='text-sm font-medium'>{label}</p><p className='mt-0.5 text-xs text-muted-foreground'>{note}</p></div></CardContent></Card>;
+  return <Card className="shadow-none"><CardContent className="flex items-center gap-3 p-4 sm:p-5"><span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary"><Icon className="size-[18px]" /></span><div className="min-w-0"><p className="text-2xl font-semibold leading-none">{value}</p><p className="mt-1.5 text-sm font-medium">{label}</p><p className="mt-0.5 text-xs leading-5 text-muted-foreground">{note}</p></div></CardContent></Card>;
 }
 
-function FundingProfile({ profile }: { profile: NonNullable<Awaited<ReturnType<typeof getDevelopmentProfile>>> }) {
-  return <Card><CardContent className='p-5'><div className='flex items-center justify-between gap-3'><h2 className='font-semibold'>Your Funding Profile</h2><Button asChild size='sm' variant='ghost'><Link href='/dashboard/settings'>Edit</Link></Button></div>
-    <div className='mt-4 space-y-3 text-sm'><p className='flex items-center gap-2'><MapPin className='size-4 text-muted-foreground' /><span className='text-muted-foreground'>Country</span><span className='ml-auto font-medium'>{countryName(profile.countryCode)}</span></p><p className='flex items-center gap-2'><Target className='size-4 text-muted-foreground' /><span className='text-muted-foreground'>Applicant</span><span className='ml-auto font-medium'>{applicantName(profile.applicantType)}</span></p></div>
-    <div className='mt-4'><p className='text-xs font-medium text-muted-foreground'>Interests</p><div className='mt-2 flex flex-wrap gap-1.5'>{profile.interests.map((item) => <Badge key={item} variant='secondary'>{interestName(item)}</Badge>)}</div></div>
-    <div className='mt-4'><p className='text-xs font-medium text-muted-foreground'>Looking for</p><div className='mt-2 flex flex-wrap gap-1.5'>{profile.opportunityTypes.map((item) => <Badge key={item} variant='outline'>{humanize(item)}</Badge>)}</div></div>
-  </CardContent></Card>;
+function WelcomePanel({ name, primaryHref, primaryLabel, workspace, welcome, summary, newProposal }: { name: string; primaryHref: string; primaryLabel: string; workspace: string; welcome: string; summary: string; newProposal: string }) {
+  return <header className="rounded-2xl border bg-card p-5 shadow-none sm:p-6"><div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between"><div className="min-w-0"><p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">{workspace}</p><h1 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">{welcome.replace("{name}", name)}</h1><p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground sm:text-base">{summary}</p></div><div className="flex shrink-0 flex-col gap-2 min-[420px]:flex-row sm:justify-end"><Button asChild><Link href={primaryHref as never}>{primaryLabel}<ArrowRight className="size-4" /></Link></Button><Button asChild variant="outline"><Link href="/dashboard/proposals/new"><FilePlus2 className="size-4" />{newProposal}</Link></Button></div></div></header>;
 }
 
-function VerificationCard({ status, note, href, organization }: { status: string; note?: string | null; href: string; organization: boolean }) {
-  const verified = status === 'verified';
-  const pending = status === 'pending';
-  const action = status === 'action_required' || status === 'rejected';
-  return <Card><CardContent className='p-5'><div className='flex items-start gap-3'><span className='flex size-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary'>{verified ? <CheckCircle2 className='size-4' /> : <ShieldCheck className='size-4' />}</span><div><h2 className='font-semibold'>{organization ? 'Organization verification' : 'Identity verification'}</h2><p className='mt-1 text-sm text-muted-foreground'>{verified ? 'Verified' : pending ? 'Under review' : action ? 'Action required' : 'Not started'}</p></div></div>
-    {!verified ? <><p className='mt-4 text-sm leading-6 text-muted-foreground'>{action ? note || 'Review the note and resubmit your documents.' : pending ? 'Your documents are being reviewed.' : 'Complete verification before using assisted application services.'}</p><Button asChild className='mt-4 w-full' variant={action ? 'default' : 'outline'}><Link href={href}>{action ? 'Review and resubmit' : pending ? 'View status' : 'Start verification'}</Link></Button></> : null}
-  </CardContent></Card>;
+function ProfessionalHelpCompact({ title, description, action }: { title: string; description: string; action: string }) {
+  return <section className="mt-8 rounded-2xl border bg-muted/30 p-4 sm:p-5"><div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"><div className="flex min-w-0 items-start gap-3"><span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-background text-primary ring-1 ring-border"><LifeBuoy className="size-4" /></span><div><h2 className="font-semibold">{title}</h2><p className="mt-1 max-w-3xl text-sm leading-6 text-muted-foreground">{description}</p></div></div><Button asChild className="w-full shrink-0 sm:w-auto" variant="outline"><Link href="/dashboard/assistance">{action}<ArrowRight className="size-4" /></Link></Button></div></section>;
+}
+
+function FundingProfile({ profile, locale, labels }: { profile: NonNullable<Awaited<ReturnType<typeof getDevelopmentProfile>>>; locale: SupportedLocale; labels: { title: string; edit: string; country: string; applicant: string; interests: string; lookingFor: string; applicantType: string; opportunityType: (value: string) => string } }) {
+  return <Card className="shadow-none"><CardContent className="p-5"><div className="flex items-center justify-between gap-3"><h2 className="font-semibold">{labels.title}</h2><Button asChild size="sm" variant="ghost"><Link href="/dashboard/settings">{labels.edit}</Link></Button></div><div className="mt-4 space-y-3 text-sm"><p className="flex items-center gap-2"><MapPin className="size-4 text-muted-foreground" /><span className="text-muted-foreground">{labels.country}</span><span className="ml-auto text-right font-medium">{displayCountry(profile.countryCode, locale)}</span></p><p className="flex items-center gap-2"><Target className="size-4 text-muted-foreground" /><span className="text-muted-foreground">{labels.applicant}</span><span className="ml-auto text-right font-medium">{labels.applicantType}</span></p></div><div className="mt-4"><p className="text-xs font-medium text-muted-foreground">{labels.interests}</p><div className="mt-2 flex flex-wrap gap-1.5">{profile.interests.map((item) => <Badge key={item} variant="secondary">{interestName(item)}</Badge>)}</div></div><div className="mt-4"><p className="text-xs font-medium text-muted-foreground">{labels.lookingFor}</p><div className="mt-2 flex flex-wrap gap-1.5">{profile.opportunityTypes.map((item) => <Badge key={item} variant="outline">{labels.opportunityType(item)}</Badge>)}</div></div></CardContent></Card>;
+}
+
+function VerificationCard({ status, note, href, organization, labels }: { status: string; note?: string | null; href: string; organization: boolean; labels: Record<string, string> }) {
+  const verified = status === "verified", pending = status === "pending", action = status === "action_required" || status === "rejected";
+  const state = verified ? labels.verified : pending ? labels.underReview : action ? labels.actionRequired : labels.notStarted;
+  const description = verified ? labels.verifiedDescription : action ? note || labels.actionDescription : pending ? labels.pendingDescription : labels.notStartedDescription;
+  const button = action ? labels.resolveAction : pending ? labels.viewStatus : labels.startVerification;
+  return <Card className="shadow-none"><CardContent className="p-5"><div className="flex items-start gap-3"><span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">{verified ? <CheckCircle2 className="size-4" /> : <ShieldCheck className="size-4" />}</span><div><h2 className="font-semibold">{organization ? labels.organization : labels.identity}</h2><p className="mt-1 text-sm text-muted-foreground">{state}</p></div></div><p className="mt-4 text-sm leading-6 text-muted-foreground">{description}</p>{!verified ? <Button asChild className="mt-4 w-full" variant={action ? "default" : "outline"}><Link href={href as never}>{button}</Link></Button> : null}</CardContent></Card>;
 }
 
 function EmptyState({ title, description, href, action }: { title: string; description: string; href?: string; action?: string }) {
-  return <div className='mt-4 rounded-2xl border border-dashed bg-card px-5 py-10 text-center'><Bookmark className='mx-auto size-7 text-muted-foreground/60' /><h3 className='mt-3 font-semibold'>{title}</h3><p className='mx-auto mt-1 max-w-md text-sm text-muted-foreground'>{description}</p>{href && action ? <Button asChild className='mt-4' variant='outline'><Link href={href}>{action}</Link></Button> : null}</div>;
+  return <div className="mt-4 rounded-2xl border border-dashed bg-card px-5 py-10 text-center"><Bookmark className="mx-auto size-7 text-muted-foreground/60" /><h3 className="mt-3 font-semibold">{title}</h3><p className="mx-auto mt-1 max-w-md text-sm leading-6 text-muted-foreground">{description}</p>{href && action ? <Button asChild className="mt-4" variant="outline"><Link href={href as never}>{action}</Link></Button> : null}</div>;
 }
 
-function relativeDate(value: string | null) {
-  if (!value) return 'Recently';
-  const days = Math.max(0, Math.floor((Date.now() - new Date(value).getTime()) / 86_400_000));
-  return days === 0 ? 'Today' : days === 1 ? 'Yesterday' : `${days} days ago`;
+async function UnsubscribedDashboard({ name }: { name: string }) {
+  const t = await getTranslations("Dashboard");
+  const cards = [["profile", "/dashboard/settings"], ["support", "/dashboard/assistance"], ["opportunities", "/dashboard/teaser"]] as const;
+  return <main className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8"><WelcomePanel name={name} primaryHref="/dashboard/opportunities" primaryLabel={t("overview.refresh.exploreGrants")} workspace={t("overview.refresh.workspace")} welcome={t.raw("overview.refresh.welcome")} summary={t("overview.refresh.summary")} newProposal={t("overview.refresh.newProposal")} /><section className="mt-7 rounded-2xl border border-primary/20 bg-primary/[0.04] p-5 sm:p-6"><h2 className="text-xl font-semibold">{t("workspace.unsubscribed.title")}</h2><p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">{t("workspace.unsubscribed.description")}</p><div className="mt-5 flex flex-col gap-3 min-[420px]:flex-row min-[420px]:flex-wrap"><Button asChild><Link href="/dashboard/activate">{t("workspace.unsubscribed.activate")}<ArrowRight className="size-4" /></Link></Button><Button asChild variant="outline"><Link href="/dashboard/payments">{t("workspace.unsubscribed.payments")}</Link></Button></div></section><section className="mt-6 grid gap-4 sm:grid-cols-3">{cards.map(([key, href]) => <Card className="shadow-none" key={key}><CardContent className="p-5"><h2 className="font-semibold">{t(`workspace.unsubscribed.cards.${key}.title`)}</h2><p className="mt-1 text-sm leading-6 text-muted-foreground">{t(`workspace.unsubscribed.cards.${key}.description`)}</p><Button asChild className="mt-4" size="sm" variant="outline"><Link href={href}>{t(`workspace.unsubscribed.cards.${key}.action`)}</Link></Button></CardContent></Card>)}</section><ProfessionalHelpCompact title={t("overview.needHelp.title")} description={t("overview.needHelp.description")} action={t("overview.needHelp.action")} /></main>;
 }
 
-function ProfessionalHelp({ applicantType }: { applicantType: string }) { return <section className='mt-7 rounded-2xl border bg-card p-5 sm:p-6'><h2 className='text-xl font-semibold'>Get Professional Proposal Assistance</h2><p className='mt-2 text-sm text-muted-foreground'>Need help preparing a winning application? Get professional proposal creation or review support from the EasyGrantPath team.</p><div className='mt-5'><ProfessionalProposalServices applicantType={applicantType} cards /></div></section>; }
-
-function UnsubscribedDashboard({ name, applicantType }: { name: string; applicantType: string }) {
-  return <main className='mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8'>
-    <header><p className='text-sm font-medium text-primary'>Your EasyGrantPath account</p><h1 className='mt-1 text-3xl font-semibold tracking-tight'>Welcome, {name}</h1><p className='mt-2 text-muted-foreground'>Your account is ready. Activate platform access when you are ready to unlock matched opportunities and subscriber-only tools.</p></header>
-    <ProfessionalHelp applicantType={applicantType} />
-    <section className='mt-7 rounded-2xl border border-primary/20 bg-primary/[0.04] p-5 sm:p-6'><h2 className='text-xl font-semibold'>Explore EasyGrantPath access</h2><p className='mt-2 max-w-2xl text-sm leading-6 text-muted-foreground'>You can manage your profile, payment history, and proposal support requests without an active subscription. A subscription is only required for premium opportunity access.</p><div className='mt-5 flex flex-wrap gap-3'><Button asChild><Link href='/dashboard/activate'>View access options <ArrowRight className='size-4' /></Link></Button><Button asChild variant='outline'><Link href='/dashboard/payments'>Payment history</Link></Button></div></section>
-    <section className='mt-6 grid gap-4 sm:grid-cols-3'><Card><CardContent className='p-5'><h2 className='font-semibold'>Profile</h2><p className='mt-1 text-sm text-muted-foreground'>Keep your funding details up to date.</p><Button asChild className='mt-4' size='sm' variant='outline'><Link href='/dashboard/settings'>Manage profile</Link></Button></CardContent></Card><Card><CardContent className='p-5'><h2 className='font-semibold'>Proposal support</h2><p className='mt-1 text-sm text-muted-foreground'>Request proposal writing or review support.</p><Button asChild className='mt-4' size='sm' variant='outline'><Link href='/dashboard/assistance'>Get support</Link></Button></CardContent></Card><Card><CardContent className='p-5'><h2 className='font-semibold'>Opportunities</h2><p className='mt-1 text-sm text-muted-foreground'>Preview what subscriber access unlocks.</p><Button asChild className='mt-4' size='sm' variant='outline'><Link href='/dashboard/teaser'>Preview access</Link></Button></CardContent></Card></section>
-  </main>;
-}
 export default async function DashboardPage() {
   const profile = await getDevelopmentProfile();
-  if (!profile || !isRegistrationProfileComplete(profile)) redirect('/dashboard/onboarding');
+  if (!profile || !isRegistrationProfileComplete(profile)) redirect("/dashboard/onboarding");
   await requireApprovedIdentityForPage();
-  if (!hasActiveAccess(profile)) return <UnsubscribedDashboard name={firstName(profile.fullName)} applicantType={profile.applicantType} />;
+  if (!hasActiveAccess(profile)) return <UnsubscribedDashboard name={firstName(profile.fullName)} />;
   const organizationApplicant = isOrganizationApplicantType(profile.applicantType);
-  const [opportunityData, proposals, savedIds, verification] = await Promise.all([
-    getDashboardOpportunityData(profile),
-    listProposalApplications(),
-    listSavedOpportunityIds(),
-    organizationApplicant ? getOrganizationVerification() : getIdentityVerification(),
-  ]);
+  const [locale, t, opportunityData, proposals, savedIds, verification] = await Promise.all([getLocale() as Promise<SupportedLocale>, getTranslations("Dashboard"), getDashboardOpportunityData(profile), listProposalApplications(), listSavedOpportunityIds(), organizationApplicant ? getOrganizationVerification() : getIdentityVerification()]);
   const saved = new Set(savedIds);
-  const activeProposal = proposals.filter((proposal) => proposal.status !== 'completed').sort((a, b) => {
-    const aDeadline = a.deadline ? new Date(a.deadline).getTime() : Number.MAX_SAFE_INTEGER;
-    const bDeadline = b.deadline ? new Date(b.deadline).getTime() : Number.MAX_SAFE_INTEGER;
-    return aDeadline - bDeadline || new Date(b.updatedAt || 0).getTime() - new Date(a.updatedAt || 0).getTime();
-  })[0];
-  const verificationRecord = organizationApplicant
-    ? verification && 'profile' in verification ? verification.profile : null
-    : verification && !('profile' in verification) ? verification : null;
-  const verificationStatus = verificationRecord?.verificationStatus || 'unverified';
-  const verificationHref = organizationApplicant ? '/dashboard/verification/organization' : '/dashboard/verification/identity';
+  const activeProposal = proposals.filter((proposal) => proposal.status !== "completed").sort((a, b) => { const aDeadline = a.deadline ? new Date(a.deadline).getTime() : Number.MAX_SAFE_INTEGER; const bDeadline = b.deadline ? new Date(b.deadline).getTime() : Number.MAX_SAFE_INTEGER; return aDeadline - bDeadline || new Date(b.updatedAt || 0).getTime() - new Date(a.updatedAt || 0).getTime(); })[0];
+  const verificationRecord = organizationApplicant ? verification && "profile" in verification ? verification.profile : null : verification && !("profile" in verification) ? verification : null;
+  const verificationStatus = verificationRecord?.verificationStatus || "unverified";
+  const verificationHref = organizationApplicant ? "/dashboard/verification/organization" : "/dashboard/verification/identity";
   const verificationNote = verificationRecord?.reviewNote || verificationRecord?.rejectionReason;
-
-  return <main className='mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8'>
-    <header className='flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
-      <div><p className='text-sm font-medium text-primary'>Your funding workspace</p><h1 className='mt-1 text-3xl font-semibold tracking-tight'>Welcome, {firstName(profile.fullName)}</h1><p className='mt-2 text-muted-foreground'>Discover funding opportunities that match your goals.</p></div>
-      <Button asChild variant='outline'><Link href='/dashboard/settings'><Settings className='size-4' /> Edit profile</Link></Button>
-    </header>
-
-    <ProfessionalHelp applicantType={profile.applicantType} />
-    {activeProposal ? <section className='mt-7 rounded-2xl border border-primary/20 bg-primary/[0.04] p-5 sm:p-6'>
-      <div className='flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between'><div className='min-w-0'><div className='flex items-center gap-2 text-sm font-semibold text-primary'><FileText className='size-4' /> Continue your proposal</div><h2 className='mt-2 truncate text-xl font-semibold'>{activeProposal.proposalMetadata.projectTitle || activeProposal.opportunityTitle}</h2><p className='mt-1 truncate text-sm text-muted-foreground'>{activeProposal.opportunityTitle}</p><div className='mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs text-muted-foreground'><span>{activeProposal.progress}% complete</span><span>Updated {relativeDate(activeProposal.updatedAt)}</span>{activeProposal.deadline ? <span>Deadline {formatDate(activeProposal.deadline)}</span> : null}</div><div className='mt-2 h-2 max-w-xl overflow-hidden rounded-full bg-primary/10'><div className='h-full rounded-full bg-primary' style={{ width: `${activeProposal.progress}%` }} /></div></div><div className='mt-5 flex flex-wrap gap-3'><Button asChild><Link href={`/dashboard/proposals/${activeProposal.id}`}>Continue writing <ArrowRight className='size-4' /></Link></Button><Button asChild variant='outline'><Link href='/dashboard/proposals/new'><FileText className='size-4' /> Create Proposal</Link></Button></div></div>
-    </section> : <section className='mt-7 flex flex-col gap-4 rounded-2xl border bg-card p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6'><div><h2 className='font-semibold'>Ready to start a proposal?</h2><p className='mt-1 text-sm text-muted-foreground'>Choose an opportunity or begin with a reusable general template.</p></div><div className='flex flex-wrap gap-3'><Button asChild><Link href='/dashboard/proposals/new'><FileText className='size-4' /> Create Proposal</Link></Button><Button asChild variant='outline'><Link href='/dashboard/opportunities'>Explore opportunities</Link></Button></div></section>}
-
-    <section className='mt-7 grid gap-4 sm:grid-cols-3' aria-label='Overview metrics'>
-      <Metric icon={Target} label='Potential Matches' value={opportunityData.potentialMatchCount} note='Based on your funding profile' />
-      <Metric icon={CalendarClock} label='Closing Soon' value={opportunityData.closingSoonCount} note='Relevant deadlines within 14 days' />
-      <Metric icon={FileText} label='My Proposals' value={proposals.length} note={proposals.length ? 'Started proposal workspaces' : 'No proposals started yet'} />
-    </section>
-
-    <section className='mt-9'><div className='flex items-end justify-between gap-4'><div><div className='flex items-center gap-2'><Sparkles className='size-5 text-primary' /><h2 className='text-xl font-semibold'>Recommended for you</h2></div><p className='mt-1 text-sm text-muted-foreground'>Funding opportunities selected based on your profile.</p></div><Link href='/dashboard/opportunities?view=matches' className='hidden text-sm font-medium text-primary hover:underline sm:block'>View all matches</Link></div>
-      {opportunityData.recommendations.length ? <div className='mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-3'>{opportunityData.recommendations.map(({ opportunity, match }) => <MatchedOpportunityCard key={opportunity.id} opportunity={opportunity} match={match} saved={saved.has(opportunity.id)} />)}</div> : <EmptyState title='No matching opportunities yet.' description='Try updating your interests or explore all available opportunities.' href='/dashboard/settings' action='Edit preferences' />}
-      <Link href='/dashboard/opportunities?view=matches' className='mt-4 inline-flex text-sm font-medium text-primary hover:underline sm:hidden'>View all matches</Link>
-    </section>
-
-    <div className='mt-9 grid gap-6 xl:grid-cols-[minmax(0,1.35fr)_minmax(300px,.65fr)]'>
-      <section><h2 className='text-xl font-semibold'>Closing soon</h2><p className='mt-1 text-sm text-muted-foreground'>Relevant opportunities that need your attention.</p>
-        {opportunityData.closingSoon.length ? <div className='mt-4 divide-y rounded-2xl border bg-card'>{opportunityData.closingSoon.map(({ opportunity }) => <div key={opportunity.id} className='flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between'><div className='min-w-0'><p className='truncate font-medium'>{opportunity.title}</p><p className='mt-1 text-sm text-muted-foreground'>{formatDate(opportunity.deadline)} Â· {opportunity.deadline ? daysRemaining(opportunity.deadline) : ''}</p></div><Button asChild size='sm' variant='outline'><Link href={`/dashboard/opportunities/${opportunity.slug}`}>View details</Link></Button></div>)}</div> : <EmptyState title='No upcoming deadlines need your attention.' description='Your matched opportunities do not close within the next 14 days.' />}
-      </section>
-      <div className='space-y-6'>
-        <FundingProfile profile={profile} />
-        <VerificationCard status={verificationStatus} note={verificationNote} href={verificationHref} organization={organizationApplicant} />
-      </div>
+  return <main className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+    <WelcomePanel name={firstName(profile.fullName)} primaryHref={activeProposal ? `/dashboard/proposals/${activeProposal.id}` : "/dashboard/opportunities"} primaryLabel={t(activeProposal ? "overview.refresh.continueProposal" : "overview.refresh.exploreGrants")} workspace={t("overview.refresh.workspace")} welcome={t.raw("overview.refresh.welcome")} summary={t("overview.refresh.summary")} newProposal={t("overview.refresh.newProposal")} />
+    {activeProposal ? <section className="mt-7 rounded-2xl border border-primary/20 bg-primary/[0.04] p-5 sm:p-6"><div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between"><div className="min-w-0 flex-1"><div className="flex items-center gap-2 text-sm font-semibold text-primary"><FileText className="size-4" />{t("workspace.activeProposal.sectionTitle")}</div><h2 className="mt-2 truncate text-xl font-semibold">{activeProposal.proposalMetadata.projectTitle || activeProposal.opportunityTitle}</h2><p className="mt-1 truncate text-sm text-muted-foreground">{activeProposal.opportunityTitle}</p><div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs text-muted-foreground"><span>{t("workspace.activeProposal.progress", { progress: activeProposal.progress })}</span><span>{t("workspace.activeProposal.updated", { date: activeProposal.updatedAt ? formatRelativeDate(activeProposal.updatedAt, locale) : t("workspace.activeProposal.recently") })}</span>{activeProposal.deadline ? <span>{t("workspace.activeProposal.deadline", { date: formatDate(activeProposal.deadline, locale) })}</span> : null}</div><div className="mt-2 h-2 max-w-xl overflow-hidden rounded-full bg-primary/10" aria-label={t("workspace.activeProposal.progressLabel")}><div className="h-full rounded-full bg-primary" style={{ width: `${activeProposal.progress}%` }} /></div></div><Button asChild className="w-full shrink-0 sm:w-auto"><Link href={`/dashboard/proposals/${activeProposal.id}`}>{t("workspace.activeProposal.continueWriting")}<ArrowRight className="size-4" /></Link></Button></div></section> : <section className="mt-7 flex flex-col gap-4 rounded-2xl border bg-card p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6"><div><h2 className="font-semibold">{t("workspace.activeProposal.emptyTitle")}</h2><p className="mt-1 text-sm leading-6 text-muted-foreground">{t("workspace.activeProposal.emptyDescription")}</p></div><Button asChild className="shrink-0"><Link href="/dashboard/proposals/new"><FilePlus2 className="size-4" />{t("workspace.activeProposal.startProposal")}</Link></Button></section>}
+    <section className="mt-7 grid gap-3 sm:grid-cols-3" aria-label={t("workspace.metrics.label")}><Metric icon={Target} label={t("workspace.metrics.matches")} value={opportunityData.potentialMatchCount} note={t("workspace.metrics.matchesNote")} /><Metric icon={CalendarClock} label={t("workspace.metrics.closingSoon")} value={opportunityData.closingSoonCount} note={t("workspace.metrics.closingSoonNote")} /><Metric icon={FileText} label={t("workspace.metrics.proposals")} value={proposals.length} note={t("workspace.metrics.proposalsNote")} /></section>
+    <section className="mt-9"><div className="flex items-end justify-between gap-4"><div><div className="flex items-center gap-2"><Sparkles className="size-5 text-primary" /><h2 className="text-xl font-semibold">{t("workspace.recommendations.title")}</h2></div><p className="mt-1 text-sm leading-6 text-muted-foreground">{t("workspace.recommendations.description")}</p></div><Link href="/dashboard/opportunities?view=matches" className="hidden shrink-0 text-sm font-medium text-primary hover:underline sm:block">{t("workspace.recommendations.viewAll")}</Link></div>{opportunityData.recommendations.length ? <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-3">{opportunityData.recommendations.map(({ opportunity, match }) => <MatchedOpportunityCard key={opportunity.id} opportunity={opportunity} match={match} saved={saved.has(opportunity.id)} />)}</div> : <EmptyState title={t("workspace.recommendations.emptyTitle")} description={t("workspace.recommendations.emptyDescription")} href="/dashboard/settings" action={t("workspace.recommendations.editPreferences")} />}<Link href="/dashboard/opportunities?view=matches" className="mt-4 inline-flex text-sm font-medium text-primary hover:underline sm:hidden">{t("workspace.recommendations.viewAll")}</Link></section>
+    <div className="mt-9 grid gap-6 xl:grid-cols-[minmax(0,1.35fr)_minmax(300px,.65fr)]"><section><h2 className="text-xl font-semibold">{t("workspace.deadlines.title")}</h2><p className="mt-1 text-sm leading-6 text-muted-foreground">{t("workspace.deadlines.description")}</p>{opportunityData.closingSoon.length ? <div className="mt-4 divide-y rounded-2xl border bg-card">{opportunityData.closingSoon.map(({ opportunity }) => { const days = opportunity.deadline ? Math.ceil((new Date(opportunity.deadline).getTime() - Date.now()) / 86_400_000) : 0; const remaining = days === 0 ? t("workspace.deadlines.dueToday") : days === 1 ? t("workspace.deadlines.oneDay") : t("workspace.deadlines.days", { count: days }); return <div key={opportunity.id} className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between"><div className="min-w-0"><p className="truncate font-medium">{opportunity.title}</p><p className="mt-1 text-sm text-muted-foreground">{opportunity.deadline ? formatDate(opportunity.deadline, locale) : ""}<span className="mx-1.5">·</span>{remaining}</p></div><Button asChild size="sm" variant="outline"><Link href={`/dashboard/opportunities/${opportunity.slug}`}>{t("workspace.deadlines.viewDetails")}</Link></Button></div>; })}</div> : <EmptyState title={t("workspace.deadlines.emptyTitle")} description={t("workspace.deadlines.emptyDescription")} />}</section>
+      <div className="space-y-6"><FundingProfile profile={profile} locale={locale} labels={{ title: t("workspace.profile.title"), edit: t("workspace.profile.edit"), country: t("workspace.profile.country"), applicant: t("workspace.profile.applicant"), interests: t("workspace.profile.interests"), lookingFor: t("workspace.profile.lookingFor"), applicantType: t(`workspace.profile.applicantTypes.${profile.applicantType}` as never), opportunityType: (value) => t(`workspace.profile.opportunityTypes.${value}` as never) }} /><VerificationCard status={verificationStatus} note={verificationNote} href={verificationHref} organization={organizationApplicant} labels={{ identity: t("workspace.verification.identity"), organization: t("workspace.verification.organization"), verified: t("workspace.verification.verified"), underReview: t("workspace.verification.underReview"), actionRequired: t("workspace.verification.actionRequired"), notStarted: t("workspace.verification.notStarted"), verifiedDescription: t("workspace.verification.verifiedDescription"), pendingDescription: t("workspace.verification.pendingDescription"), actionDescription: t("workspace.verification.actionDescription"), notStartedDescription: t("workspace.verification.notStartedDescription"), resolveAction: t("workspace.verification.resolveAction"), viewStatus: t("workspace.verification.viewStatus"), startVerification: t("workspace.verification.startVerification") }} /></div>
     </div>
+    <ProfessionalHelpCompact title={t("overview.needHelp.title")} description={t("overview.needHelp.description")} action={t("overview.needHelp.action")} />
   </main>;
 }
