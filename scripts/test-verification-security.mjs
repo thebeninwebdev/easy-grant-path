@@ -59,4 +59,25 @@ assert.match(onboarding, /router\.push\("\/dashboard\/verification\/identity"\)/
 assert.match(identityPage, /status === "pending"/);
 assert.match(identityPage, /status === "provisional"/);
 assert.match(identityPage, /status === "verified"/);
+
+// Security regression: verification is mandatory on customer pages and at
+// checkout, including when the signed-in customer also has an admin role.
+// Admin moderation routes remain protected separately by requireAdmin().
+const [onboardingPage, paymentsPage, adminLayout] = await Promise.all([
+  read("app/dashboard/onboarding/page.tsx"),
+  read("app/dashboard/payments/page.tsx"),
+  read("app/admin/layout.tsx"),
+]);
+assert.doesNotMatch(guard, /if\s*\(!hasAdminRole\(session\.user\.role\)\)/, "customer page/API guards must not exempt admins");
+assert.match(guard, /const status = await getIdentityVerificationStatus\(session\.user\.id\)/, "page guard must inspect actual verification status");
+assert.match(guard, /await assertIdentityVerificationApproved\(session\.user\.id\)/, "API guard must check all customer roles");
+assert.match(guard, /redirect\("\/dashboard\/verification\/identity"\)/, "unverified customers must reach the verification flow");
+assert.match(guard, /canBypassCustomerDashboardGuards\(_isAdmin: boolean\) \{ return false; \}/, "no legacy bypass should remain usable");
+assert.doesNotMatch(onboardingPage, /hasAdminRole/, "completed onboarding must not bypass identity approval");
+assert.match(onboardingPage, /isIdentityVerificationApproved\(await getIdentityVerificationStatus\(session\.user\.id\)\)/);
+assert.doesNotMatch(payment, /if\s*\(!hasAdminRole\(user\.role\)\)/, "admin customers must not bypass checkout verification");
+assert.match(payment, /await assertIdentityVerificationApproved\(user\.id\)/);
+assert.match(paymentsPage, /requireApprovedIdentityForPage\(\)/, "payment history page must be guarded");
+assert.match(adminLayout, /hasAdminRole/, "the separate admin area retains its role check");
+
 console.log("verification security tests passed");

@@ -7,7 +7,8 @@ import { getIdentityVerificationForUserId } from "@/lib/verification";
 import { isIdentityVerificationApproved, type VerificationStatus } from "@/lib/verification-policy";
 /** Admins preview the dashboard as themselves; this never grants ownership of another user's records. */
 export async function getDashboardAccess() { const session = await getCurrentSession(); return { session, isAdmin: hasAdminRole(session?.user.role) }; }
-export function canBypassCustomerDashboardGuards(isAdmin: boolean) { return isAdmin; }
+/** Customer verification has no role-based bypass, including administrators. */
+export function canBypassCustomerDashboardGuards(_isAdmin: boolean) { return false; }
 
 export { isIdentityVerificationApproved };
 
@@ -33,10 +34,8 @@ export async function assertIdentityVerificationApproved(userId: string) {
 export async function requireApprovedIdentityForPage() {
   const session = await getCurrentSession();
   if (!session?.user.emailVerified) redirect("/sign-in");
-  if (!hasAdminRole(session.user.role)) {
-    const status = await getIdentityVerificationStatus(session.user.id);
-    if (!isIdentityVerificationApproved(status)) redirect("/dashboard/verification/identity");
-  }
+  const status = await getIdentityVerificationStatus(session.user.id);
+  if (!isIdentityVerificationApproved(status)) redirect("/dashboard/verification/identity");
   return session;
 }
 
@@ -45,6 +44,6 @@ export async function requireApprovedIdentityForApi() {
   const session = await getCurrentSession();
   if (!session) throw new AppError("Sign in required.", "UNAUTHORIZED", 401);
   if (!session.user.emailVerified) throw new AppError("Verify your email before continuing.", "EMAIL_NOT_VERIFIED", 403);
-  if (!hasAdminRole(session.user.role)) await assertIdentityVerificationApproved(session.user.id);
+  await assertIdentityVerificationApproved(session.user.id);
   return session;
 }
