@@ -5,6 +5,23 @@ import { paystackAmountFromStoredAmount, validatePaystackTransaction, verifyLega
 import { safeSecretEqual, validateFlutterwaveTransaction } from "../lib/flutterwave-policy.ts";
 import { normalizeWhatsappNumber, whatsappUrl } from "../lib/service-request-policy.ts";
 import { getProposalServicePrice, resolveProposalPricingCategory } from "../lib/proposal-service-pricing.ts";
+import { resolvePaystackCredentials } from "../lib/paystack-config-policy.ts";
+import { resolveAssistanceUnavailableReason } from "../lib/service-availability-policy.ts";
+
+const liveKey = "sk_live_ValidLive123";
+const testKey = "sk_test_ValidTest123";
+assert.deepEqual(resolvePaystackCredentials({ PAYSTACK_LIVE_SECRET_KEY: liveKey }), { activeEnvironment: "live", liveConfigured: true, testConfigured: false, liveSecretKey: liveKey, testSecretKey: null });
+assert.deepEqual(resolvePaystackCredentials({ PAYSTACK_TEST_SECRET_KEY: testKey }), { activeEnvironment: "test", liveConfigured: false, testConfigured: true, liveSecretKey: null, testSecretKey: testKey });
+assert.equal(resolvePaystackCredentials({ PAYSTACK_LIVE_SECRET_KEY: liveKey, PAYSTACK_TEST_SECRET_KEY: testKey }).activeEnvironment, "live");
+assert.equal(resolvePaystackCredentials({}).activeEnvironment, null);
+assert.equal(resolvePaystackCredentials({ PAYSTACK_LIVE_SECRET_KEY: "sk_live_invalid-key", PAYSTACK_TEST_SECRET_KEY: testKey }).activeEnvironment, "test");
+assert.equal(resolvePaystackCredentials({ PAYSTACK_SECRET_KEY: `  ${testKey}  ` }).activeEnvironment, "test");
+assert.equal(resolvePaystackCredentials({ PAYSTACK_SECRET_KEY: liveKey }).activeEnvironment, "live");
+assert.equal(resolvePaystackCredentials({ PAYSTACK_LIVE_SECRET_KEY: "sk_test_WrongMode", PAYSTACK_TEST_SECRET_KEY: "sk_live_WrongMode" }).activeEnvironment, null);
+assert.equal(resolveAssistanceUnavailableReason(true, true), null);
+assert.equal(resolveAssistanceUnavailableReason(false, true), "payment_provider");
+assert.equal(resolveAssistanceUnavailableReason(true, false), "account_classification");
+assert.equal(resolveAssistanceUnavailableReason(false, false), "payment_provider");
 
 const expectedPrices = [
   ["proposal_review", "individual", 7_500],
@@ -66,22 +83,28 @@ const flutterVerified = { id: 12345, status: "successful", tx_ref: flutterExpect
 assert.equal(validateFlutterwaveTransaction(flutterExpected, flutterVerified, "test").valid, true);
 
 const read = (path) => readFile(new URL("../" + path, import.meta.url), "utf8");
-const [checkout, webhook, payments, paymentModel, requestModel, config, products, callback, email, adminRequests, en, fr] = await Promise.all([
-  read("app/api/payments/checkout/route.ts"), read("app/api/webhooks/paystack/route.ts"), read("lib/payments.ts"), read("models/Payment.ts"), read("models/ServiceRequest.ts"), read("lib/paystack-config.ts"), read("lib/payment-products.ts"), read("app/dashboard/payments/callback/page.tsx"), read("lib/email.ts"), read("app/admin/service-requests/page.tsx"), read("messages/en.json"), read("messages/fr.json"),
+const [checkout, webhook, payments, paymentModel, requestModel, config, paystackClient, products, serviceConfig, callback, email, adminRequests, diagnostics, en, fr] = await Promise.all([
+  read("app/api/payments/checkout/route.ts"), read("app/api/webhooks/paystack/route.ts"), read("lib/payments.ts"), read("models/Payment.ts"), read("models/ServiceRequest.ts"), read("lib/paystack-config.ts"), read("lib/paystack.ts"), read("lib/payment-products.ts"), read("lib/service-request-config.ts"), read("app/dashboard/payments/callback/page.tsx"), read("lib/email.ts"), read("app/admin/service-requests/page.tsx"), read("app/api/admin/payments/config/route.ts"), read("messages/en.json"), read("messages/fr.json"),
 ]);
 assert.ok(checkout.indexOf("getCurrentSession()") < checkout.indexOf("readJsonBody(request)"));
 assert.doesNotMatch(checkout, /amountMinor|currency/);
 assert.match(checkout, /if \(!session\)/);
-assert.match(webhook, /paystack-signature/); assert.match(webhook, /x-paystack-signature/); assert.match(webhook, /PaymentWebhookEvent/); assert.match(webhook, /verifyAndFulfillPayment/);
+assert.match(webhook, /paystack-signature/); assert.match(webhook, /x-paystack-signature/); assert.match(webhook, /PaymentWebhookEvent/); assert.match(webhook, /verifyAndFulfillPayment/); assert.match(webhook, /Payment\.findOne/); assert.match(webhook, /getPaystackConfig\(payment\.environment\)/); assert.match(webhook, /paystack:\$\{payment\.environment\}/);
 assert.match(payments, /verifyPaystackTransaction/); assert.match(payments, /validatePaystackTransaction/); assert.match(payments, /verifyFlutterwaveTransaction/); assert.match(payments, /fulfillmentStartedAt/);
 assert.ok(payments.indexOf("UserProfile.findOne") < payments.indexOf("getPaymentProduct(input.productId, profile.applicantType)"));
 assert.match(payments, /PROFILE_CLASSIFICATION_REQUIRED/); assert.match(payments, /applicantTypeSnapshot/);
+assert.match(payments, /getPaystackConfig\(payment\.environment\)/); assert.match(payments, /verifyPaystackTransaction\(payment\.reference, payment\.environment\)/); assert.match(payments, /PAYMENT_ENVIRONMENT_UNAVAILABLE/);
+assert.match(paystackClient, /request<PaystackTransaction>\(`\/transaction\/verify\/\$\{encodeURIComponent\(reference\)\}`, environment\)/); assert.match(paystackClient, /PAYMENT_INITIALIZATION_FAILED/); assert.doesNotMatch(paystackClient, /PAYSTACK_TEST_SECRET_KEY|PAYSTACK_LIVE_SECRET_KEY/);
 assert.match(paymentModel, /enum: \["flutterwave", "paystack"\]/); assert.match(paymentModel, /provider: 1, providerTransactionId: 1/);
-assert.match(requestModel, /paymentProvider: 1, providerTransactionId: 1/); assert.match(requestModel, /applicantTypeSnapshot/); assert.match(config, /PAYSTACK_WEBHOOK_SECRET/); assert.match(config, /sk_live_/); assert.match(products, /PLATFORM_ACCESS_PRICE_MINOR/); assert.match(products, /PLATFORM_ACCESS_CURRENCY/); assert.match(products, /PLATFORM_ACCESS_DURATION_DAYS/); assert.match(callback, /query.reference \|\| query.tx_ref/);
+assert.match(requestModel, /paymentProvider: 1, providerTransactionId: 1/); assert.match(requestModel, /applicantTypeSnapshot/); assert.match(config, /PAYSTACK_WEBHOOK_SECRET/); assert.match(config, /liveConfigured/); assert.match(config, /testConfigured/); assert.match(products, /PLATFORM_ACCESS_PRICE_MINOR/); assert.match(products, /PLATFORM_ACCESS_CURRENCY/); assert.match(products, /PLATFORM_ACCESS_DURATION_DAYS/); assert.match(callback, /query.reference \|\| query.tx_ref/);
+assert.match(serviceConfig, /resolveAssistanceUnavailableReason/);
+assert.match(diagnostics, /requireAdmin/); assert.match(diagnostics, /getPaystackDiagnostics/); assert.doesNotMatch(diagnostics, /secretKey|Authorization/);
 assert.match(email, /Account classification/); assert.match(adminRequests, /applicantTypeLabel/);
 const enMessages = JSON.parse(en), frMessages = JSON.parse(fr);
 assert.equal(enMessages.Payments.history.products.proposal_writing, "Proposal creation");
 assert.equal(frMessages.Payments.history.products.proposal_writing, "Création de proposition");
 assert.equal(enMessages.Payments.callback.details.amount, "Amount paid");
 assert.equal(frMessages.Payments.callback.details.amount, "Montant payé");
+assert.equal(enMessages.Proposals.services.paymentUnavailable.includes("payment"), true);
+assert.equal(frMessages.Proposals.services.classificationIncomplete.includes("classification"), true);
 console.log("Paystack payment policy tests passed");

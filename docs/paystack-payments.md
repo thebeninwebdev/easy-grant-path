@@ -14,9 +14,11 @@ Prices in the environment and MongoDB are whole human-readable XOF values: `5000
 
 ```env
 PAYMENT_PROVIDER=paystack
-PAYSTACK_SECRET_KEY=sk_test_...
-PAYSTACK_WEBHOOK_SECRET=whsec_...
-NEXT_PUBLIC_APP_URL=http://localhost:3000
+PAYSTACK_LIVE_SECRET_KEY=sk_live_...
+PAYSTACK_TEST_SECRET_KEY=sk_test_...
+PAYSTACK_LIVE_WEBHOOK_SECRET=whsec_...
+PAYSTACK_TEST_WEBHOOK_SECRET=whsec_...
+NEXT_PUBLIC_APP_URL=https://www.easygrantpath.com
 PLATFORM_ACCESS_PRICE_MINOR=5000
 PLATFORM_ACCESS_CURRENCY=XOF
 PLATFORM_ACCESS_DURATION_DAYS=30
@@ -27,11 +29,15 @@ RESEND_FROM_EMAIL=EasyGrantPath <billing@example.com>
 
 Proposal service prices are defined centrally in `lib/proposal-service-pricing.ts`, not in environment variables. Checkout resolves the authenticated customer's stored `UserProfile.applicantType`, stores the resulting XOF amount and classification snapshot, and rejects missing or unsupported classifications. Platform access remains independently configured by the `PLATFORM_ACCESS_*` variables above.
 
-`PAYSTACK_WEBHOOK_SIGNING_SECRET` is supported only as a temporary alias for deployment migration. The public key is not required because checkout is initialized solely on the server. Local development and Vercel Preview require `sk_test_`; a production deployment requires `sk_live_`, HTTPS, and never falls back to test credentials.
+New checkout selects valid credentials in this order: `PAYSTACK_LIVE_SECRET_KEY`, then `PAYSTACK_TEST_SECRET_KEY`. `PAYSTACK_SECRET_KEY` remains a backward-compatible fallback and is assigned strictly by its `sk_live_` or `sk_test_` prefix. If both modes are configured, live is preferred. Invalid or whitespace-only live values allow configuration-time fallback to test; a failed live API request never retries in test mode.
+
+Verification does not use the preferred checkout mode. It reads the payment's stored `environment` and requires credentials for that exact mode, so historical test payments remain verifiable after live becomes preferred and live payments are never checked with a test key. The public key is not required because checkout is initialized solely on the server. Live checkout requires an HTTPS `NEXT_PUBLIC_APP_URL`; test checkout also permits HTTP on localhost.
+
+`PAYSTACK_LIVE_WEBHOOK_SECRET` and `PAYSTACK_TEST_WEBHOOK_SECRET` are preferred for environment-specific webhook signing. `PAYSTACK_WEBHOOK_SECRET` and the older `PAYSTACK_WEBHOOK_SIGNING_SECRET` remain shared deployment-migration fallbacks. Administrators can inspect the non-sensitive configuration state at `GET /api/admin/payments/config`; the response never contains credentials.
 
 ## Webhook
 
-Register `https://www.easygrantpath.com/api/webhooks/paystack` in Paystack Dashboard > Developers > API configuration. Generate a signing secret and set `PAYSTACK_WEBHOOK_SECRET`. The handler reads the raw body, limits it to 1 MB, validates the timestamped `Paystack-Signature` SHA-512 HMAC within five minutes, and uses constant-time comparison. While a dashboard mode has no signing secret, the legacy `x-paystack-signature` HMAC with the Paystack secret key remains compatible. Only `charge.success` is fulfilled, and it is always independently verified with Paystack.
+Register `https://www.easygrantpath.com/api/webhooks/paystack` in Paystack Dashboard > Developers > API configuration. Configure the matching environment-specific signing secret. The handler reads the raw body, limits it to 1 MB, resolves the referenced payment's stored environment, validates the timestamped `Paystack-Signature` SHA-512 HMAC within five minutes, and uses constant-time comparison. While a dashboard mode has no signing secret, the legacy `x-paystack-signature` HMAC uses that payment environment's Paystack secret key. Only `charge.success` is fulfilled, and it is always independently verified with Paystack.
 
 Paystack retries non-2xx webhooks; the event table namespaces IDs by provider and safely acknowledges duplicates. Email notification dispatch is deferred and retains the existing retry process.
 

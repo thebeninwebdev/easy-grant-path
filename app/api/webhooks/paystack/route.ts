@@ -5,17 +5,13 @@ import { verifyLegacyPaystackWebhookSignature, verifyPaystackWebhookSignature } 
 import { connectToDatabase } from "@/lib/db";
 import { verifyAndFulfillPayment } from "@/lib/payments";
 import { dispatchServiceRequestNotification } from "@/lib/service-requests";
+import { Payment } from "@/models/Payment";
 import { PaymentWebhookEvent } from "@/models/PaymentWebhookEvent";
 
 type EventData = { id?: unknown; reference?: unknown; status?: unknown };
 export async function POST(request: Request) {
   const raw = Buffer.from(await request.arrayBuffer());
   if (raw.byteLength > 1_000_000) return Response.json({ error: "Request too large." }, { status: 413 });
-  const config = getPaystackConfig();
-  const signature = request.headers.get("paystack-signature");
-  const legacySignature = request.headers.get("x-paystack-signature");
-  const signed = config.webhookSigningSecret ? verifyPaystackWebhookSignature(raw, signature, config.webhookSigningSecret) : verifyLegacyPaystackWebhookSignature(raw, legacySignature, config.secretKey);
-  if (!signed) return Response.json({ error: "Invalid webhook signature." }, { status: 401 });
   let payload: unknown; try { payload = JSON.parse(raw.toString("utf8")); } catch { return Response.json({ error: "Malformed webhook payload." }, { status: 400 }); }
   if (!payload || typeof payload !== "object") return Response.json({ error: "Malformed webhook payload." }, { status: 400 });
   const event = "event" in payload && typeof payload.event === "string" ? payload.event : "";
@@ -24,7 +20,15 @@ export async function POST(request: Request) {
   const reference = typeof data?.reference === "string" ? data.reference : "";
   if (!event || !data || !transactionId || !reference) return Response.json({ error: "Malformed webhook event." }, { status: 400 });
   await connectToDatabase();
-  const key = `paystack:${event}:${transactionId}`;
+  const payment = await Payment.findOne({ reference, provider: "paystack" }).select("environment").lean();
+  if (!payment || (payment.environment !== "live" && payment.environment !== "test")) return Response.json({ error: "Invalid webhook signature." }, { status: 401 });
+  const config = getPaystackConfig(payment.environment);
+  if (!config.credentialsValid || !config.secretKey) return Response.json({ error: `Paystack ${payment.environment} webhook credentials are unavailable.` }, { status: 503 });
+  const signature = request.headers.get("paystack-signature");
+  const legacySignature = request.headers.get("x-paystack-signature");
+  const signed = config.webhookSigningSecret ? verifyPaystackWebhookSignature(raw, signature, config.webhookSigningSecret) : verifyLegacyPaystackWebhookSignature(raw, legacySignature, config.secretKey);
+  if (!signed) return Response.json({ error: "Invalid webhook signature." }, { status: 401 });
+  const key = `paystack:${payment.environment}:${event}:${transactionId}`;
   await PaymentWebhookEvent.updateOne({ key }, { $setOnInsert: { key, event, transactionId, paymentReference: reference, providerStatus: typeof data.status === "string" ? data.status : "unknown", processingStatus: "pending" } }, { upsert: true, setDefaultsOnInsert: true });
   const stale = new Date(Date.now() - 5 * 60_000);
   const claimed = await PaymentWebhookEvent.findOneAndUpdate({ key, $or: [{ processingStatus: { $in: ["pending", "failed"] } }, { processingStatus: "processing", updatedAt: { $lte: stale } }] }, { $set: { processingStatus: "processing" }, $inc: { attempts: 1 } }, { returnDocument: "after" }).lean();

@@ -16,7 +16,7 @@ type SaveState = "saved" | "saving" | "failed";
 type ExportType = "pdf" | "docx";
 function words(value: string) { return value.trim() ? value.trim().split(/\s+/).length : 0; }
 
-type AssistanceWorkspace = SerializedProposalApplication & { assistance: { initialWhatsapp: string; services: { proposal_review: { configured: boolean; price: string | null }; proposal_writing: { configured: boolean; price: string | null } } } };
+type AssistanceWorkspace = SerializedProposalApplication & { assistance: { initialWhatsapp: string; services: { proposal_review: { configured: boolean; price: string | null; unavailableReason: "payment_provider" | "account_classification" | null }; proposal_writing: { configured: boolean; price: string | null; unavailableReason: "payment_provider" | "account_classification" | null } } } };
 export function ProposalWorkspace({ initial }: { initial: AssistanceWorkspace }) {
   const t = useTranslations("Proposals.workspace");
   const locale = useLocale();
