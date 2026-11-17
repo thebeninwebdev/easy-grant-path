@@ -15,6 +15,7 @@ import { buildProposalRecommendation, applyRecommendationSections } from "@/lib/
 import { getProposalStarter, getBuiltinTemplateId, PROPOSAL_STARTER_IDS, type ProposalStarterId } from "@/lib/proposal-presets";
 import type { ProposalTemplateSectionInput } from "@/lib/validation/proposal";
 import { localizeProposalTemplate } from "@/lib/proposal-localization";
+import { createBuiltinProposalTemplate, resolveGuaranteedProposalTemplate } from "@/lib/proposal-resolver";
 import { serializePublicOpportunity } from "@/lib/public-opportunities";
 import type { SupportedLocale } from "@/lib/config";
 
@@ -56,7 +57,8 @@ function recommendationType(opportunity: Record<string, unknown>) {
   }).recommendedTemplateType;
 }
 
-export { createBuiltinProposalTemplate } from "./proposal-resolver";
+export { createBuiltinProposalTemplate };
+
 
 export async function resolveProposalTemplateForOpportunity(
   opportunity: Record<string, unknown> | { _id?: unknown; id?: string; title: string; [key: string]: unknown },
@@ -137,7 +139,7 @@ export async function getProposalCreationOptions(locale: SupportedLocale = "en")
   }
 
   // Ensure universal built-in template is available
-  const universalBuiltin = createBuiltinProposalTemplate("general", locale, { universalFallback: true });
+  const universalBuiltin = createBuiltinProposalTemplate("general", locale, { isUniversal: true });
   if (!templatesMap.has(universalBuiltin.id)) {
     templatesMap.set(universalBuiltin.id, universalBuiltin);
   }
@@ -231,7 +233,7 @@ export async function startProposal(input: StartProposalInput) {
   }
 
   if (!template) {
-    template = createBuiltinProposalTemplate("general", locale, { universalFallback: true });
+    template = createBuiltinProposalTemplate("general", locale, { isUniversal: true });
   }
 
   const serializedTemplate = template;
