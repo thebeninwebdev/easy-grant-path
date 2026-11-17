@@ -578,7 +578,16 @@
       },
       "needHelp": {
         "title": "Besoin d'aide professionnelle ?",
-        "description": "Les propositions en libre-service sont rédigées dans EasyGrantPath. Pour une rédaction ou révision professionnelle, notre équipe travaille avec vous via WhatsApp."
+        "description": "Les propositions en libre-service sont rédigées dans EasyGrantPath. Pour une rédaction ou révision professionnelle, notre équipe travaille avec vous via WhatsApp.",
+        "action": "Découvrir les services d’accompagnement"
+      },
+      "refresh": {
+        "workspace": "Votre espace de financement",
+        "welcome": "Bienvenue, {name}",
+        "summary": "Vos subventions, brouillons de propositions et échéances à venir, au même endroit.",
+        "continueProposal": "Reprendre la proposition",
+        "exploreGrants": "Explorer les subventions",
+        "newProposal": "Nouvelle proposition"
       }
     },
     "workspace": {
@@ -683,7 +692,17 @@
         "description": "La rédaction et la révision professionnelles restent disponibles lorsque vous souhaitez un accompagnement humain ciblé.",
         "action": "Découvrir l’accompagnement"
       },
-      "unsubscribed": {}
+      "unsubscribed": {
+        "title": "Découvrir l’accès EasyGrantPath",
+        "description": "Gérez votre profil, votre historique de paiements et votre accompagnement sans abonnement actif. Activez l’accès pour débloquer les opportunités correspondantes et les outils réservés aux abonnés.",
+        "activate": "Voir les options d’accès",
+        "payments": "Historique des paiements",
+        "cards": {
+          "profile": { "title": "Profil", "description": "Gardez vos informations de financement à jour.", "action": "Gérer le profil" },
+          "support": { "title": "Accompagnement", "description": "Demandez une rédaction ou une révision professionnelle de votre proposition.", "action": "Obtenir de l’aide" },
+          "opportunities": { "title": "Opportunités", "description": "Découvrez ce que l’accès abonné permet de débloquer.", "action": "Aperçu de l’accès" }
+        }
+      }
     },
     "teaser": {
       "step": "Étape 4 sur 4",
